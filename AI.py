@@ -79,7 +79,7 @@ for index, row in df.iterrows():
                 print("Take profit hit at", df.at[i, 'Date (GMT)'])
                 print("Close price:", current_price)
                 print("P&L:", pnl)
-                print('-------------------------------------------------')
+                print('---------------------------------------------------')
                 break
             elif current_price <= stop_loss:
                 pnl = (stop_loss - entry_price) * 1 * 50
