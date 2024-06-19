@@ -89,7 +89,7 @@ for index, row in df.iterrows():
                 print("Stop loss hit at", df.at[i, 'Date (GMT)'])
                 print("Close price:", current_price)
                 print("P&L:", pnl)
-                print('----------------------------                        ---------------------')
+                print('--------------------------------------------')
                 break
 
 # Save trades to a file
