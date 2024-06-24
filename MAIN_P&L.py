@@ -8,11 +8,11 @@ Buy_Quantity = 0
 Sell_Quantity = 0
 
 # File paths
-input_file_path = r"C:\Users\lenovo\Downloads\1.xlsx"
-output_directory = r"D:\pnl output"
-output_file_path = os.path.join(output_directory, "output.xlsx")  # Example filename
+input_file_path = r"C:\Users\lenovo\Downloads\4.xlsx"
+output_file_path = r"D:\\pnl output\\A4 mon.xlsx"
 
 # Ensure the output directory exists
+output_directory = os.path.dirname(output_file_path)
 if not os.path.exists(output_directory):
     os.makedirs(output_directory)
 
@@ -23,12 +23,12 @@ df = pd.read_excel(input_file_path)
 df = df.iloc[::-1]
 
 # List of columns to delete
-columns_to_delete = ['OrderID', 'User', 'TradeID', 'Entry Price', 'Parent', 'Account']
+columns_to_delete = ['OrderID', 'User', 'TradeID','Entry Price','Parent','Account']
 # Drop the specified columns
 df.drop(columns=columns_to_delete, inplace=True)
 
 # Write the modified DataFrame to a new Excel file
-new_file_path = os.path.join(output_directory, "Modified_Pra.xlsx")
+new_file_path = r"D:\\Modified_Pra.xlsx"
 df.to_excel(new_file_path, index=False)
 
 try:
@@ -51,7 +51,7 @@ for symbol in symbols:
     Sell_value = 0
     Buy_Quantity = 0
     Sell_Quantity = 0
-
+    
     # Iterate over rows for the current symbol
     for index, row in data.iterrows():
         if row['Symbol'] == symbol:
@@ -64,24 +64,25 @@ for symbol in symbols:
 
             if Buy_Quantity == Sell_Quantity:
                 if symbol[0:2] == "YM":
-                    current_position = (Sell_value - Buy_value) * 5
-                elif symbol[0:2] == "ES":
-                    current_position = (Sell_value - Buy_value) * 50
-                elif symbol[0:2] == "NQ":
-                    current_position = (Sell_value - Buy_value) * 20
-                elif symbol[0:3] == "MES":
-                    current_position = (Sell_value - Buy_value) * 5
-                elif symbol[0:3] == "MNQ":
-                    current_position = (Sell_value - Buy_value) * 2
-                elif symbol[0:3] == "MYM":
-                    current_position = (Sell_value - Buy_value) * 0.5
-                elif symbol[0:3] == "MCL":
-                    current_position = (Sell_value - Buy_value) * 100
-                elif symbol[0:3] == "MBT":
-                    current_position = (Sell_value - Buy_value) * 0.1
-                elif symbol[0:3] == "MGC":
-                    current_position = (Sell_value - Buy_value) * 10
-
+                    current_position = (Sell_value - Buy_value)*5
+                elif symbol [0:2] == "ES" :
+                    current_position = (Sell_value - Buy_value)*50
+                elif symbol [0:2] == "NQ" :
+                    current_position = (Sell_value - Buy_value)*20
+                elif symbol [0:3] == "MES" :
+                    current_position = (Sell_value - Buy_value)*5
+                elif symbol [0:3] == "MNQ" :
+                    current_position = (Sell_value - Buy_value)*2
+                elif symbol [0:3] == "MYM" :
+                    current_position = (Sell_value - Buy_value)*0.5
+                elif symbol [0:3] == "MCL" :
+                    current_position = (Sell_value - Buy_value)*100
+                elif symbol [0:3] == "MBT" :
+                    current_position = (Sell_value - Buy_value)*0.1
+                elif symbol [0:3] == "MGC" :
+                    current_position = (Sell_value - Buy_value)*10
+                
+                 
                 data.at[index, 'P&L'] = current_position
                 Buy_Quantity = 0
                 Buy_value = 0
@@ -89,17 +90,15 @@ for symbol in symbols:
                 Sell_Quantity = 0
 
 # Write the modified DataFrame to the new Excel file
-final_output_file_path = os.path.join(output_directory, "final_output.xlsx")
-data.to_excel(final_output_file_path, index=False)
+data.to_excel(output_file_path, index=False)
 
 # Re-open the Excel file in append mode to add each symbol's data to a separate sheet
-with pd.ExcelWriter(final_output_file_path, mode='a', engine='openpyxl') as writer:
+with pd.ExcelWriter(output_file_path, mode='a', engine='openpyxl') as writer:
     for symbol in symbols:
         sheet_name = str(symbol)
         symbol_data = data[data['Symbol'] == symbol]
 
         # Append the data to the existing sheet or create a new sheet
-        symbol_data.to_excel(writer, index=False, sheet_name=sheet_name,
-                             startrow=writer.sheets[sheet_name].max_row if sheet_name in writer.sheets else 0)
-
-print("----DONE----Srinu----:", final_output_file_path)
+        symbol_data.to_excel(writer, index=False, sheet_name=sheet_name, startrow=writer.sheets[sheet_name].max_row if sheet_name in writer.sheets else 0)
+       
+print("Data has been written to the Excel file and saved to----- D:disk.")

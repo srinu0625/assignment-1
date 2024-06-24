@@ -1,7 +1,7 @@
 import pandas as pd
 import math
 
-file_path = r"D:\ym daily.csv"
+file_path = r"D:\data\snp daily.csv"
 
 # Load the data
 try:
