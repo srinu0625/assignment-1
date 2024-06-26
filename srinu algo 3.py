@@ -99,6 +99,13 @@ for index1, row1 in data1.iterrows():
                     print("-------------------------------------------------------------------------------------------")
                     time.sleep(0)
 
+                    # updating exit price----------------------------------
+                    if(bull and local_low1 > exit_price):
+                        exit_price = local_low1
+        
+                    if(bear and local_high1 < exit_price):
+                        exit_price = local_high1
+
                     # Evaluate bullish condition and execute trades
                     max_loss_for_trade = (local_high1 - local_low1 + (tick_val * 4)) * contract_size
                     if ((current_high1 > local_high1) and (local_low1 > previous_low1)

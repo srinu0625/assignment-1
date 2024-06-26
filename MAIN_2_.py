@@ -116,7 +116,7 @@ for index1, row1 in data1.iterrows():
                         print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :", local_high1, " temp_high1 :", temp_high)
                         print("Current Low1 :", current_low1, "Previous Low1 :", previous_low1, "local_low1 :", local_low1, " temp_low1 :", temp_low)
                         print("   ")
-                        time.sleep(3)
+                        time.sleep()
 
                         # case 1 for data2-----------------------------------------------------------------------------------
                         if (current_high2 > previous_high2):
