@@ -66,7 +66,7 @@ for index, row in df.iterrows():
         print(" Stop Loss:", stop_loss)
         print(" Take Profit:", take_profit)
         print(" P&L:", pnl)
-        print('-------------------------------------------------')
+        print('----------------------------               ---------------------')
 
         # Check for take profit or stop loss conditions and execute them if met
         for i in range(index + 1, len(df)):
