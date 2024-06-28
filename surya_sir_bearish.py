@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the dataset
-file_path = r"C:\Users\lenovo\Downloads\240 MIN.csv"
+file_path = r"C:\Users\lenovo\Downloads\10 MIN.csv"
 df = pd.read_csv(file_path)
 
 # Print the column names to verify them
@@ -66,7 +66,7 @@ for index, row in df.iterrows():
         print(" Stop Loss:", stop_loss)
         print(" Take Profit:", take_profit)
         print(" P&L:", pnl)
-        print('----------------------------               ---------------------')
+        print('-------------------------------------------------')
 
         # Check for take profit or stop loss conditions and execute them if met
         for i in range(index + 1, len(df)):
@@ -96,7 +96,7 @@ for index, row in df.iterrows():
                 break
 
 # Save trades to a file
-trades_df.to_csv(r'D:\data\240 min_bearish.csv', index=False)
+trades_df.to_csv(r'D:\data\10b min_bearish.csv', index=False)
 #print(file_path)
 # Print total P&L and trade statistics
 print("   Total Positive P&L:", total_positive_pnl)
