@@ -8,8 +8,8 @@ Buy_Quantity = 0
 Sell_Quantity = 0
 
 # File paths
-input_file_path = r"C:\Users\lenovo\Downloads\a4t.xlsx"
-output_file_path = r"D:\\pnl output\\A4 tue.xlsx"
+input_file_path = r"C:\Users\lenovo\Downloads\a3th.xlsx"
+output_file_path = r"D:\\pnl output\\A3 thu.xlsx"
 
 # Ensure the output directory exists
 output_directory = os.path.dirname(output_file_path)
@@ -69,6 +69,8 @@ for symbol in symbols:
                     current_position = (Sell_value - Buy_value)*50
                 elif symbol [0:2] == "NQ" :
                     current_position = (Sell_value - Buy_value)*20
+                elif symbol [0:3] == "CL" :
+                    current_position = (Sell_value - Buy_value)*10
                 elif symbol [0:3] == "MES" :
                     current_position = (Sell_value - Buy_value)*5
                 elif symbol [0:3] == "MNQ" :

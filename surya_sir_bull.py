@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the dataset
-file_path = r"C:\Users\manoh\Desktop\SRINU\Candles\snp 240min.csv"
+file_path = r"C:\Users\lenovo\Downloads\10 MIN .csv"
 df = pd.read_csv(file_path)
 
 # Print the column names to verify them

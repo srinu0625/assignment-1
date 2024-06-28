@@ -23,8 +23,8 @@ temp_high = 0
 temp_low  = 0
 
 # local high and local low 
-current_high1=0
-current_low1 =0
+current_high=0
+current_low =0
 local_high1 = temp_high
 local_low1  = temp_low
 local_high2 = temp_high
@@ -62,8 +62,8 @@ total_short_pnl = 0
 positive_pnl = 0
 negative_pnl = 0
 num_of_lots  = 0
-max_num_lots = 5
-risk = 450
+max_num_lots = 100
+risk = 10000
 try:
     # Iterate over each row of the daily DataFrame (data1)
     for index1, row1 in data1.iterrows():
