@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\ym hourly.csv"
-file_path2 = r"D:\ym daily.csv"
+file_path1 = r"D:\New folder\es 60 min.csv"
+file_path2 = r"D:\New folder\es day.csv"
 
 # Load the data
 try:
@@ -116,7 +116,7 @@ for index1, row1 in data1.iterrows():
                         print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :", local_high1, " temp_high1 :", temp_high)
                         print("Current Low1 :", current_low1, "Previous Low1 :", previous_low1, "local_low1 :", local_low1, " temp_low1 :", temp_low)
                         print("   ")
-                        time.sleep()
+                        time.sleep(0)
 
                         # case 1 for data2-----------------------------------------------------------------------------------
                         if (current_high2 > previous_high2):
@@ -136,6 +136,7 @@ for index1, row1 in data1.iterrows():
                         print("DAILY Time:", current_time2)
                         print("Current High2 :", current_high2, "Previous High2 :", previous_high2, "local_high2 :", local_high2, " temp_high2 :", temp_high)
                         print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2, "local_low2 :", local_low2, " temp_low2 :", temp_low)
+                        time.sleep(0)
                         print("-------------------------------------------------------------------------------------------")
                         # updating exit price----------------------------------
                         if(bull and local_low1 > exit_price):

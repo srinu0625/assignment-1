@@ -151,16 +151,16 @@ try:
                                     number_of_positions += 1
                                     if num_of_lots >=max_num_lots:
                                        num_of_lots = max_num_lots
-                                    entry_price = local_high1 + (tick_val * 2)
-                                    print("\033[32m<------ LONG ENTRY ------> (CH1 > LH1 and LL1 > LH2)\033[0m")  # ANSI escape codes for this color coding to work
-                                    print("       ENTRY PRICE  = ", entry_price)
-                                    print("   num_of_positions = ", number_of_positions)
-                                    print("        num_of_lots = ",round(num_of_lots))
-                                    print(" max_loss_for_trade = ",round(max_loss_for_trade))
-                                    print("---------------------------------------------")
-                                    bull = True
-                                    flag = True
-                                    continue
+                                entry_price = local_high1 + (tick_val * 2)
+                                print("\033[32m<------ LONG ENTRY ------> (CH1 > LH1 and LL1 > LH2)\033[0m")  # ANSI escape codes for this color coding to work
+                                print("       ENTRY PRICE  = ", entry_price)
+                                print("   num_of_positions = ", number_of_positions)
+                                print("        num_of_lots = ",round(num_of_lots))
+                                print(" max_loss_for_trade = ",round(max_loss_for_trade))
+                                print("---------------------------------------------")
+                                bull = True
+                                flag = True
+                                continue
                             # Bullish Exit
                             if current_low1 <= local_low1 and bull and flag:
                                 exit_price = local_low1 - (tick_val * 2)
@@ -215,16 +215,16 @@ try:
                                     number_of_positions += 1
                                     if num_of_lots >=max_num_lots:
                                        num_of_lots = max_num_lots
-                                    entry_price = local_low1 - (tick_val * 2)
-                                    print("\033[31m<------ SHORT ENTRY ------> (CL1 < LL1 and LH1 < LH2)\033[0m")  # ANSI escape codes for this color coding to work
-                                    print("        ENTRY PRICE = ", entry_price)
-                                    print("   num_of_positions = ", number_of_positions)
-                                    print("        num_of_lots = ",round(num_of_lots))
-                                    print(" max_loss_for_trade = ",round(max_loss_for_trade))
-                                    print("------------------------------------------------")
-                                    bear = True
-                                    flag = True
-                                    continue
+                                entry_price = local_low1 - (tick_val * 2)
+                                print("\033[31m<------ SHORT ENTRY ------> (CL1 < LL1 and LH1 < LH2)\033[0m")  # ANSI escape codes for this color coding to work
+                                print("        ENTRY PRICE = ", entry_price)
+                                print("   num_of_positions = ", number_of_positions)
+                                print("        num_of_lots = ",round(num_of_lots))
+                                print(" max_loss_for_trade = ",round(max_loss_for_trade))
+                                print("------------------------------------------------")
+                                bear = True
+                                flag = True
+                                continue
                             # bearish exit        
                             if current_high1 >= local_high1 and bear and flag:
                                 exit_price = local_high1 + (tick_val * 2)

@@ -8,8 +8,8 @@ Buy_Quantity = 0
 Sell_Quantity = 0
 
 # File paths
-input_file_path = r"C:\Users\lenovo\Downloads\a2tue.xlsx"
-output_file_path = r"D:\\pnl output\\A3 end.xlsx"
+input_file_path = r"C:\Users\lenovo\Downloads\m a6 sim.xlsx"
+output_file_path = r"D:\\pnl output\\ A6 SIM fri end.xlsx"
 
 # Ensure the output directory exists
 output_directory = os.path.dirname(output_file_path)

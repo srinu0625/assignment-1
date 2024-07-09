@@ -150,16 +150,16 @@ try:
                                     num_of_lots = math.floor(risk / max_loss_for_trade)
                                     if num_of_lots >= max_num_lots:
                                        num_of_lots = max_num_lots
-                                    entry_price = local_high1 + (tick_val * 2)
-                                    print("<------ LONG ENTRY ------> (LL1 > LL2 and LL1 > CL2)")
-                                    print("       ENTRY PRICE  = ", entry_price)
-                                    print("   num_of_positions = ", number_of_positions)
-                                    print("        num_of_lots = ", round(num_of_lots))
-                                    print(" max_loss_for_trade = ", round(max_loss_for_trade))
-                                    print("---------------------------------------------")
-                                    bull = True
-                                    flag = True
-                                    continue
+                                entry_price = local_high1 + (tick_val * 2)
+                                print("<------ LONG ENTRY ------> (LL1 > LL2 and LL1 > CL2)")
+                                print("       ENTRY PRICE  = ", entry_price)
+                                print("   num_of_positions = ", number_of_positions)
+                                print("        num_of_lots = ", round(num_of_lots))
+                                print(" max_loss_for_trade = ", round(max_loss_for_trade))
+                                print("---------------------------------------------")
+                                bull = True
+                                flag = True
+                                continue
 
                             # Bullish Exit
                             if current_low1 >= local_low1 and bull and flag:
@@ -210,7 +210,7 @@ try:
                                     num_of_lots = math.floor(risk / max_loss_for_trade)
                                     if num_of_lots >= max_num_lots:
                                         num_of_lots = max_num_lots
-                                    entry_price = local_low1 - (tick_val * 2)
+                                entry_price = local_low1 - (tick_val * 2)
                                 print("<------ SHORT ENTRY ------> (LH1 < LL2 and LH1 < CH2)")
                                 print("        ENTRY PRICE = ", entry_price)
                                 print("   num_of_positions = ", number_of_positions)

@@ -2,9 +2,9 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\New folder\snp 60 min.csv"
-file_path2 = r"D:\New folder\snp 240 min.csv"
-file_path3 = r"D:\New folder\snp day.csv"
+file_path1 = r"D:\New folder\es 60 min.csv"
+file_path2 = r"D:\New folder\es 240 min.csv"
+file_path3 = r"D:\New folder\es day.csv"
 
 # Load the data
 try:
@@ -75,6 +75,7 @@ risk = 450
 
 # Iterate over each row of the daily DataFrame (data3)
 for index1, row1 in data1.iterrows():
+    print(index1)
     if pd.notna(row1[time_column_name]) and pd.notna(row1[high_column_name]) and pd.notna(row1[low_column_name]):
         current_date1 = row1[time_column_name].split()[0]
 
@@ -83,7 +84,7 @@ for index1, row1 in data1.iterrows():
             if pd.notna(row2[time_column_name]) and pd.notna(row2[high_column_name]) and pd.notna(row2[low_column_name]):
                 current_date2 = row2[time_column_name].split()[0]
                 
-                if current_date1 == current_date3:
+                if current_date1 == current_date2:
 
 
                     for index3, row3 in data3.iterrows():
