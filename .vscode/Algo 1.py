@@ -261,7 +261,7 @@ for index1, row1 in data1.iterrows():
             print("         max_profit = ", round(max_profit,2))
             print("           max_loss = ", round(max_loss,2))
             print("       P&L_Of_trade = ", pnl_color, round(integer_pnl,2),"\033[0m")
-            print("-------------------------------------------------------------------")
+            print("---------------------------  ----------------------------------------")
             continue
                     
         # bearish candle-------------------------------------------------------------------------
