@@ -1,3 +1,3 @@
 {
-    "scm.repositories.sortOrder": "path"
+    "scm.repositories.sortOrder": "name"
 }
