@@ -2,10 +2,9 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"C:\Users\lenovo\Desktop\snp 60 min.csv"
-file_path2 = r"C:\Users\lenovo\Desktop\snp 240 min.csv"
-file_path3 = r"C:\Users\lenovo\Desktop\snp day.csv"
-
+file_path1 = r"D:\candles\es 60 min.csv"
+file_path2 = r"D:\candles\es 240 min.csv"
+file_path3 = r"D:\candles\es daily.csv"
 # Load the data
 try:
     data1 = pd.read_csv(file_path1)
@@ -145,12 +144,16 @@ for index1, row1 in data1.iterrows():
             temp_low1 = current_low1
         # case 2 for data1-----------------------------------------------------------------------------------
         if(current_high1 > previous_high1):
-            prev_local_low1 = local_low1
             local_low1 = temp_low1
+            if(temp_low1 != local_low1): 
+               prev_local_low1 = local_low1
+            
 
         if(current_low1 < previous_low1):
-            prev_local_high1 = local_high1
             local_high1 = temp_high1
+            if(temp_high1 != local_high1):
+                prev_local_high1 = local_high1
+         
         
 
         # Printing data for data1
@@ -169,12 +172,15 @@ for index1, row1 in data1.iterrows():
             temp_low2 = current_low2
         # case 2 for data1-----------------------------------------------------------------------------------
         if(current_high2 > previous_high2):
-            prev_local_low2 = local_low2
             local_low2 = temp_low2
+            if(temp_low2 != local_low2): 
+               prev_local_low2 = local_low2
+            
 
         if(current_low2 < previous_low2):
-            prev_local_high2 = local_high2
             local_high2 = temp_high2
+            if(temp_high2 != local_high2):
+                prev_local_high2 = local_high2
         
         # Printing data for data2
 
@@ -191,13 +197,17 @@ for index1, row1 in data1.iterrows():
         if (current_low3 < previous_low3):
             temp_low3 = current_low3
         # case 2 for data1-----------------------------------------------------------------------------------
+        # case 2 for data1-----------------------------------------------------------------------------------
         if(current_high3 > previous_high3):
-            prev_local_low3 = local_low3
             local_low3 = temp_low3
+            if(temp_low3 != local_low3): 
+               prev_local_low3 = local_low3
+            
 
         if(current_low3 < previous_low3):
-            prev_local_high3 = local_high3
             local_high3 = temp_high3
+            if(temp_high3 != local_high3):
+                prev_local_high3 = local_high3
 
         # Printing data for data3
 
