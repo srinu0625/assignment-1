@@ -2,9 +2,10 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\candles\es 60 min 1.csv"
-file_path2 = r"D:\candles\es 240 min 1.csv"
-file_path3 = r"D:\candles\es daily.csv"
+file_path1 = r"C:\Users\lenovo\Desktop\snp 60 min.csv"
+file_path2 = r"C:\Users\lenovo\Desktop\snp 240 min.csv"
+file_path3 = r"C:\Users\lenovo\Desktop\snp day.csv"
+
 
 # Load the data
 try:
@@ -140,28 +141,24 @@ for index1, row1 in data1.iterrows():
         if(current_high1 > previous_high1):
             temp_high1 = current_high1
             
-
         if(current_low1 < previous_low1):
             temp_low1 = current_low1
         # case 2 for data1-----------------------------------------------------------------------------------
         if(current_high1 > previous_high1):
             local_low1 = temp_low1
             if(temp_low1 != local_low1): 
-               prev_local_low1 = local_low1
+                prev_local_low1 = local_low1
             
-
         if(current_low1 < previous_low1):
             local_high1 = temp_high1
             if(temp_high1 != local_high1):
                 prev_local_high1 = local_high1
          
-        
-
         # Printing data for data1
 
         print("---60 MIN---:", current_time1)
-        print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :", local_high1,"prev_local_high1 :",prev_local_high1)
-        print("Current Low1 :", current_low1, "Previous Low1 :", previous_low1, "local_low1 :", local_low1,"prev_local_low1 :",prev_local_low1)
+        print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :", local_high1,"prev_local_high1 :",prev_local_high1,"temp_high1 :", temp_high1)
+        print("Current Low1 :", current_low1, "Previous Low1 :", previous_low1, "local_low1 :", local_low1,"prev_local_low1 :",prev_local_low1,"temp_low1 :", temp_low1)
         print("   ")
         time.sleep(0.5)
 
@@ -175,19 +172,19 @@ for index1, row1 in data1.iterrows():
         if(current_high2 > previous_high2):
             local_low2 = temp_low2
             if(temp_low2 != local_low2): 
-               prev_local_low2 = local_low2
+              prev_local_low2 = local_low2
             
 
         if(current_low2 < previous_low2):
             local_high2 = temp_high2
             if(temp_high2 != local_high2):
-                prev_local_high2 = local_high2
+               prev_local_high2 = local_high2
         
         # Printing data for data2
 
         print("---240 MIN---:", current_time2)
-        print("Current High2 :", current_high2, "Previous High2 :", previous_high2, "local_high2 :", local_high2,"prev_local_high2 :",prev_local_high2)
-        print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2, "local_low2 :", local_low2,"prev_local_low2 :",prev_local_low2)
+        print("Current High2 :", current_high2, "Previous High2 :", previous_high2, "local_high2 :", local_high2,"prev_local_high2 :",prev_local_high2,"temp_high2 :", temp_high2)
+        print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2, "local_low2 :", local_low2,"prev_local_low2 :",prev_local_low2,"temp_low2 :", temp_low2)
         print("   ")
         time.sleep(0.5)
 
@@ -198,13 +195,11 @@ for index1, row1 in data1.iterrows():
         if (current_low3 < previous_low3):
             temp_low3 = current_low3
         # case 2 for data1-----------------------------------------------------------------------------------
-        # case 2 for data1-----------------------------------------------------------------------------------
         if(current_high3 > previous_high3):
             local_low3 = temp_low3
             if(temp_low3 != local_low3): 
-               prev_local_low3 = local_low3
-            
-
+                prev_local_low3 = local_low3
+                
         if(current_low3 < previous_low3):
             local_high3 = temp_high3
             if(temp_high3 != local_high3):
@@ -213,8 +208,8 @@ for index1, row1 in data1.iterrows():
         # Printing data for data3
 
         print("----DAILY----:", current_time3)
-        print("Current High3 :", current_high3, "Previous High3 :", previous_high3, "local_high3 :", local_high3,"prev_local_high3 :",prev_local_high3)
-        print("Current Low3 :", current_low3, "Previous Low3 :", previous_low3, "local_low3 :", local_low3,"prev_local_low3 :",prev_local_low3)
+        print("Current High3 :", current_high3, "Previous High3 :", previous_high3, "local_high3 :", local_high3,"prev_local_high3 :",prev_local_high3,"temp_high3 :", temp_high3)
+        print("Current Low3 :", current_low3, "Previous Low3 :", previous_low3, "local_low3 :", local_low3,"prev_local_low3 :",prev_local_low3,"temp_low3 :", temp_low3)
         time.sleep(0.5)
         print("   ")
 
@@ -226,17 +221,17 @@ for index1, row1 in data1.iterrows():
             exit_price = local_high1
 
         # bullish candle    
-        max_loss_for_trade = (local_high1 - current_low1 + ( tick_val * 4)) * contract_size 
+        max_loss_for_trade = (local_high1 - local_low1 + ( tick_val * 4)) * contract_size 
        
         if (local_low1 > prev_local_low1) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and not bear and not flag:
             if max_loss_for_trade > risk:
-               num_of_lots = 1
+               num_of_lots = 5
                continue  
             else:
                 max_loss_for_trade <= risk
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 if num_of_lots >=max_num_lots:
-                   num_of_lots = 5
+                   num_of_lots = 10
             entry_price = local_high1 + (tick_val * 2)
             exit_price = local_low1 - (tick_val * 2)
             print("\033[32m<------ LONG ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
@@ -291,18 +286,18 @@ for index1, row1 in data1.iterrows():
             continue
                     
         # bearish candle-------------------------------------------------------------------------
-        max_loss_for_trade = (local_high1 - current_low1 + ( tick_val * 4)) * contract_size
+        max_loss_for_trade = (local_high1 - local_low1 + ( tick_val * 4)) * contract_size
         
         if (local_high1 < prev_local_high1) and ((local_high1 < local_high2) and (local_high1 < local_high3) and (local_high1 < current_high3)) and not bull and not flag:
             if max_loss_for_trade > risk:
-                num_of_lots = 1
+                num_of_lots = 5
                 continue  
             else:
                 max_loss_for_trade <= risk
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 number_of_positions += 1
                 if num_of_lots >=max_num_lots:
-                    num_of_lots = 5
+                    num_of_lots = 10
             entry_price = local_low1 - (tick_val * 2)
             exit_price = local_high1 + (tick_val * 2)
             print("\033[31m<------ SHORT ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work

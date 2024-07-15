@@ -2,10 +2,9 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\candles\es 60 min 1.csv"
-file_path2 = r"D:\candles\es 240 min 1.csv"
-file_path3 = r"D:\candles\es daily.csv"
-
+file_path1 = r"C:\Users\lenovo\Desktop\snp 60 min.csv"
+file_path2 = r"C:\Users\lenovo\Desktop\snp 240 min.csv"
+file_path3 = r"C:\Users\lenovo\Desktop\snp day.csv"
 
 # Load the data
 try:
@@ -71,8 +70,8 @@ total_short_pnl = 0
 positive_pnl = 0
 negative_pnl = 0
 num_of_lots  = 0
-max_num_lots = 5
-risk = 450
+max_num_lots = 20
+risk = 360
 
 #total rows in sheets
 rows_count_240_mins=0
@@ -205,13 +204,13 @@ for index1, row1 in data1.iterrows():
        
         if (current_high1 > local_high1) and ((local_high1 > local_high2) or (local_high1 > current_high2)) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and  local_low1 != 0  and local_high2 != 0 and local_low2 != 0 and not bear and not flag:
             if max_loss_for_trade > risk:
-               num_of_lots = 1
+               num_of_lots = 5
                continue  
             else:
                 max_loss_for_trade <= risk
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 if num_of_lots >=max_num_lots:
-                   num_of_lots = 5
+                   num_of_lots = 10
             entry_price = local_high1 + (tick_val * 2)
             exit_price = current_low1 - (tick_val * 2)
             print("\033[32m<------ LONG ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
@@ -262,7 +261,7 @@ for index1, row1 in data1.iterrows():
             print("         max_profit = ", round(max_profit,2))
             print("           max_loss = ", round(max_loss,2))
             print("       P&L_Of_trade = ", pnl_color, round(integer_pnl,2),"\033[0m")
-            print("---------------------------  ----------------------------------------")
+            print("-------------------------------------------------------------------")
             continue
                     
         # bearish candle-------------------------------------------------------------------------
@@ -270,14 +269,14 @@ for index1, row1 in data1.iterrows():
         
         if (current_low1 < local_low1) and ((local_low1 < local_low2 or local_low1 < current_low2)) and ((local_high1 < local_high2) and (local_high1 < local_high3) and (local_high1 < current_high3)) and local_high1 != 0 and local_low1 != 0  and local_high2 != 0 and local_low2 != 0  and not bull and not flag:
             if max_loss_for_trade > risk:
-                num_of_lots = 1
+                num_of_lots = 5
                 continue  
             else:
                 max_loss_for_trade <= risk
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 number_of_positions += 1
                 if num_of_lots >=max_num_lots:
-                    num_of_lots = 5
+                    num_of_lots = 10
             entry_price = local_low1 - (tick_val * 2)
             exit_price = current_high1 + (tick_val * 2)
             print("\033[31m<------ SHORT ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
