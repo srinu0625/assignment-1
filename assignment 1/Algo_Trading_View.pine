@@ -1,0 +1,160 @@
+//@version=5
+strategy("Multi-Timeframe Strategy", overlay=true)
+
+// Inputs
+contract_size = input(5, "Contract Size")
+tick_val = input(0.25, "Tick Value")
+max_num_lots = input(20, "Max Number of Lots")
+risk = input(450, "Risk")
+
+// Initialize variables
+var float temp_high1 = na
+var float temp_low1 = na
+var float temp_high2 = na
+var float temp_low2 = na
+var float temp_high3 = na
+var float temp_low3 = na
+var float local_high1 = na
+var float local_low1 = na
+var float local_high2 = na
+var float local_low2 = na
+var float local_high3 = na
+var float local_low3 = na
+var bool bull = false
+var bool bear = false
+var bool flag = false
+var int number_of_positions = 0
+var int num_of_trades = 0
+var float entry_price = na
+var float exit_price = na
+var float max_loss = 0
+var float max_profit = 0
+var float TOTAL_P_L = 0
+var float total_long_pnl = 0
+var float total_short_pnl = 0
+var float positive_pnl = 0
+var float negative_pnl = 0
+var int num_of_lots = 0
+
+// 60-minute chart
+current_high1 = request.security(syminfo.tickerid, "60", high)
+previous_high1 = request.security(syminfo.tickerid, "60", high[1])
+current_low1 = request.security(syminfo.tickerid, "60", low)
+previous_low1 = request.security(syminfo.tickerid, "60", low[1])
+
+// 240-minute chart
+current_high2 = request.security(syminfo.tickerid, "240", high)
+previous_high2 = request.security(syminfo.tickerid, "240", high[1])
+current_low2 = request.security(syminfo.tickerid, "240", low)
+previous_low2 = request.security(syminfo.tickerid, "240", low[1])
+
+// Daily chart
+current_high3 = request.security(syminfo.tickerid, "D", high)
+previous_high3 = request.security(syminfo.tickerid, "D", high[1])
+current_low3 = request.security(syminfo.tickerid, "D", low)
+previous_low3 = request.security(syminfo.tickerid, "D", low[1])
+
+// Update temp and local high/low for 60-minute chart
+if (current_high1 > previous_high1)
+    temp_high1 := current_high1
+if (current_low1 < previous_low1)
+    temp_low1 := current_low1
+if (current_high1 > previous_high1)
+    local_low1 := temp_low1
+if (current_low1 < previous_low1)
+    local_high1 := temp_high1
+
+// Update temp and local high/low for 240-minute chart
+if (current_high2 > previous_high2)
+    temp_high2 := current_high2
+if (current_low2 < previous_low2)
+    temp_low2 := current_low2
+if (current_high2 > previous_high2)
+    local_low2 := temp_low2
+if (current_low2 < previous_low2)
+    local_high2 := temp_high2
+
+// Update temp and local high/low for daily chart
+if (current_high3 > previous_high3)
+    temp_high3 := current_high3
+if (current_low3 < previous_low3)
+    temp_low3 := current_low3
+if (current_high3 > previous_high3)
+    local_low3 := temp_low3
+if (current_low3 < previous_low3)
+    local_high3 := temp_high3
+
+// Update exit price
+if (bull and local_low1 > exit_price)
+    exit_price := local_low1
+if (bear and local_high1 < exit_price)
+    exit_price := local_high1
+
+// Bullish entry
+max_loss_for_bull = (local_high1 - local_low1 + (tick_val * 4)) * contract_size
+if (current_high1 > local_high1 and ((local_high1 > local_high2) or (local_high1 > current_high2)) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and not na(local_low1) and not na(local_high2) and not na(local_low2) and not bear and not flag)
+    num_of_lots := math.min(max_num_lots, math.floor(risk / max_loss_for_bull))
+    entry_price := local_high1 + (tick_val * 2)
+    exit_price := local_low1 - (tick_val * 2)
+    label.new(bar_index, high, text="<------ LONG ENTRY ------>", style=label.style_label_up, color=color.green)
+    strategy.entry("Long", strategy.long, qty=num_of_lots)
+    bull := true
+    flag := true
+
+// Bullish exit
+if (current_low1 < exit_price and bull and flag)
+    label.new(bar_index, low, text="LONG EXIT")
+    strategy.close("Long")
+    number_of_positions -= 1
+    num_of_trades += 1
+    pnl = (exit_price - entry_price) * num_of_lots * contract_size
+    TOTAL_P_L += pnl
+    total_long_pnl += pnl
+    max_profit := math.max(max_profit, pnl)
+    max_loss := math.min(max_loss, pnl)
+    if pnl >= 0
+        positive_pnl += pnl
+    else
+        negative_pnl += pnl
+    bull := false
+    flag := false
+
+// Bearish entry
+max_loss_for_bear = (local_high1 - local_low1 + (tick_val * 4)) * contract_size
+if (current_low1 < local_low1 and ((local_low1 < local_low2) or (local_low1 < current_low2)) and ((local_high1 < local_high2) and (local_high1 < local_high3) and (local_high1 < current_high3)) and not na(local_low1) and not na(local_high2) and not na(local_low2) and not bull and not flag)
+    num_of_lots := math.min(max_num_lots, math.floor(risk / max_loss_for_bear))
+    entry_price := local_low1 - (tick_val * 2)
+    exit_price := local_high1 + (tick_val * 2)
+    label.new(bar_index, low, text="<------ SHORT ENTRY ------>", style=label.style_label_down, color=color.red)
+    strategy.entry("Short", strategy.short, qty=num_of_lots)
+    bear := true
+    flag := true
+
+// Bearish exit
+if (current_high1 > exit_price and bear and flag)
+    label.new(bar_index, high, text="SHORT EXIT")
+    strategy.close("Short")
+    number_of_positions -= 1
+    num_of_trades += 1
+    pnl = (entry_price - exit_price) * num_of_lots * contract_size
+    TOTAL_P_L += pnl
+    total_short_pnl += pnl
+    max_profit := math.max(max_profit, pnl)
+    max_loss := math.min(max_loss, pnl)
+    if pnl >= 0
+        positive_pnl += pnl
+    else
+        negative_pnl += pnl
+    bear := false
+    flag := false
+
+// Summary of P&L
+if (bar_index == 100)
+    label.new(bar_index, high, text="Max Profit: " + str.tostring(max_profit), style=label.style_label_up, color=color.green)
+    label.new(bar_index, high, text="Max Loss: " + str.tostring(max_loss), style=label.style_label_up, color=color.red)
+    label.new(bar_index, high, text="Total P&L: " + str.tostring(TOTAL_P_L), style=label.style_label_up, color=color.blue)
+
+// Plot P&L summary
+plot(max_profit, title="Max Profit", color=color.green)
+plot(max_loss, title="Max Loss", color=color.red)
+plot(TOTAL_P_L, title="Total P&L", color=color.blue)
