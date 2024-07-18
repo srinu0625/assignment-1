@@ -214,11 +214,11 @@ for index1, row1 in data1.iterrows():
         print("   ")
 
         # updating exit price----------------------------------
-        if(bull and local_low1 > exit_price):
-            exit_price = local_low1
+        if(bull and current_low1 > exit_price):
+            exit_price = current_low1
 
-        if(bear and local_high1 < exit_price):
-            exit_price = local_high1
+        if(bear and current_high1 < exit_price):
+            exit_price = current_high1
 
         # bullish candle    
         max_loss_for_trade = (local_high1 - current_low1 + ( tick_val * 4)) * contract_size 
@@ -245,8 +245,6 @@ for index1, row1 in data1.iterrows():
 
         # Bullish Exit
         if current_low1 < exit_price and bull and flag:
-            print
-            print("current_low:",current_low1," exit_price :",exit_price)
             number_of_positions -= 1
             num_of_trades += 1
             bull = False

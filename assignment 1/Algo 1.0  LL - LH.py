@@ -277,6 +277,7 @@ for index1, row1 in data1.iterrows():
                     num_of_lots = max_num_lots
             entry_price = min(local_low1,current_low1) - (tick_val * 2)
             exit_price = local_high1 + (tick_val * 2)
+
             print("\033[31m<------ SHORT ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
             print("        ENTRY PRICE = ", entry_price)
             print("   num_of_positions = ", number_of_positions)
@@ -289,7 +290,6 @@ for index1, row1 in data1.iterrows():
 
         # bearish exit        
         if local_high1 > exit_price and bear and flag:
-            print("exit_price :", exit_price)
             number_of_positions -= 1
             num_of_trades += 1
             bear = False

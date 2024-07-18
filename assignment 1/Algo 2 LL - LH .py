@@ -221,9 +221,8 @@ for index1, row1 in data1.iterrows():
             exit_price = local_high1
 
         # bullish candle    
-       
+        max_loss_for_trade = (local_high1 - local_low1 + ( tick_val * 4)) * contract_size 
         if (local_low1 > prev_local_low1) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and not bear and not flag:
-            max_loss_for_trade = (local_high1 - local_low1 + ( tick_val * 4)) * contract_size 
             if max_loss_for_trade > risk:
                num_of_lots = 5
                continue  
@@ -231,7 +230,7 @@ for index1, row1 in data1.iterrows():
                 max_loss_for_trade <= risk
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 if num_of_lots >=max_num_lots:
-                   num_of_lots = 10
+                   num_of_lots = max_num_lots
             entry_price = local_high1 + (tick_val * 2)
             exit_price = local_low1 - (tick_val * 2)
             print("\033[32m<------ LONG ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
@@ -246,7 +245,6 @@ for index1, row1 in data1.iterrows():
 
         # Bullish Exit
         if local_low1 < exit_price and bull and flag:
-            print("exit_price :", exit_price)
             number_of_positions -= 1
             num_of_trades += 1
             bull = False
@@ -296,7 +294,7 @@ for index1, row1 in data1.iterrows():
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 number_of_positions += 1
                 if num_of_lots >=max_num_lots:
-                    num_of_lots = 10
+                    num_of_lots = max_num_lots
             entry_price = local_low1 - (tick_val * 2)
             exit_price = local_high1 + (tick_val * 2)
             print("\033[31m<------ SHORT ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
