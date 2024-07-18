@@ -1,9 +1,9 @@
 import pandas as pd
 import math
 import time
-file_path1 = r"D:\candles\es monthly data\es feb 60 min.csv"
-file_path2 = r"D:\candles\es monthly data\es feb 240 min.csv"
-file_path3 = r"D:\candles\es monthly data\es feb daily.csv"
+file_path1 = r"D:\candles\es monthly data\es jun 60 min.csv"
+file_path2 = r"D:\candles\es monthly data\es jun 240 min.csv"
+file_path3 = r"D:\candles\es monthly data\es jun daily.csv"
 
 # Load the data
 try:
@@ -203,7 +203,7 @@ for index1, row1 in data1.iterrows():
         # bullish candle     
         max_loss_for_trade =  (max(current_high1, local_high1) - local_low1 + ( tick_val * 4)) * contract_size 
          
-        if (current_high1 > local_high1) and ((local_high1 > local_high2) or (local_high1 > local_high3) or (local_high1 > current_high3)) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and not bear and not flag:
+        if (current_high1 > local_high1) and ((local_high1 > local_high2) or (local_high1 > local_high3) or (local_high1 > current_high3)) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and local_high1 != 0 and local_low1 != 0  and local_high2 != 0 and local_low2 != 0 and not bear and not flag :
             if max_loss_for_trade > risk:
                    num_of_lots = 5
                    continue 
@@ -268,7 +268,7 @@ for index1, row1 in data1.iterrows():
         # bearish candle-------------------------------------------------------------------------
         max_loss_for_trade = (min(local_low1,current_low1) - local_high1 + ( tick_val * 4)) * contract_size
         
-        if (current_low1 < local_low1) and ((local_low1 < local_low2) or (local_low1 < local_low3) or (local_low1 < current_low3)) and ((local_high1 < local_high2) and (local_high1 < local_high3) and (local_high1 < current_high3)) and not bull and not flag:
+        if (current_low1 < local_low1) and ((local_low1 < local_low2) or (local_low1 < local_low3) or (local_low1 < current_low3)) and ((local_high1 < local_high2) and (local_high1 < local_high3) and (local_high1 < current_high3)) and local_high1 != 0 and local_low1 != 0  and local_high2 != 0 and local_low2 != 0  and not bull and not flag:
             if max_loss_for_trade > risk:
                 num_of_lots = 5
                 continue  

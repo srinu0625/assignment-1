@@ -1,10 +1,9 @@
 import pandas as pd
 import math
 import time
-
-file_path1 = r"D:\candles\es monthly data\es jan 60 min.csv"
-file_path2 = r"D:\candles\es monthly data\es jan 240 min.csv"
-file_path3 = r"D:\candles\es monthly data\es jan daily.csv"
+file_path1 = r"D:\candles\es monthly data\es feb 60 min.csv"
+file_path2 = r"D:\candles\es monthly data\es feb 240 min.csv"
+file_path3 = r"D:\candles\es monthly data\es feb daily.csv"
 
 # Load the data
 try:
@@ -80,13 +79,13 @@ current_hours_count=1
 date_flag = False
 
 previous_date = data1.loc[0,time_column_name].split()[0]
-# assigning values of rows for prev candles
+
 current_time2 = data2.loc[rows_count_240_mins, time_column_name]
 current_high2 = float(data2.loc[rows_count_240_mins,high_column_name])
 previous_high2 = float(data2.loc[rows_count_240_mins-1,high_column_name]) if rows_count_240_mins > 0 else 0
 current_low2 = float(data2.loc[rows_count_240_mins,low_column_name])
 previous_low2 = float(data2.loc[rows_count_240_mins-1,low_column_name]) if rows_count_240_mins > 0 else 0
-# assigning values of rows for prev candles
+
 current_time3 = data3.loc[rows_count_daily, time_column_name]
 current_high3 = float(data3.loc[rows_count_daily,high_column_name])
 previous_high3 = float(data3.loc[rows_count_daily-1,high_column_name]) if rows_count_daily > 0 else 0
@@ -99,6 +98,7 @@ for index1, row1 in data1.iterrows():
     current_date = row1[time_column_name].split()[0]
     if(previous_date != current_date):
         date_flag = True
+
     try:
         # Extracting current and previous values for high and low from data1
         current_time1 = row1[time_column_name]
@@ -142,6 +142,7 @@ for index1, row1 in data1.iterrows():
 
         if(current_low1 < previous_low1):
             local_high1 = temp_high1
+        
 
         # Printing data for data1
 
@@ -165,6 +166,7 @@ for index1, row1 in data1.iterrows():
             local_high2 = temp_high2
         
         # Printing data for data2
+
         print("---240 MIN---:", current_time2)
         print("Current High2 :", current_high2, "Previous High2 :", previous_high2, "local_high2 :", local_high2)
         print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2, "local_low2 :", local_low2)
@@ -179,7 +181,7 @@ for index1, row1 in data1.iterrows():
             temp_low3 = current_low3
         # case 2 for data1-----------------------------------------------------------------------------------
         if(current_high3 > previous_high3):
-             local_low3 = temp_low3
+            local_low3 = temp_low3
 
         if(current_low3 < previous_low3):
             local_high3 = temp_high3
@@ -192,27 +194,26 @@ for index1, row1 in data1.iterrows():
         time.sleep(0)
         print("   ")
 
-        # updating exit price----------------------------------
+       # updating exit price----------------------------------
         if(bull and local_low1 > exit_price):
             exit_price = local_low1
 
         if(bear and local_high1 < exit_price):
             exit_price = local_high1
 
-        # bullish candle    
-       
-        if (current_high1 > local_high1) and ((local_high1 > local_high2) or (local_high1 > current_high2)) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and  local_low1 != 0  and local_high2 != 0 and local_low2 != 0 and not bear and not flag:
-            max_loss_for_trade =  (max(current_high1, local_high1) - local_low1 + ( tick_val * 4)) * contract_size 
+        # bullish candle     
+        if (current_high1 > local_high1) and ((local_high1 > local_high2) or (local_high1 > local_high3) or (local_high1 > current_high3)) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and local_high1 != 0 and local_low1 != 0  and local_high2 != 0 and local_low2 != 0 and not bear and not flag :
+            max_loss_for_trade = (max(current_high1, local_high1) - current_low1 + ( tick_val * 4)) * contract_size 
             if max_loss_for_trade > risk:
-               num_of_lots = 5
-               continue  
+                   num_of_lots = 5
+                   continue 
             else:
                 max_loss_for_trade <= risk
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 if num_of_lots >=max_num_lots:
-                   num_of_lots = max_num_lots
+                    num_of_lots = 10
             entry_price = (max(local_high1,current_high1)) + (tick_val * 2)
-            exit_price = local_low1 - (tick_val * 2)
+            exit_price = current_low1 - (tick_val * 2)
             print("\033[32m<------ LONG ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
             print("       ENTRY PRICE  = ", entry_price)
             print("   num_of_positions = ", number_of_positions)
@@ -224,10 +225,10 @@ for index1, row1 in data1.iterrows():
             continue
 
         # Bullish Exit
-        if local_low1 < exit_price and bull and flag:
-            print("exit_price :", exit_price)
+        if current_low1 < exit_price and bull and flag:
             number_of_positions -= 1
             num_of_trades += 1
+            
             bull = False
             flag = False
 
@@ -252,8 +253,8 @@ for index1, row1 in data1.iterrows():
                 positive_pnl += pnl
             else:
                 negative_pnl += pnl
-
-            print("\033[32m<------ LONG EXIT ------>\033[0m")  # ANSI escape codes for this color coding to work
+            
+            print("\033[32m<------ LONG EXIT ------> \033[0m")  # ANSI escape codes for this color coding to work
             print("         EXIT PRICE = ", exit_price)
             print("   num_of_positions = ", number_of_positions)
             print("        num_of_lots = ", round(-1 * num_of_lots))
@@ -265,9 +266,9 @@ for index1, row1 in data1.iterrows():
             continue
                     
         # bearish candle-------------------------------------------------------------------------
-
-        if (current_low1 < local_low1) and ((local_low1 < local_low2 or local_low1 < current_low2)) and ((local_high1 < local_high2) and (local_high1 < local_high3) and (local_high1 < current_high3)) and local_high1 != 0 and local_low1 != 0  and local_high2 != 0 and local_low2 != 0  and not bull and not flag:
-            max_loss_for_trade = (min(local_low1,current_low1) - local_high1 + ( tick_val * 4)) * contract_size
+        
+        if (current_low1 < local_low1) and ((local_low1 < local_low2) or (local_low1 < local_low3) or (local_low1 < current_low3)) and ((local_high1 < local_high2) and (local_high1 < local_high3) and (local_high1 < current_high3)) and local_high1 != 0 and local_low1 != 0  and local_high2 != 0 and local_low2 != 0  and not bull and not flag:
+            max_loss_for_trade = (min(local_low1,current_low1) - current_high1 + ( tick_val * 4)) * contract_size
             if max_loss_for_trade > risk:
                 num_of_lots = 5
                 continue  
@@ -276,9 +277,9 @@ for index1, row1 in data1.iterrows():
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 number_of_positions += 1
                 if num_of_lots >=max_num_lots:
-                    num_of_lots = max_num_lots
+                    num_of_lots = 10
             entry_price = min(local_low1,current_low1) - (tick_val * 2)
-            exit_price = local_high1 + (tick_val * 2)
+            exit_price = current_high1 + (tick_val * 2)
             print("\033[31m<------ SHORT ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
             print("        ENTRY PRICE = ", entry_price)
             print("   num_of_positions = ", number_of_positions)
@@ -290,10 +291,10 @@ for index1, row1 in data1.iterrows():
             continue
 
         # bearish exit        
-        if local_high1 > exit_price and bear and flag:
-            print("exit_price :", exit_price)
+        if current_high1 > exit_price and bear and flag:
             number_of_positions -= 1
             num_of_trades += 1
+            
             bear = False
             flag = False
 
@@ -318,7 +319,7 @@ for index1, row1 in data1.iterrows():
                 positive_pnl += pnl
             else:
                 negative_pnl += pnl
-            print("\033[31m<------ SHORT EXIT ------>\033[0m")  # ANSI escape codes for this color coding to work
+            print("\033[31m<------ SHORT EXIT ------> \033[0m")  # ANSI escape codes for this color coding to work
             print("         EXIT PRICE = ", exit_price)
             print("   num_of_positions = ", number_of_positions)
             print("        num_of_lots = ", round(-1 * num_of_lots))

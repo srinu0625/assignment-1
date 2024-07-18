@@ -2,9 +2,9 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\candles\es monthly data\es feb 60 min.csv"
-file_path2 = r"D:\candles\es monthly data\es feb 240 min.csv"
-file_path3 = r"D:\candles\es monthly data\es feb daily.csv"
+file_path1 = r"D:\candles\es monthly data\es jun 60 min.csv"
+file_path2 = r"D:\candles\es monthly data\es jun 240 min.csv"
+file_path3 = r"D:\candles\es monthly data\es jun daily.csv"
 
 # Load the data
 try:
@@ -52,7 +52,7 @@ num_of_trades = 0
 # P&L calculation
 entry_price = 0
 exit_price  = 0
-contract_size = 50
+contract_size = 5
 # defining tick size
 tick_val = 0.25
 
@@ -192,12 +192,13 @@ for index1, row1 in data1.iterrows():
         time.sleep(0)
         print("   ")
 
-        # updating exit price----------------------------------
+        # Updating exit price
         if(bull and current_low1 > exit_price):
             exit_price = current_low1
 
         if(bear and current_high1 < exit_price):
             exit_price = current_high1
+
 
         # bullish candle    
         max_loss_for_trade = (max(current_high1, local_high1) - current_low1 + ( tick_val * 4)) * contract_size 
@@ -211,10 +212,9 @@ for index1, row1 in data1.iterrows():
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 if num_of_lots >=max_num_lots:
                    num_of_lots = max_num_lots
-            entry_price = (max(local_high1,current_high1)) + (tick_val * 2)
+            entry_price = (max(current_high1,local_high1)) + (tick_val * 2)
             exit_price = current_low1 - (tick_val * 2)
 
-            print("LH:",local_high1 ,"CL:",current_low1)
             print("\033[32m<------ LONG ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
             print("       ENTRY PRICE  = ", entry_price)
             print("   num_of_positions = ", number_of_positions)
@@ -227,7 +227,6 @@ for index1, row1 in data1.iterrows():
 
         # Bullish Exit
         if current_low1 < exit_price and bull and flag:
-            print("exit_price :", exit_price,"CL:",current_low1)
             number_of_positions -= 1
             num_of_trades += 1
             bull = False
@@ -241,7 +240,7 @@ for index1, row1 in data1.iterrows():
 
             # declaring maxloss and maxprofit
             max_profit = max(max_profit, pnl)
-            max_loss = min(max_loss,pnl)
+            max_loss = min(max_loss, pnl)
 
             # Check if integer part of P&L is positive or negative and set color accordingly
             if integer_pnl >= 0:
