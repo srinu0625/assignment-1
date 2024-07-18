@@ -1,9 +1,9 @@
 import pandas as pd
 import math
 import time
-file_path1 = r"D:\candles\es monthly data\es jun 60 min.csv"
-file_path2 = r"D:\candles\es monthly data\es jun 240 min.csv"
-file_path3 = r"D:\candles\es monthly data\es jun daily.csv"
+file_path1 = r"D:\candles\es monthly data\es jan 60 min.csv"
+file_path2 = r"D:\candles\es monthly data\es jan 240 min.csv"
+file_path3 = r"D:\candles\es monthly data\es jan daily.csv"
 
 # Load the data
 try:
