@@ -2,10 +2,9 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\candles\es monthly data\es jan 60 min.csv"
-file_path2 = r"D:\candles\es monthly data\es jan 240 min.csv"
-file_path3 = r"D:\candles\es monthly data\es jan daily.csv"
-
+file_path1 = r"C:\Users\lenovo\Desktop\data\es j-f 60 min.csv"
+file_path2 = r"C:\Users\lenovo\Desktop\data\es j-f 240 min.csv"
+file_path3 = r"C:\Users\lenovo\Desktop\data\es j-f daily.csv"
 
 # Load the data
 try:
@@ -16,74 +15,34 @@ except Exception as e:
     print("Error loading data:", e)
     exit()
 
-# Assuming the column names for high and low are 'High' and 'Low'
+# Column names
 high_column_name = 'High'
-low_column_name  = 'Low'
+low_column_name = 'Low'
 time_column_name = 'Date (GMT)'
 
-# temp column names
-temp_high1 = 0
-temp_low1  = 0
-temp_high2 = 0
-temp_low2  = 0
-temp_high3 = 0
-temp_low3  = 0
+# Temp variables for tracking highs and lows
+temp_high1 = temp_low1 = temp_high2 = temp_low2 = temp_high3 = temp_low3 = 0
 
-# local high and local low 
-current_high1 = 0
-current_low1  = 0
-local_high1 = temp_high1
-local_low1 = temp_low1
-local_high2 = temp_high2
-local_low2 = temp_low2
-local_high3 = temp_high3
-local_low3 = temp_low3
-prev_local_high1 = 0 
-prev_local_low1  = 0
-prev_local_high2 = 0 
-prev_local_low2  = 0
-prev_local_high3 = 0 
-prev_local_low3  = 0
+# Local highs and lows
+local_high1 = local_low1 = local_high2 = local_low2 = local_high3 = local_low3 = 0
 
-# flag 
-bull = False
-bear = False
-flag = False
+# Trading flags
+bull = bear = flag = False
 
-# num of positions 
-number_of_positions = 0
-
-# num of trades
-num_of_trades = 0
-
-# P&L calculation
-entry_price = 0
-exit_price  = 0
+# Trading parameters
+number_of_positions = num_of_trades = 0
+entry_price = exit_price = 0
 contract_size = 5
-# defining tick size
 tick_val = 0.25
-
-# maxloss maxprofit
-max_loss   = 0  
-max_profit = 0 
-max_loss_for_trade = 0
-
-# total p&l
-TOTAL_P_L = 0
-
-# total long and short pnl
-total_long_pnl = 0
-total_short_pnl = 0
-positive_pnl = 0
-negative_pnl = 0
-num_of_lots  = 0
+max_loss = max_profit = max_loss_for_trade = 0
+TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
+num_of_lots = 0
 max_num_lots = 20
 risk = 360
 
-#total rows in sheets
-rows_count_240_mins=0
-rows_count_daily=0
-current_hours_count=1
+# Row counters
+rows_count_240_mins = rows_count_daily = 0
+current_hours_count = 1
 date_flag = False
 
 previous_date = data1.loc[0,time_column_name].split()[0]
@@ -222,7 +181,8 @@ for index1, row1 in data1.iterrows():
 
         # bullish candle    
         max_loss_for_trade = (local_high1 - local_low1 + ( tick_val * 4)) * contract_size 
-        if (local_low1 > prev_local_low1) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and not bear and not flag:
+        if (local_low1 > prev_local_low1) and ((local_low1 > local_low2) and (local_low1 > local_low3) and \
+                (local_low1 > current_low3)) and not bear and not flag:
             if max_loss_for_trade > risk:
                num_of_lots = 5
                continue  

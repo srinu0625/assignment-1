@@ -8,8 +8,8 @@ Buy_Quantity = 0
 Sell_Quantity = 0
 
 # File paths
-input_file_path = r"C:\Users\lenovo\Downloads\A3 wed.xlsx"
-output_file_path = r"D:\\Modified_P&L.....A3 wed.....xlsx"
+input_file_path = r"C:\Users\lenovo\Downloads\Trade_Book_Export-20240719_17.18.42.xlsx"
+output_file_path = r"D:\\Modified_P&L.....FRI      .....xlsx"
 
 # Ensure the output directory exists
 output_directory = os.path.dirname(output_file_path)
@@ -81,8 +81,23 @@ for symbol in symbols:
                     current_position = (Sell_value - Buy_value)*0.1
                 elif symbol [0:3] == "MGC" :
                     current_position = (Sell_value - Buy_value)*10
+
+                # new products of surya sir
+                elif symbol [0:3] == "SIU" :
+                    current_position = (Sell_value - Buy_value)*5000
+                elif symbol [0:3] == "HGU" :
+                    current_position = (Sell_value - Buy_value)*25000
+                elif symbol [0:3] == "ZSX" :
+                    current_position = (Sell_value - Buy_value)*50
+                elif symbol [0:3] == "ZMZ" :
+                    current_position = (Sell_value - Buy_value)*100
+                elif symbol [0:3] == "ZCZ" :
+                    current_position = (Sell_value - Buy_value)*50
+                elif symbol [0:3] == "ZLZ" :
+                    current_position = (Sell_value - Buy_value)*600
+                elif symbol [0:3] == "ZWZ" :
+                    current_position = (Sell_value - Buy_value)*50
                 
-                 
                 data.at[index, 'P&L'] = current_position
                 Buy_Quantity = 0
                 Buy_value = 0
