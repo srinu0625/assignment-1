@@ -15,68 +15,34 @@ except Exception as e:
     print("Error loading data:", e)
     exit()
 
-# Assuming the column names for high and low are 'High' and 'Low'
+# Column names
 high_column_name = 'High'
-low_column_name  = 'Low'
+low_column_name = 'Low'
 time_column_name = 'Date (GMT)'
 
-# temp column names
-temp_high1 = 0
-temp_low1  = 0
-temp_high2 = 0
-temp_low2  = 0
-temp_high3 = 0
-temp_low3  = 0
+# Temp variables for tracking highs and lows
+temp_high1 = temp_low1 = temp_high2 = temp_low2 = temp_high3 = temp_low3 = 0
 
-# local high and local low 
-current_high1 = 0
-current_low1  = 0
-local_high1 = temp_high1
-local_low1 = temp_low1
-local_high2 = temp_high2
-local_low2 = temp_low2
-local_high3 = temp_high3
-local_low3 = temp_low3
+# Local highs and lows
+local_high1 = local_low1 = local_high2 = local_low2 = local_high3 = local_low3 = 0
 
-# flag 
-bull = False
-bear = False
-flag = False
+# Trading flags
+bull = bear = flag = False
 
-# num of positions 
-number_of_positions = 0
-
-# num of trades
-num_of_trades = 0
-
-# P&L calculation
-entry_price = 0
-exit_price  = 0
+# Trading parameters
+number_of_positions = num_of_trades = 0
+entry_price = exit_price = 0
 contract_size = 5
-# defining tick size
 tick_val = 0.25
-
-# maxloss maxprofit
-max_loss   = 0  
-max_profit = 0 
-max_loss_for_trade = 0
-
-# total p&l
-TOTAL_P_L = 0
-
-# total long and short pnl
-total_long_pnl = 0
-total_short_pnl = 0
-positive_pnl = 0
-negative_pnl = 0
-num_of_lots  = 0
+max_loss = max_profit = max_loss_for_trade = 0
+TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
+num_of_lots = 0
 max_num_lots = 20
 risk = 360
 
-#total rows in sheets
-rows_count_240_mins=0
-rows_count_daily=0
-current_hours_count=1
+# Row counters
+rows_count_240_mins = rows_count_daily = 0
+current_hours_count = 1
 date_flag = False
 
 previous_date = data1.loc[0,time_column_name].split()[0]
