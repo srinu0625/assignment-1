@@ -2,9 +2,10 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"C:\Users\lenovo\Desktop\data\es j-f 60 min.csv"
-file_path2 = r"C:\Users\lenovo\Desktop\data\es j-f 240 min.csv"
-file_path3 = r"C:\Users\lenovo\Desktop\data\es j-f daily.csv"
+file_path1 = r"C:\Users\lenovo\Desktop\es 60.csv"
+file_path2 = r"C:\Users\lenovo\Desktop\es 240.csv"
+file_path3 = r"C:\Users\lenovo\Desktop\es day.csv"
+
 
 # Load the data
 try:
@@ -32,8 +33,8 @@ bull = bear = flag = False
 # Trading parameters
 number_of_positions = num_of_trades = 0
 entry_price = exit_price = 0
-contract_size = 5
-tick_val = 0.25
+contract_size = 100
+tick_val = 0.1
 max_loss = max_profit = max_loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0
@@ -171,13 +172,13 @@ for index1, row1 in data1.iterrows():
         max_loss_for_trade =  (max(current_high1, local_high1) - local_low1 + ( tick_val * 4)) * contract_size 
         if (current_high1 > local_high1) and ((local_high1 > local_high2) or (local_high1 > local_high3) or (local_high1 > current_high3)) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and local_high1 != 0 and local_low1 != 0  and local_high2 != 0 and local_low2 != 0 and not bear and not flag :
             if max_loss_for_trade > risk:
-                   num_of_lots = 5
+                   num_of_lots = 1
                    continue 
             else:
                 max_loss_for_trade <= risk
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 if num_of_lots >=max_num_lots:
-                    num_of_lots = 10
+                    num_of_lots = 5
             entry_price = (max(local_high1,current_high1)) + (tick_val * 2)
             exit_price = local_low1 - (tick_val * 2)
             print("\033[32m<------ LONG ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
@@ -236,14 +237,14 @@ for index1, row1 in data1.iterrows():
         
         if (current_low1 < local_low1) and ((local_low1 < local_low2) or (local_low1 < local_low3) or (local_low1 < current_low3)) and ((local_high1 < local_high2) and (local_high1 < local_high3) and (local_high1 < current_high3)) and local_high1 != 0 and local_low1 != 0  and local_high2 != 0 and local_low2 != 0  and not bull and not flag:
             if max_loss_for_trade > risk:
-                num_of_lots = 5
+                num_of_lots = 1
                 continue  
             else:
                 max_loss_for_trade <= risk
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 number_of_positions += 1
                 if num_of_lots >=max_num_lots:
-                    num_of_lots = 10
+                    num_of_lots = 5
             entry_price = min(local_low1,current_low1) - (tick_val * 2)
             exit_price = local_high1 + (tick_val * 2)
             print("\033[31m<------ SHORT ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work

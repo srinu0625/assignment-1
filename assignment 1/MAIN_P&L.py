@@ -8,8 +8,8 @@ Buy_Quantity = 0
 Sell_Quantity = 0
 
 # File paths
-input_file_path = r"C:\Users\lenovo\Downloads\Trade_Book_Export-20240719_17.18.42.xlsx"
-output_file_path = r"D:\\Modified_P&L.....FRI      .....xlsx"
+input_file_path = r"C:\Users\lenovo\Downloads\33 (1).xlsx"
+output_file_path = r"D:\\Modified_P&L..... 33333333.....xlsx"
 
 # Ensure the output directory exists
 output_directory = os.path.dirname(output_file_path)
@@ -23,7 +23,7 @@ df = pd.read_excel(input_file_path)
 df = df.iloc[::-1]
 
 # List of columns to delete
-columns_to_delete = ['OrderID', 'User', 'TradeID','Entry Price','Parent','Account']
+columns_to_delete = ['OrderID']
 # Drop the specified columns
 df.drop(columns=columns_to_delete, inplace=True)
 

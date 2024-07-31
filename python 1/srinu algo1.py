@@ -2,9 +2,9 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"C:\Users\lenovo\Desktop\snp 60 min.csv"
-file_path2 = r"C:\Users\lenovo\Desktop\snp 240 min.csv"
-file_path3 = r"C:\Users\lenovo\Desktop\snp day.csv"
+file_path1 = r"D:\candles\es j - f 60 min.csv"
+file_path2 = r"D:\candles\es j - f 240 min.csv"
+file_path3 = r"D:\candles\es j - f daily.csv"
 
 # Load the data
 try:
@@ -283,7 +283,7 @@ for index1, row1 in data1.iterrows():
                 num_of_lots = math.floor(risk / max_loss_for_trade )
                 number_of_positions += 1
                 if num_of_lots >=max_num_lots:
-                    num_of_lots = 5
+                   num_of_lots = 5
             entry_price = local_low1 - (tick_val * 2)
             exit_price = current_high1
             print("\033[31m<------ SHORT ENTRY ------> (CL1 < LL1 and LH1 < LH2)\033[0m")  # ANSI escape codes for this color coding to work

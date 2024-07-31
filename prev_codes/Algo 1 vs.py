@@ -2,9 +2,10 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\New folder\es 60 min.csv"
-file_path2 = r"D:\New folder\es 240 min.csv"
-file_path3 = r"D:\New folder\es day.csv"
+
+file_path1 = r"C:\Users\lenovo\Desktop\cme 60 min.csv"
+file_path2 = r"C:\Users\lenovo\Desktop\cme 240 min.csv"
+file_path3 = r"C:\Users\lenovo\Desktop\cme daily.csv"
 
 # Load the data
 try:
@@ -84,13 +85,13 @@ for index1, row1 in data1.iterrows():
             if pd.notna(row2[time_column_name]) and pd.notna(row2[high_column_name]) and pd.notna(row2[low_column_name]):
                 current_date2 = row2[time_column_name].split()[0]
                 
-                if current_date1 == current_date2:
+                if current_date1 != current_date2:
 
 
                     for index3, row3 in data3.iterrows():
                         if pd.notna(row3[time_column_name]) and pd.notna(row3[high_column_name]) and pd.notna(row3[low_column_name]):
                             current_date3 = row3[time_column_name].split()[0]
-                            if current_date2 == current_date1 == current_date3:
+                            if current_date2 == current_date3 != current_date1:
 
                                 try:
                                     # Extracting current and previous values for high and low from data1

@@ -107,12 +107,12 @@ for index, row in data.iterrows():
             if current_high > local_high and local_high != 0 and local_low != 0 and not bear and not flag :
                 if max_loss_for_trade > risk:
                    num_of_lots = 1
-                   continue  # Skip this trade
+                   continue 
                 else:
                     max_loss_for_trade <= risk
-                    num_of_lots = math.floor(risk / max_loss_for_trade )
+                    num_of_lots = math.floor(risk / max_loss_for_trade)
                     number_of_positions += 1
-                    if num_of_lots >=max_num_lots:
+                    if num_of_lots >= max_num_lots:
                        num_of_lots = max_num_lots
                     entry_price = local_high + (tick_val * 2)
                     print("\033[32m<------ LONG ENTRY ------> (CH > LH)\033[0m")  # ANSI escape codes for this color coding to work
@@ -168,7 +168,7 @@ for index, row in data.iterrows():
             if current_low < local_low and local_high != 0 and local_low != 0 and not bull and not flag:
                 if max_loss_for_trade > risk:
                    num_of_lots = 1
-                   continue  # Skip this trade
+                   continue 
                 else:
                     ( max_loss_for_trade <=risk)
                     num_of_lots = math.floor( risk / max_loss_for_trade)
