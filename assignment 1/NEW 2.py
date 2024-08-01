@@ -129,9 +129,10 @@ for index1, row1 in data1.iterrows():
                            exit_price = local_high1
             
                         # bullish candle---------------------------------------------------------------------------
-                        loss_for_trade = (local_high1 - local_low1 + (tick_val * 4)) * contract_size 
+                       
                         print(local_high1 , local_low1 , tick_val , contract_size)
                         if (local_low1 > prev_local_low1) and (local_low1 >= local_low2) and not bear and not flag :
+                            loss_for_trade = (local_high1 - local_low1 + (tick_val * 4)) * contract_size 
                             if loss_for_trade > risk:
                                num_of_lots = 1
                                continue  
@@ -190,9 +191,9 @@ for index1, row1 in data1.iterrows():
                             continue
                                     
                         # bearish candle-------------------------------------------------------------------------
-                        loss_for_trade = (local_high1 - local_low1 + ( tick_val * 4)) * contract_size
-                        print(local_high2 , local_low2 , tick_val , contract_size)
+                        
                         if (local_high1 < prev_local_high1) and (local_high1 <= local_high2) and not bull and not flag:
+                            loss_for_trade = (local_low1 - local_high1 + ( tick_val * 4)) * contract_size
                             if loss_for_trade > risk:
                                num_of_lots = 1
                                continue  
