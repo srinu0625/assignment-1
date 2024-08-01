@@ -300,3 +300,10 @@ print("   total_long_pnl  = ", total_long_pnl_color,round(total_long_pnl,2),"\03
 print("  total_short_pnl  = ", total_short_pnl_color, round(total_short_pnl,2),"\033[0m")
 print("         TOTAL_P_L = ", TOTAL_P_L_colour, round(TOTAL_P_L,2),"\033[0m")
 print("     num of trades = ", num_of_trades)
+
+
+
+
+
+
+
