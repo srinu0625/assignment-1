@@ -1,2 +1,2 @@
-file_path2 = r"C:\Users\lenovo\Desktop\es 240.csv"
-file_path3 = r"C:\Users\lenovo\Desktop\es day.csv"
+file_path1 = r"C:\Users\lenovo\Music\es 1 240.csv"
+file_path2 = r"C:\Users\lenovo\Music\es 1 day.csv"

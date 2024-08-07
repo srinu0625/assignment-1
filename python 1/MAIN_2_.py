@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\candles\es j - f 240 min.csv"
-file_path2 = r"D:\candles\es j - f daily.csv"
+file_path1 = r"D:\candles\ES H 240.csv"
+file_path2 = r"D:\candles\ES H day.csv"
 
 # Load the data
 try:

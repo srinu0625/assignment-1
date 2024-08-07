@@ -1,9 +1,8 @@
 import pandas as pd
 import math
-import time
 
-file_path1 = r"C:\Users\lenovo\Documents\es 240.csv"
-file_path2 = r"C:\Users\lenovo\Documents\es day.csv"
+file_path1 = r"C:\Users\lenovo\Music\es 1 240.csv"
+file_path2 = r"C:\Users\lenovo\Music\es 1 day.csv"
 
 # Load the data
 try:
@@ -13,9 +12,18 @@ except Exception as e:
     print("Error loading data:", e)
     exit()
 
-## Column names
-high_column_name = 'High'
-low_column_name = 'Low'
+# Ensure the date columns are in datetime format
+data1['Date (GMT)'] = pd.to_datetime(data1['Date (GMT)'])
+data2['Date (GMT)'] = pd.to_datetime(data2['Date (GMT)'])
+
+# Merge the datasets on the date column
+merged_data = pd.merge(data1, data2, on='Date (GMT)', suffixes=('_240', '_daily'))
+
+# Column names
+high_240 = 'High_240'
+low_240 = 'Low_240'
+high_daily = 'High_daily'
+low_daily = 'Low_daily'
 time_column_name = 'Date (GMT)'
 
 # Temp variables for tracking highs and lows
@@ -23,9 +31,6 @@ temp_high1 = temp_low1 = temp_high2 = temp_low2 = 0
 
 # Local highs and lows
 local_high1 = local_low1 = local_high2 = local_low2 = 0
-
-# prev local high and lows
-prev_local_high1 = prev_local_low1 = prev_local_high2 = prev_local_low2 = 0
 
 # Trading flags
 bull = bear = flag = False
@@ -41,213 +46,143 @@ num_of_lots = 0
 max_num_lots = 20
 risk = 900
 
-# Iterate over each row of the daily DataFrame (data1)
-for index1, row1 in data1.iterrows():
-    # Check if the row has valid data
-    if pd.notna(row1[time_column_name]) and pd.notna(row1[high_column_name]) and pd.notna(row1[low_column_name]):
-        # Extract the current date from the daily data
-        current_date1 = row1[time_column_name].split()[0]
+# Iterate over each row of the merged DataFrame
+for index, row in merged_data.iterrows():
+    try:
+        # Extract current and previous values for high and low
+        current_time = row[time_column_name]
+        
+        current_high1 = row[high_240]
+        current_low1 = row[low_240]
+        current_high2 = row[high_daily]
+        current_low2 = row[low_daily]
+        
+        previous_high1 = merged_data.at[index - 1, high_240] if index > 0 else 0
+        previous_low1 = merged_data.at[index - 1, low_240] if index > 0 else 0
+        previous_high2 = merged_data.at[index - 1, high_daily] if index > 1 else 0
+        previous_low2 = merged_data.at[index - 1, low_daily] if index > 1 else 0
 
-        # Iterate over each row of the hourly DataFrame (data2)
-        for index2, row2 in data2.iterrows():
-            # Check if the row has valid data
-            if pd.notna(row2[time_column_name]) and pd.notna(row2[high_column_name]) and pd.notna(row2[low_column_name]):
-                # Extract the current date from the hourly data
-                current_date2 = row2[time_column_name].split()[0]
+        # Update temp highs and lows for data1 (240 min)
+        if current_high1 > previous_high1:
+            temp_high1 = current_high1
+            local_low1 = temp_low1
 
-                # If the hourly data date matches the daily data date
-                if current_date2 == current_date1:
-                    try:
-                        # Extracting current and previous values for high and low from data1
-                        current_time1 = row1[time_column_name]
-                        current_high1 = float(row1[high_column_name])
-                        previous_high1 = float(data1.at[index1 - 1, high_column_name]) if index1 > 0 else 0
-                        current_low1 = float(row1[low_column_name])
-                        previous_low1 = float(data1.at[index1 - 1, low_column_name]) if index1 > 0 else 0
+        if current_low1 < previous_low1:
+            temp_low1 = current_low1
+            local_high1 = temp_high1
 
-                        # Extracting current and previous values for high and low from data2
-                        current_time2 = (data2.at[index2 - 1, time_column_name])
-                        current_high2 = float(row2[high_column_name])
-                        previous_high2 = float(data2.at[index2 - 1, high_column_name]) if index2 > 0 else 0
-                        current_low2 = float(row2[low_column_name])
-                        previous_low2 = float(data2.at[index2 - 1, low_column_name]) if index2 > 0 else 0
+        # Update temp highs and lows for data2 (daily)
+        if current_high2 > previous_high2:
+            temp_high2 = current_high2
+            local_low2 = temp_low2
 
-                        # case 1 for data1
-                        if current_high1 > previous_high1:
-                            temp_high1 = current_high1
+        if current_low2 < previous_low2:
+            temp_low2 = current_low2
+            local_high2 = temp_high2
 
-                        if current_low1 < previous_low1:
-                            temp_low1 = current_low1
+        # Updating exit price
+        if bull and current_low1 > exit_price:
+            exit_price = current_low1
 
-                        # case 2 for data1
-                        if current_high1 > previous_high1:
-                            local_low1 = temp_low1
+        if bear and current_high1 < exit_price:
+            exit_price = current_high1
 
-                        if current_low1 < previous_low1:
-                            local_high1 = temp_high1
+        # Bullish trade logic
+        if (current_high1 > local_high1) and (local_low1 >= local_low2) and not bear and not flag:
+            entry_price = local_high1 + (tick_val * 2)
+            loss_for_trade = (local_high1 - current_low1 + (tick_val * 4)) * contract_size
+            num_of_lots = 1 if loss_for_trade > risk else min(math.floor(risk / loss_for_trade), max_num_lots)
 
-                        # Printing data for data2
-                        print("----240 MIN:----", current_time1)
-                        print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :", local_high1)
-                        print("Current Low1 :", current_low1, "Previous Low1 :", previous_low1, "local_low1 :", local_low1)
-                        print("   ")
-                        time.sleep(0)
+            print("\033[32m<------ LONG ENTRY ------>(CH1 > LH1) AND (LL1 >= LL2)\033[0m")
+            print(f"       ENTRY PRICE  = {entry_price}")
+            print(f"        num_of_lots = {round(num_of_lots)}")
+            print(f"     loss_for_trade = {round(loss_for_trade)}")
+            print("--------------------------------------------------")
+            bull = True
+            flag = True
+            continue
 
-                        # case 1 for data2
-                        if current_high2 > previous_high2:
-                            temp_high2 = current_high2
+        # Bullish exit logic
+        if current_low1 < exit_price and bull and flag:
+            exit_price = current_low1 - (tick_val * 2)
+            number_of_positions -= 1
+            num_of_trades += 1
+            bull = False
+            flag = False
 
-                        if current_low2 < previous_low2:
-                            temp_low2 = current_low2
+            pnl = (exit_price - entry_price) * num_of_lots * contract_size
+            TOTAL_P_L += pnl
+            total_long_pnl += pnl
 
-                        # case 2 for data2
-                        if current_high2 > previous_high2:
-                            local_low2 = temp_low2
+            max_profit = max(max_profit, pnl)
+            max_loss = min(max_loss, pnl)
 
-                        if current_low2 < previous_low2:
-                            local_high2 = temp_high2
+            pnl_color = "\033[32m" if pnl >= 0 else "\033[31m"
+            positive_pnl += pnl if pnl >= 0 else 0
+            negative_pnl += pnl if pnl < 0 else 0
 
-                        # Printing data for data2
-                        print("----DAILY :----", current_time2)
-                        print("Current High2 :", current_high2, "Previous High2 :", previous_high2, "local_high2 :", local_high2)
-                        print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2, "local_low2 :", local_low2)
-                        print("   ")
-                        time.sleep(0)
+            print("\033[32m<------ LONG EXIT ------>(LL1 >\033[0m")
+            print(f"         EXIT PRICE = {exit_price}")
+            print(f"        num_of_lots = {round(num_of_lots)}")
+            print(f"      num_of_trades = {num_of_trades}")
+            print(f"         max_profit = {round(max_profit, 2)}")
+            print(f"           max_loss = {round(max_loss, 2)}")
+            print(f"       P&L_Of_trade = {pnl_color}{round(pnl, 2)}\033[0m")
+            print("---------------------------------------------------------")
+            continue
 
-                        # updating exit price
-                        if bull and current_low1 > exit_price:
-                            exit_price = current_low1
+        # Bearish trade logic
+        if (current_low1 < local_low1) and (local_high1 <= local_high2) and not bull and not flag:
+            entry_price = local_low1 - (tick_val * 2)
+            loss_for_trade = (local_low1 - current_high1 + (tick_val * 4)) * contract_size
+            num_of_lots = 1 if loss_for_trade > risk else min(math.floor(risk / loss_for_trade), max_num_lots)
 
-                        if bear and current_high1 < exit_price:
-                            exit_price = current_high1
+            print("\033[31m<------ SHORT ENTRY ------> (CH1 < LL1) AND (LH1 <= LH2)\033[0m")
+            print(f"        ENTRY PRICE = {entry_price}")
+            print(f"        num_of_lots = {round(num_of_lots)}")
+            print(f"     loss_for_trade = {round(loss_for_trade)}")
+            print("------------------------------------------------")
+            bear = True
+            flag = True
+            continue
 
-                        # bullish candle
-                        if (current_high1 > local_high1) and (local_low1 >= local_low2) and not bear and not flag:
-                            loss_for_trade = (local_high1 - current_low1 + (tick_val * 4)) * contract_size
-                            print("Calculated loss_for_trade (bullish):", loss_for_trade)
-                            if loss_for_trade > risk:
-                                num_of_lots = 1
-                            else:
-                                num_of_lots = math.floor(risk / loss_for_trade)
-                                if num_of_lots > max_num_lots:
-                                    num_of_lots = max_num_lots
-                            entry_price = local_high1 + (tick_val * 2)
-                            exit_price = current_low1 - (tick_val * 2)
-                            print("\033[32m<------ LONG ENTRY ------>(CH1 > LH1) AND (LL1 >= LL2)\033[0m")
-                            print("       ENTRY PRICE  = ", entry_price)
-                            print("        num_of_lots = ", round(num_of_lots))
-                            print(" loss_for_trade = ", round(loss_for_trade))
-                            print("--------------------------------------------------")
-                            bull = True
-                            flag = True
-                            continue
+        # Bearish exit logic
+        if current_high1 > exit_price and bear and flag:
+            exit_price = current_high1 + (tick_val * 2)
+            number_of_positions -= 1
+            num_of_trades += 1
 
-                        # Bullish Exit
-                        if current_low1 < exit_price and bull and flag:
-                            number_of_positions -= 1
-                            num_of_trades += 1
-                            bull = False
-                            flag = False
+            bear = False
+            flag = False
 
-                            # Calculate P&L
-                            pnl = (exit_price - entry_price) * num_of_lots * contract_size
-                            TOTAL_P_L += pnl
-                            total_long_pnl += pnl
-                            integer_pnl = float(pnl)  # Extract the integer part of the P&L
+            pnl = (entry_price - exit_price) * num_of_lots * contract_size
+            TOTAL_P_L += pnl
+            total_short_pnl += pnl
 
-                            # declaring maxloss and maxprofit
-                            max_profit = max(max_profit, pnl)
-                            max_loss = min(max_loss, pnl)
+            max_profit = max(max_profit, pnl)
+            max_loss = min(max_loss, pnl)
 
-                            # Check if integer part of P&L is positive or negative and set color accordingly
-                            if integer_pnl >= 0:
-                                pnl_color = "\033[32m"  # Green color
-                            else:
-                                pnl_color = "\033[31m"  # Red color
+            pnl_color = "\033[32m" if pnl >= 0 else "\033[31m"
+            positive_pnl += pnl if pnl >= 0 else 0
+            negative_pnl += pnl if pnl < 0 else 0
 
-                            # Add to total positive or negative P&L based on the result
-                            if pnl >= 0:
-                                positive_pnl += pnl
-                            else:
-                                negative_pnl += pnl
+            print("\033[31m<------ SHORT EXIT ------>(LH1 >)\033[0m")
+            print(f"         EXIT PRICE = {exit_price}")
+            print(f"        num_of_lots = {round(num_of_lots)}")
+            print(f"      num_of_trades = {num_of_trades}")
+            print(f"         max_profit = {round(max_profit, 2)}")
+            print(f"           max_loss = {round(max_loss, 2)}")
+            print(f"       P&L_of_trade = {pnl_color}{round(pnl, 2)}\033[0m")
+            print("------------------------------------------------")
+            continue
 
-                            print("\033[32m<------ LONG EXIT ------>(LL1 >\033[0m")
-                            print("         EXIT PRICE = ", exit_price)
-                            print("        num_of_lots = ", round(-1 * num_of_lots))
-                            print("      num_of_trades = ", num_of_trades)
-                            print("         max_profit = ", round(max_profit, 2))
-                            print("           max_loss = ", round(max_loss, 2))
-                            print("       P&L_Of_trade = ", pnl_color, round(integer_pnl, 2), "\033[0m")
-                            print("---------------------------------------------------------")
-                            continue
+    except Exception as e:
+        print("Error:", e)
 
-                        # bearish candle
-                        if (current_low1 < local_low1) and (local_high1 <= local_high2) and not bull and not flag:
-                            loss_for_trade = (local_low1 - current_high1 + (tick_val * 4)) * contract_size
-                            print("Calculated loss_for_trade (bearish):", loss_for_trade)
-                            if loss_for_trade > risk:
-                                num_of_lots = 1
-                            else:
-                                num_of_lots = math.floor(risk / loss_for_trade)
-                                if num_of_lots > max_num_lots:
-                                    num_of_lots = max_num_lots
-                            entry_price = local_low1 - (tick_val * 2)
-                            exit_price = current_high1 + (tick_val * 2)
-                            print("\033[31m<------ SHORT ENTRY ------> (CH1 < LL1) AND (LH1 <= LH2)\033[0m")
-                            print("        ENTRY PRICE = ", entry_price)
-                            print("        num_of_lots = ", round(num_of_lots))
-                            print(" loss_for_trade = ", round(loss_for_trade))
-                            print("------------------------------------------------")
-                            bear = True
-                            flag = True
-                            continue
+    finally:
+        print("------------------------------------------End of iteration---------------------------------------------")
 
-                        # bearish exit
-                        if current_high1 > exit_price and bear and flag:
-                            number_of_positions -= 1
-                            num_of_trades += 1
-
-                            bear = False
-                            flag = False
-
-                            # Calculate P&L
-                            pnl = (entry_price - exit_price) * num_of_lots * contract_size
-                            TOTAL_P_L += pnl
-                            total_short_pnl += pnl
-                            integer_pnl = float(pnl)  # Extract the integer part of the P&L
-
-                            # declaring maxloss and maxprofit
-                            max_profit = max(max_profit, pnl)
-                            max_loss = min(max_loss, pnl)
-
-                            # Check if integer part of P&L is positive or negative and set color accordingly
-                            if integer_pnl >= 0:
-                                pnl_color = "\033[32m"  # Green color
-                            else:
-                                pnl_color = "\033[31m"  # Red color
-
-                            # Add to total positive or negative P&L based on the result
-                            if pnl >= 0:
-                                positive_pnl += pnl
-                            else:
-                                negative_pnl += pnl
-
-                            print("\033[31m<------ SHORT EXIT ------>(LH1 >)\033[0m")
-                            print("         EXIT PRICE = ", exit_price)
-                            print("        num_of_lots = ", round(-1 * num_of_lots))
-                            print("      num_of_trades = ", num_of_trades)
-                            print("         max_profit = ", round(max_profit, 2))
-                            print("           max_loss = ", round(max_loss, 2))
-                            print("       P&L_of_trade = ", pnl_color, round(integer_pnl, 2), "\033[0m")
-                            print("------------------------------------------------")
-                            continue
-
-                    except Exception as e:
-                        print("Error:", e)
-
-                    finally:
-                        print("------------------------------------------End of iteration---------------------------------------------")
-
+# Final summary
 max_loss_color = "\033[31m" if max_loss < 0 else "\033[32m"
 max_profit_color = "\033[31m" if max_profit < 0 else "\033[32m"
 positive_pnl_color = "\033[31m" if positive_pnl < 0 else "\033[32m"
@@ -256,11 +191,11 @@ total_long_pnl_color = "\033[31m" if total_long_pnl < 0 else "\033[32m"
 total_short_pnl_color = "\033[31m" if total_short_pnl < 0 else "\033[32m"
 TOTAL_P_L_colour = "\033[31m" if TOTAL_P_L < 0 else "\033[32m"
 
-print("        max_profit = ", max_profit_color, round(max_profit, 2), "\033[0m")
-print("          max_loss = ", max_loss_color, round(max_loss, 2), "\033[0m")
-print("      positive_pnl = ", positive_pnl_color, round(positive_pnl, 2), "\033[0m")
-print("      negative_pnl = ", negative_pnl_color, round(negative_pnl, 2), "\033[0m")
-print("   total_long_pnl  = ", total_long_pnl_color, round(total_long_pnl, 2), "\033[0m")
-print("  total_short_pnl  = ", total_short_pnl_color, round(total_short_pnl, 2), "\033[0m")
-print("         TOTAL_P_L = ", TOTAL_P_L_colour, round(TOTAL_P_L, 2), "\033[0m")
-print("     num of trades = ", num_of_trades)
+print(f"        max_profit = {max_profit_color}{round(max_profit, 2)}\033[0m")
+print(f"          max_loss = {max_loss_color}{round(max_loss, 2)}\033[0m")
+print(f"      positive_pnl = {positive_pnl_color}{round(positive_pnl, 2)}\033[0m")
+print(f"      negative_pnl = {negative_pnl_color}{round(negative_pnl, 2)}\033[0m")
+print(f"   total_long_pnl  = {total_long_pnl_color}{round(total_long_pnl, 2)}\033[0m")
+print(f"  total_short_pnl  = {total_short_pnl_color}{round(total_short_pnl, 2)}\033[0m")
+print(f"         TOTAL_P_L = {TOTAL_P_L_colour}{round(TOTAL_P_L, 2)}\033[0m")
+print(f"     num of trades = {num_of_trades}")

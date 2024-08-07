@@ -1,7 +1,7 @@
 import pandas as pd
 import math
 
-file_path = r"D:\ym daily.csv"
+file_path = r"D:\candles\ES H 240.csv"
 
 # Load the data
 try:
@@ -61,7 +61,7 @@ positive_pnl = 0
 negative_pnl = 0
 num_of_lots  = 0
 max_num_lots = 5
-risk = 5000
+risk = 450
 
 # Iterate over each row of the DataFrame
 for index, row in data.iterrows():
