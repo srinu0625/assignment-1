@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\candles\ES U 240.csv"
-file_path2 = r"D:\candles\ES U day.csv"
+file_path1 = r"D:\candles\gc contracts\GC U 240.csv"
+file_path2 = r"D:\candles\gc contracts\GC U day.csv"
 
 # Load the data
 try:
@@ -14,7 +14,7 @@ except Exception as e:
     exit()
 
 ## Column names
-high_column_name = 'High'
+high_column_name = 'High' 
 low_column_name = 'Low'
 time_column_name = 'Date (GMT)'
 
@@ -27,6 +27,10 @@ local_high1 = local_low1 = local_high2 = local_low2  = 0
 # prev local high and lows
 prev_local_high1 = prev_local_low1 = prev_local_high2 = prev_local_low2 = 0
 
+# for positive and negative trades
+total_positive_trades = 0
+total_negative_trades = 0
+
 # Trading flags
 bull = bear = flag = False
 
@@ -34,8 +38,8 @@ bull = bear = flag = False
 # Trading parameters
 number_of_positions = num_of_trades = 0
 entry_price = exit_price = 0
-contract_size = 5
-tick_val = 0.25
+contract_size = 10
+tick_val = 0.1
 max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0
@@ -82,6 +86,10 @@ for index1, row1 in data1.iterrows():
                             temp_low1 = current_low1
                             local_high1 = temp_high1
 
+                        if current_high1 > previous_high1 and current_low1 < previous_low1 :
+                            local_high1 = temp_high1
+                            local_low1 = temp_low1
+
                         # Printing data for data2
                         print("----240 MIN:----", current_time1)
                         print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :", local_high1)
@@ -89,7 +97,7 @@ for index1, row1 in data1.iterrows():
                         print("   ")
                         time.sleep(0)
 
-                        # case 1 for data2
+                         # case 1 for data2
                         if current_high2 > previous_high2:
                             temp_high2 = current_high2
                             local_low2 = temp_low2
@@ -97,6 +105,11 @@ for index1, row1 in data1.iterrows():
                         if current_low2 < previous_low2:
                             temp_low2 = current_low2
                             local_high2 = temp_high2
+
+                        if current_high2 > previous_high2 and current_low2 < previous_low2 :
+                            local_high2 = temp_high2
+                            local_low2 = temp_low2
+
 
                         # Printing data for data2
                         print("----DAILY :----", current_time2)
@@ -159,8 +172,10 @@ for index1, row1 in data1.iterrows():
                             # Add to total positive or negative P&L based on the result
                             if pnl >= 0:
                                 positive_pnl += pnl
+                                total_positive_trades +=1
                             else:
                                 negative_pnl += pnl
+                                total_negative_trades +=1
 
                             print("\033[32m<------ LONG EXIT ------> (LL1 <)\033[0m")  # ANSI escape codes for this color coding to work
                             print("         EXIT PRICE = ", exit_price)
@@ -219,8 +234,10 @@ for index1, row1 in data1.iterrows():
                             # Add to total positive or negative P&L based on the result
                             if pnl >= 0:
                                 positive_pnl += pnl
+                                total_positive_trades +=1
                             else:
                                 negative_pnl += pnl
+                                total_negative_trades +=1
 
                             print("\033[31m<------ SHORT EXIT ------> (LH1 >)\033[0m")  # ANSI escape codes for this color coding to work
                             print("         EXIT PRICE = ", exit_price)
@@ -247,11 +264,13 @@ total_long_pnl_color = "\033[31m" if total_long_pnl < 0 else "\033[32m"
 total_short_pnl_color = "\033[31m" if total_short_pnl < 0 else "\033[32m"
 TOTAL_P_L_colour = "\033[31m" if TOTAL_P_L < 0 else "\033[32m"
 
-print("        max_profit = ", max_profit_color,round(max_profit,2),"\033[0m")
-print("          max_loss = ", max_loss_color, round(max_loss,2),"\033[0m")
-print("      positive_pnl = ", positive_pnl_color,round(positive_pnl,2),"\033[0m")
-print("      negative_pnl = ", negative_pnl_color, round(negative_pnl,2),"\033[0m")
-print("   total_long_pnl  = ", total_long_pnl_color,round(total_long_pnl,2),"\033[0m")
-print("  total_short_pnl  = ", total_short_pnl_color, round(total_short_pnl,2),"\033[0m")
-print("         TOTAL_P_L = ", TOTAL_P_L_colour, round(TOTAL_P_L,2),"\033[0m")
-print("     num of trades = ", num_of_trades)
+print("           max_profit = ", max_profit_color, round(max_profit, 2), "\033[0m")
+print("             max_loss = ", max_loss_color, round(max_loss, 2), "\033[0m")
+print("         positive_pnl = ", positive_pnl_color, round(positive_pnl, 2), "\033[0m")
+print("         negative_pnl = ", negative_pnl_color, round(negative_pnl, 2), "\033[0m")
+print("      total_long_pnl  = ", total_long_pnl_color, round(total_long_pnl, 2), "\033[0m")
+print("     total_short_pnl  = ", total_short_pnl_color, round(total_short_pnl, 2), "\033[0m")
+print("            TOTAL_P_L = ", TOTAL_P_L_colour, round(TOTAL_P_L, 2), "\033[0m")
+print("        num of trades = ", num_of_trades)
+print("Total Positive Trades =", total_positive_trades)
+print("Total Negative Trades =", total_negative_trades)
