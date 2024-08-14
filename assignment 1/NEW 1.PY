@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\candles\CL  contracts\CL H 240.csv"
-file_path2 = r"D:\candles\CL  contracts\CL H day.csv"
+file_path1 = r"D:\candles\nq contracts\NQ U 240.csv"
+file_path2 = r"D:\candles\nq contracts\NQ U day.csv"
 
 # Load the data
 try:
@@ -36,8 +36,8 @@ bull = bear = flag = False
 # Trading parameters
 number_of_positions = num_of_trades = 0
 entry_price = exit_price = 0
-contract_size = 100
-tick_val = 0.01
+contract_size = 2
+tick_val = 0.25
 max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0
@@ -64,17 +64,23 @@ for index1, row1 in data1.iterrows():
                     try:
                         # Extracting current and previous values for high and low from data1
                         current_time1 = row1[time_column_name]
-                        current_high1 = float(row1[high_column_name])
-                        previous_high1 = float(data1.at[index1 - 1, high_column_name]) if index1 > 0 else 0
-                        current_low1 = float(row1[low_column_name])
-                        previous_low1 = float(data1.at[index1 - 1, low_column_name]) if index1 > 0 else 0
+                        high1 = float(row1[high_column_name])
+                        low1 = float(row1[low_column_name])
+                        if (high1 > current_high1) or (low1 < current_low1):
+                            previous_high1 = current_high1
+                            previous_low1 = current_low1
+                            current_high1 = high1
+                            current_low1 = low1
 
                         # Extracting current and previous values for high and low from data2
                         current_time2 = (data2.at[index2 - 1, time_column_name])
-                        current_high2 = float(row2[high_column_name])
-                        previous_high2 = float(data2.at[index2 - 1, high_column_name]) if index2 > 1 else 0
-                        current_low2 = float(row2[low_column_name])
-                        previous_low2 = float(data2.at[index2 - 1, low_column_name]) if index2 > 1 else 0
+                        high2 = float(row2[high_column_name])
+                        low2 = float(row2[low_column_name])
+                        if (high2 > current_high2) or(low2 < current_low2):
+                            previous_high2 = current_high2
+                            previous_low2 = current_low2
+                            current_high2 = high2
+                            current_low2 = low2
 
                         # case 1 for data1
                         if current_high1 > previous_high1:
