@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\candles\nq contracts\NQ U 240.csv"
-file_path2 = r"D:\candles\nq contracts\NQ U day.csv"
+file_path1 = r"D:\candles\gc contracts\GC H 240.csv"
+file_path2 = r"D:\candles\gc contracts\GC H day.csv"
 
 # Load the data
 try:
@@ -30,14 +30,22 @@ prev_local_high1 = prev_local_low1 = prev_local_high2 = prev_local_low2 = 0
 total_positive_trades = 0
 total_negative_trades = 0
 
+current_high1 = 0
+current_low1 = 0
+current_high2 = 0
+current_low2 = 0
+
+previous_high2 = 0
+previous_low2 = 0
+
 # Trading flags
 bull = bear = flag = False
 
 # Trading parameters
 number_of_positions = num_of_trades = 0
 entry_price = exit_price = 0
-contract_size = 2
-tick_val = 0.25
+contract_size = 10
+tick_val =0.1
 max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0
@@ -76,7 +84,7 @@ for index1, row1 in data1.iterrows():
                         current_time2 = (data2.at[index2 - 1, time_column_name])
                         high2 = float(row2[high_column_name])
                         low2 = float(row2[low_column_name])
-                        if (high2 > current_high2) or(low2 < current_low2):
+                        if (high2 > current_high2) or (low2 < current_low2):
                             previous_high2 = current_high2
                             previous_low2 = current_low2
                             current_high2 = high2

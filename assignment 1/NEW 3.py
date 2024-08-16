@@ -30,6 +30,13 @@ prev_local_high1 = prev_local_low1 = prev_local_high2 = prev_local_low2 = 0
 # for positive and negative trades
 total_positive_trades = 0
 total_negative_trades = 0
+current_high1 = 0
+current_low1 = 0
+current_high2 = 0
+current_low2 = 0
+
+previous_high2 = 0
+previous_low2 = 0
 
 # Trading flags
 bull = bear = flag = False
@@ -141,7 +148,7 @@ for index1, row1 in data1.iterrows():
                                     loss_for_trade <= risk
                                     num_of_lots = math.floor(risk / loss_for_trade )
                                     if num_of_lots >=max_num_lots:
-                                       num_of_lots = max_num_lots
+                                       num_of_lots = 5
                                     entry_price = local_high1 + (tick_val * 2)
                                     exit_price = local_low1 - (tick_val * 2)
                                     print("\033[32m<------ LONG ENTRY ------> (CH1 > LH1) and (LH1 > LH2) AND (LL1 >= LL2)\033[0m")  # ANSI escape codes for this color coding to work
@@ -203,7 +210,7 @@ for index1, row1 in data1.iterrows():
                                     loss_for_trade <= risk
                                     num_of_lots = math.floor(risk / loss_for_trade )
                                     if num_of_lots >=max_num_lots:
-                                       num_of_lots = max_num_lots
+                                       num_of_lots = 5
                                     entry_price = local_low1 - (tick_val * 2) 
                                     exit_price = local_high1 + (tick_val * 2)
                                     print("\033[31m<------ SHORT ENTRY ------> (CL1 < LL1) AND ( LL1 < LL2) AND (LH1 <= LH2)\033[0m")  # ANSI escape codes for this color coding to work
