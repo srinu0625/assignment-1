@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\candles\gc contracts\GC H 240.csv"
-file_path2 = r"D:\candles\gc contracts\GC H day.csv"
+file_path1 = r"D:\candles\es contracts\ES H 240.csv"
+file_path2 = r"D:\candles\es contracts\ES H day.csv"
 
 # Load the data
 try:
@@ -37,14 +37,17 @@ prev_local_high1 = prev_local_low1 = prev_local_high2 = prev_local_low2 = 0
 total_positive_trades = 0
 total_negative_trades = 0
 
+highest_point = 0
+lowest_point = 0
+
 # Trading flags
 bull = bear = flag = False
 
 # Trading parameters
 number_of_positions = num_of_trades = 0
 entry_price = exit_price = 0
-contract_size = 10
-tick_val = 0.1
+contract_size = 5
+tick_val = 0.25
 max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0
@@ -69,11 +72,11 @@ for index1, row1 in data1.iterrows():
                 # If the hourly data date matches the daily data date
                 if current_date2 == current_date1:
                     try:
-                         # Extracting current and previous values for high and low from data1
+                        # Extracting current and previous values for high and low from data1
                         current_time1 = row1[time_column_name]
                         high1 = float(row1[high_column_name])
                         low1 = float(row1[low_column_name])
-                        if (high1 > current_high1) or (low1 < current_low1):
+                        if (high1 > current_high1) or(low1 < current_low1):
                             previous_high1 = current_high1
                             previous_low1 = current_low1
                             current_high1 = high1
@@ -81,13 +84,14 @@ for index1, row1 in data1.iterrows():
 
                         # Extracting current and previous values for high and low from data2
                         current_time2 = (data2.at[index2 - 1, time_column_name])
-                        high2 = float(row2[high_column_name])
-                        low2 = float(row2[low_column_name])
+                        high2 = float(row1[high_column_name])
+                        low2 = float(row1[low_column_name])
                         if (high2 > current_high2) or(low2 < current_low2):
                             previous_high2 = current_high2
                             previous_low2 = current_low2
                             current_high2 = high2
                             current_low2 = low2
+
 
                         # case 1 for data1-----------------------------------------------------------------------------------
                         if(current_high1 > previous_high1):
@@ -136,10 +140,10 @@ for index1, row1 in data1.iterrows():
                         print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2, "local_low2 :", local_low2,"prev_local_low2 :",prev_local_low2,"temp_low2 :", temp_low2)
                         print("   ")
                         time.sleep(0)
-                        print("---------------------------------------------------------------------------------------------------------------------------------------")
+ 
                         # Bullish entry-------------------
                         if local_high1 > 0:
-                            if (local_low1 > prev_local_low1) and (local_low1 > local_high2) and (current_high1 > previous_high1) and not bear and not flag:
+                            if (local_low1 > prev_local_low1) and (local_low1 >= local_high2) and (current_high1 > previous_high1) and not bear and not flag:
                                 loss_for_trade = abs(previous_high1 - current_low1 + (tick_val * 4)) * contract_size
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
@@ -150,14 +154,21 @@ for index1, row1 in data1.iterrows():
                                         num_of_lots = 5
                                     entry_price = previous_high1 + (tick_val * 2)
                                     exit_price = current_low1 - (tick_val * 2)
+                                    highest_point = entry_price
                                     print("\033[32m<------ LONG ENTRY ------>(CH1 > LH1) AND (LL1 >= LL2)\033[0m")
                                     print("       ENTRY PRICE  = ", entry_price)
                                     print("        num_of_lots = ", round(num_of_lots))
                                     print("     loss_for_trade = ", round(loss_for_trade))
-                                    print("--------------------------------------------------")
+                                    print("   ")
+                                    print("      highest_point = ",highest_point)
+                                    print("==========================================================")
                                     bull = True
                                     flag = True
                                     continue
+                        
+
+                        if bull:
+                            highest_point = max(highest_point , current_high1)
 
                         # updating exit price----------------------------------
                         if(bull and current_low1 > exit_price):
@@ -192,38 +203,45 @@ for index1, row1 in data1.iterrows():
                             else:
                                 negative_pnl += pnl
                                 total_negative_trades +=1
-
-                            print("\033[32m<------ LONG EXIT ------>(LL1 <)\033[0m")  # ANSI escape codes for this color coding to work
+                            print("\033[32m<------ LONG EXIT ------>(CL1 <)\033[0m")  # ANSI escape codes for this color coding to work
                             print("         EXIT PRICE = ", exit_price)
                             print("        num_of_lots = ", round(num_of_lots))
                             print("      num_of_trades = ", num_of_trades)
                             print("         max_profit = ", round(max_profit,2))
                             print("           max_loss = ", round(max_loss,2))
                             print("       P&L_Of_trade = ", pnl_color, round(integer_pnl,2),"\033[0m")
-                            print("---------------------------------------------------------")
+                            print("   ")
+                            print("      highest_point = ",highest_point)
+                            print("================================================================")
                             continue
                                     
                         # bearish candle-------------------------------------------------------------------------
                         if local_low1 > 0:
-                            if (local_high1 < prev_local_high1) and (local_high1 < local_low2 ) and (current_low1 < previous_low1) and not bull and not flag:
+                            if (local_high1 < prev_local_high1) and (local_high1 <= local_low2) and (current_low1 < previous_low1) and not bull and not flag:
                                 loss_for_trade = abs(previous_low1 - current_high1 + ( tick_val * 4)) * contract_size
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
                                     continue  
                                 else:
                                     num_of_lots = math.floor(risk / loss_for_trade )
-                                    if num_of_lots >= max_num_lots:
+                                    if num_of_lots >=max_num_lots:
                                        num_of_lots = 5
                                     entry_price = previous_low1 - (tick_val * 2)
                                     exit_price = current_high1 + (tick_val * 2)
-                                print("\033[31m<------ SHORT ENTRY ------>(LH1 < PLH1) AND (LH1 <= LH2)\033[0m")  # ANSI escape codes for this color coding to work
+                                    lowest_point = entry_price
+                                print("\033[31m<------ SHORT ENTRY ------> (CL1 < LL1) AND (LH1 <= LH2)\033[0m")
                                 print("        ENTRY PRICE = ", entry_price)
-                                print("        num_of_lots = ",round(num_of_lots))
-                                print(" max_loss_for_trade = ",round(loss_for_trade))
-                                print("------------------------------------------------")
+                                print("        num_of_lots = ", round(num_of_lots))
+                                print("     loss_for_trade = ", round(loss_for_trade))
+                                print("  ")
+                                print("       lowest_point = ",lowest_point)
+                                print("==============================================")
                                 bear = True
                                 flag = True
                                 continue
+
+                        if bear:
+                            lowest_point = min(lowest_point , current_low1 )
 
                         # updating exit price----------------------------------
                         if(bear and current_high1 < exit_price):
@@ -260,14 +278,17 @@ for index1, row1 in data1.iterrows():
                                 negative_pnl += pnl
                                 total_negative_trades +=1
 
-                            print("\033[31m<------ SHORT EXIT ------>(LH1 >)\033[0m")  # ANSI escape codes for this color coding to work
+                            print("\033[31m<------ SHORT EXIT ------>(CH1 >)\033[0m")  # ANSI escape codes for this color coding to work
                             print("         EXIT PRICE = ", exit_price)
                             print("        num_of_lots = ", round(num_of_lots))
                             print("      num_of_trades = ", num_of_trades)
                             print("         max_profit = ", round(max_profit,2))  
                             print("           max_loss = ", round( max_loss,2))
                             print("       P&L_of_trade = ", pnl_color, round(integer_pnl,2),"\033[0m")
-                            print("------------------------------------------------")
+                            print("   ") 
+                            print("       lowest_point = ",lowest_point)
+                            print("============================================================")
+
                             continue
                     except Exception as e:
                        print("Error:", e)
@@ -287,9 +308,9 @@ print("           max_profit = ", max_profit_color, round(max_profit, 2), "\033[
 print("             max_loss = ", max_loss_color, round(max_loss, 2), "\033[0m")
 print("         positive_pnl = ", positive_pnl_color, round(positive_pnl, 2), "\033[0m")
 print("         negative_pnl = ", negative_pnl_color, round(negative_pnl, 2), "\033[0m")
-print("      total_long_pnl  = ", total_long_pnl_color, round(total_long_pnl, 2), "\033[0m")
-print("     total_short_pnl  = ", total_short_pnl_color, round(total_short_pnl, 2), "\033[0m")
+print("       total_long_pnl = ", total_long_pnl_color, round(total_long_pnl, 2), "\033[0m")
+print("      total_short_pnl = ", total_short_pnl_color, round(total_short_pnl, 2), "\033[0m")
 print("            TOTAL_P_L = ", TOTAL_P_L_colour, round(TOTAL_P_L, 2), "\033[0m")
 print("        num of trades = ", num_of_trades)
-print("Total Positive Trades =", total_positive_trades)
-print("Total Negative Trades =", total_negative_trades)
+print("Total Positive Trades = ", total_positive_trades)
+print("Total Negative Trades = ", total_negative_trades)

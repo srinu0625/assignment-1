@@ -1,2 +1,1 @@
-
-tick_val = 0.25
+  print("----240 MIN:----", current_time1)

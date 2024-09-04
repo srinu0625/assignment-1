@@ -17,3 +17,34 @@
                             previous_low2 = current_low2
                             current_high2 = high2
                             current_low2 = low2
+
+
+
+                            # Inside your trading loop after the trade entry
+highest_point = entry_price  # For long trades
+lowest_point = entry_price   # For short trades
+
+# During the trade, track the highest or lowest point
+if bull:  # Long trade
+    highest_point = max(highest_point, current_high1)
+
+    # Update exit condition to check against the highest point
+    if current_low1 < highest_point - (tick_val * 10):  # Adjust tick_val * 10 to your risk tolerance
+        exit_price = current_low1
+        # Exit the trade with updated logic
+
+if bear:  # Short trade
+    lowest_point = min(lowest_point, current_low1)
+
+    # Update exit condition to check against the lowest point
+    if current_high1 > lowest_point + (tick_val * 10):  # Adjust tick_val * 10 to your risk tolerance
+        exit_price = current_high1
+        # Exit the trade with updated logic
+
+
+
+
+
+ print("1,c,MESU4,",current_high1,current_low1,prev_high1,prev_low1,temp_high1,temp_low1,local_high1,local_low1,prev_local_high1,prev_local_low1)
+ print("1,c,MESU4," + str(current_high1) + "," + str(current_low1) + "," + str(previous_high1) + "," + str(previous_low1) + "," + str(temp_high1) + "," + str(temp_low1) + "," + str(local_high1) + "," + str(local_low1) + "," + str(prev_local_high1) + "," + str(prev_local_low1))
+           
