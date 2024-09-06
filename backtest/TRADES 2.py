@@ -53,7 +53,7 @@ max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0
 max_num_lots = 20
-risk = 900
+risk = 720
 
 # Initialize list to store trade entries
 trade_entries_long = []
@@ -176,8 +176,8 @@ for index1, row1 in data1.iterrows():
  
                         # Bullish entry-------------------
                         if local_high1 > 0:
-                            if (local_low1 > prev_local_low1) and (local_low1 > local_high2) and (current_high1 > previous_high1) and not bear and not flag:
-                                loss_for_trade = abs(previous_high1 - current_low1 + (tick_val * 4)) * contract_size
+                            if (local_low1 > prev_local_low1) and (local_high1 < local_low2) and (current_high1 > previous_high1) and not bear and not flag:
+                                loss_for_trade = abs(local_high1 - local_low1 + (tick_val * 4)) * contract_size
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
                                     continue
@@ -185,8 +185,8 @@ for index1, row1 in data1.iterrows():
                                     num_of_lots = math.floor(risk / loss_for_trade)
                                     if num_of_lots >= max_num_lots:
                                         num_of_lots = 5
-                                    entry_price = previous_high1 + (tick_val * 2)
-                                    exit_price = current_low1 - (tick_val * 2)
+                                    entry_price = local_high1 + (tick_val * 2)
+                                    exit_price = local_low1 - (tick_val * 2)
                                     print("\033[32m<------ LONG ENTRY ------>(CH1 > LH1) AND (LL1 >= LL2)\033[0m")
                                     print("       ENTRY PRICE  = ", entry_price)
                                     print("        num_of_lots = ", round(num_of_lots))
@@ -215,11 +215,11 @@ for index1, row1 in data1.iterrows():
                                     continue
 
                         # updating exit price----------------------------------
-                        if(bull and current_low1 > exit_price):
-                           exit_price = current_low1
+                        if(bull and local_low1 > exit_price):
+                           exit_price = local_low1
 
                         # Bullish Exit
-                        if current_low1 < exit_price and bull and flag:
+                        if local_low1 < exit_price and bull and flag:
                             num_of_trades += 1
                             bull = False
                             flag = False
@@ -273,6 +273,7 @@ for index1, row1 in data1.iterrows():
                                 'Current High': current_high1,
                                 'Current Low': current_low1,
                                 'local_high2':local_high2,
+                                'num_of_lots':round(num_of_lots),
                                 'P&L': pnl,
                                
                             })
@@ -280,8 +281,8 @@ for index1, row1 in data1.iterrows():
                                     
                          # bearish candle-------------------------------------------------------------------------
                         if local_low1 > 0:
-                            if (local_high1 < prev_local_high1) and (local_high1 < local_low2 ) and (current_low1 < previous_low1) and not bull and not flag:
-                                loss_for_trade = abs(previous_low1 - current_high1 + ( tick_val * 4)) * contract_size
+                            if (local_high1 < prev_local_high1) and (local_low1 > local_high2 ) and (current_low1 < previous_low1) and not bull and not flag:
+                                loss_for_trade = abs(local_low1 - local_high1 + ( tick_val * 4)) * contract_size
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
                                     continue  
@@ -289,8 +290,8 @@ for index1, row1 in data1.iterrows():
                                     num_of_lots = math.floor(risk / loss_for_trade )
                                     if num_of_lots >=max_num_lots:
                                        num_of_lots = 5
-                                    entry_price = previous_low1 - (tick_val * 2)
-                                    exit_price = current_high1 + (tick_val * 2)
+                                    entry_price = local_low1 - (tick_val * 2)
+                                    exit_price = local_high1 + (tick_val * 2)
                                 print("\033[31m<------ SHORT ENTRY ------>(LH1 < PLH1) AND (LH1 <= LH2)\033[0m")  # ANSI escape codes for this color coding to work
                                 print("        ENTRY PRICE = ", entry_price)
                                 print("        num_of_lots = ",round(num_of_lots))
@@ -312,7 +313,7 @@ for index1, row1 in data1.iterrows():
                                     'Prev  Low': previous_low1,
                                     'Current High': current_high1,
                                     'Current Low': current_low1,
-                                     'local_high2':local_high2
+                                    'local_high2':local_high2
                                     
                                     
                                 })
@@ -378,6 +379,7 @@ for index1, row1 in data1.iterrows():
                                 'Current High': current_high1,
                                 'Current Low': current_low1,
                                 'local_high2':local_high2,
+                                'num_of_lots':round(num_of_lots),
                                 'P&L': pnl
                                
                             })
@@ -412,3 +414,45 @@ print("            TOTAL_P_L = ", TOTAL_P_L_colour, round(TOTAL_P_L, 2), "\033[0
 print("        num of trades = ", num_of_trades)
 print("Total Positive Trades =", total_positive_trades)
 print("Total Negative Trades =", total_negative_trades)
+
+# Prepare summary statistics
+summary_stats_long = {
+    'Type': 'Summary',
+    'Entry Time': '',
+    'Exit Time': '',
+    'Entry Price': '',
+    'Exit Price': '',
+    'Local High': '',
+    'Local Low': '',
+    'Prev  High': '',
+    'Prev  Low': '',
+    'Current High': '',
+    'Current Low': '',
+    'local_high2': '',
+    'num_of_lots': '',
+    'P&L': '',
+
+    'max_profit': round(max_profit, 2),
+    'max_loss': round(max_loss, 2),
+    'positive_pnl': round(positive_pnl, 2),
+    'negative_pnl': round(negative_pnl, 2),
+    'total_long_pnl': round(total_long_pnl, 2),
+    'total_short_pnl': round(total_short_pnl, 2),
+    'TOTAL_P_L': round(TOTAL_P_L, 2),
+    'num_of_trades': num_of_trades,
+    'total_positive_trades': total_positive_trades,
+    'total_negative_trades': total_negative_trades
+}
+
+summary_stats_short = summary_stats_long.copy()
+
+# Append the summary statistics to the DataFrames
+trade_entries_long.append(summary_stats_long)
+trade_entries_short.append(summary_stats_short)
+
+# Save the trade entries along with summary statistics to CSV files
+trade_entries_long_df = pd.DataFrame(trade_entries_long)
+trade_entries_long_df.to_csv(output_file_path_long, index=False)
+
+trade_entries_short_df = pd.DataFrame(trade_entries_short)
+trade_entries_short_df.to_csv(output_file_path_short, index=False)

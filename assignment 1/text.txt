@@ -47,4 +47,47 @@ if bear:  # Short trade
 
  print("1,c,MESU4,",current_high1,current_low1,prev_high1,prev_low1,temp_high1,temp_low1,local_high1,local_low1,prev_local_high1,prev_local_low1)
  print("1,c,MESU4," + str(current_high1) + "," + str(current_low1) + "," + str(previous_high1) + "," + str(previous_low1) + "," + str(temp_high1) + "," + str(temp_low1) + "," + str(local_high1) + "," + str(local_low1) + "," + str(prev_local_high1) + "," + str(prev_local_low1))
-           
+
+
+
+
+
+
+                        # Extracting current and previous values for high and low from data1
+                        current_time1 = data1.at[index 1 - 0, time_column_name]
+                        high1 = float(row1[high_column_name])
+                        low1 = float(row1[low_column_name])
+                        if (high1 > current_high1) or (low1 < current_low1):
+                            previous_high1 = current_high1
+                            previous_low1 = current_low1
+                            current_high1 = high1
+                            current_low1 = low1
+
+                        # Extracting current and previous values for high and low from data2
+                        current_time2 = row2[ time_column_name]
+                        high2 = float(row2[high_column_name])
+                        low2 = float(row2[low_column_name])
+                        if (high2 > current_high2) or (low2 < current_low2):
+                            previous_high2 = current_high2
+                            previous_low2 = current_low2
+                            current_high2 = high2
+                            current_low2 = low2   
+
+
+
+1,c,MESU4,5565,5506,5670.75,5516.75,5670.75,5506,5670.75,5516.75,5663.75,5561.25
+
+1,c,MNQU4,19115,18824.2,19683,18911,19693.5,18824.2,19693.5,19140.2,19693.5,19542
+
+1,c,MCLV4,71.46,68.81,74.28,70.08,76.91,68.81,76.91,75.95,76.91,71.46
+
+1,c,MYMU4,41260,40848,41650,40866,41682,40848,41682,40920,41451,40684
+
+1,c,MGCZ4,2531.7,2502.6,2539.5,2504.4,2564.3,2502.6,2564.3,2502.6,2563.2,2527.8
+
+1,c,MBTU4,58825,55720,60165,57735,65620,55720,65620,56800,62215,49640
+
+
+
+
+

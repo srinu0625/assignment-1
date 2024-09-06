@@ -111,7 +111,7 @@ for index1, row1 in data1.iterrows():
                         print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :", local_high1,"prev_local_high1 :",prev_local_high1,"temp_high1 :", temp_high1)
                         print("Current Low1 :", current_low1, "Previous Low1 :", previous_low1, "local_low1 :", local_low1,"prev_local_low1 :",prev_local_low1,"temp_low1 :", temp_low1)
                         print("   ")
-                        time.sleep(0)
+                        time.sleep(1)
 
                         # case 1 for data2-----------------------------------------------------------------------------------
                         if (current_high2 > previous_high2):
@@ -135,7 +135,7 @@ for index1, row1 in data1.iterrows():
                         print("Current High2 :", current_high2, "Previous High2 :", previous_high2, "local_high2 :", local_high2,"prev_local_high2 :",prev_local_high2,"temp_high2 :", temp_high2)
                         print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2, "local_low2 :", local_low2,"prev_local_low2 :",prev_local_low2,"temp_low2 :", temp_low2)
                         print("   ")
-                        time.sleep(0)
+                        time.sleep(1)
  
                         # Bullish entry-------------------
                         if local_high1 > 0:
