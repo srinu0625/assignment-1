@@ -1,8 +1,9 @@
 import pandas as pd
 import math
 import time
-file_path1 = r"D:\candles\gc contracts\GC U 240.csv"
-file_path2 = r"D:\candles\gc contracts\GC U day.csv"
+
+file_path1 = r"D:\candles\gc contracts\GC M 240.csv"
+file_path2 = r"D:\candles\gc contracts\GC M day.csv"
 
 # Load the data
 try:
@@ -10,7 +11,6 @@ try:
     data2 = pd.read_csv(file_path2)
 except Exception as e:
     print("Error loading data:", e)
-    exit()
 
 ## Column names
 high_column_name = 'High'
@@ -92,7 +92,7 @@ for index1, row1 in data1.iterrows():
                         local_low1 = temp_low1
                         
                     # Printing data for data2
-                    print("----DAILY :----", current_time1)
+                    print("----240 MIN :----", current_time1)
                     print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :", local_high1)
                     print("Current Low1 :", current_low1, "Previous Low1 :", previous_low1, "local_low1 :", local_low1)
                     print("   ")
@@ -122,7 +122,7 @@ for index1, row1 in data1.iterrows():
                         local_low2 = temp_low2
 
                     # Printing data for data2
-                    print("----WEEKLY :----", current_time2)
+                    print("---- DAILY :----", current_time2)
                     print("Current High2 :", current_high2, "Previous High2 :", previous_high2, "local_high2 :", local_high2)
                     print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2, "local_low2 :", local_low2)
                     print("   ")
@@ -130,7 +130,7 @@ for index1, row1 in data1.iterrows():
 
                     # Bullish entry
                     if local_high1 > 0:
-                        if (current_high1 > local_high1) and  not bear and not flag:
+                        if (current_high1 > local_high1) and (local_high1 < local_low2) and not bear and not flag:
                             loss_for_trade = abs(local_high1 - local_low1 + (tick_val * 4)) * contract_size
                             if loss_for_trade > risk:
                                 num_of_lots = 1
@@ -196,7 +196,7 @@ for index1, row1 in data1.iterrows():
 
                     # Bearish entry----------------------------------------------------------------------------
                     if local_low1 > 0:
-                        if (current_low1 < local_low1) and  not bull and not flag:
+                        if (current_low1 < local_low1) and (local_low1 > local_high2) and not bull and not flag:
                             loss_for_trade = abs(local_low1 - local_high1 + ( tick_val * 4)) * contract_size
                             if loss_for_trade > risk:
                                 num_of_lots = 1
