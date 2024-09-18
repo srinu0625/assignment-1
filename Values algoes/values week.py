@@ -1,7 +1,7 @@
 import pandas as pd
 import time
 
-file_path1 = r"D:\CANDLES 2\GC DAY.csv"
+file_path1 = r"D:\CANDLES 2\NQ DAY.csv"
 
 # Load the data
 try:
@@ -64,8 +64,8 @@ for index1, row1 in data2.iterrows():
                 local_high1 = temp_high1
                 
             # Printing data for data1
-            print("----DAILY:----", current_time1)
-            print("1,c,MGCZ4," + str(current_high1) + "," + str(current_low1) + "," + str(previous_high1) + "," + str(previous_low1) + "," + str(temp_high1) + "," + str(temp_low1) + "," + str(local_high1) + "," + str(local_low1) + "," + str(prev_local_high1) + "," + str(prev_local_low1))
+            print("----WEEKLY:----", current_time1)
+            print("1,C,MGCZ4," + str(current_high1) + "," + str(current_low1) + "," + str(previous_high1) + "," + str(previous_low1) + "," + str(temp_high1) + "," + str(temp_low1) + "," + str(local_high1) + "," + str(local_low1) + "," + str(prev_local_high1) + "," + str(prev_local_low1))
             print("   ")
             time.sleep(0)
 

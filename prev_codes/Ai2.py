@@ -132,7 +132,6 @@ try:
                             pnl = (exit_price - entry_price) * num_of_lots * contract_size
                             TOTAL_P_L += pnl
                             total_long_pnl += pnl
-                            update_max_profit_and_loss(pnl)
 
                             bull = False
                             flag = False
@@ -150,7 +149,6 @@ try:
                             pnl = (entry_price - exit_price) * num_of_lots * contract_size
                             TOTAL_P_L += pnl
                             total_short_pnl += pnl
-                            update_max_profit_and_loss(pnl)
 
                             bear = False
                             flag = False
@@ -161,23 +159,21 @@ except Exception as e:
 finally:
     print("-----------------------------------End of iteration-------------------------------------")
 
-# Output final results
-print("        max_profit = ", format_color(max_profit))
-print("          max_loss = ", format_color(max_loss))
-print("      positive_pnl = ", format_color(positive_pnl))
-print("      negative_pnl = ", format_color(negative_pnl))
-print("   total_long_pnl  = ", format_color(total_long_pnl))
-print("  total_short_pnl  = ", format_color(total_short_pnl))
-print("         TOTAL_P_L = ", format_color(TOTAL_P_L))
-print("     num of trades = ", num_of_trades)
+max_loss_color = "\033[31m" if max_loss < 0 else "\033[32m"
+max_profit_color = "\033[31m" if max_profit < 0 else "\033[32m"
+positive_pnl_color = "\033[31m" if positive_pnl < 0 else "\033[32m"
+negative_pnl_color = "\033[31m" if negative_pnl < 0 else "\033[32m"
+total_long_pnl_color = "\033[31m" if total_long_pnl < 0 else "\033[32m"
+total_short_pnl_color = "\033[31m" if total_short_pnl < 0 else "\033[32m"
+TOTAL_P_L_colour = "\033[31m" if TOTAL_P_L < 0 else "\033[32m"
 
-# Function to update max profit and loss
-def update_max_profit_and_loss(pnl):
-    global max_profit, max_loss
-    max_profit = max(max_profit, pnl)
-    max_loss = min(max_loss, pnl)
-
-# Function to format output with color based on value
-def format_color(value):
-    color = "\033[32m" if value >= 0 else "\033[31m"
-    return f"{color}{round(value, 2)}\033[0m"
+print("           max_profit = ", max_profit_color, round(max_profit, 2), "\033[0m")
+print("             max_loss = ", max_loss_color, round(max_loss, 2), "\033[0m")
+print("         positive_pnl = ", positive_pnl_color, round(positive_pnl, 2), "\033[0m")
+print("         negative_pnl = ", negative_pnl_color, round(negative_pnl, 2), "\033[0m")
+print("      total_long_pnl  = ", total_long_pnl_color, round(total_long_pnl, 2), "\033[0m")
+print("     total_short_pnl  = ", total_short_pnl_color, round(total_short_pnl, 2), "\033[0m")
+print("            TOTAL_P_L = ", TOTAL_P_L_colour, round(TOTAL_P_L, 2), "\033[0m")
+print("        num of trades = ", num_of_trades)
+print("Total Positive Trades =", total_positive_trades)
+print("Total Negative Trades =", total_negative_trades)

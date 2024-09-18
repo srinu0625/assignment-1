@@ -2,11 +2,11 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\candles\nq contracts\NQ U 240.csv"
-file_path2 = r"D:\candles\nq contracts\NQ U day.csv"
+file_path1 = r"C:\Users\lenovo\Music\ES 240 A.csv"
+file_path2 = r"C:\Users\lenovo\Music\ES DAY A.csv"
 
-output_file_path_long =  r"D:\Output_TradeBooks\NQ U LONG TRADES.csv"
-output_file_path_short =  r"D:\Output_TradeBooks\NQ U SHORT TRADES.csv"
+output_file_path_long =  r"D:\Output_TradeBooks\ES LONG TRADES.csv"
+output_file_path_short =  r"D:\Output_TradeBooks\ES SHORT TRADES.csv"
 
 
 # Load the data
@@ -47,7 +47,7 @@ bull = bear = flag = False
 # Trading parameters
 number_of_positions = num_of_trades = 0
 entry_price = exit_price = 0
-contract_size = 2
+contract_size = 5
 tick_val = 0.25
 max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
@@ -107,7 +107,8 @@ for index1, row1 in data1.iterrows():
                         if current_high1 > previous_high1 and current_low1 < previous_low1:
                             local_high1 = temp_high1
                             local_low1 = temp_low1
-                            # Printing data for data2
+
+                        # Printing data for data2
                         print("----240 MIN:----", current_time1)
                         print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :",
                                   local_high1)
@@ -116,7 +117,7 @@ for index1, row1 in data1.iterrows():
                         print("   ")
                         time.sleep(0)
 
-                            # case 1 for data2
+                        # case 1 for data2
                         if current_high2 > previous_high2:
                                 temp_high2 = current_high2
                                 local_low2 = temp_low2
@@ -129,7 +130,7 @@ for index1, row1 in data1.iterrows():
                                 local_high2 = temp_high2
                                 local_low2 = temp_low2
 
-                            # Printing data for data2
+                        # Printing data for data2
                         print("----DAILY :----", current_time2)
                         print("Current High2 :", current_high2, "Previous High2 :", previous_high2, "local_high2 :",
                                   local_high2)
@@ -163,7 +164,7 @@ for index1, row1 in data1.iterrows():
 
                         # Bullish entry
                         if local_high1 > 0:
-                            if (current_high1 > local_high1) and  not bear and not flag:
+                            if (current_high1 > local_high1) and (local_low1 >= local_low2) and not bear and not flag:
                                 loss_for_trade = abs(local_high1 - current_low1 + (tick_val * 4)) * contract_size
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
@@ -171,7 +172,7 @@ for index1, row1 in data1.iterrows():
                                 else:
                                     num_of_lots = math.floor(risk / loss_for_trade)
                                     if num_of_lots >= max_num_lots:
-                                        num_of_lots = 5
+                                        num_of_lots = 20
                                     entry_price = local_high1 + (tick_val * 2)
                                     exit_price = current_low1 - (tick_val * 2)
                                     print("\033[32m<------ LONG ENTRY ------>(CH1 > LH1) AND (LL1 >= LL2)\033[0m")
@@ -265,7 +266,7 @@ for index1, row1 in data1.iterrows():
 
                         # Bearish entry
                         if local_low1 > 0:
-                            if (current_low1 < local_low1) and not bull and not flag:
+                            if (current_low1 < local_low1) and (local_high1 <= local_high2) and  not bull and not flag:
                                 loss_for_trade = abs(local_low1 - current_high1 + ( tick_val * 4)) * contract_size
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
@@ -273,7 +274,7 @@ for index1, row1 in data1.iterrows():
                                 else:
                                     num_of_lots = math.floor(risk / loss_for_trade)
                                     if num_of_lots >= max_num_lots:
-                                        num_of_lots = 5
+                                        num_of_lots = 20
                                     entry_price = local_low1 - (tick_val * 2)
                                     exit_price = current_high1 + (tick_val * 2)
                                     print("\033[31m<------ SHORT ENTRY ------> (CL1 < LL1) AND (LH1 <= LH2)\033[0m")

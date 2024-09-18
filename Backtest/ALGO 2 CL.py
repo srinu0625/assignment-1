@@ -13,6 +13,30 @@ except Exception as e:
     print("Error loading data:", e)
     exit()
 
+if file_path1 == r"D:\candles\es contracts\ES H 240.csv":
+    contract_size = 5
+    tick_val = 0.25
+
+if file_path1 == r"D:\candles\nq contracts\NQ H 240.csv":
+    contract_size = 2
+    tick_val = 0.25
+
+if file_path1 == r"D:\candles\ym contracts\YM H 240.csv":
+    contract_size = 0.5
+    tick_val = 1
+
+if file_path1 == r"D:\candles\cl contracts\CL H 240.csv":
+    contract_size = 100
+    tick_val = 0.01
+
+if file_path1 == r"D:\candles\bt contracts\BT H 240.csv":
+    contract_size = 0.1
+    tick_val = 5
+
+if file_path1 == r"D:\candles\gc contracts\GC H 240.csv":
+    contract_size = 10
+    tick_val = 0.1
+
 ## Column names
 high_column_name = 'High'
 low_column_name = 'Low'
@@ -44,8 +68,7 @@ bull = bear = flag = False
 # Trading parameters
 number_of_positions = num_of_trades = 0
 entry_price = exit_price = 0
-contract_size = 10
-tick_val = 0.1
+
 max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0
@@ -152,7 +175,7 @@ for index1, row1 in data1.iterrows():
                                         num_of_lots = 5
                                     entry_price = local_high1 + (tick_val * 2)
                                     exit_price = current_low1 - (tick_val * 2)
-                                    print("\033[32m<------ LONG ENTRY ------>(CH1 > LH1) AND (LL1 >= LL2)\033[0m")
+                                    print("\033[32m<------ LONG ENTRY ------>\033[0m")
                                     print("       ENTRY PRICE  = ", entry_price)
                                     print("        num_of_lots = ", round(num_of_lots))
                                     print("     loss_for_trade = ", round(loss_for_trade))
@@ -195,7 +218,7 @@ for index1, row1 in data1.iterrows():
                                 negative_pnl += pnl
                                 total_negative_trades +=1
 
-                            print("\033[32m<------ LONG EXIT ------>(LL1 <)\033[0m")  # ANSI escape codes for this color coding to work
+                            print("\033[32m<------ LONG EXIT ------>\033[0m")  # ANSI escape codes for this color coding to work
                             print("         EXIT PRICE = ", exit_price)
                             print("        num_of_lots = ", round(num_of_lots))
                             print("      num_of_trades = ", num_of_trades)
@@ -218,7 +241,7 @@ for index1, row1 in data1.iterrows():
                                        num_of_lots = 5
                                     entry_price = local_low1 - (tick_val * 2)
                                     exit_price = current_high1 + (tick_val * 2)
-                                print("\033[31m<------ SHORT ENTRY ------>(LH1 < PLH1) AND (LH1 <= LH2)\033[0m")  # ANSI escape codes for this color coding to work
+                                print("\033[31m<------ SHORT ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
                                 print("        ENTRY PRICE = ", entry_price)
                                 print("        num_of_lots = ",round(num_of_lots))
                                 print(" max_loss_for_trade = ",round(loss_for_trade))
@@ -262,7 +285,7 @@ for index1, row1 in data1.iterrows():
                                 negative_pnl += pnl
                                 total_negative_trades +=1
 
-                            print("\033[31m<------ SHORT EXIT ------>(LH1 >)\033[0m")  # ANSI escape codes for this color coding to work
+                            print("\033[31m<------ SHORT EXIT ------>\033[0m")  # ANSI escape codes for this color coding to work
                             print("         EXIT PRICE = ", exit_price)
                             print("        num_of_lots = ", round(num_of_lots))
                             print("      num_of_trades = ", num_of_trades)

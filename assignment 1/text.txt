@@ -87,6 +87,30 @@ if bear:  # Short trade
 
 1,c,MBTU4,58825,55720,60165,57735,65620,55720,65620,56800,62215,49640
 
+if file_path1 := r"D:\candles\es contracts\ES H 240.csv":
+    contract_size = 5
+    tick_val = 0.25
+
+if file_path1 := r"D:\candles\nq contracts\NQ H 240.csv":
+    contract_size = 2
+    tick_val = 0.25
+
+if file_path1 := r"D:\candles\ym contracts\YM H 240.csv":
+    contract_size = 0.5
+    tick_val = 1
+
+if file_path1 := r"D:\candles\cl contracts\CL H 240.csv":
+    contract_size = 100
+    tick_val = 0.01
+
+if file_path1 := r"D:\candles\bt contracts\BT H 240.csv":
+    contract_size = 0.1
+    tick_val = 5
+
+if file_path1 := r"D:\candles\gc contracts\GC H 240.csv":
+    contract_size = 10
+    tick_val = 0.1
+
 
 
 

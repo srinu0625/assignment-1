@@ -231,7 +231,7 @@ for index1, row1 in data1.iterrows():
             continue
                     
         # bearish candle-------------------------------------------------------------------------
-        max_loss_for_trade = (local_high1 - current_low1 + ( tick_val * 4)) * contract_size
+        max_loss_for_trade = (local_low1 - current_high1 + ( tick_val * 4)) * contract_size
 
         if (current_low1 < local_low1) and ((local_low1 < local_low2 or local_low1 < current_low2)) and ((local_high1 < local_high2) and (local_high1 < local_high3) and (local_high1 < current_high3)) and local_high1 != 0 and local_low1 != 0  and local_high2 != 0 and local_low2 != 0  and not bull and not flag:
             if max_loss_for_trade > risk:

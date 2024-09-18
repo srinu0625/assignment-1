@@ -29,7 +29,7 @@ curr_high = float('-inf')
 curr_low = float('inf')
 curr_close = 0
 total_trade_value =0 
-timeSlot = 15  # Assuming time slot is 15 minutes
+timeSlot = 1  # Assuming time slot is 15 minutes
 
 # Iterate over each row of the DataFrame
 for index, row in data.iterrows():
