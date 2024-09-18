@@ -166,7 +166,7 @@ for index1, row1 in data1.iterrows():
             exit_price = current_high1
 
 
-        # bullish candle    
+        # Bullish candle    
         max_loss_for_trade = (local_high1 - local_low1 + (tick_val * 4)) * contract_size  
        
         if (current_high1 > local_high1) and ((local_high1 > local_high2) or (local_high1 > current_high2)) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and  local_low1 != 0  and local_high2 != 0 and local_low2 != 0 and not bear and not flag:
@@ -231,7 +231,7 @@ for index1, row1 in data1.iterrows():
             print("-------------------------------------------------------------------")
             continue
                     
-        # bearish candle-------------------------------------------------------------------------
+        # Bearish candle-------------------------------------------------------------------------
         max_loss_for_trade = (local_high1 - local_low1 + ( tick_val * 4)) * contract_size
 
         if (current_low1 < local_low1) and ((local_low1 < local_low2 or local_low1 < current_low2)) and ((local_high1 < local_high2) and (local_high1 < local_high3) and (local_high1 < current_high3)) and local_high1 != 0 and local_low1 != 0  and local_high2 != 0 and local_low2 != 0  and not bull and not flag:
@@ -257,7 +257,7 @@ for index1, row1 in data1.iterrows():
             flag = True
             continue
 
-        # bearish exit        
+        # Bearish exit------------------------------------------------------------------------------        
         if local_high1 > exit_price and bear and flag:
             number_of_positions -= 1
             num_of_trades += 1

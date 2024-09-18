@@ -5,7 +5,7 @@ import time
 # Initialize tm_struct as the current datetime
 tm_struct = datetime.datetime.now()
 
-file_path = r"D:\surya sir.csv"
+file_path = r"C:\Users\lenovo\Music\es day.csv"
 
 # Load the data
 try:
@@ -29,7 +29,7 @@ curr_high = float('-inf')
 curr_low = float('inf')
 curr_close = 0
 total_trade_value =0 
-timeSlot = 1  # Assuming time slot is 15 minutes
+timeSlot = 240  # Assuming time slot is 15 minutes
 
 # Iterate over each row of the DataFrame
 for index, row in data.iterrows():

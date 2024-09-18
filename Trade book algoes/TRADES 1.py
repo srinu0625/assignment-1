@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"C:\Users\lenovo\Music\ES 240 A.csv"
-file_path2 = r"C:\Users\lenovo\Music\ES DAY A.csv"
+file_path1 = r"C:\Users\lenovo\Music\es 240.csv"
+file_path2 = r"C:\Users\lenovo\Music\es day.csv"
 
 output_file_path_long =  r"D:\Output_TradeBooks\ES LONG TRADES.csv"
 output_file_path_short =  r"D:\Output_TradeBooks\ES SHORT TRADES.csv"
