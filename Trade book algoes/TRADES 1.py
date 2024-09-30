@@ -2,11 +2,12 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"C:\Users\lenovo\Music\es 240.csv"
-file_path2 = r"C:\Users\lenovo\Music\es day.csv"
+file_path1 = r"D:\CANDLES 2\GC 240.csv"
+file_path2 = r"D:\CANDLES 2\GC DAY.csv"
 
-output_file_path_long =  r"D:\Output_TradeBooks\ES LONG TRADES.csv"
-output_file_path_short =  r"D:\Output_TradeBooks\ES SHORT TRADES.csv"
+
+output_file_path_long =  r"D:\vs outputs\GC LONG TRADES.csv"
+output_file_path_short =  r"D:\vs outputs\GC SHORT TRADES.csv"
 
 
 # Load the data
@@ -16,6 +17,30 @@ try:
 except Exception as e:
     print("Error loading data:", e)
     exit()
+
+if "ES" in file_path1:
+    contract_size = 5
+    tick_val = 0.25
+
+if "NQ" in file_path1:
+    contract_size = 2
+    tick_val = 0.25
+
+if "YM" in file_path1:
+    contract_size = 0.5
+    tick_val = 1
+
+if "CL" in file_path1:
+    contract_size = 100
+    tick_val = 0.01
+
+if "BT" in file_path1:
+    contract_size = 0.1
+    tick_val = 5
+
+if "GC" in file_path1:
+    contract_size = 10
+    tick_val = 0.1
 
 ## Column names
 high_column_name = 'High'
@@ -27,6 +52,13 @@ temp_high1 = temp_low1 = temp_high2 = temp_low2  = 0
 
 # Local highs and lows
 local_high1 = local_low1 = local_high2 = local_low2  = 0
+
+# prev local high and lows
+prev_local_high1 = prev_local_low1 = prev_local_high2 = prev_local_low2 = 0
+# for positive and negative trades
+total_positive_trades = 0
+total_negative_trades = 0
+
 current_high1 = 0
 current_low1 = 0
 current_high2 = 0
@@ -35,20 +67,12 @@ current_low2 = 0
 previous_high2 = 0
 previous_low2 = 0
 
-# prev local high and lows
-prev_local_high1 = prev_local_low1 = prev_local_high2 = prev_local_low2 = 0
-# for positive and negative trades
-total_positive_trades = 0
-total_negative_trades = 0
-
 # Trading flags
 bull = bear = flag = False
 
 # Trading parameters
 number_of_positions = num_of_trades = 0
 entry_price = exit_price = 0
-contract_size = 5
-tick_val = 0.25
 max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0

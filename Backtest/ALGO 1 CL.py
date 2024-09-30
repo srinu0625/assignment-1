@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\CANDLES 2\BT 240.csv"
-file_path2 = r"D:\CANDLES 2\BT DAY.csv"
+file_path1 = r"D:\CANDLES 2\NQ 240.csv"
+file_path2 = r"D:\CANDLES 2\NQ DAY.csv"
 
 # Load the data
 try:
@@ -13,7 +13,7 @@ except Exception as e:
     print("Error loading data:", e)
     exit()
 
-if "ES" in file_path1:
+if "es" in file_path1:
     contract_size = 5
     tick_val = 0.25
 

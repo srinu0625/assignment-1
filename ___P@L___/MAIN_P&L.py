@@ -8,7 +8,7 @@ Buy_Quantity = 0
 Sell_Quantity = 0
 
 # File paths
-input_file_path = r"C:\Users\lenovo\Downloads\A3 11-09-24.xlsx"
+input_file_path = r"C:\Users\lenovo\Downloads\A7 bullish 25-09-24.xlsx"
 output_file_path = r"D:\........   A3 11-09-2411111.........xlsx"
 
 # Ensure the output directory exists
