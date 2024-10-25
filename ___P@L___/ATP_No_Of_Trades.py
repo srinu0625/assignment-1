@@ -11,8 +11,8 @@ current_date = datetime.now()
 previous_day = current_date - timedelta(days=1)
 
 # File paths
-input_file_path = r"C:\Users\lenovo\Downloads\A3 27-09-24.xlsx"
-output_file_path = r"D:\PNL output\PNL- A3 27-09-24.xlsx"
+input_file_path = r"C:\Users\lenovo\Downloads\A3 sim 24-10-24.xlsx"
+output_file_path = r"D:\PNL output\A3 sim 24-10-24.xlsx"
 
 # Ensure the output directory exists
 output_directory = os.path.dirname(output_file_path)
@@ -31,7 +31,7 @@ columns_to_delete = ['OrderID']
 df.drop(columns=columns_to_delete, inplace=True)
 
 # Write the modified DataFrame to a new Excel file
-new_file_path = r"D:\PNL output\A3 27-09-24.xlsx"
+new_file_path = r"D:\PNL output\A3 sim t24-10-24t.xlsx"
 df.to_excel(new_file_path, index=False)
 
 try:
@@ -147,10 +147,10 @@ with pd.ExcelWriter(output_file_path, mode='a', engine='openpyxl') as writer:
 
     # Add the new sheet for summed P&L values and trade counts
     summed_pl_df = pd.DataFrame({
-        'Symbol': list(summed_pl.keys()),
+           'Symbol': list(summed_pl.keys()),
         'Total P&L': list(summed_pl.values()),
-        'Positive': [positive_trades[symbol] for symbol in symbols],
-        'Negative': [negative_trades[symbol] for symbol in symbols]
+         'Positive': [positive_trades[symbol] for symbol in symbols],
+         'Negative': [negative_trades[symbol] for symbol in symbols]
     })
 
     # Insert the current date in the first row

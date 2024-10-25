@@ -1,86 +1,186 @@
 import pandas as pd
-import time
+import os
+from datetime import datetime, timedelta
+
+# Initialize variables
+Buy_value = 0
+Sell_value = 0
+Buy_Quantity = 0
+Sell_Quantity = 0
+current_date = datetime.now()
+previous_day = current_date - timedelta(days=1)
 
 # File paths
-file_paths = [
-    r"D:\CANDLES 2\ES DAY.csv",
-    r"D:\CANDLES 2\NQ DAY.csv",
-    r"D:\CANDLES 2\YM DAY.csv",
-    r"D:\CANDLES 2\CL DAY.csv",
-    r"D:\CANDLES 2\BT DAY.csv",
-    r"D:\CANDLES 2\GC DAY.csv"
-]
+input_file_path = r"C:\Users\lenovo\Downloads\A3 sim 15-10-24.xlsx"
+output_file_path = r"D:\PNL output\15-10-24.xlsx"
 
-# Load the data from all file paths
-data_frames = []
-for path in file_paths:
-    try:
-        df = pd.read_csv(path)
-        data_frames.append(df)
-    except Exception as e:
-        print(f"Error loading data from {path}: {e}")
-        exit()
+# Ensure the output directory exists
+output_directory = os.path.dirname(output_file_path)
+if not os.path.exists(output_directory):
+    os.makedirs(output_directory)
 
-# Column names (assuming all files have the same structure)
-high_column_name = 'High'
-low_column_name = 'Low'
-time_column_name = 'Date (GMT)'
+# Read the Excel file into a pandas DataFrame
+df = pd.read_excel(input_file_path)
 
-# Temp variables for tracking highs and lows for each dataset
-temp_high = [0] * 6
-temp_low = [0] * 6
-local_high = [0] * 6
-local_low = [0] * 6
-current_high = [0] * 6
-current_low = [0] * 6
-previous_high = [0] * 6
-previous_low = [0] * 6
-prev_local_high = [0] * 6
-prev_local_low = [0] * 6
+# Sort the DataFrame by 'OrderID' in Ascending order
+df.sort_values(by='OrderID', ascending=True, inplace=True)
 
-# Iterate over all dataframes simultaneously
-for rows in zip(*[df.iterrows() for df in data_frames]):
-    for i, (index, row) in enumerate(rows):
-        # Check if the row has valid data
-        if pd.notna(row[time_column_name]) and pd.notna(row[high_column_name]) and pd.notna(row[low_column_name]):
-            try:
-                # Extract current time and high/low values
-                current_time = row[time_column_name]
-                high = float(row[high_column_name])
-                low = float(row[low_column_name])
+# List of columns to delete (excluding 'OrderID')
+columns_to_delete = ['OrderID']
+# Drop the specified columns
+df.drop(columns=columns_to_delete, inplace=True)
 
-                # Update current and previous high/low
-                if high > current_high[i] or low < current_low[i]:
-                    previous_high[i] = current_high[i]
-                    previous_low[i] = current_low[i]
-                    current_high[i] = high
-                    current_low[i] = low
+# Write the modified DataFrame to a new Excel file
+new_file_path = r"D:\PNL output\15-10-24.xlsx"
+df.to_excel(new_file_path, index=False)
 
-                # Case 1: Update temporary highs and lows
-                if current_high[i] > previous_high[i]:
-                    temp_high[i] = current_high[i]
-                if current_low[i] < previous_low[i]:
-                    temp_low[i] = current_low[i]
+try:
+    data = pd.read_excel(new_file_path)
+except Exception as e:
+    print("Error loading data from Excel file:", e)
+    exit()
 
-                # Case 2: Update local highs and lows
-                if current_high[i] > previous_high[i]:
-                    if temp_low[i] != local_low[i]:
-                        prev_local_low[i] = local_low[i]
-                    local_low[i] = temp_low[i]
-                if current_low[i] < previous_high[i]:
-                    if temp_high[i] != local_high[i]:
-                        prev_local_high[i] = local_high[i]
-                    local_high[i] = temp_high[i]
+# Get unique symbols in the data
+symbols = data['Symbol'].unique()
 
-                # Print data for each file (data1, data2, etc.)
-                print(f"----File {i + 1}:---- {current_time}")
-                print(f"1,c,MGCZ4,{current_high[i]},{current_low[i]},{previous_high[i]},{previous_low[i]},{temp_high[i]},{temp_low[i]},{local_high[i]},{local_low[i]},{prev_local_high[i]},{prev_local_low[i]}")
-                print("   ")
+# Check if the 'P&L' column already exists
+if 'P&L' not in data.columns:
+    data['P&L'] = None
 
-            except Exception as e:
-                print(f"Error in file {i + 1}: {e}")
+# Dictionary to store summed P&L values and trade counts for each product
+summed_pl = {}
+positive_trades = {}
+negative_trades = {}
 
-            finally:
-                print(f"-----------------------------------End of iteration for file {i + 1}-------------------------------------")
+# Iterate over each symbol
+for symbol in symbols:
+    # Reset variables for each symbol
+    Buy_value = 0
+    Sell_value = 0
+    Buy_Quantity = 0
+    Sell_Quantity = 0
+    current_position = 0
+    summed_pl[symbol] = 0
+    positive_trades[symbol] = 0
+    negative_trades[symbol] = 0
 
-    time.sleep(0)
+    # Iterate over rows for the current symbol
+    for index, row in data.iterrows():
+        if row['Symbol'] == symbol:
+            if row['B/S'] == 'Buy':
+                Buy_Quantity += row['Qty']
+                Buy_value += row['Qty'] * row['Price']
+            elif row['B/S'] == 'Sell':
+                Sell_Quantity += row['Qty']
+                Sell_value += row['Qty'] * row['Price']
+
+            if Buy_Quantity == Sell_Quantity:
+                if symbol[0:2] == "YM":
+                    current_position = (Sell_value - Buy_value) * 5
+                elif symbol[0:2] == "ES":
+                    current_position = (Sell_value - Buy_value) * 50
+                elif symbol[0:2] == "NQ":
+                    current_position = (Sell_value - Buy_value) * 20
+                elif symbol[0:3] == "MES":
+                    current_position = (Sell_value - Buy_value) * 5
+                elif symbol[0:3] == "MNQ":
+                    current_position = (Sell_value - Buy_value) * 2
+                elif symbol[0:3] == "MYM":
+                    current_position = (Sell_value - Buy_value) * 0.5
+                elif symbol[0:3] == "MCL":
+                    current_position = (Sell_value - Buy_value) * 100
+                elif symbol[0:3] == "MBT":
+                    current_position = (Sell_value - Buy_value) * 0.1
+                elif symbol[0:3] == "MGC":
+                    current_position = (Sell_value - Buy_value) * 10
+
+                # New products of Surya Sir
+                elif symbol[0:3] == "SIZ":
+                    current_position = (Sell_value - Buy_value) * 5000
+                elif symbol[0:3] == "HGZ":
+                    current_position = (Sell_value - Buy_value) * 25000
+                elif symbol[0:3] == "ZSX":
+                    current_position = (Sell_value - Buy_value) * 50
+                elif symbol[0:3] == "ZMZ":
+                    current_position = (Sell_value - Buy_value) * 100
+                elif symbol[0:3] == "ZCZ":
+                    current_position = (Sell_value - Buy_value) * 50
+                elif symbol[0:3] == "ZLZ":
+                    current_position = (Sell_value - Buy_value) * 600
+                elif symbol[0:3] == "ZWZ":
+                    current_position = (Sell_value - Buy_value) * 50
+                elif symbol[0:3] == "6EU":
+                    current_position = (Sell_value - Buy_value) * 1250
+                elif symbol[0:3] == "6CU":
+                    current_position = (Sell_value - Buy_value) * 1000
+                elif symbol[0:3] == "6BU":
+                    current_position = (Sell_value - Buy_value) * 625
+
+                # Update the P&L column
+                data.at[index, 'P&L'] = current_position
+                summed_pl[symbol] += current_position
+
+                # Count positive and negative trades
+                if current_position > 0:
+                    positive_trades[symbol] += 1
+                elif current_position < 0:
+                    negative_trades[symbol] += 1
+
+                # Reset variables for the next trade
+                Buy_Quantity = 0
+                Buy_value = 0
+                Sell_value = 0
+                Sell_Quantity = 0
+
+# Write the modified DataFrame to the new Excel file
+data.to_excel(output_file_path, index=False)
+
+# Add the new sheet for summed P&L values and trade counts in the desired format
+with pd.ExcelWriter(output_file_path, mode='a', engine='openpyxl') as writer:
+    # First section: Algo summary
+    summed_pl_df = pd.DataFrame({
+        'Symbol': list(summed_pl.keys()),
+        'Total P&L': list(summed_pl.values()),
+        'Positive': [positive_trades[symbol] for symbol in symbols],
+        'Negative': [negative_trades[symbol] for symbol in symbols],
+    })
+
+    # Add a row for the date
+    summed_pl_df.loc[-1] = [f"Date: {previous_day.strftime('%Y-%m-%d')}", '', '', '']
+    summed_pl_df.index = summed_pl_df.index + 1
+    summed_pl_df = summed_pl_df.sort_index()
+
+    # Append the algo summary to the Excel file
+    summed_pl_df.to_excel(writer, index=False, sheet_name='Summary', startrow=1)
+
+    # Total row for the first section
+    total_row = pd.DataFrame({
+        'Symbol': ['Total'],
+        'Total P&L': [summed_pl_df['Total P&L'].sum()],
+        'Positive': [summed_pl_df['Positive'].sum()],
+        'Negative': [summed_pl_df['Negative'].sum()]
+    })
+    total_row.to_excel(writer, index=False, sheet_name='Summary', startrow=len(summed_pl_df) + 2)
+
+    # Second section: Existing positions
+    existing_positions = pd.DataFrame({
+        'Symbol': ['MNQZ4', 'MCLX4.CN', 'MGCZ4'],  # Example positions
+        'Position': ['1 short', '3 short', '3 long'],  # Quantities and direction (long/short)
+        'P&L': [87, 510, -147]  # Example P&L values
+    })
+    
+    # Add an "Existing positions" title row
+    title_df = pd.DataFrame({'Symbol': ['Existing positions'], 'Total P&L': ['P@I']})
+    title_df.to_excel(writer, index=False, sheet_name='Summary', startrow=len(summed_pl_df) + 4)
+
+    # Append the existing positions data
+    existing_positions.to_excel(writer, index=False, sheet_name='Summary', startrow=len(summed_pl_df) + 6)
+
+    # Total row for the second section
+    total_positions_row = pd.DataFrame({
+        'Symbol': ['Total'],
+        'P&L': [existing_positions['P&L'].sum()]
+    })
+    total_positions_row.to_excel(writer, index=False, sheet_name='Summary', startrow=len(summed_pl_df) + 9)
+
+print("Formatted data has been added to the final sheet.")

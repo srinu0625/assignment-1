@@ -2,12 +2,12 @@ import pandas as pd
 import time
 
 # File paths
-file_path1 = r"D:\CANDLES 2\ES DAY.csv"
-file_path2 = r"D:\CANDLES 2\NQ DAY.csv"
-file_path3 = r"D:\CANDLES 2\YM DAY.csv"
-file_path4 = r"D:\CANDLES 2\CL DAY.csv"
-file_path5 = r"D:\CANDLES 2\BT DAY.csv"
-file_path6 = r"D:\CANDLES 2\GC DAY.csv"
+file_path1 = r"D:\data\ES W.csv"
+file_path2 = r"D:\data\NQ W.csv"
+file_path3 = r"D:\data\YM W.csv"
+file_path4 = r"D:\data\CL W.csv"
+file_path5 = r"D:\data\BTW0.csv"
+file_path6 = r"D:\data\GC W.csv"
 
 # Load the data
 try:
@@ -15,7 +15,7 @@ try:
     data2 = pd.read_csv(file_path2)
     data3 = pd.read_csv(file_path3)
     data4 = pd.read_csv(file_path4)
-    data5 = pd.read_csv(file_path5)
+    # data5 = pd.read_csv(file_path5)
     data6 = pd.read_csv(file_path6)
 except Exception as e:
     print("Error loading data:", e)
@@ -196,41 +196,41 @@ for index4, row4 in data4.iterrows():
             print("Error in Dataset 4:", e)
 
 # Process data for dataset 5
-for index5, row5 in data5.iterrows():
-    if pd.notna(row5[time_column_name]) and pd.notna(row5[high_column_name]) and pd.notna(row5[low_column_name]):
-        try:
-            current_time5 = row5[time_column_name]
-            high5 = float(row5[high_column_name])
-            low5 = float(row5[low_column_name])
+# for index5, row5 in data5.iterrows():
+#     if pd.notna(row5[time_column_name]) and pd.notna(row5[high_column_name]) and pd.notna(row5[low_column_name]):
+#         try:
+#             current_time5 = row5[time_column_name]
+#             high5 = float(row5[high_column_name])
+#             low5 = float(row5[low_column_name])
 
-            if (high5 > current_high5) or (low5 < current_low5):
-                previous_high5 = current_high5
-                previous_low5 = current_low5
-                current_high5 = high5
-                current_low5 = low5
+#             if (high5 > current_high5) or (low5 < current_low5):
+#                 previous_high5 = current_high5
+#                 previous_low5 = current_low5
+#                 current_high5 = high5
+#                 current_low5 = low5
 
-            if current_high5 > previous_high5:
-                temp_high5 = current_high5
-            if current_low5 < previous_low5:
-                temp_low5 = current_low5
+#             if current_high5 > previous_high5:
+#                 temp_high5 = current_high5
+#             if current_low5 < previous_low5:
+#                 temp_low5 = current_low5
 
-            if current_high5 > previous_high5:
-                if temp_low5 != local_low5:
-                    prev_local_low5 = local_low5
-                local_low5 = temp_low5
+#             if current_high5 > previous_high5:
+#                 if temp_low5 != local_low5:
+#                     prev_local_low5 = local_low5
+#                 local_low5 = temp_low5
 
-            if current_low5 < previous_low5:
-                if temp_high5 != local_high5:
-                    prev_local_high5 = local_high5
-                local_high5 = temp_high5
+#             if current_low5 < previous_low5:
+#                 if temp_high5 != local_high5:
+#                     prev_local_high5 = local_high5
+#                 local_high5 = temp_high5
 
-            print(f"----DAILY: {current_time5} ----")
-            print(f"1,c,MBTV4,{current_high5},{current_low5},{previous_high5},{previous_low5},{temp_high5},{temp_low5},{local_high5},{local_low5},{prev_local_high5},{prev_local_low5}")
-            print("   ")
-            time.sleep(0)
+#             print(f"----DAILY: {current_time5} ----")
+#             print(f"1,c,MBTV4,{current_high5},{current_low5},{previous_high5},{previous_low5},{temp_high5},{temp_low5},{local_high5},{local_low5},{prev_local_high5},{prev_local_low5}")
+#             print("   ")
+#             time.sleep(0)
 
-        except Exception as e:
-            print("Error in Dataset 5:", e)
+        # except Exception as e:
+        #     print("Error in Dataset 5:", e)
 
 # Process data for dataset 6
 for index6, row6 in data6.iterrows():
