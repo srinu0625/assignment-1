@@ -2,12 +2,12 @@ import pandas as pd
 import time
 
 # File paths
-file_path1 = r"D:\data 2\ES H.csv"
-file_path2 = r"D:\data 2\NQ H.csv"
-file_path3 = r"D:\data 2\YM H.csv"
-file_path4 = r"D:\data 2\CL H.csv"
-file_path5 = r"D:\data 2\BT H.csv"
-file_path6 = r"D:\data 2\GC H.csv"
+file_path1 = r"D:\data 2\ES 240.csv"
+file_path2 = r"D:\data 2\NQ 240.csv"
+file_path3 = r"D:\data 2\YM 240.csv"
+file_path4 = r"D:\data 2\CL 240.csv"
+file_path5 = r"D:\data 2\BT 240.csv"
+file_path6 = r"D:\data 2\GC 240.csv"
 
 # Load the data
 try:

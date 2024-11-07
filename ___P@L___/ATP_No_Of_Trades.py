@@ -11,8 +11,8 @@ current_date = datetime.now()
 previous_day = current_date - timedelta(days=1)
 
 # File paths
-input_file_path = r"C:\Users\lenovo\Downloads\A3 sim 24-10-24.xlsx"
-output_file_path = r"D:\PNL output\A3 sim 24-10-24.xlsx"
+input_file_path = r"C:\Users\lenovo\Downloads\A3 sim 6-11-24.xlsx"
+output_file_path = r"D:\PNL output\A3 sim 6-11-24.xlsx"
 
 # Ensure the output directory exists
 output_directory = os.path.dirname(output_file_path)
@@ -31,7 +31,7 @@ columns_to_delete = ['OrderID']
 df.drop(columns=columns_to_delete, inplace=True)
 
 # Write the modified DataFrame to a new Excel file
-new_file_path = r"D:\PNL output\A3 sim t24-10-24t.xlsx"
+new_file_path = r"D:\PNL output\A3 sim  6-11-24t.xlsx"
 df.to_excel(new_file_path, index=False)
 
 try:
