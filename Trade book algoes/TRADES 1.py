@@ -2,11 +2,11 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\e 240.csv"
-file_path2 = r"D:\e d.csv"
 
-output_file_path = r"D:\back_test vs outputs\es_`BACKTEST_combined_trades.xlsx"  # Single Excel output
+file_path1 = r"D:\ARB_office\data\cl 240.csv"
+file_path2 = r"D:\ARB_office\data\cl d.csv"
 
+output_file_path = r"D:\back_test vs outputs\CL A1111_`BACKTEST_combined_trades.xlsx"  # Single Excel output
 # Load the data
 try:
     data1 = pd.read_csv(file_path1)
@@ -15,9 +15,8 @@ except Exception as e:
     print("Error loading data:", e)
     exit()
 
-contract_size = 5
-tick_val = 0.25
-
+contract_size = 100
+tick_val = 0.01
 
 ## Column names
 high_column_name = 'High'
@@ -100,11 +99,10 @@ for index1, row1 in data1.iterrows():
                             if temp_high1 != local_high1:
                                 prev_local_high1 = local_high1
                             local_high1 = temp_high1
-                        
-                      
 
+                        if current_high1 > local_high1 and current_low1 > local_low1:
+                            local_high1 = previous_high1 
                         
-
                         # Printing data for data2
                         print("----240 MIN:----", current_time1)
                         print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :",
@@ -139,8 +137,9 @@ for index1, row1 in data1.iterrows():
                             if temp_high2 != local_high2:
                                 prev_local_high2 = local_high2
                             local_high2 = temp_high2
-                            
-                       
+
+                        if current_low1 < local_low1 and current_high1 < local_high1:
+                            local_low1 = previous_low1
 
                         # Printing data for data2
                         print("----DAILY :----", current_time2)

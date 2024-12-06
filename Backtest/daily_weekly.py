@@ -1,9 +1,9 @@
 import pandas as pd
 import math
-import time
 
-file_path1 = r"D:\ARB_office\data\cl 240.csv"
-file_path2 = r"D:\ARB_office\data\cl d.csv"
+file_path1 = r"D:\cl d.csv"  # Path for 15-minute data
+file_path2 = r"D:\cl w.csv"  # Path for weekly data
+
 # Load the data
 try:
     data1 = pd.read_csv(file_path1)
@@ -12,8 +12,8 @@ except Exception as e:
     print("Error loading data:", e)
     exit()
 
-contract_size = 100
-tick_val = 0.01
+contract_size = 0.1
+tick_val = 5
 
 ## Column names
 high_column_name = 'High'
@@ -47,11 +47,15 @@ bull = bear = flag = False
 # Trading parameters
 number_of_positions = num_of_trades = 0
 entry_price = exit_price = 0
+entry_price1 = entry_price2 = 0
 max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0
 max_num_lots = 20
 risk = 720
+
+# Initialize the variable to track the start of the week (last Friday)
+last_friday = None
 
 # Iterate over each row of the daily DataFrame (data1)
 for index1, row1 in data1.iterrows():
@@ -94,16 +98,18 @@ for index1, row1 in data1.iterrows():
                             if temp_high1 != local_high1:
                                 prev_local_high1 = local_high1
                             local_high1 = temp_high1
+                        
+                        
+                         # Additional condition for entry price
+                        if current_high1 > previous_high1 and current_low1 < previous_low1 and not bear and not flag:
+                            entry_price = previous_high1 + (tick_val *2)
+                            
 
-                        # if current_low1 < prev_local_low1 and current_high1 < prev_local_high1:
-                        #     local_high1 = prev_local_high1 
-                              
                         # Printing data for data2
                         print("----240 MIN :----", current_time1)
                         print("Current High1 :", current_high1, "Previous High1 :", previous_high1,"temp_high",temp_high1, "local_high1 :", local_high1,"prev_local_high :",prev_local_high1)
                         print("Current Low1 :", current_low1, "Previous Low1 :", previous_low1,"temp_low",temp_low1 ,"local_low1 :", local_low1,"prev_local_low1 :",prev_local_low1)
                         print("   ")
-                        time.sleep(0)
 
                         # Extracting current and previous values for high and low from data2
                         current_time2 = (data2.at[index2 - 1, time_column_name])
@@ -132,15 +138,43 @@ for index1, row1 in data1.iterrows():
                                 prev_local_high2 = local_high2
                             local_high2 = temp_high2
 
-                        # if current_low1 < prev_local_low1 and current_high1 < prev_local_high1:
-                        #      local_low1 = prev_local_low1
+
+                        
 
                         # Printing data for data2
                         print("---- DAILY :----", current_time2)
                         print("Current High2 :", current_high2, "Previous High2 :", previous_high2,"temp_high2 :",temp_high2, "local_high2 :", local_high2,"prev_local_high2 :",prev_local_high2)
                         print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2,"temp_low2 :",temp_low2 ,"local_low2 :", local_low2,"prev_local_low2 :",prev_local_low2)
-                        print("   ")
-                        time.sleep(0)
+                        print(" =================================================  ")
+
+                        # Update daily high, low, and close
+                        if daily_high == 0 or high1 > daily_high:
+                            daily_high = high1
+                        if daily_low == 0 or low1 < daily_low:
+                            daily_low = low1
+                        daily_close = close1
+
+                        # Logic for daily candle completion (every 96th 15-min interval = 1 day)
+                        if daily_candle_count % 96 == 0:
+                            print("----DAILY CANDLE :----", current_time1)
+                            print("Daily High:", daily_high, "Daily Low:", daily_low, "Daily Close:", daily_close)
+                            
+                            # Check if the week has ended (i.e., we are on Friday) to print weekly candle
+                            # Assuming the last Friday marks the end of the previous week
+                            if pd.to_datetime(current_time1).weekday() == 4:  # Friday is day 4 of the week
+                                last_friday = current_time1
+                                # Print weekly candle from last week's data (previous Friday's daily candle to this Friday)
+                                print("----WEEKLY CANDLE :----")
+                                print("Weekly High:", weekly_high, "Weekly Low:", weekly_low, "Weekly Close:", weekly_close)
+
+                                # Reset weekly candle data after printing
+                                weekly_high = daily_high
+                                weekly_low = daily_low
+                                weekly_close = daily_close
+
+                            # Reset daily values for the next day
+                            daily_high = daily_low = daily_close = 0
+                            daily_candle_count = 0
 
                         # Bullish entry
                         if local_high1 > 0:
@@ -148,13 +182,13 @@ for index1, row1 in data1.iterrows():
                                 loss_for_trade = abs(local_high1 - current_low1 + (tick_val * 4)) * contract_size
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
-                                    continue
                                 else:
                                     num_of_lots = math.floor(risk / loss_for_trade)
                                     if num_of_lots >= max_num_lots:
                                         num_of_lots = 5
                                 entry_price = local_high1 + (tick_val * 2)
                                 exit_price = current_low1 - (tick_val * 2)
+                                
                                 print("\033[32m<------ LONG ENTRY ------>(CH1 > LH1) AND (LL1 >= LL2)\033[0m")
                                 print("       ENTRY PRICE  = ", entry_price)
                                 print("        num_of_lots = ", round(num_of_lots))
@@ -163,8 +197,8 @@ for index1, row1 in data1.iterrows():
                                 bull = True
                                 flag = True
                                 continue
-                        
-                        # updating exit price 
+
+                        # Updating exit price
                         if (bull and current_low1 > exit_price):
                             exit_price = current_low1 
 
@@ -180,7 +214,7 @@ for index1, row1 in data1.iterrows():
                             total_long_pnl += pnl
                             integer_pnl = float(pnl)  # Extract the integer part of the P&L
 
-                            # declaring maxloss and maxprofit
+                            # Declaring max loss and max profit
                             max_profit = max(max_profit, pnl)
                             max_loss = min(max_loss, pnl)
 
@@ -193,10 +227,10 @@ for index1, row1 in data1.iterrows():
                             # Add to total positive or negative P&L based on the result
                             if pnl >= 0:
                                 positive_pnl += pnl
-                                total_positive_trades +=1
+                                total_positive_trades += 1
                             else:
                                 negative_pnl += pnl
-                                total_negative_trades +=1
+                                total_negative_trades += 1
 
                             print("\033[32m<------ LONG EXIT ------>\033[0m")
                             print("         EXIT PRICE = ", exit_price)
@@ -208,20 +242,21 @@ for index1, row1 in data1.iterrows():
                             print("---------------------------------------------------------")
                             continue
 
-                        # Bearish entry----------------------------------------------------------------------------
+                        # Bearish entry
                         if local_low1 > 0:
                             if (current_low1 < local_low1) and (local_high1 <= local_high2) and not bull and not flag:
-                                loss_for_trade = abs(local_low1 - current_high1 + ( tick_val * 4)) * contract_size
-                                print(tick_val,contract_size)
+                                # Calculate loss_for_trade and number of lots
+                                loss_for_trade = abs(local_low1 - current_high1 + (tick_val * 4)) * contract_size
+                                
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
-                                    continue
                                 else:
                                     num_of_lots = math.floor(risk / loss_for_trade)
                                     if num_of_lots >= max_num_lots:
                                         num_of_lots = 5
                                 entry_price = local_low1 - (tick_val * 2)
                                 exit_price = current_high1 + (tick_val * 2)
+
                                 print("\033[31m<------ SHORT ENTRY ------>\033[0m")
                                 print("        ENTRY PRICE = ", entry_price)
                                 print("        num_of_lots = ", round(num_of_lots))
@@ -231,12 +266,11 @@ for index1, row1 in data1.iterrows():
                                 flag = True
                                 continue
 
+                        # Bearish exit
                         if (bear and current_high1 < exit_price):
                             exit_price = current_high1
 
-                        # Bearish exit
                         if current_high1 > exit_price and bear and flag:
-                            number_of_positions -= 1
                             num_of_trades += 1
                             bear = False
                             flag = False
@@ -247,7 +281,7 @@ for index1, row1 in data1.iterrows():
                             total_short_pnl += pnl
                             integer_pnl = float(pnl)  # Extract the integer part of the P&L
 
-                            # declaring maxloss and maxprofit
+                            # Declaring max loss and max profit
                             max_profit = max(max_profit, pnl)
                             max_loss = min(max_loss, pnl)
 
@@ -255,25 +289,7 @@ for index1, row1 in data1.iterrows():
                             if integer_pnl >= 0:
                                 pnl_color = "\033[32m"  # Green color
                             else:
-                                pnl_color = "\033[31m"  # Red color
-
-                            # Add to total positive or negative P&L based on the result
-                            if pnl >= 0:
-                                positive_pnl += pnl
-                                total_positive_trades +=1
-                            else:
-                                negative_pnl += pnl
-                                total_negative_trades +=1
-
-                            print("\033[31m<------ SHORT EXIT ------>\033[0m")
-                            print("         EXIT PRICE = ", exit_price)
-                            print("        num_of_lots = ", round(num_of_lots))
-                            print("      num_of_trades = ", num_of_trades)
-                            print("         max_profit = ", round(max_profit, 2))
-                            print("           max_loss = ", round(max_loss, 2))
-                            print("       P&L_of_trade = ", pnl_color, round(integer_pnl),"\033[0m")
-                            print("------------------------------------------------")
-                            continue
+                                pnl_color = "\033[31m"  # Red colorHere’s the code update based on your requirement to print **daily** and **weekly** candles and perform trading logic accordingly:
 
                     except Exception as e:
                         print("Error:", e)

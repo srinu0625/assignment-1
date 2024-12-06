@@ -2,12 +2,12 @@ import pandas as pd
 import time
 
 # File paths
-file_path1 = r"D:\data 2\ES 240.csv"
-file_path2 = r"D:\data 2\NQ 240.csv"
-file_path3 = r"D:\data 2\YM 240.csv"
-file_path4 = r"D:\data 2\CL 240.csv"
-file_path5 = r"D:\data 2\BT 240.csv"
-file_path6 = r"D:\data 2\GC 240.csv"
+file_path1 = r"D:\data 2\ES W.csv"
+file_path2 = r"D:\data 2\NQ W.csv"
+file_path3 = r"D:\data 2\YM W.csv"
+file_path4 = r"D:\data 2\CL W.csv"
+file_path5 = r"D:\data 2\BT W.csv"
+file_path6 = r"D:\data 2\GC W.csv"
 
 # Load the data
 try:
@@ -77,7 +77,7 @@ for index1, row1 in data1.iterrows():
                 local_high1 = temp_high1
 
             print(f"----240 min: {current_time1} ----")
-            print(f"1,c,MESZ4,{current_high1},{current_low1},{previous_high1},{previous_low1},{temp_high1},{temp_low1},{local_high1},{local_low1},{prev_local_high1},{prev_local_low1}")
+            print(f"1,C,MESZ4,{current_high1},{current_low1},{previous_high1},{previous_low1},{temp_high1},{temp_low1},{local_high1},{local_low1},{prev_local_high1},{prev_local_low1}")
             print("   ")
             time.sleep(0)
 
@@ -114,7 +114,7 @@ for index2, row2 in data2.iterrows():
                 local_high2 = temp_high2
 
             print(f"----240 min: {current_time2} ----")
-            print(f"1,c,MNQZ4,{current_high2},{current_low2},{previous_high2},{previous_low2},{temp_high2},{temp_low2},{local_high2},{local_low2},{prev_local_high2},{prev_local_low2}")
+            print(f"1,C,MNQZ4,{current_high2},{current_low2},{previous_high2},{previous_low2},{temp_high2},{temp_low2},{local_high2},{local_low2},{prev_local_high2},{prev_local_low2}")
             print("   ")
             time.sleep(0)
 
@@ -151,7 +151,7 @@ for index3, row3 in data3.iterrows():
                 local_high3 = temp_high3
 
             print(f"----240 min: {current_time3} ----")
-            print(f"1,c,MYMZ4,{current_high3},{current_low3},{previous_high3},{previous_low3},{temp_high3},{temp_low3},{local_high3},{local_low3},{prev_local_high3},{prev_local_low3}")
+            print(f"1,C,MYMZ4,{current_high3},{current_low3},{previous_high3},{previous_low3},{temp_high3},{temp_low3},{local_high3},{local_low3},{prev_local_high3},{prev_local_low3}")
             print("   ")
             time.sleep(0)
 
@@ -188,7 +188,7 @@ for index4, row4 in data4.iterrows():
                 local_high4 = temp_high4
 
             print(f"----240 min: {current_time4} ----")
-            print(f"1,c,MCLZ4,{current_high4},{current_low4},{previous_high4},{previous_low4},{temp_high4},{temp_low4},{local_high4},{local_low4},{prev_local_high4},{prev_local_low4}")
+            print(f"1,C,MCLZ4,{current_high4},{current_low4},{previous_high4},{previous_low4},{temp_high4},{temp_low4},{local_high4},{local_low4},{prev_local_high4},{prev_local_low4}")
             print("   ")
             time.sleep(0)
 
@@ -225,7 +225,7 @@ for index5, row5 in data5.iterrows():
                 local_high5 = temp_high5
 
             print(f"----240 min: {current_time5} ----")
-            print(f"1,c,MBTV4,{current_high5},{current_low5},{previous_high5},{previous_low5},{temp_high5},{temp_low5},{local_high5},{local_low5},{prev_local_high5},{prev_local_low5}")
+            print(f"1,C,MBTX4,{current_high5},{current_low5},{previous_high5},{previous_low5},{temp_high5},{temp_low5},{local_high5},{local_low5},{prev_local_high5},{prev_local_low5}")
             print("   ")
             time.sleep(0)
 
@@ -262,7 +262,7 @@ for index6, row6 in data6.iterrows():
                 local_high6 = temp_high6
 
             print(f"----240 min: {current_time6} ----")
-            print(f"1,c,MGCZ4,{current_high6},{current_low6},{previous_high6},{previous_low6},{temp_high6},{temp_low6},{local_high6},{local_low6},{prev_local_high6},{prev_local_low6}")
+            print(f"1,C,MGCZ4,{current_high6},{current_low6},{previous_high6},{previous_low6},{temp_high6},{temp_low6},{local_high6},{local_low6},{prev_local_high6},{prev_local_low6}")
             print("   ")
             print("====================================================================================================================================")
             time.sleep(0)

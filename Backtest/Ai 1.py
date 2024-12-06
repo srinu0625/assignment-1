@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\ARB_office\data\cl 240.csv"
-file_path2 = r"D:\ARB_office\data\cl d.csv"
+file_path1 = r"D:\e 240.csv"
+file_path2 = r"D:\e d.csv"
 # Load the data
 try:
     data1 = pd.read_csv(file_path1)
@@ -12,8 +12,8 @@ except Exception as e:
     print("Error loading data:", e)
     exit()
 
-contract_size = 100
-tick_val = 0.01
+contract_size = 5
+tick_val = 0.25
 
 ## Column names
 high_column_name = 'High'
@@ -94,10 +94,7 @@ for index1, row1 in data1.iterrows():
                             if temp_high1 != local_high1:
                                 prev_local_high1 = local_high1
                             local_high1 = temp_high1
-
-                        # if current_low1 < prev_local_low1 and current_high1 < prev_local_high1:
-                        #     local_high1 = prev_local_high1 
-                              
+                        
                         # Printing data for data2
                         print("----240 MIN :----", current_time1)
                         print("Current High1 :", current_high1, "Previous High1 :", previous_high1,"temp_high",temp_high1, "local_high1 :", local_high1,"prev_local_high :",prev_local_high1)
@@ -132,9 +129,6 @@ for index1, row1 in data1.iterrows():
                                 prev_local_high2 = local_high2
                             local_high2 = temp_high2
 
-                        # if current_low1 < prev_local_low1 and current_high1 < prev_local_high1:
-                        #      local_low1 = prev_local_low1
-
                         # Printing data for data2
                         print("---- DAILY :----", current_time2)
                         print("Current High2 :", current_high2, "Previous High2 :", previous_high2,"temp_high2 :",temp_high2, "local_high2 :", local_high2,"prev_local_high2 :",prev_local_high2)
@@ -154,6 +148,7 @@ for index1, row1 in data1.iterrows():
                                     if num_of_lots >= max_num_lots:
                                         num_of_lots = 5
                                 entry_price = local_high1 + (tick_val * 2)
+                               
                                 exit_price = current_low1 - (tick_val * 2)
                                 print("\033[32m<------ LONG ENTRY ------>(CH1 > LH1) AND (LL1 >= LL2)\033[0m")
                                 print("       ENTRY PRICE  = ", entry_price)
@@ -162,7 +157,25 @@ for index1, row1 in data1.iterrows():
                                 print("----------------------------------------------------------")
                                 bull = True
                                 flag = True
-                                continue
+                            else:
+                                if (current_high1 > local_high1) and (local_low1 >= local_low2)  and (current_high1 > previous_high1) and (current_low1 < previous_low1) and not bear and not flag:
+                                    loss_for_trade = abs(previous_high1 - current_low1 + (tick_val * 4)) * contract_size
+                                    if loss_for_trade > risk:
+                                        num_of_lots = 1
+                                    else:
+                                        num_of_lots = math.floor(risk / loss_for_trade)
+                                        if num_of_lots >= max_num_lots:
+                                            num_of_lots = 5
+                                    entry_price = previous_high1 + (tick_val * 2)
+                                    exit_price = current_low1 - (tick_val * 2)
+                                    print("\033[32m<------ LONG ENTRY ------>(CH1 > LH1) AND (LL1 >= LL2)\033[0m")
+                                    print("       ENTRY PRICE  = ", entry_price)
+                                    print("        num_of_lots = ", round(num_of_lots))
+                                    print("     loss_for_trade = ", round(loss_for_trade))
+                                    print("----------------------------------------------------------")
+                                    bull = True
+                                    flag = True
+                                    continue
                         
                         # updating exit price 
                         if (bull and current_low1 > exit_price):
@@ -215,7 +228,6 @@ for index1, row1 in data1.iterrows():
                                 print(tick_val,contract_size)
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
-                                    continue
                                 else:
                                     num_of_lots = math.floor(risk / loss_for_trade)
                                     if num_of_lots >= max_num_lots:
@@ -229,7 +241,27 @@ for index1, row1 in data1.iterrows():
                                 print("------------------------------------------------")
                                 bear = True
                                 flag = True
-                                continue
+                            else:
+                                if (current_low1 < local_low1) and (local_high1 <= local_high2) and (current_high1 > previous_high1) and (current_low1 < previous_low1)  and not bull and not flag:
+                                    loss_for_trade = abs(previous_low1 - current_high1 + ( tick_val * 4)) * contract_size
+                                    print(tick_val,contract_size)
+                                    if loss_for_trade > risk:
+                                        num_of_lots = 1
+                                    else:
+                                        num_of_lots = math.floor(risk / loss_for_trade)
+                                        if num_of_lots >= max_num_lots:
+                                            num_of_lots = 5
+                                    entry_price = previous_low1 - (tick_val * 2)
+                                    exit_price = current_high1 + (tick_val * 2)
+                                    print("\033[31m<------ SHORT ENTRY ------>\033[0m")
+                                    print("        ENTRY PRICE = ", entry_price)
+                                    print("        num_of_lots = ", round(num_of_lots))
+                                    print("     loss_for_trade = ", round(loss_for_trade))
+                                    print("------------------------------------------------")
+                                    bear = True
+                                    flag = True
+                                    continue
+                            
 
                         if (bear and current_high1 < exit_price):
                             exit_price = current_high1

@@ -2,8 +2,9 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\ARB_office\data\cl 240.csv"
-file_path2 = r"D:\ARB_office\data\cl d.csv"
+
+file_path1 = r"D:\data\NQ 240.csv"
+file_path2 = r"D:\data\NQ D.csv"
 # Load the data
 try:
     data1 = pd.read_csv(file_path1)
@@ -12,13 +13,14 @@ except Exception as e:
     print("Error loading data:", e)
     exit()
 
-contract_size = 100
-tick_val = 0.01
+contract_size = 2
+tick_val = 0.25
 
 ## Column names
 high_column_name = 'High'
 low_column_name = 'Low'
 time_column_name = 'Date (GMT)'
+close_column_name = 'Last'
 
 # Temp variables for tracking highs and lows
 temp_high1 = temp_low1 = temp_high2 = temp_low2  = 0
@@ -47,6 +49,7 @@ bull = bear = flag = False
 # Trading parameters
 number_of_positions = num_of_trades = 0
 entry_price = exit_price = 0
+entry_price1 = entry_price2 = 0
 max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0
@@ -56,14 +59,14 @@ risk = 720
 # Iterate over each row of the daily DataFrame (data1)
 for index1, row1 in data1.iterrows():
     # Check if the row has valid data
-    if pd.notna(row1[time_column_name]) and pd.notna(row1[high_column_name]) and pd.notna(row1[low_column_name]):
+    if pd.notna(row1[time_column_name]) and pd.notna(row1[high_column_name]) and pd.notna(row1[low_column_name]) and pd.notna(row1[close_column_name]):
         # Extract the current date from the daily data
         current_date1 = row1[time_column_name].split()[0]
 
         # Iterate over each row of the hourly DataFrame (data2)
         for index2, row2 in data2.iterrows():
             # Check if the row has valid data
-            if pd.notna(row2[time_column_name]) and pd.notna(row2[high_column_name]) and pd.notna(row2[low_column_name]):
+            if pd.notna(row2[time_column_name]) and pd.notna(row2[high_column_name]) and pd.notna(row2[low_column_name]) and pd.notna(row2[close_column_name]):
                 # Extract the current date from the hourly data
                 current_date2 = row2[time_column_name].split()[0]
 
@@ -73,6 +76,7 @@ for index1, row1 in data1.iterrows():
                         current_time1 = row1[time_column_name]
                         high1 = float(row1[high_column_name])
                         low1 = float(row1[low_column_name])
+                        close1 = float(row1[close_column_name])
                         
                         if (high1 > current_high1) or (low1 < current_low1):
                             previous_high1 = current_high1
@@ -95,13 +99,15 @@ for index1, row1 in data1.iterrows():
                                 prev_local_high1 = local_high1
                             local_high1 = temp_high1
 
-                        # if current_low1 < prev_local_low1 and current_high1 < prev_local_high1:
-                        #     local_high1 = prev_local_high1 
-                              
+                        if current_high1 > previous_high1 and current_low1 < previous_low1 and not bear:
+                            entry_price = previous_high1
+                            exit_price = current_low1
+
                         # Printing data for data2
                         print("----240 MIN :----", current_time1)
                         print("Current High1 :", current_high1, "Previous High1 :", previous_high1,"temp_high",temp_high1, "local_high1 :", local_high1,"prev_local_high :",prev_local_high1)
                         print("Current Low1 :", current_low1, "Previous Low1 :", previous_low1,"temp_low",temp_low1 ,"local_low1 :", local_low1,"prev_local_low1 :",prev_local_low1)
+                        print("last 1 = ",close1)
                         print("   ")
                         time.sleep(0)
 
@@ -109,6 +115,7 @@ for index1, row1 in data1.iterrows():
                         current_time2 = (data2.at[index2 - 1, time_column_name])
                         high2 = float(data2.at[index2 - 1,high_column_name])       
                         low2 = float(data2.at[index2 - 1,low_column_name])
+                        close2 = float(row2[close_column_name])
 
                         # inside candles logic 
                         if (high2 > current_high2) or (low2 < current_low2):
@@ -132,23 +139,25 @@ for index1, row1 in data1.iterrows():
                                 prev_local_high2 = local_high2
                             local_high2 = temp_high2
 
-                        # if current_low1 < prev_local_low1 and current_high1 < prev_local_high1:
-                        #      local_low1 = prev_local_low1
+                        
+                        if current_high1 > previous_high1 and current_low1 < previous_low1 and not bear and not bull:
+                            entry_price = previous_low1
+                            exit_price = current_high1
 
                         # Printing data for data2
                         print("---- DAILY :----", current_time2)
                         print("Current High2 :", current_high2, "Previous High2 :", previous_high2,"temp_high2 :",temp_high2, "local_high2 :", local_high2,"prev_local_high2 :",prev_local_high2)
                         print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2,"temp_low2 :",temp_low2 ,"local_low2 :", local_low2,"prev_local_low2 :",prev_local_low2)
+                        print("last 2 = ",close2)
                         print("   ")
                         time.sleep(0)
 
-                        # Bullish entry
+                       # Bullish entry
                         if local_high1 > 0:
                             if (current_high1 > local_high1) and (local_low1 >= local_low2) and not bear and not flag:
                                 loss_for_trade = abs(local_high1 - current_low1 + (tick_val * 4)) * contract_size
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
-                                    continue
                                 else:
                                     num_of_lots = math.floor(risk / loss_for_trade)
                                     if num_of_lots >= max_num_lots:
@@ -163,7 +172,7 @@ for index1, row1 in data1.iterrows():
                                 bull = True
                                 flag = True
                                 continue
-                        
+
                         # updating exit price 
                         if (bull and current_low1 > exit_price):
                             exit_price = current_low1 
@@ -208,14 +217,14 @@ for index1, row1 in data1.iterrows():
                             print("---------------------------------------------------------")
                             continue
 
-                        # Bearish entry----------------------------------------------------------------------------
+                       # Bearish entry
                         if local_low1 > 0:
                             if (current_low1 < local_low1) and (local_high1 <= local_high2) and not bull and not flag:
-                                loss_for_trade = abs(local_low1 - current_high1 + ( tick_val * 4)) * contract_size
-                                print(tick_val,contract_size)
+                                # Calculate loss_for_trade and number of lots
+                                loss_for_trade = abs(local_low1 - current_high1 + (tick_val * 4)) * contract_size
+                                
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
-                                    continue
                                 else:
                                     num_of_lots = math.floor(risk / loss_for_trade)
                                     if num_of_lots >= max_num_lots:
@@ -231,6 +240,7 @@ for index1, row1 in data1.iterrows():
                                 flag = True
                                 continue
 
+                        
                         if (bear and current_high1 < exit_price):
                             exit_price = current_high1
 

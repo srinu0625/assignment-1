@@ -1,0 +1,2071 @@
+2024-11-22 19:56:38,004 - INFO - End of iteration
+2024-11-22 19:56:38,008 - INFO - End of iteration
+2024-11-22 19:56:38,012 - INFO - End of iteration
+2024-11-22 19:56:38,015 - INFO - End of iteration
+2024-11-22 19:56:38,019 - INFO - End of iteration
+2024-11-22 19:56:38,022 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,022 - INFO - ENTRY PRICE = 66260.0, num_of_lots = 13, loss_for_trade = 54
+2024-11-22 19:56:38,022 - INFO - End of iteration
+2024-11-22 19:56:38,026 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,026 - INFO - EXIT PRICE = 66795.0, num_of_lots = 13, P&L = 695.5
+2024-11-22 19:56:38,026 - INFO - End of iteration
+2024-11-22 19:56:38,030 - INFO - End of iteration
+2024-11-22 19:56:38,034 - INFO - End of iteration
+2024-11-22 19:56:38,037 - INFO - End of iteration
+2024-11-22 19:56:38,042 - INFO - End of iteration
+2024-11-22 19:56:38,050 - INFO - End of iteration
+2024-11-22 19:56:38,055 - INFO - End of iteration
+2024-11-22 19:56:38,059 - INFO - End of iteration
+2024-11-22 19:56:38,063 - INFO - End of iteration
+2024-11-22 19:56:38,067 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,067 - INFO - ENTRY PRICE = 55790.0, num_of_lots = 5, loss_for_trade = 134
+2024-11-22 19:56:38,068 - INFO - End of iteration
+2024-11-22 19:56:38,071 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,071 - INFO - EXIT PRICE = 57125.0, num_of_lots = 5, P&L = 667.5
+2024-11-22 19:56:38,072 - INFO - End of iteration
+2024-11-22 19:56:38,076 - INFO - End of iteration
+2024-11-22 19:56:38,080 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,080 - INFO - ENTRY PRICE = 57145.0, num_of_lots = 20, loss_for_trade = 24
+2024-11-22 19:56:38,080 - INFO - End of iteration
+2024-11-22 19:56:38,084 - INFO - End of iteration
+2024-11-22 19:56:38,088 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,088 - INFO - EXIT PRICE = 57665.0, num_of_lots = 20, P&L = 1040.0
+2024-11-22 19:56:38,088 - INFO - End of iteration
+2024-11-22 19:56:38,092 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,092 - INFO - ENTRY PRICE = 58250.0, num_of_lots = 20, loss_for_trade = 35
+2024-11-22 19:56:38,092 - INFO - End of iteration
+2024-11-22 19:56:38,096 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,096 - INFO - EXIT PRICE = 58600.0, num_of_lots = 20, P&L = 700.0
+2024-11-22 19:56:38,096 - INFO - End of iteration
+2024-11-22 19:56:38,100 - INFO - End of iteration
+2024-11-22 19:56:38,103 - INFO - End of iteration
+2024-11-22 19:56:38,107 - INFO - End of iteration
+2024-11-22 19:56:38,111 - INFO - End of iteration
+2024-11-22 19:56:38,114 - INFO - End of iteration
+2024-11-22 19:56:38,117 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,118 - INFO - ENTRY PRICE = 58775.0, num_of_lots = 5, loss_for_trade = 122
+2024-11-22 19:56:38,118 - INFO - End of iteration
+2024-11-22 19:56:38,121 - INFO - End of iteration
+2024-11-22 19:56:38,124 - INFO - End of iteration
+2024-11-22 19:56:38,128 - INFO - End of iteration
+2024-11-22 19:56:38,132 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,132 - INFO - EXIT PRICE = 62440.0, num_of_lots = 5, P&L = 1832.5
+2024-11-22 19:56:38,132 - INFO - End of iteration
+2024-11-22 19:56:38,135 - INFO - End of iteration
+2024-11-22 19:56:38,139 - INFO - End of iteration
+2024-11-22 19:56:38,142 - INFO - End of iteration
+2024-11-22 19:56:38,147 - INFO - End of iteration
+2024-11-22 19:56:38,150 - INFO - End of iteration
+2024-11-22 19:56:38,153 - INFO - End of iteration
+2024-11-22 19:56:38,157 - INFO - End of iteration
+2024-11-22 19:56:38,160 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,160 - INFO - ENTRY PRICE = 61955.0, num_of_lots = 4, loss_for_trade = 150
+2024-11-22 19:56:38,160 - INFO - End of iteration
+2024-11-22 19:56:38,164 - INFO - End of iteration
+2024-11-22 19:56:38,167 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,167 - INFO - EXIT PRICE = 61745.0, num_of_lots = 4, P&L = -84.0
+2024-11-22 19:56:38,167 - INFO - End of iteration
+2024-11-22 19:56:38,171 - INFO - End of iteration
+2024-11-22 19:56:38,174 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,174 - INFO - ENTRY PRICE = 61985.0, num_of_lots = 20, loss_for_trade = 14
+2024-11-22 19:56:38,174 - INFO - End of iteration
+2024-11-22 19:56:38,179 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,179 - INFO - EXIT PRICE = 61840.0, num_of_lots = 20, P&L = -290.0
+2024-11-22 19:56:38,179 - INFO - End of iteration
+2024-11-22 19:56:38,183 - INFO - End of iteration
+2024-11-22 19:56:38,187 - INFO - End of iteration
+2024-11-22 19:56:38,190 - INFO - End of iteration
+2024-11-22 19:56:38,194 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,194 - INFO - ENTRY PRICE = 60050.0, num_of_lots = 20, loss_for_trade = 11
+2024-11-22 19:56:38,194 - INFO - End of iteration
+2024-11-22 19:56:38,198 - INFO - End of iteration
+2024-11-22 19:56:38,201 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,202 - INFO - EXIT PRICE = 60400.0, num_of_lots = 20, P&L = 700.0
+2024-11-22 19:56:38,202 - INFO - End of iteration
+2024-11-22 19:56:38,205 - INFO - End of iteration
+2024-11-22 19:56:38,208 - INFO - End of iteration
+2024-11-22 19:56:38,212 - INFO - End of iteration
+2024-11-22 19:56:38,215 - INFO - End of iteration
+2024-11-22 19:56:38,219 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,219 - INFO - ENTRY PRICE = 60000.0, num_of_lots = 9, loss_for_trade = 79
+2024-11-22 19:56:38,219 - INFO - End of iteration
+2024-11-22 19:56:38,223 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,223 - INFO - EXIT PRICE = 60790.0, num_of_lots = 9, P&L = 711.0
+2024-11-22 19:56:38,223 - INFO - End of iteration
+2024-11-22 19:56:38,227 - INFO - End of iteration
+2024-11-22 19:56:38,230 - INFO - End of iteration
+2024-11-22 19:56:38,234 - INFO - End of iteration
+2024-11-22 19:56:38,237 - INFO - End of iteration
+2024-11-22 19:56:38,240 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,240 - INFO - ENTRY PRICE = 60850.0, num_of_lots = 11, loss_for_trade = 64
+2024-11-22 19:56:38,240 - INFO - End of iteration
+2024-11-22 19:56:38,245 - INFO - End of iteration
+2024-11-22 19:56:38,248 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,248 - INFO - EXIT PRICE = 62230.0, num_of_lots = 11, P&L = 1518.0
+2024-11-22 19:56:38,248 - INFO - End of iteration
+2024-11-22 19:56:38,253 - INFO - End of iteration
+2024-11-22 19:56:38,256 - INFO - End of iteration
+2024-11-22 19:56:38,261 - INFO - End of iteration
+2024-11-22 19:56:38,265 - INFO - End of iteration
+2024-11-22 19:56:38,268 - INFO - End of iteration
+2024-11-22 19:56:38,271 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,271 - INFO - ENTRY PRICE = 60560.0, num_of_lots = 20, loss_for_trade = 16
+2024-11-22 19:56:38,272 - INFO - End of iteration
+2024-11-22 19:56:38,275 - INFO - End of iteration
+2024-11-22 19:56:38,279 - INFO - End of iteration
+2024-11-22 19:56:38,283 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,283 - INFO - EXIT PRICE = 61465.0, num_of_lots = 20, P&L = 1810.0
+2024-11-22 19:56:38,283 - INFO - End of iteration
+2024-11-22 19:56:38,286 - INFO - End of iteration
+2024-11-22 19:56:38,290 - INFO - End of iteration
+2024-11-22 19:56:38,294 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,294 - INFO - ENTRY PRICE = 64115.0, num_of_lots = 3, loss_for_trade = 181
+2024-11-22 19:56:38,294 - INFO - End of iteration
+2024-11-22 19:56:38,297 - INFO - End of iteration
+2024-11-22 19:56:38,301 - INFO - End of iteration
+2024-11-22 19:56:38,304 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,304 - INFO - EXIT PRICE = 65225.0, num_of_lots = 3, P&L = 333.0
+2024-11-22 19:56:38,304 - INFO - End of iteration
+2024-11-22 19:56:38,308 - INFO - End of iteration
+2024-11-22 19:56:38,312 - INFO - End of iteration
+2024-11-22 19:56:38,316 - INFO - End of iteration
+2024-11-22 19:56:38,320 - INFO - End of iteration
+2024-11-22 19:56:38,324 - INFO - End of iteration
+2024-11-22 19:56:38,328 - INFO - End of iteration
+2024-11-22 19:56:38,331 - INFO - End of iteration
+2024-11-22 19:56:38,335 - INFO - End of iteration
+2024-11-22 19:56:38,339 - INFO - End of iteration
+2024-11-22 19:56:38,342 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,342 - INFO - ENTRY PRICE = 60455.0, num_of_lots = 20, loss_for_trade = 27
+2024-11-22 19:56:38,342 - INFO - End of iteration
+2024-11-22 19:56:38,346 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,346 - INFO - EXIT PRICE = 60725.0, num_of_lots = 20, P&L = 540.0
+2024-11-22 19:56:38,347 - INFO - End of iteration
+2024-11-22 19:56:38,350 - INFO - End of iteration
+2024-11-22 19:56:38,353 - INFO - End of iteration
+2024-11-22 19:56:38,356 - INFO - End of iteration
+2024-11-22 19:56:38,359 - INFO - End of iteration
+2024-11-22 19:56:38,363 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,363 - INFO - ENTRY PRICE = 60985.0, num_of_lots = 19, loss_for_trade = 37
+2024-11-22 19:56:38,363 - INFO - End of iteration
+2024-11-22 19:56:38,366 - INFO - End of iteration
+2024-11-22 19:56:38,370 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,370 - INFO - EXIT PRICE = 61200.0, num_of_lots = 19, P&L = 408.5
+2024-11-22 19:56:38,370 - INFO - End of iteration
+2024-11-22 19:56:38,373 - INFO - End of iteration
+2024-11-22 19:56:38,377 - INFO - End of iteration
+2024-11-22 19:56:38,380 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,381 - INFO - ENTRY PRICE = 60230.0, num_of_lots = 20, loss_for_trade = 4
+2024-11-22 19:56:38,381 - INFO - End of iteration
+2024-11-22 19:56:38,384 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,384 - INFO - EXIT PRICE = 60185.0, num_of_lots = 20, P&L = -90.0
+2024-11-22 19:56:38,384 - INFO - End of iteration
+2024-11-22 19:56:38,387 - INFO - End of iteration
+2024-11-22 19:56:38,390 - INFO - End of iteration
+2024-11-22 19:56:38,412 - INFO - End of iteration
+2024-11-22 19:56:38,415 - INFO - End of iteration
+2024-11-22 19:56:38,419 - INFO - End of iteration
+2024-11-22 19:56:38,422 - INFO - End of iteration
+2024-11-22 19:56:38,427 - INFO - End of iteration
+2024-11-22 19:56:38,430 - INFO - End of iteration
+2024-11-22 19:56:38,433 - INFO - End of iteration
+2024-11-22 19:56:38,437 - INFO - End of iteration
+2024-11-22 19:56:38,440 - INFO - End of iteration
+2024-11-22 19:56:38,444 - INFO - End of iteration
+2024-11-22 19:56:38,447 - INFO - End of iteration
+2024-11-22 19:56:38,451 - INFO - End of iteration
+2024-11-22 19:56:38,455 - INFO - End of iteration
+2024-11-22 19:56:38,458 - INFO - End of iteration
+2024-11-22 19:56:38,462 - INFO - End of iteration
+2024-11-22 19:56:38,466 - INFO - End of iteration
+2024-11-22 19:56:38,469 - INFO - End of iteration
+2024-11-22 19:56:38,472 - INFO - End of iteration
+2024-11-22 19:56:38,476 - INFO - End of iteration
+2024-11-22 19:56:38,480 - INFO - End of iteration
+2024-11-22 19:56:38,484 - INFO - End of iteration
+2024-11-22 19:56:38,487 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,487 - INFO - ENTRY PRICE = 57490.0, num_of_lots = 7, loss_for_trade = 95
+2024-11-22 19:56:38,487 - INFO - End of iteration
+2024-11-22 19:56:38,491 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,491 - INFO - EXIT PRICE = 56540.0, num_of_lots = 7, P&L = -665.0
+2024-11-22 19:56:38,491 - INFO - End of iteration
+2024-11-22 19:56:38,495 - INFO - End of iteration
+2024-11-22 19:56:38,499 - INFO - End of iteration
+2024-11-22 19:56:38,503 - INFO - End of iteration
+2024-11-22 19:56:38,506 - INFO - End of iteration
+2024-11-22 19:56:38,510 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,510 - INFO - ENTRY PRICE = 56130.0, num_of_lots = 15, loss_for_trade = 46
+2024-11-22 19:56:38,510 - INFO - End of iteration
+2024-11-22 19:56:38,514 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,514 - INFO - EXIT PRICE = 55670.0, num_of_lots = 15, P&L = -690.0
+2024-11-22 19:56:38,514 - INFO - End of iteration
+2024-11-22 19:56:38,518 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,518 - INFO - ENTRY PRICE = 57410.0, num_of_lots = 20, loss_for_trade = 32
+2024-11-22 19:56:38,518 - INFO - End of iteration
+2024-11-22 19:56:38,521 - INFO - End of iteration
+2024-11-22 19:56:38,525 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,525 - INFO - EXIT PRICE = 57360.0, num_of_lots = 20, P&L = -100.0
+2024-11-22 19:56:38,525 - INFO - End of iteration
+2024-11-22 19:56:38,529 - INFO - End of iteration
+2024-11-22 19:56:38,533 - INFO - End of iteration
+2024-11-22 19:56:38,536 - INFO - End of iteration
+2024-11-22 19:56:38,540 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,540 - INFO - ENTRY PRICE = 58075.0, num_of_lots = 20, loss_for_trade = 12
+2024-11-22 19:56:38,540 - INFO - End of iteration
+2024-11-22 19:56:38,544 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,544 - INFO - EXIT PRICE = 57950.0, num_of_lots = 20, P&L = -250.0
+2024-11-22 19:56:38,544 - INFO - End of iteration
+2024-11-22 19:56:38,548 - INFO - End of iteration
+2024-11-22 19:56:38,551 - INFO - End of iteration
+2024-11-22 19:56:38,555 - INFO - End of iteration
+2024-11-22 19:56:38,558 - INFO - End of iteration
+2024-11-22 19:56:38,562 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,562 - INFO - ENTRY PRICE = 58545.0, num_of_lots = 18, loss_for_trade = 39
+2024-11-22 19:56:38,562 - INFO - End of iteration
+2024-11-22 19:56:38,565 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,565 - INFO - EXIT PRICE = 58155.0, num_of_lots = 18, P&L = -702.0
+2024-11-22 19:56:38,565 - INFO - End of iteration
+2024-11-22 19:56:38,568 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,568 - INFO - ENTRY PRICE = 58885.0, num_of_lots = 18, loss_for_trade = 39
+2024-11-22 19:56:38,568 - INFO - End of iteration
+2024-11-22 19:56:38,572 - INFO - End of iteration
+2024-11-22 19:56:38,575 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,575 - INFO - EXIT PRICE = 58550.0, num_of_lots = 18, P&L = -603.0
+2024-11-22 19:56:38,576 - INFO - End of iteration
+2024-11-22 19:56:38,581 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,582 - INFO - ENTRY PRICE = 59050.0, num_of_lots = 6, loss_for_trade = 112
+2024-11-22 19:56:38,582 - INFO - End of iteration
+2024-11-22 19:56:38,587 - INFO - End of iteration
+2024-11-22 19:56:38,591 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,592 - INFO - EXIT PRICE = 58750.0, num_of_lots = 6, P&L = -180.0
+2024-11-22 19:56:38,592 - INFO - End of iteration
+2024-11-22 19:56:38,596 - INFO - End of iteration
+2024-11-22 19:56:38,599 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,599 - INFO - ENTRY PRICE = 58690.0, num_of_lots = 20, loss_for_trade = 27
+2024-11-22 19:56:38,599 - INFO - End of iteration
+2024-11-22 19:56:38,604 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,604 - INFO - EXIT PRICE = 58420.0, num_of_lots = 20, P&L = -540.0
+2024-11-22 19:56:38,604 - INFO - End of iteration
+2024-11-22 19:56:38,608 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,609 - INFO - ENTRY PRICE = 58785.0, num_of_lots = 20, loss_for_trade = 2
+2024-11-22 19:56:38,609 - INFO - End of iteration
+2024-11-22 19:56:38,614 - INFO - End of iteration
+2024-11-22 19:56:38,618 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,618 - INFO - EXIT PRICE = 60265.0, num_of_lots = 20, P&L = 2960.0
+2024-11-22 19:56:38,618 - INFO - End of iteration
+2024-11-22 19:56:38,621 - INFO - End of iteration
+2024-11-22 19:56:38,624 - INFO - End of iteration
+2024-11-22 19:56:38,630 - INFO - End of iteration
+2024-11-22 19:56:38,634 - INFO - End of iteration
+2024-11-22 19:56:38,637 - INFO - End of iteration
+2024-11-22 19:56:38,641 - INFO - End of iteration
+2024-11-22 19:56:38,645 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,645 - INFO - ENTRY PRICE = 58820.0, num_of_lots = 20, loss_for_trade = 25
+2024-11-22 19:56:38,645 - INFO - End of iteration
+2024-11-22 19:56:38,649 - INFO - End of iteration
+2024-11-22 19:56:38,652 - INFO - End of iteration
+2024-11-22 19:56:38,656 - INFO - End of iteration
+2024-11-22 19:56:38,659 - INFO - End of iteration
+2024-11-22 19:56:38,664 - INFO - End of iteration
+2024-11-22 19:56:38,668 - INFO - End of iteration
+2024-11-22 19:56:38,671 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,671 - INFO - EXIT PRICE = 60860.0, num_of_lots = 20, P&L = 4080.0
+2024-11-22 19:56:38,671 - INFO - End of iteration
+2024-11-22 19:56:38,675 - INFO - End of iteration
+2024-11-22 19:56:38,679 - INFO - End of iteration
+2024-11-22 19:56:38,682 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,682 - INFO - ENTRY PRICE = 60640.0, num_of_lots = 12, loss_for_trade = 56
+2024-11-22 19:56:38,682 - INFO - End of iteration
+2024-11-22 19:56:38,686 - INFO - End of iteration
+2024-11-22 19:56:38,689 - INFO - End of iteration
+2024-11-22 19:56:38,692 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,692 - INFO - EXIT PRICE = 62550.0, num_of_lots = 12, P&L = 2292.0
+2024-11-22 19:56:38,692 - INFO - End of iteration
+2024-11-22 19:56:38,697 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,697 - INFO - ENTRY PRICE = 63000.0, num_of_lots = 20, loss_for_trade = 18
+2024-11-22 19:56:38,697 - INFO - End of iteration
+2024-11-22 19:56:38,701 - INFO - End of iteration
+2024-11-22 19:56:38,704 - INFO - End of iteration
+2024-11-22 19:56:38,707 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,707 - INFO - EXIT PRICE = 63685.0, num_of_lots = 20, P&L = 1370.0
+2024-11-22 19:56:38,708 - INFO - End of iteration
+2024-11-22 19:56:38,711 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,711 - INFO - ENTRY PRICE = 64460.0, num_of_lots = 8, loss_for_trade = 90
+2024-11-22 19:56:38,711 - INFO - End of iteration
+2024-11-22 19:56:38,715 - INFO - End of iteration
+2024-11-22 19:56:38,719 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,719 - INFO - EXIT PRICE = 63630.0, num_of_lots = 8, P&L = -664.0
+2024-11-22 19:56:38,719 - INFO - End of iteration
+2024-11-22 19:56:38,722 - INFO - End of iteration
+2024-11-22 19:56:38,725 - INFO - End of iteration
+2024-11-22 19:56:38,729 - INFO - End of iteration
+2024-11-22 19:56:38,732 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,732 - INFO - ENTRY PRICE = 64670.0, num_of_lots = 15, loss_for_trade = 48
+2024-11-22 19:56:38,732 - INFO - End of iteration
+2024-11-22 19:56:38,736 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,736 - INFO - EXIT PRICE = 64190.0, num_of_lots = 15, P&L = -720.0
+2024-11-22 19:56:38,736 - INFO - End of iteration
+2024-11-22 19:56:38,739 - INFO - End of iteration
+2024-11-22 19:56:38,743 - INFO - End of iteration
+2024-11-22 19:56:38,746 - INFO - End of iteration
+2024-11-22 19:56:38,749 - INFO - End of iteration
+2024-11-22 19:56:38,753 - INFO - End of iteration
+2024-11-22 19:56:38,756 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,756 - INFO - ENTRY PRICE = 64335.0, num_of_lots = 12, loss_for_trade = 56
+2024-11-22 19:56:38,756 - INFO - End of iteration
+2024-11-22 19:56:38,759 - INFO - End of iteration
+2024-11-22 19:56:38,762 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,762 - INFO - EXIT PRICE = 63845.0, num_of_lots = 12, P&L = -588.0
+2024-11-22 19:56:38,762 - INFO - End of iteration
+2024-11-22 19:56:38,766 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,766 - INFO - ENTRY PRICE = 64510.0, num_of_lots = 14, loss_for_trade = 50
+2024-11-22 19:56:38,766 - INFO - End of iteration
+2024-11-22 19:56:38,769 - INFO - End of iteration
+2024-11-22 19:56:38,772 - INFO - End of iteration
+2024-11-22 19:56:38,775 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,775 - INFO - EXIT PRICE = 64630.0, num_of_lots = 14, P&L = 168.0
+2024-11-22 19:56:38,776 - INFO - End of iteration
+2024-11-22 19:56:38,779 - INFO - End of iteration
+2024-11-22 19:56:38,782 - INFO - End of iteration
+2024-11-22 19:56:38,785 - INFO - End of iteration
+2024-11-22 19:56:38,788 - INFO - End of iteration
+2024-11-22 19:56:38,791 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,792 - INFO - ENTRY PRICE = 63975.0, num_of_lots = 13, loss_for_trade = 52
+2024-11-22 19:56:38,792 - INFO - End of iteration
+2024-11-22 19:56:38,795 - INFO - End of iteration
+2024-11-22 19:56:38,798 - INFO - End of iteration
+2024-11-22 19:56:38,801 - INFO - End of iteration
+2024-11-22 19:56:38,805 - INFO - End of iteration
+2024-11-22 19:56:38,809 - INFO - End of iteration
+2024-11-22 19:56:38,812 - INFO - End of iteration
+2024-11-22 19:56:38,815 - INFO - End of iteration
+2024-11-22 19:56:38,818 - INFO - End of iteration
+2024-11-22 19:56:38,821 - INFO - End of iteration
+2024-11-22 19:56:38,824 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,824 - INFO - EXIT PRICE = 66040.0, num_of_lots = 13, P&L = 2684.5
+2024-11-22 19:56:38,824 - INFO - End of iteration
+2024-11-22 19:56:38,828 - INFO - End of iteration
+2024-11-22 19:56:38,831 - INFO - End of iteration
+2024-11-22 19:56:38,834 - INFO - End of iteration
+2024-11-22 19:56:38,837 - INFO - End of iteration
+2024-11-22 19:56:38,840 - INFO - End of iteration
+2024-11-22 19:56:38,843 - INFO - End of iteration
+2024-11-22 19:56:38,846 - INFO - End of iteration
+2024-11-22 19:56:38,850 - INFO - End of iteration
+2024-11-22 19:56:38,853 - INFO - End of iteration
+2024-11-22 19:56:38,856 - INFO - End of iteration
+2024-11-22 19:56:38,859 - INFO - End of iteration
+2024-11-22 19:56:38,862 - INFO - End of iteration
+2024-11-22 19:56:38,865 - INFO - End of iteration
+2024-11-22 19:56:38,868 - INFO - End of iteration
+2024-11-22 19:56:38,871 - INFO - End of iteration
+2024-11-22 19:56:38,874 - INFO - End of iteration
+2024-11-22 19:56:38,878 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,878 - INFO - ENTRY PRICE = 62240.0, num_of_lots = 7, loss_for_trade = 96
+2024-11-22 19:56:38,878 - INFO - End of iteration
+2024-11-22 19:56:38,882 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,882 - INFO - EXIT PRICE = 61285.0, num_of_lots = 7, P&L = -668.5
+2024-11-22 19:56:38,882 - INFO - End of iteration
+2024-11-22 19:56:38,885 - INFO - End of iteration
+2024-11-22 19:56:38,889 - INFO - End of iteration
+2024-11-22 19:56:38,892 - INFO - End of iteration
+2024-11-22 19:56:38,896 - INFO - End of iteration
+2024-11-22 19:56:38,900 - INFO - End of iteration
+2024-11-22 19:56:38,905 - INFO - End of iteration
+2024-11-22 19:56:38,908 - INFO - End of iteration
+2024-11-22 19:56:38,911 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,911 - INFO - ENTRY PRICE = 61480.0, num_of_lots = 17, loss_for_trade = 41
+2024-11-22 19:56:38,912 - INFO - End of iteration
+2024-11-22 19:56:38,915 - INFO - End of iteration
+2024-11-22 19:56:38,918 - INFO - End of iteration
+2024-11-22 19:56:38,921 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,921 - INFO - EXIT PRICE = 61425.0, num_of_lots = 17, P&L = -93.5
+2024-11-22 19:56:38,921 - INFO - End of iteration
+2024-11-22 19:56:38,924 - INFO - End of iteration
+2024-11-22 19:56:38,927 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,927 - INFO - ENTRY PRICE = 63110.0, num_of_lots = 12, loss_for_trade = 59
+2024-11-22 19:56:38,927 - INFO - End of iteration
+2024-11-22 19:56:38,931 - INFO - End of iteration
+2024-11-22 19:56:38,934 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,934 - INFO - EXIT PRICE = 63595.0, num_of_lots = 12, P&L = 582.0
+2024-11-22 19:56:38,934 - INFO - End of iteration
+2024-11-22 19:56:38,937 - INFO - End of iteration
+2024-11-22 19:56:38,941 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:38,941 - INFO - ENTRY PRICE = 64335.0, num_of_lots = 10, loss_for_trade = 67
+2024-11-22 19:56:38,941 - INFO - End of iteration
+2024-11-22 19:56:38,944 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:38,944 - INFO - EXIT PRICE = 63665.0, num_of_lots = 10, P&L = -670.0
+2024-11-22 19:56:38,944 - INFO - End of iteration
+2024-11-22 19:56:38,947 - INFO - End of iteration
+2024-11-22 19:56:38,950 - INFO - End of iteration
+2024-11-22 19:56:38,953 - INFO - End of iteration
+2024-11-22 19:56:38,957 - INFO - End of iteration
+2024-11-22 19:56:38,961 - INFO - End of iteration
+2024-11-22 19:56:38,965 - INFO - End of iteration
+2024-11-22 19:56:38,969 - INFO - End of iteration
+2024-11-22 19:56:38,972 - INFO - End of iteration
+2024-11-22 19:56:38,976 - INFO - End of iteration
+2024-11-22 19:56:38,979 - INFO - End of iteration
+2024-11-22 19:56:38,983 - INFO - End of iteration
+2024-11-22 19:56:38,988 - INFO - End of iteration
+2024-11-22 19:56:38,993 - INFO - End of iteration
+2024-11-22 19:56:38,996 - INFO - End of iteration
+2024-11-22 19:56:39,000 - INFO - End of iteration
+2024-11-22 19:56:39,004 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:39,004 - INFO - ENTRY PRICE = 61260.0, num_of_lots = 12, loss_for_trade = 59
+2024-11-22 19:56:39,004 - INFO - End of iteration
+2024-11-22 19:56:39,007 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:39,007 - INFO - EXIT PRICE = 60670.0, num_of_lots = 12, P&L = -708.0
+2024-11-22 19:56:39,007 - INFO - End of iteration
+2024-11-22 19:56:39,011 - INFO - End of iteration
+2024-11-22 19:56:39,014 - INFO - End of iteration
+2024-11-22 19:56:39,018 - INFO - End of iteration
+2024-11-22 19:56:39,021 - INFO - End of iteration
+2024-11-22 19:56:39,025 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:39,025 - INFO - ENTRY PRICE = 61445.0, num_of_lots = 20, loss_for_trade = 32
+2024-11-22 19:56:39,025 - INFO - End of iteration
+2024-11-22 19:56:39,028 - INFO - End of iteration
+2024-11-22 19:56:39,032 - INFO - End of iteration
+2024-11-22 19:56:39,035 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:39,036 - INFO - EXIT PRICE = 62940.0, num_of_lots = 20, P&L = 2990.0
+2024-11-22 19:56:39,036 - INFO - End of iteration
+2024-11-22 19:56:39,039 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:39,039 - INFO - ENTRY PRICE = 63675.0, num_of_lots = 6, loss_for_trade = 104
+2024-11-22 19:56:39,039 - INFO - End of iteration
+2024-11-22 19:56:39,042 - INFO - End of iteration
+2024-11-22 19:56:39,045 - INFO - End of iteration
+2024-11-22 19:56:39,049 - INFO - End of iteration
+2024-11-22 19:56:39,053 - INFO - End of iteration
+2024-11-22 19:56:39,056 - INFO - End of iteration
+2024-11-22 19:56:39,059 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:39,059 - INFO - EXIT PRICE = 65965.0, num_of_lots = 6, P&L = 1374.0
+2024-11-22 19:56:39,059 - INFO - End of iteration
+2024-11-22 19:56:39,063 - INFO - End of iteration
+2024-11-22 19:56:39,066 - INFO - End of iteration
+2024-11-22 19:56:39,070 - INFO - End of iteration
+2024-11-22 19:56:39,073 - INFO - End of iteration
+2024-11-22 19:56:39,077 - INFO - End of iteration
+2024-11-22 19:56:39,080 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:39,080 - INFO - ENTRY PRICE = 67760.0, num_of_lots = 11, loss_for_trade = 63
+2024-11-22 19:56:39,080 - INFO - End of iteration
+2024-11-22 19:56:39,084 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:39,084 - INFO - EXIT PRICE = 67130.0, num_of_lots = 11, P&L = -693.0
+2024-11-22 19:56:39,084 - INFO - End of iteration
+2024-11-22 19:56:39,088 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:39,088 - INFO - ENTRY PRICE = 67820.0, num_of_lots = 14, loss_for_trade = 49
+2024-11-22 19:56:39,088 - INFO - End of iteration
+2024-11-22 19:56:39,091 - INFO - End of iteration
+2024-11-22 19:56:39,095 - INFO - End of iteration
+2024-11-22 19:56:39,098 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:39,098 - INFO - EXIT PRICE = 67810.0, num_of_lots = 14, P&L = -14.0
+2024-11-22 19:56:39,098 - INFO - End of iteration
+2024-11-22 19:56:39,103 - INFO - End of iteration
+2024-11-22 19:56:39,107 - INFO - End of iteration
+2024-11-22 19:56:39,147 - INFO - End of iteration
+2024-11-22 19:56:39,184 - INFO - End of iteration
+2024-11-22 19:56:39,198 - INFO - End of iteration
+2024-11-22 19:56:39,204 - INFO - End of iteration
+2024-11-22 19:56:39,208 - INFO - End of iteration
+2024-11-22 19:56:39,212 - INFO - End of iteration
+2024-11-22 19:56:39,216 - INFO - End of iteration
+2024-11-22 19:56:39,219 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:39,219 - INFO - ENTRY PRICE = 68550.0, num_of_lots = 13, loss_for_trade = 52
+2024-11-22 19:56:39,219 - INFO - End of iteration
+2024-11-22 19:56:39,223 - INFO - End of iteration
+2024-11-22 19:56:39,228 - INFO - End of iteration
+2024-11-22 19:56:39,232 - INFO - End of iteration
+2024-11-22 19:56:39,235 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:39,235 - INFO - EXIT PRICE = 68645.0, num_of_lots = 13, P&L = 123.5
+2024-11-22 19:56:39,236 - INFO - End of iteration
+2024-11-22 19:56:39,239 - INFO - End of iteration
+2024-11-22 19:56:39,242 - INFO - End of iteration
+2024-11-22 19:56:39,247 - INFO - End of iteration
+2024-11-22 19:56:39,250 - INFO - End of iteration
+2024-11-22 19:56:39,253 - INFO - End of iteration
+2024-11-22 19:56:39,256 - INFO - End of iteration
+2024-11-22 19:56:39,261 - INFO - End of iteration
+2024-11-22 19:56:39,264 - INFO - End of iteration
+2024-11-22 19:56:39,268 - INFO - End of iteration
+2024-11-22 19:56:39,271 - INFO - End of iteration
+2024-11-22 19:56:39,274 - INFO - End of iteration
+2024-11-22 19:56:39,279 - INFO - End of iteration
+2024-11-22 19:56:39,283 - INFO - End of iteration
+2024-11-22 19:56:39,286 - INFO - End of iteration
+2024-11-22 19:56:39,289 - INFO - End of iteration
+2024-11-22 19:56:39,293 - INFO - End of iteration
+2024-11-22 19:56:39,297 - INFO - End of iteration
+2024-11-22 19:56:39,301 - INFO - End of iteration
+2024-11-22 19:56:39,305 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:39,305 - INFO - ENTRY PRICE = 67605.0, num_of_lots = 9, loss_for_trade = 80
+2024-11-22 19:56:39,305 - INFO - End of iteration
+2024-11-22 19:56:39,308 - INFO - End of iteration
+2024-11-22 19:56:39,313 - INFO - End of iteration
+2024-11-22 19:56:39,316 - INFO - End of iteration
+2024-11-22 19:56:39,320 - INFO - <------ LONG EXIT ------>
+2024-11-22 19:56:39,320 - INFO - EXIT PRICE = 67810.0, num_of_lots = 9, P&L = 184.5
+2024-11-22 19:56:39,320 - INFO - End of iteration
+2024-11-22 19:56:39,323 - INFO - End of iteration
+2024-11-22 19:56:39,327 - INFO - End of iteration
+2024-11-22 19:56:39,330 - INFO - <------ LONG ENTRY ------>
+2024-11-22 19:56:39,330 - INFO - ENTRY PRICE = 68580.0, num_of_lots = 15, loss_for_trade = 48
+2024-11-22 19:56:39,330 - INFO - End of iteration
+2024-11-22 19:56:39,330 - INFO - -------- Backtesting Summary --------
+2024-11-22 19:56:39,330 - INFO - Total P&L: 20751.5, Number of trades: 43
+2024-11-22 19:56:39,330 - INFO - Total Positive Trades: 23, Total Negative Trades: 20
+2024-11-22 19:56:39,330 - INFO - Max Profit: 4080.0, Max Loss: -720.0
+2024-11-22 20:05:09,088 - INFO - End of iteration
+2024-11-22 20:05:09,092 - INFO - End of iteration
+2024-11-22 20:05:09,095 - INFO - End of iteration
+2024-11-22 20:05:09,098 - INFO - End of iteration
+2024-11-22 20:05:09,103 - INFO - End of iteration
+2024-11-22 20:05:09,107 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,107 - INFO - ENTRY PRICE = 66260.0, num_of_lots = 13, loss_for_trade = 54
+2024-11-22 20:05:09,107 - INFO - End of iteration
+2024-11-22 20:05:09,110 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,110 - INFO - EXIT PRICE = 66795.0, num_of_lots = 13, P&L = 695.5
+2024-11-22 20:05:09,110 - INFO - End of iteration
+2024-11-22 20:05:09,114 - INFO - End of iteration
+2024-11-22 20:05:09,116 - INFO - End of iteration
+2024-11-22 20:05:09,116 - INFO - End of iteration
+2024-11-22 20:05:09,116 - INFO - End of iteration
+2024-11-22 20:05:09,116 - INFO - End of iteration
+2024-11-22 20:05:09,116 - INFO - End of iteration
+2024-11-22 20:05:09,132 - INFO - End of iteration
+2024-11-22 20:05:09,132 - INFO - End of iteration
+2024-11-22 20:05:09,132 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,132 - INFO - ENTRY PRICE = 55790.0, num_of_lots = 5, loss_for_trade = 134
+2024-11-22 20:05:09,132 - INFO - End of iteration
+2024-11-22 20:05:09,132 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,132 - INFO - EXIT PRICE = 57125.0, num_of_lots = 5, P&L = 667.5
+2024-11-22 20:05:09,132 - INFO - End of iteration
+2024-11-22 20:05:09,132 - INFO - End of iteration
+2024-11-22 20:05:09,147 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,147 - INFO - ENTRY PRICE = 57145.0, num_of_lots = 20, loss_for_trade = 24
+2024-11-22 20:05:09,147 - INFO - End of iteration
+2024-11-22 20:05:09,147 - INFO - End of iteration
+2024-11-22 20:05:09,147 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,147 - INFO - EXIT PRICE = 57665.0, num_of_lots = 20, P&L = 1040.0
+2024-11-22 20:05:09,147 - INFO - End of iteration
+2024-11-22 20:05:09,147 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,147 - INFO - ENTRY PRICE = 58250.0, num_of_lots = 20, loss_for_trade = 35
+2024-11-22 20:05:09,147 - INFO - End of iteration
+2024-11-22 20:05:09,147 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,147 - INFO - EXIT PRICE = 58600.0, num_of_lots = 20, P&L = 700.0
+2024-11-22 20:05:09,147 - INFO - End of iteration
+2024-11-22 20:05:09,163 - INFO - End of iteration
+2024-11-22 20:05:09,163 - INFO - End of iteration
+2024-11-22 20:05:09,163 - INFO - End of iteration
+2024-11-22 20:05:09,163 - INFO - End of iteration
+2024-11-22 20:05:09,163 - INFO - End of iteration
+2024-11-22 20:05:09,179 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,179 - INFO - ENTRY PRICE = 58775.0, num_of_lots = 5, loss_for_trade = 122
+2024-11-22 20:05:09,179 - INFO - End of iteration
+2024-11-22 20:05:09,179 - INFO - End of iteration
+2024-11-22 20:05:09,179 - INFO - End of iteration
+2024-11-22 20:05:09,179 - INFO - End of iteration
+2024-11-22 20:05:09,179 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,179 - INFO - EXIT PRICE = 62440.0, num_of_lots = 5, P&L = 1832.5
+2024-11-22 20:05:09,179 - INFO - End of iteration
+2024-11-22 20:05:09,194 - INFO - End of iteration
+2024-11-22 20:05:09,194 - INFO - End of iteration
+2024-11-22 20:05:09,194 - INFO - End of iteration
+2024-11-22 20:05:09,194 - INFO - End of iteration
+2024-11-22 20:05:09,194 - INFO - End of iteration
+2024-11-22 20:05:09,210 - INFO - End of iteration
+2024-11-22 20:05:09,210 - INFO - End of iteration
+2024-11-22 20:05:09,210 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,210 - INFO - ENTRY PRICE = 61955.0, num_of_lots = 4, loss_for_trade = 150
+2024-11-22 20:05:09,210 - INFO - End of iteration
+2024-11-22 20:05:09,210 - INFO - End of iteration
+2024-11-22 20:05:09,210 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,210 - INFO - EXIT PRICE = 61745.0, num_of_lots = 4, P&L = -84.0
+2024-11-22 20:05:09,210 - INFO - End of iteration
+2024-11-22 20:05:09,226 - INFO - End of iteration
+2024-11-22 20:05:09,226 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,226 - INFO - ENTRY PRICE = 61985.0, num_of_lots = 20, loss_for_trade = 14
+2024-11-22 20:05:09,226 - INFO - End of iteration
+2024-11-22 20:05:09,226 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,226 - INFO - EXIT PRICE = 61840.0, num_of_lots = 20, P&L = -290.0
+2024-11-22 20:05:09,226 - INFO - End of iteration
+2024-11-22 20:05:09,226 - INFO - End of iteration
+2024-11-22 20:05:09,226 - INFO - End of iteration
+2024-11-22 20:05:09,241 - INFO - End of iteration
+2024-11-22 20:05:09,241 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,241 - INFO - ENTRY PRICE = 60050.0, num_of_lots = 20, loss_for_trade = 11
+2024-11-22 20:05:09,241 - INFO - End of iteration
+2024-11-22 20:05:09,241 - INFO - End of iteration
+2024-11-22 20:05:09,241 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,241 - INFO - EXIT PRICE = 60400.0, num_of_lots = 20, P&L = 700.0
+2024-11-22 20:05:09,241 - INFO - End of iteration
+2024-11-22 20:05:09,241 - INFO - End of iteration
+2024-11-22 20:05:09,257 - INFO - End of iteration
+2024-11-22 20:05:09,257 - INFO - End of iteration
+2024-11-22 20:05:09,257 - INFO - End of iteration
+2024-11-22 20:05:09,257 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,257 - INFO - ENTRY PRICE = 60000.0, num_of_lots = 9, loss_for_trade = 79
+2024-11-22 20:05:09,257 - INFO - End of iteration
+2024-11-22 20:05:09,257 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,257 - INFO - EXIT PRICE = 60790.0, num_of_lots = 9, P&L = 711.0
+2024-11-22 20:05:09,257 - INFO - End of iteration
+2024-11-22 20:05:09,272 - INFO - End of iteration
+2024-11-22 20:05:09,272 - INFO - End of iteration
+2024-11-22 20:05:09,272 - INFO - End of iteration
+2024-11-22 20:05:09,272 - INFO - End of iteration
+2024-11-22 20:05:09,272 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,272 - INFO - ENTRY PRICE = 60850.0, num_of_lots = 11, loss_for_trade = 64
+2024-11-22 20:05:09,272 - INFO - End of iteration
+2024-11-22 20:05:09,288 - INFO - End of iteration
+2024-11-22 20:05:09,288 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,288 - INFO - EXIT PRICE = 62230.0, num_of_lots = 11, P&L = 1518.0
+2024-11-22 20:05:09,288 - INFO - End of iteration
+2024-11-22 20:05:09,288 - INFO - End of iteration
+2024-11-22 20:05:09,288 - INFO - End of iteration
+2024-11-22 20:05:09,288 - INFO - End of iteration
+2024-11-22 20:05:09,304 - INFO - End of iteration
+2024-11-22 20:05:09,304 - INFO - End of iteration
+2024-11-22 20:05:09,304 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,304 - INFO - ENTRY PRICE = 60560.0, num_of_lots = 20, loss_for_trade = 16
+2024-11-22 20:05:09,304 - INFO - End of iteration
+2024-11-22 20:05:09,304 - INFO - End of iteration
+2024-11-22 20:05:09,304 - INFO - End of iteration
+2024-11-22 20:05:09,319 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,319 - INFO - EXIT PRICE = 61465.0, num_of_lots = 20, P&L = 1810.0
+2024-11-22 20:05:09,319 - INFO - End of iteration
+2024-11-22 20:05:09,319 - INFO - End of iteration
+2024-11-22 20:05:09,319 - INFO - End of iteration
+2024-11-22 20:05:09,319 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,319 - INFO - ENTRY PRICE = 64115.0, num_of_lots = 3, loss_for_trade = 181
+2024-11-22 20:05:09,319 - INFO - End of iteration
+2024-11-22 20:05:09,319 - INFO - End of iteration
+2024-11-22 20:05:09,338 - INFO - End of iteration
+2024-11-22 20:05:09,338 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,338 - INFO - EXIT PRICE = 65225.0, num_of_lots = 3, P&L = 333.0
+2024-11-22 20:05:09,338 - INFO - End of iteration
+2024-11-22 20:05:09,338 - INFO - End of iteration
+2024-11-22 20:05:09,338 - INFO - End of iteration
+2024-11-22 20:05:09,338 - INFO - End of iteration
+2024-11-22 20:05:09,353 - INFO - End of iteration
+2024-11-22 20:05:09,353 - INFO - End of iteration
+2024-11-22 20:05:09,353 - INFO - End of iteration
+2024-11-22 20:05:09,353 - INFO - End of iteration
+2024-11-22 20:05:09,369 - INFO - End of iteration
+2024-11-22 20:05:09,369 - INFO - End of iteration
+2024-11-22 20:05:09,369 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,369 - INFO - ENTRY PRICE = 60455.0, num_of_lots = 20, loss_for_trade = 27
+2024-11-22 20:05:09,369 - INFO - End of iteration
+2024-11-22 20:05:09,369 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,369 - INFO - EXIT PRICE = 60725.0, num_of_lots = 20, P&L = 540.0
+2024-11-22 20:05:09,369 - INFO - End of iteration
+2024-11-22 20:05:09,369 - INFO - End of iteration
+2024-11-22 20:05:09,385 - INFO - End of iteration
+2024-11-22 20:05:09,385 - INFO - End of iteration
+2024-11-22 20:05:09,385 - INFO - End of iteration
+2024-11-22 20:05:09,385 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,385 - INFO - ENTRY PRICE = 60985.0, num_of_lots = 19, loss_for_trade = 37
+2024-11-22 20:05:09,385 - INFO - End of iteration
+2024-11-22 20:05:09,399 - INFO - End of iteration
+2024-11-22 20:05:09,402 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,402 - INFO - EXIT PRICE = 61200.0, num_of_lots = 19, P&L = 408.5
+2024-11-22 20:05:09,403 - INFO - End of iteration
+2024-11-22 20:05:09,406 - INFO - End of iteration
+2024-11-22 20:05:09,409 - INFO - End of iteration
+2024-11-22 20:05:09,412 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,412 - INFO - ENTRY PRICE = 60230.0, num_of_lots = 20, loss_for_trade = 4
+2024-11-22 20:05:09,412 - INFO - End of iteration
+2024-11-22 20:05:09,415 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,416 - INFO - EXIT PRICE = 60185.0, num_of_lots = 20, P&L = -90.0
+2024-11-22 20:05:09,416 - INFO - End of iteration
+2024-11-22 20:05:09,416 - INFO - End of iteration
+2024-11-22 20:05:09,416 - INFO - End of iteration
+2024-11-22 20:05:09,432 - INFO - End of iteration
+2024-11-22 20:05:09,432 - INFO - End of iteration
+2024-11-22 20:05:09,432 - INFO - End of iteration
+2024-11-22 20:05:09,447 - INFO - End of iteration
+2024-11-22 20:05:09,447 - INFO - End of iteration
+2024-11-22 20:05:09,447 - INFO - End of iteration
+2024-11-22 20:05:09,447 - INFO - End of iteration
+2024-11-22 20:05:09,447 - INFO - End of iteration
+2024-11-22 20:05:09,463 - INFO - End of iteration
+2024-11-22 20:05:09,463 - INFO - End of iteration
+2024-11-22 20:05:09,463 - INFO - End of iteration
+2024-11-22 20:05:09,463 - INFO - End of iteration
+2024-11-22 20:05:09,463 - INFO - End of iteration
+2024-11-22 20:05:09,478 - INFO - End of iteration
+2024-11-22 20:05:09,478 - INFO - End of iteration
+2024-11-22 20:05:09,478 - INFO - End of iteration
+2024-11-22 20:05:09,478 - INFO - End of iteration
+2024-11-22 20:05:09,478 - INFO - End of iteration
+2024-11-22 20:05:09,494 - INFO - End of iteration
+2024-11-22 20:05:09,494 - INFO - End of iteration
+2024-11-22 20:05:09,494 - INFO - End of iteration
+2024-11-22 20:05:09,494 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,494 - INFO - ENTRY PRICE = 57490.0, num_of_lots = 7, loss_for_trade = 95
+2024-11-22 20:05:09,494 - INFO - End of iteration
+2024-11-22 20:05:09,494 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,494 - INFO - EXIT PRICE = 56540.0, num_of_lots = 7, P&L = -665.0
+2024-11-22 20:05:09,494 - INFO - End of iteration
+2024-11-22 20:05:09,510 - INFO - End of iteration
+2024-11-22 20:05:09,510 - INFO - End of iteration
+2024-11-22 20:05:09,510 - INFO - End of iteration
+2024-11-22 20:05:09,510 - INFO - End of iteration
+2024-11-22 20:05:09,510 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,510 - INFO - ENTRY PRICE = 56130.0, num_of_lots = 15, loss_for_trade = 46
+2024-11-22 20:05:09,510 - INFO - End of iteration
+2024-11-22 20:05:09,525 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,525 - INFO - EXIT PRICE = 55670.0, num_of_lots = 15, P&L = -690.0
+2024-11-22 20:05:09,525 - INFO - End of iteration
+2024-11-22 20:05:09,525 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,525 - INFO - ENTRY PRICE = 57410.0, num_of_lots = 20, loss_for_trade = 32
+2024-11-22 20:05:09,525 - INFO - End of iteration
+2024-11-22 20:05:09,525 - INFO - End of iteration
+2024-11-22 20:05:09,525 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,525 - INFO - EXIT PRICE = 57360.0, num_of_lots = 20, P&L = -100.0
+2024-11-22 20:05:09,525 - INFO - End of iteration
+2024-11-22 20:05:09,525 - INFO - End of iteration
+2024-11-22 20:05:09,541 - INFO - End of iteration
+2024-11-22 20:05:09,541 - INFO - End of iteration
+2024-11-22 20:05:09,541 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,541 - INFO - ENTRY PRICE = 58075.0, num_of_lots = 20, loss_for_trade = 12
+2024-11-22 20:05:09,541 - INFO - End of iteration
+2024-11-22 20:05:09,541 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,541 - INFO - EXIT PRICE = 57950.0, num_of_lots = 20, P&L = -250.0
+2024-11-22 20:05:09,541 - INFO - End of iteration
+2024-11-22 20:05:09,541 - INFO - End of iteration
+2024-11-22 20:05:09,557 - INFO - End of iteration
+2024-11-22 20:05:09,557 - INFO - End of iteration
+2024-11-22 20:05:09,557 - INFO - End of iteration
+2024-11-22 20:05:09,557 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,557 - INFO - ENTRY PRICE = 58545.0, num_of_lots = 18, loss_for_trade = 39
+2024-11-22 20:05:09,557 - INFO - End of iteration
+2024-11-22 20:05:09,557 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,557 - INFO - EXIT PRICE = 58155.0, num_of_lots = 18, P&L = -702.0
+2024-11-22 20:05:09,557 - INFO - End of iteration
+2024-11-22 20:05:09,572 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,572 - INFO - ENTRY PRICE = 58885.0, num_of_lots = 18, loss_for_trade = 39
+2024-11-22 20:05:09,572 - INFO - End of iteration
+2024-11-22 20:05:09,572 - INFO - End of iteration
+2024-11-22 20:05:09,572 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,572 - INFO - EXIT PRICE = 58550.0, num_of_lots = 18, P&L = -603.0
+2024-11-22 20:05:09,572 - INFO - End of iteration
+2024-11-22 20:05:09,572 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,572 - INFO - ENTRY PRICE = 59050.0, num_of_lots = 6, loss_for_trade = 112
+2024-11-22 20:05:09,572 - INFO - End of iteration
+2024-11-22 20:05:09,572 - INFO - End of iteration
+2024-11-22 20:05:09,588 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,588 - INFO - EXIT PRICE = 58750.0, num_of_lots = 6, P&L = -180.0
+2024-11-22 20:05:09,588 - INFO - End of iteration
+2024-11-22 20:05:09,588 - INFO - End of iteration
+2024-11-22 20:05:09,588 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,588 - INFO - ENTRY PRICE = 58690.0, num_of_lots = 20, loss_for_trade = 27
+2024-11-22 20:05:09,588 - INFO - End of iteration
+2024-11-22 20:05:09,588 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,588 - INFO - EXIT PRICE = 58420.0, num_of_lots = 20, P&L = -540.0
+2024-11-22 20:05:09,588 - INFO - End of iteration
+2024-11-22 20:05:09,603 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,603 - INFO - ENTRY PRICE = 58785.0, num_of_lots = 20, loss_for_trade = 2
+2024-11-22 20:05:09,603 - INFO - End of iteration
+2024-11-22 20:05:09,603 - INFO - End of iteration
+2024-11-22 20:05:09,603 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,603 - INFO - EXIT PRICE = 60265.0, num_of_lots = 20, P&L = 2960.0
+2024-11-22 20:05:09,603 - INFO - End of iteration
+2024-11-22 20:05:09,603 - INFO - End of iteration
+2024-11-22 20:05:09,603 - INFO - End of iteration
+2024-11-22 20:05:09,619 - INFO - End of iteration
+2024-11-22 20:05:09,619 - INFO - End of iteration
+2024-11-22 20:05:09,619 - INFO - End of iteration
+2024-11-22 20:05:09,619 - INFO - End of iteration
+2024-11-22 20:05:09,619 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,619 - INFO - ENTRY PRICE = 58820.0, num_of_lots = 20, loss_for_trade = 25
+2024-11-22 20:05:09,619 - INFO - End of iteration
+2024-11-22 20:05:09,635 - INFO - End of iteration
+2024-11-22 20:05:09,635 - INFO - End of iteration
+2024-11-22 20:05:09,635 - INFO - End of iteration
+2024-11-22 20:05:09,635 - INFO - End of iteration
+2024-11-22 20:05:09,635 - INFO - End of iteration
+2024-11-22 20:05:09,650 - INFO - End of iteration
+2024-11-22 20:05:09,650 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,650 - INFO - EXIT PRICE = 60860.0, num_of_lots = 20, P&L = 4080.0
+2024-11-22 20:05:09,650 - INFO - End of iteration
+2024-11-22 20:05:09,650 - INFO - End of iteration
+2024-11-22 20:05:09,650 - INFO - End of iteration
+2024-11-22 20:05:09,650 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,650 - INFO - ENTRY PRICE = 60640.0, num_of_lots = 12, loss_for_trade = 56
+2024-11-22 20:05:09,650 - INFO - End of iteration
+2024-11-22 20:05:09,666 - INFO - End of iteration
+2024-11-22 20:05:09,666 - INFO - End of iteration
+2024-11-22 20:05:09,666 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,666 - INFO - EXIT PRICE = 62550.0, num_of_lots = 12, P&L = 2292.0
+2024-11-22 20:05:09,666 - INFO - End of iteration
+2024-11-22 20:05:09,666 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,666 - INFO - ENTRY PRICE = 63000.0, num_of_lots = 20, loss_for_trade = 18
+2024-11-22 20:05:09,666 - INFO - End of iteration
+2024-11-22 20:05:09,666 - INFO - End of iteration
+2024-11-22 20:05:09,682 - INFO - End of iteration
+2024-11-22 20:05:09,682 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,682 - INFO - EXIT PRICE = 63685.0, num_of_lots = 20, P&L = 1370.0
+2024-11-22 20:05:09,682 - INFO - End of iteration
+2024-11-22 20:05:09,682 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,682 - INFO - ENTRY PRICE = 64460.0, num_of_lots = 8, loss_for_trade = 90
+2024-11-22 20:05:09,682 - INFO - End of iteration
+2024-11-22 20:05:09,682 - INFO - End of iteration
+2024-11-22 20:05:09,682 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,682 - INFO - EXIT PRICE = 63630.0, num_of_lots = 8, P&L = -664.0
+2024-11-22 20:05:09,682 - INFO - End of iteration
+2024-11-22 20:05:09,697 - INFO - End of iteration
+2024-11-22 20:05:09,697 - INFO - End of iteration
+2024-11-22 20:05:09,697 - INFO - End of iteration
+2024-11-22 20:05:09,697 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,697 - INFO - ENTRY PRICE = 64670.0, num_of_lots = 15, loss_for_trade = 48
+2024-11-22 20:05:09,697 - INFO - End of iteration
+2024-11-22 20:05:09,697 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,697 - INFO - EXIT PRICE = 64190.0, num_of_lots = 15, P&L = -720.0
+2024-11-22 20:05:09,697 - INFO - End of iteration
+2024-11-22 20:05:09,713 - INFO - End of iteration
+2024-11-22 20:05:09,713 - INFO - End of iteration
+2024-11-22 20:05:09,713 - INFO - End of iteration
+2024-11-22 20:05:09,713 - INFO - End of iteration
+2024-11-22 20:05:09,713 - INFO - End of iteration
+2024-11-22 20:05:09,728 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,728 - INFO - ENTRY PRICE = 64335.0, num_of_lots = 12, loss_for_trade = 56
+2024-11-22 20:05:09,728 - INFO - End of iteration
+2024-11-22 20:05:09,728 - INFO - End of iteration
+2024-11-22 20:05:09,728 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,728 - INFO - EXIT PRICE = 63845.0, num_of_lots = 12, P&L = -588.0
+2024-11-22 20:05:09,728 - INFO - End of iteration
+2024-11-22 20:05:09,728 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,728 - INFO - ENTRY PRICE = 64510.0, num_of_lots = 14, loss_for_trade = 50
+2024-11-22 20:05:09,728 - INFO - End of iteration
+2024-11-22 20:05:09,728 - INFO - End of iteration
+2024-11-22 20:05:09,744 - INFO - End of iteration
+2024-11-22 20:05:09,744 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,744 - INFO - EXIT PRICE = 64630.0, num_of_lots = 14, P&L = 168.0
+2024-11-22 20:05:09,744 - INFO - End of iteration
+2024-11-22 20:05:09,744 - INFO - End of iteration
+2024-11-22 20:05:09,744 - INFO - End of iteration
+2024-11-22 20:05:09,744 - INFO - End of iteration
+2024-11-22 20:05:09,760 - INFO - End of iteration
+2024-11-22 20:05:09,760 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,760 - INFO - ENTRY PRICE = 63975.0, num_of_lots = 13, loss_for_trade = 52
+2024-11-22 20:05:09,760 - INFO - End of iteration
+2024-11-22 20:05:09,760 - INFO - End of iteration
+2024-11-22 20:05:09,760 - INFO - End of iteration
+2024-11-22 20:05:09,760 - INFO - End of iteration
+2024-11-22 20:05:09,775 - INFO - End of iteration
+2024-11-22 20:05:09,775 - INFO - End of iteration
+2024-11-22 20:05:09,775 - INFO - End of iteration
+2024-11-22 20:05:09,775 - INFO - End of iteration
+2024-11-22 20:05:09,775 - INFO - End of iteration
+2024-11-22 20:05:09,791 - INFO - End of iteration
+2024-11-22 20:05:09,791 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,791 - INFO - EXIT PRICE = 66040.0, num_of_lots = 13, P&L = 2684.5
+2024-11-22 20:05:09,791 - INFO - End of iteration
+2024-11-22 20:05:09,791 - INFO - End of iteration
+2024-11-22 20:05:09,791 - INFO - End of iteration
+2024-11-22 20:05:09,791 - INFO - End of iteration
+2024-11-22 20:05:09,807 - INFO - End of iteration
+2024-11-22 20:05:09,807 - INFO - End of iteration
+2024-11-22 20:05:09,807 - INFO - End of iteration
+2024-11-22 20:05:09,807 - INFO - End of iteration
+2024-11-22 20:05:09,807 - INFO - End of iteration
+2024-11-22 20:05:09,822 - INFO - End of iteration
+2024-11-22 20:05:09,822 - INFO - End of iteration
+2024-11-22 20:05:09,822 - INFO - End of iteration
+2024-11-22 20:05:09,822 - INFO - End of iteration
+2024-11-22 20:05:09,822 - INFO - End of iteration
+2024-11-22 20:05:09,838 - INFO - End of iteration
+2024-11-22 20:05:09,838 - INFO - End of iteration
+2024-11-22 20:05:09,838 - INFO - End of iteration
+2024-11-22 20:05:09,838 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,838 - INFO - ENTRY PRICE = 62240.0, num_of_lots = 7, loss_for_trade = 96
+2024-11-22 20:05:09,838 - INFO - End of iteration
+2024-11-22 20:05:09,838 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,838 - INFO - EXIT PRICE = 61285.0, num_of_lots = 7, P&L = -668.5
+2024-11-22 20:05:09,838 - INFO - End of iteration
+2024-11-22 20:05:09,853 - INFO - End of iteration
+2024-11-22 20:05:09,853 - INFO - End of iteration
+2024-11-22 20:05:09,853 - INFO - End of iteration
+2024-11-22 20:05:09,853 - INFO - End of iteration
+2024-11-22 20:05:09,853 - INFO - End of iteration
+2024-11-22 20:05:09,869 - INFO - End of iteration
+2024-11-22 20:05:09,869 - INFO - End of iteration
+2024-11-22 20:05:09,869 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,869 - INFO - ENTRY PRICE = 61480.0, num_of_lots = 17, loss_for_trade = 41
+2024-11-22 20:05:09,869 - INFO - End of iteration
+2024-11-22 20:05:09,869 - INFO - End of iteration
+2024-11-22 20:05:09,869 - INFO - End of iteration
+2024-11-22 20:05:09,885 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,885 - INFO - EXIT PRICE = 61425.0, num_of_lots = 17, P&L = -93.5
+2024-11-22 20:05:09,885 - INFO - End of iteration
+2024-11-22 20:05:09,885 - INFO - End of iteration
+2024-11-22 20:05:09,885 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,885 - INFO - ENTRY PRICE = 63110.0, num_of_lots = 12, loss_for_trade = 59
+2024-11-22 20:05:09,885 - INFO - End of iteration
+2024-11-22 20:05:09,885 - INFO - End of iteration
+2024-11-22 20:05:09,885 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,885 - INFO - EXIT PRICE = 63595.0, num_of_lots = 12, P&L = 582.0
+2024-11-22 20:05:09,885 - INFO - End of iteration
+2024-11-22 20:05:09,900 - INFO - End of iteration
+2024-11-22 20:05:09,900 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,900 - INFO - ENTRY PRICE = 64335.0, num_of_lots = 10, loss_for_trade = 67
+2024-11-22 20:05:09,900 - INFO - End of iteration
+2024-11-22 20:05:09,900 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,900 - INFO - EXIT PRICE = 63665.0, num_of_lots = 10, P&L = -670.0
+2024-11-22 20:05:09,900 - INFO - End of iteration
+2024-11-22 20:05:09,900 - INFO - End of iteration
+2024-11-22 20:05:09,900 - INFO - End of iteration
+2024-11-22 20:05:09,917 - INFO - End of iteration
+2024-11-22 20:05:09,917 - INFO - End of iteration
+2024-11-22 20:05:09,917 - INFO - End of iteration
+2024-11-22 20:05:09,917 - INFO - End of iteration
+2024-11-22 20:05:09,917 - INFO - End of iteration
+2024-11-22 20:05:09,936 - INFO - End of iteration
+2024-11-22 20:05:09,939 - INFO - End of iteration
+2024-11-22 20:05:09,942 - INFO - End of iteration
+2024-11-22 20:05:09,945 - INFO - End of iteration
+2024-11-22 20:05:09,949 - INFO - End of iteration
+2024-11-22 20:05:09,949 - INFO - End of iteration
+2024-11-22 20:05:09,949 - INFO - End of iteration
+2024-11-22 20:05:09,949 - INFO - End of iteration
+2024-11-22 20:05:09,949 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,949 - INFO - ENTRY PRICE = 61260.0, num_of_lots = 12, loss_for_trade = 59
+2024-11-22 20:05:09,949 - INFO - End of iteration
+2024-11-22 20:05:09,949 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,949 - INFO - EXIT PRICE = 60670.0, num_of_lots = 12, P&L = -708.0
+2024-11-22 20:05:09,965 - INFO - End of iteration
+2024-11-22 20:05:09,965 - INFO - End of iteration
+2024-11-22 20:05:09,965 - INFO - End of iteration
+2024-11-22 20:05:09,965 - INFO - End of iteration
+2024-11-22 20:05:09,965 - INFO - End of iteration
+2024-11-22 20:05:09,965 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,965 - INFO - ENTRY PRICE = 61445.0, num_of_lots = 20, loss_for_trade = 32
+2024-11-22 20:05:09,980 - INFO - End of iteration
+2024-11-22 20:05:09,980 - INFO - End of iteration
+2024-11-22 20:05:09,980 - INFO - End of iteration
+2024-11-22 20:05:09,980 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,980 - INFO - EXIT PRICE = 62940.0, num_of_lots = 20, P&L = 2990.0
+2024-11-22 20:05:09,980 - INFO - End of iteration
+2024-11-22 20:05:09,980 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:09,980 - INFO - ENTRY PRICE = 63675.0, num_of_lots = 6, loss_for_trade = 104
+2024-11-22 20:05:09,980 - INFO - End of iteration
+2024-11-22 20:05:09,996 - INFO - End of iteration
+2024-11-22 20:05:09,996 - INFO - End of iteration
+2024-11-22 20:05:09,996 - INFO - End of iteration
+2024-11-22 20:05:09,996 - INFO - End of iteration
+2024-11-22 20:05:09,996 - INFO - End of iteration
+2024-11-22 20:05:09,996 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:09,996 - INFO - EXIT PRICE = 65965.0, num_of_lots = 6, P&L = 1374.0
+2024-11-22 20:05:09,996 - INFO - End of iteration
+2024-11-22 20:05:10,012 - INFO - End of iteration
+2024-11-22 20:05:10,012 - INFO - End of iteration
+2024-11-22 20:05:10,012 - INFO - End of iteration
+2024-11-22 20:05:10,012 - INFO - End of iteration
+2024-11-22 20:05:10,012 - INFO - End of iteration
+2024-11-22 20:05:10,027 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:10,027 - INFO - ENTRY PRICE = 67760.0, num_of_lots = 11, loss_for_trade = 63
+2024-11-22 20:05:10,027 - INFO - End of iteration
+2024-11-22 20:05:10,027 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:10,027 - INFO - EXIT PRICE = 67130.0, num_of_lots = 11, P&L = -693.0
+2024-11-22 20:05:10,027 - INFO - End of iteration
+2024-11-22 20:05:10,027 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:10,027 - INFO - ENTRY PRICE = 67820.0, num_of_lots = 14, loss_for_trade = 49
+2024-11-22 20:05:10,027 - INFO - End of iteration
+2024-11-22 20:05:10,027 - INFO - End of iteration
+2024-11-22 20:05:10,043 - INFO - End of iteration
+2024-11-22 20:05:10,043 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:10,043 - INFO - EXIT PRICE = 67810.0, num_of_lots = 14, P&L = -14.0
+2024-11-22 20:05:10,043 - INFO - End of iteration
+2024-11-22 20:05:10,043 - INFO - End of iteration
+2024-11-22 20:05:10,043 - INFO - End of iteration
+2024-11-22 20:05:10,043 - INFO - End of iteration
+2024-11-22 20:05:10,059 - INFO - End of iteration
+2024-11-22 20:05:10,059 - INFO - End of iteration
+2024-11-22 20:05:10,059 - INFO - End of iteration
+2024-11-22 20:05:10,059 - INFO - End of iteration
+2024-11-22 20:05:10,059 - INFO - End of iteration
+2024-11-22 20:05:10,074 - INFO - End of iteration
+2024-11-22 20:05:10,074 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:10,074 - INFO - ENTRY PRICE = 68550.0, num_of_lots = 13, loss_for_trade = 52
+2024-11-22 20:05:10,074 - INFO - End of iteration
+2024-11-22 20:05:10,074 - INFO - End of iteration
+2024-11-22 20:05:10,074 - INFO - End of iteration
+2024-11-22 20:05:10,074 - INFO - End of iteration
+2024-11-22 20:05:10,090 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:10,090 - INFO - EXIT PRICE = 68645.0, num_of_lots = 13, P&L = 123.5
+2024-11-22 20:05:10,090 - INFO - End of iteration
+2024-11-22 20:05:10,090 - INFO - End of iteration
+2024-11-22 20:05:10,090 - INFO - End of iteration
+2024-11-22 20:05:10,090 - INFO - End of iteration
+2024-11-22 20:05:10,090 - INFO - End of iteration
+2024-11-22 20:05:10,105 - INFO - End of iteration
+2024-11-22 20:05:10,105 - INFO - End of iteration
+2024-11-22 20:05:10,105 - INFO - End of iteration
+2024-11-22 20:05:10,105 - INFO - End of iteration
+2024-11-22 20:05:10,105 - INFO - End of iteration
+2024-11-22 20:05:10,121 - INFO - End of iteration
+2024-11-22 20:05:10,121 - INFO - End of iteration
+2024-11-22 20:05:10,121 - INFO - End of iteration
+2024-11-22 20:05:10,121 - INFO - End of iteration
+2024-11-22 20:05:10,121 - INFO - End of iteration
+2024-11-22 20:05:10,121 - INFO - End of iteration
+2024-11-22 20:05:10,137 - INFO - End of iteration
+2024-11-22 20:05:10,137 - INFO - End of iteration
+2024-11-22 20:05:10,137 - INFO - End of iteration
+2024-11-22 20:05:10,137 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:10,137 - INFO - ENTRY PRICE = 67605.0, num_of_lots = 9, loss_for_trade = 80
+2024-11-22 20:05:10,137 - INFO - End of iteration
+2024-11-22 20:05:10,137 - INFO - End of iteration
+2024-11-22 20:05:10,152 - INFO - End of iteration
+2024-11-22 20:05:10,152 - INFO - End of iteration
+2024-11-22 20:05:10,152 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:05:10,152 - INFO - EXIT PRICE = 67810.0, num_of_lots = 9, P&L = 184.5
+2024-11-22 20:05:10,152 - INFO - End of iteration
+2024-11-22 20:05:10,152 - INFO - End of iteration
+2024-11-22 20:05:10,152 - INFO - End of iteration
+2024-11-22 20:05:10,168 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:05:10,168 - INFO - ENTRY PRICE = 68580.0, num_of_lots = 15, loss_for_trade = 48
+2024-11-22 20:05:10,168 - INFO - End of iteration
+2024-11-22 20:05:10,168 - INFO - -------- Backtesting Summary --------
+2024-11-22 20:05:10,168 - INFO - Total P&L: 20751.5, Number of trades: 43
+2024-11-22 20:05:10,168 - INFO - Total Positive Trades: 23, Total Negative Trades: 20
+2024-11-22 20:05:10,168 - INFO - Max Profit: 4080.0, Max Loss: -720.0
+2024-11-22 20:18:49,835 - INFO - End of iteration
+2024-11-22 20:18:49,835 - INFO - End of iteration
+2024-11-22 20:18:49,835 - INFO - End of iteration
+2024-11-22 20:18:49,852 - INFO - End of iteration
+2024-11-22 20:18:49,852 - INFO - End of iteration
+2024-11-22 20:18:49,852 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:49,852 - INFO - ENTRY PRICE = 66260.0, num_of_lots = 13, loss_for_trade = 54
+2024-11-22 20:18:49,852 - INFO - End of iteration
+2024-11-22 20:18:49,852 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:49,852 - INFO - EXIT PRICE = 66795.0, num_of_lots = 13, P&L = 695.5
+2024-11-22 20:18:49,852 - INFO - End of iteration
+2024-11-22 20:18:49,868 - INFO - End of iteration
+2024-11-22 20:18:49,868 - INFO - End of iteration
+2024-11-22 20:18:49,868 - INFO - End of iteration
+2024-11-22 20:18:49,868 - INFO - End of iteration
+2024-11-22 20:18:49,885 - INFO - End of iteration
+2024-11-22 20:18:49,885 - INFO - End of iteration
+2024-11-22 20:18:49,885 - INFO - End of iteration
+2024-11-22 20:18:49,885 - INFO - End of iteration
+2024-11-22 20:18:49,885 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:49,885 - INFO - ENTRY PRICE = 55790.0, num_of_lots = 5, loss_for_trade = 134
+2024-11-22 20:18:49,885 - INFO - End of iteration
+2024-11-22 20:18:49,903 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:49,903 - INFO - EXIT PRICE = 57125.0, num_of_lots = 5, P&L = 667.5
+2024-11-22 20:18:49,903 - INFO - End of iteration
+2024-11-22 20:18:49,904 - INFO - End of iteration
+2024-11-22 20:18:49,904 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:49,904 - INFO - ENTRY PRICE = 57145.0, num_of_lots = 20, loss_for_trade = 24
+2024-11-22 20:18:49,904 - INFO - End of iteration
+2024-11-22 20:18:49,904 - INFO - End of iteration
+2024-11-22 20:18:49,918 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:49,918 - INFO - EXIT PRICE = 57665.0, num_of_lots = 20, P&L = 1040.0
+2024-11-22 20:18:49,918 - INFO - End of iteration
+2024-11-22 20:18:49,918 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:49,918 - INFO - ENTRY PRICE = 58250.0, num_of_lots = 20, loss_for_trade = 35
+2024-11-22 20:18:49,918 - INFO - End of iteration
+2024-11-22 20:18:49,918 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:49,918 - INFO - EXIT PRICE = 58600.0, num_of_lots = 20, P&L = 700.0
+2024-11-22 20:18:49,918 - INFO - End of iteration
+2024-11-22 20:18:49,918 - INFO - End of iteration
+2024-11-22 20:18:49,918 - INFO - End of iteration
+2024-11-22 20:18:49,933 - INFO - End of iteration
+2024-11-22 20:18:49,933 - INFO - End of iteration
+2024-11-22 20:18:49,933 - INFO - End of iteration
+2024-11-22 20:18:49,933 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:49,933 - INFO - ENTRY PRICE = 58775.0, num_of_lots = 5, loss_for_trade = 122
+2024-11-22 20:18:49,933 - INFO - End of iteration
+2024-11-22 20:18:49,950 - INFO - End of iteration
+2024-11-22 20:18:49,950 - INFO - End of iteration
+2024-11-22 20:18:49,950 - INFO - End of iteration
+2024-11-22 20:18:49,950 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:49,950 - INFO - EXIT PRICE = 62440.0, num_of_lots = 5, P&L = 1832.5
+2024-11-22 20:18:49,950 - INFO - End of iteration
+2024-11-22 20:18:49,950 - INFO - End of iteration
+2024-11-22 20:18:49,967 - INFO - End of iteration
+2024-11-22 20:18:49,967 - INFO - End of iteration
+2024-11-22 20:18:49,967 - INFO - End of iteration
+2024-11-22 20:18:49,967 - INFO - End of iteration
+2024-11-22 20:18:49,967 - INFO - End of iteration
+2024-11-22 20:18:49,985 - INFO - End of iteration
+2024-11-22 20:18:49,985 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:49,985 - INFO - ENTRY PRICE = 61955.0, num_of_lots = 4, loss_for_trade = 150
+2024-11-22 20:18:49,985 - INFO - End of iteration
+2024-11-22 20:18:49,985 - INFO - End of iteration
+2024-11-22 20:18:49,985 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:49,985 - INFO - EXIT PRICE = 61745.0, num_of_lots = 4, P&L = -84.0
+2024-11-22 20:18:49,985 - INFO - End of iteration
+2024-11-22 20:18:50,000 - INFO - End of iteration
+2024-11-22 20:18:50,001 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,001 - INFO - ENTRY PRICE = 61985.0, num_of_lots = 20, loss_for_trade = 14
+2024-11-22 20:18:50,001 - INFO - End of iteration
+2024-11-22 20:18:50,001 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,001 - INFO - EXIT PRICE = 61840.0, num_of_lots = 20, P&L = -290.0
+2024-11-22 20:18:50,001 - INFO - End of iteration
+2024-11-22 20:18:50,001 - INFO - End of iteration
+2024-11-22 20:18:50,001 - INFO - End of iteration
+2024-11-22 20:18:50,019 - INFO - End of iteration
+2024-11-22 20:18:50,019 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,019 - INFO - ENTRY PRICE = 60050.0, num_of_lots = 20, loss_for_trade = 11
+2024-11-22 20:18:50,019 - INFO - End of iteration
+2024-11-22 20:18:50,019 - INFO - End of iteration
+2024-11-22 20:18:50,019 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,019 - INFO - EXIT PRICE = 60400.0, num_of_lots = 20, P&L = 700.0
+2024-11-22 20:18:50,019 - INFO - End of iteration
+2024-11-22 20:18:50,034 - INFO - End of iteration
+2024-11-22 20:18:50,039 - INFO - End of iteration
+2024-11-22 20:18:50,043 - INFO - End of iteration
+2024-11-22 20:18:50,043 - INFO - End of iteration
+2024-11-22 20:18:50,054 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,054 - INFO - ENTRY PRICE = 60000.0, num_of_lots = 9, loss_for_trade = 79
+2024-11-22 20:18:50,055 - INFO - End of iteration
+2024-11-22 20:18:50,062 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,062 - INFO - EXIT PRICE = 60790.0, num_of_lots = 9, P&L = 711.0
+2024-11-22 20:18:50,062 - INFO - End of iteration
+2024-11-22 20:18:50,067 - INFO - End of iteration
+2024-11-22 20:18:50,074 - INFO - End of iteration
+2024-11-22 20:18:50,075 - INFO - End of iteration
+2024-11-22 20:18:50,075 - INFO - End of iteration
+2024-11-22 20:18:50,086 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,087 - INFO - ENTRY PRICE = 60850.0, num_of_lots = 11, loss_for_trade = 64
+2024-11-22 20:18:50,087 - INFO - End of iteration
+2024-11-22 20:18:50,089 - INFO - End of iteration
+2024-11-22 20:18:50,089 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,089 - INFO - EXIT PRICE = 62230.0, num_of_lots = 11, P&L = 1518.0
+2024-11-22 20:18:50,089 - INFO - End of iteration
+2024-11-22 20:18:50,089 - INFO - End of iteration
+2024-11-22 20:18:50,106 - INFO - End of iteration
+2024-11-22 20:18:50,107 - INFO - End of iteration
+2024-11-22 20:18:50,107 - INFO - End of iteration
+2024-11-22 20:18:50,119 - INFO - End of iteration
+2024-11-22 20:18:50,125 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,125 - INFO - ENTRY PRICE = 60560.0, num_of_lots = 20, loss_for_trade = 16
+2024-11-22 20:18:50,125 - INFO - End of iteration
+2024-11-22 20:18:50,127 - INFO - End of iteration
+2024-11-22 20:18:50,138 - INFO - End of iteration
+2024-11-22 20:18:50,140 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,140 - INFO - EXIT PRICE = 61465.0, num_of_lots = 20, P&L = 1810.0
+2024-11-22 20:18:50,140 - INFO - End of iteration
+2024-11-22 20:18:50,140 - INFO - End of iteration
+2024-11-22 20:18:50,152 - INFO - End of iteration
+2024-11-22 20:18:50,153 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,153 - INFO - ENTRY PRICE = 64115.0, num_of_lots = 3, loss_for_trade = 181
+2024-11-22 20:18:50,153 - INFO - End of iteration
+2024-11-22 20:18:50,153 - INFO - End of iteration
+2024-11-22 20:18:50,153 - INFO - End of iteration
+2024-11-22 20:18:50,167 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,167 - INFO - EXIT PRICE = 65225.0, num_of_lots = 3, P&L = 333.0
+2024-11-22 20:18:50,167 - INFO - End of iteration
+2024-11-22 20:18:50,169 - INFO - End of iteration
+2024-11-22 20:18:50,169 - INFO - End of iteration
+2024-11-22 20:18:50,169 - INFO - End of iteration
+2024-11-22 20:18:50,183 - INFO - End of iteration
+2024-11-22 20:18:50,187 - INFO - End of iteration
+2024-11-22 20:18:50,187 - INFO - End of iteration
+2024-11-22 20:18:50,187 - INFO - End of iteration
+2024-11-22 20:18:50,187 - INFO - End of iteration
+2024-11-22 20:18:50,205 - INFO - End of iteration
+2024-11-22 20:18:50,207 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,207 - INFO - ENTRY PRICE = 60455.0, num_of_lots = 20, loss_for_trade = 27
+2024-11-22 20:18:50,207 - INFO - End of iteration
+2024-11-22 20:18:50,207 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,207 - INFO - EXIT PRICE = 60725.0, num_of_lots = 20, P&L = 540.0
+2024-11-22 20:18:50,207 - INFO - End of iteration
+2024-11-22 20:18:50,217 - INFO - End of iteration
+2024-11-22 20:18:50,222 - INFO - End of iteration
+2024-11-22 20:18:50,222 - INFO - End of iteration
+2024-11-22 20:18:50,222 - INFO - End of iteration
+2024-11-22 20:18:50,234 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,234 - INFO - ENTRY PRICE = 60985.0, num_of_lots = 19, loss_for_trade = 37
+2024-11-22 20:18:50,234 - INFO - End of iteration
+2024-11-22 20:18:50,235 - INFO - End of iteration
+2024-11-22 20:18:50,235 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,235 - INFO - EXIT PRICE = 61200.0, num_of_lots = 19, P&L = 408.5
+2024-11-22 20:18:50,235 - INFO - End of iteration
+2024-11-22 20:18:50,235 - INFO - End of iteration
+2024-11-22 20:18:50,250 - INFO - End of iteration
+2024-11-22 20:18:50,252 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,252 - INFO - ENTRY PRICE = 60230.0, num_of_lots = 20, loss_for_trade = 4
+2024-11-22 20:18:50,252 - INFO - End of iteration
+2024-11-22 20:18:50,252 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,252 - INFO - EXIT PRICE = 60185.0, num_of_lots = 20, P&L = -90.0
+2024-11-22 20:18:50,252 - INFO - End of iteration
+2024-11-22 20:18:50,252 - INFO - End of iteration
+2024-11-22 20:18:50,267 - INFO - End of iteration
+2024-11-22 20:18:50,285 - INFO - End of iteration
+2024-11-22 20:18:50,285 - INFO - End of iteration
+2024-11-22 20:18:50,285 - INFO - End of iteration
+2024-11-22 20:18:50,302 - INFO - End of iteration
+2024-11-22 20:18:50,302 - INFO - End of iteration
+2024-11-22 20:18:50,302 - INFO - End of iteration
+2024-11-22 20:18:50,302 - INFO - End of iteration
+2024-11-22 20:18:50,302 - INFO - End of iteration
+2024-11-22 20:18:50,318 - INFO - End of iteration
+2024-11-22 20:18:50,318 - INFO - End of iteration
+2024-11-22 20:18:50,318 - INFO - End of iteration
+2024-11-22 20:18:50,318 - INFO - End of iteration
+2024-11-22 20:18:50,335 - INFO - End of iteration
+2024-11-22 20:18:50,335 - INFO - End of iteration
+2024-11-22 20:18:50,335 - INFO - End of iteration
+2024-11-22 20:18:50,335 - INFO - End of iteration
+2024-11-22 20:18:50,352 - INFO - End of iteration
+2024-11-22 20:18:50,352 - INFO - End of iteration
+2024-11-22 20:18:50,352 - INFO - End of iteration
+2024-11-22 20:18:50,352 - INFO - End of iteration
+2024-11-22 20:18:50,366 - INFO - End of iteration
+2024-11-22 20:18:50,368 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,368 - INFO - ENTRY PRICE = 57490.0, num_of_lots = 7, loss_for_trade = 95
+2024-11-22 20:18:50,368 - INFO - End of iteration
+2024-11-22 20:18:50,368 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,368 - INFO - EXIT PRICE = 56540.0, num_of_lots = 7, P&L = -665.0
+2024-11-22 20:18:50,368 - INFO - End of iteration
+2024-11-22 20:18:50,368 - INFO - End of iteration
+2024-11-22 20:18:50,368 - INFO - End of iteration
+2024-11-22 20:18:50,385 - INFO - End of iteration
+2024-11-22 20:18:50,385 - INFO - End of iteration
+2024-11-22 20:18:50,385 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,385 - INFO - ENTRY PRICE = 56130.0, num_of_lots = 15, loss_for_trade = 46
+2024-11-22 20:18:50,385 - INFO - End of iteration
+2024-11-22 20:18:50,385 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,385 - INFO - EXIT PRICE = 55670.0, num_of_lots = 15, P&L = -690.0
+2024-11-22 20:18:50,385 - INFO - End of iteration
+2024-11-22 20:18:50,402 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,402 - INFO - ENTRY PRICE = 57410.0, num_of_lots = 20, loss_for_trade = 32
+2024-11-22 20:18:50,402 - INFO - End of iteration
+2024-11-22 20:18:50,402 - INFO - End of iteration
+2024-11-22 20:18:50,402 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,402 - INFO - EXIT PRICE = 57360.0, num_of_lots = 20, P&L = -100.0
+2024-11-22 20:18:50,402 - INFO - End of iteration
+2024-11-22 20:18:50,402 - INFO - End of iteration
+2024-11-22 20:18:50,402 - INFO - End of iteration
+2024-11-22 20:18:50,418 - INFO - End of iteration
+2024-11-22 20:18:50,418 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,418 - INFO - ENTRY PRICE = 58075.0, num_of_lots = 20, loss_for_trade = 12
+2024-11-22 20:18:50,418 - INFO - End of iteration
+2024-11-22 20:18:50,418 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,418 - INFO - EXIT PRICE = 57950.0, num_of_lots = 20, P&L = -250.0
+2024-11-22 20:18:50,418 - INFO - End of iteration
+2024-11-22 20:18:50,418 - INFO - End of iteration
+2024-11-22 20:18:50,436 - INFO - End of iteration
+2024-11-22 20:18:50,436 - INFO - End of iteration
+2024-11-22 20:18:50,436 - INFO - End of iteration
+2024-11-22 20:18:50,436 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,436 - INFO - ENTRY PRICE = 58545.0, num_of_lots = 18, loss_for_trade = 39
+2024-11-22 20:18:50,436 - INFO - End of iteration
+2024-11-22 20:18:50,454 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,455 - INFO - EXIT PRICE = 58155.0, num_of_lots = 18, P&L = -702.0
+2024-11-22 20:18:50,455 - INFO - End of iteration
+2024-11-22 20:18:50,455 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,455 - INFO - ENTRY PRICE = 58885.0, num_of_lots = 18, loss_for_trade = 39
+2024-11-22 20:18:50,455 - INFO - End of iteration
+2024-11-22 20:18:50,455 - INFO - End of iteration
+2024-11-22 20:18:50,455 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,467 - INFO - EXIT PRICE = 58550.0, num_of_lots = 18, P&L = -603.0
+2024-11-22 20:18:50,467 - INFO - End of iteration
+2024-11-22 20:18:50,473 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,473 - INFO - ENTRY PRICE = 59050.0, num_of_lots = 6, loss_for_trade = 112
+2024-11-22 20:18:50,473 - INFO - End of iteration
+2024-11-22 20:18:50,473 - INFO - End of iteration
+2024-11-22 20:18:50,473 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,473 - INFO - EXIT PRICE = 58750.0, num_of_lots = 6, P&L = -180.0
+2024-11-22 20:18:50,473 - INFO - End of iteration
+2024-11-22 20:18:50,485 - INFO - End of iteration
+2024-11-22 20:18:50,485 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,485 - INFO - ENTRY PRICE = 58690.0, num_of_lots = 20, loss_for_trade = 27
+2024-11-22 20:18:50,485 - INFO - End of iteration
+2024-11-22 20:18:50,485 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,485 - INFO - EXIT PRICE = 58420.0, num_of_lots = 20, P&L = -540.0
+2024-11-22 20:18:50,485 - INFO - End of iteration
+2024-11-22 20:18:50,485 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,485 - INFO - ENTRY PRICE = 58785.0, num_of_lots = 20, loss_for_trade = 2
+2024-11-22 20:18:50,485 - INFO - End of iteration
+2024-11-22 20:18:50,499 - INFO - End of iteration
+2024-11-22 20:18:50,502 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,502 - INFO - EXIT PRICE = 60265.0, num_of_lots = 20, P&L = 2960.0
+2024-11-22 20:18:50,502 - INFO - End of iteration
+2024-11-22 20:18:50,502 - INFO - End of iteration
+2024-11-22 20:18:50,502 - INFO - End of iteration
+2024-11-22 20:18:50,502 - INFO - End of iteration
+2024-11-22 20:18:50,519 - INFO - End of iteration
+2024-11-22 20:18:50,519 - INFO - End of iteration
+2024-11-22 20:18:50,519 - INFO - End of iteration
+2024-11-22 20:18:50,519 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,519 - INFO - ENTRY PRICE = 58820.0, num_of_lots = 20, loss_for_trade = 25
+2024-11-22 20:18:50,519 - INFO - End of iteration
+2024-11-22 20:18:50,536 - INFO - End of iteration
+2024-11-22 20:18:50,538 - INFO - End of iteration
+2024-11-22 20:18:50,538 - INFO - End of iteration
+2024-11-22 20:18:50,538 - INFO - End of iteration
+2024-11-22 20:18:50,552 - INFO - End of iteration
+2024-11-22 20:18:50,552 - INFO - End of iteration
+2024-11-22 20:18:50,552 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,552 - INFO - EXIT PRICE = 60860.0, num_of_lots = 20, P&L = 4080.0
+2024-11-22 20:18:50,552 - INFO - End of iteration
+2024-11-22 20:18:50,552 - INFO - End of iteration
+2024-11-22 20:18:50,568 - INFO - End of iteration
+2024-11-22 20:18:50,568 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,568 - INFO - ENTRY PRICE = 60640.0, num_of_lots = 12, loss_for_trade = 56
+2024-11-22 20:18:50,568 - INFO - End of iteration
+2024-11-22 20:18:50,568 - INFO - End of iteration
+2024-11-22 20:18:50,568 - INFO - End of iteration
+2024-11-22 20:18:50,568 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,568 - INFO - EXIT PRICE = 62550.0, num_of_lots = 12, P&L = 2292.0
+2024-11-22 20:18:50,568 - INFO - End of iteration
+2024-11-22 20:18:50,583 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,583 - INFO - ENTRY PRICE = 63000.0, num_of_lots = 20, loss_for_trade = 18
+2024-11-22 20:18:50,583 - INFO - End of iteration
+2024-11-22 20:18:50,583 - INFO - End of iteration
+2024-11-22 20:18:50,583 - INFO - End of iteration
+2024-11-22 20:18:50,583 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,583 - INFO - EXIT PRICE = 63685.0, num_of_lots = 20, P&L = 1370.0
+2024-11-22 20:18:50,583 - INFO - End of iteration
+2024-11-22 20:18:50,601 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,601 - INFO - ENTRY PRICE = 64460.0, num_of_lots = 8, loss_for_trade = 90
+2024-11-22 20:18:50,601 - INFO - End of iteration
+2024-11-22 20:18:50,601 - INFO - End of iteration
+2024-11-22 20:18:50,601 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,601 - INFO - EXIT PRICE = 63630.0, num_of_lots = 8, P&L = -664.0
+2024-11-22 20:18:50,601 - INFO - End of iteration
+2024-11-22 20:18:50,601 - INFO - End of iteration
+2024-11-22 20:18:50,601 - INFO - End of iteration
+2024-11-22 20:18:50,618 - INFO - End of iteration
+2024-11-22 20:18:50,618 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,618 - INFO - ENTRY PRICE = 64670.0, num_of_lots = 15, loss_for_trade = 48
+2024-11-22 20:18:50,618 - INFO - End of iteration
+2024-11-22 20:18:50,618 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,618 - INFO - EXIT PRICE = 64190.0, num_of_lots = 15, P&L = -720.0
+2024-11-22 20:18:50,618 - INFO - End of iteration
+2024-11-22 20:18:50,618 - INFO - End of iteration
+2024-11-22 20:18:50,636 - INFO - End of iteration
+2024-11-22 20:18:50,637 - INFO - End of iteration
+2024-11-22 20:18:50,637 - INFO - End of iteration
+2024-11-22 20:18:50,637 - INFO - End of iteration
+2024-11-22 20:18:50,652 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,652 - INFO - ENTRY PRICE = 64335.0, num_of_lots = 12, loss_for_trade = 56
+2024-11-22 20:18:50,652 - INFO - End of iteration
+2024-11-22 20:18:50,655 - INFO - End of iteration
+2024-11-22 20:18:50,655 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,655 - INFO - EXIT PRICE = 63845.0, num_of_lots = 12, P&L = -588.0
+2024-11-22 20:18:50,655 - INFO - End of iteration
+2024-11-22 20:18:50,655 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,655 - INFO - ENTRY PRICE = 64510.0, num_of_lots = 14, loss_for_trade = 50
+2024-11-22 20:18:50,655 - INFO - End of iteration
+2024-11-22 20:18:50,668 - INFO - End of iteration
+2024-11-22 20:18:50,668 - INFO - End of iteration
+2024-11-22 20:18:50,668 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,668 - INFO - EXIT PRICE = 64630.0, num_of_lots = 14, P&L = 168.0
+2024-11-22 20:18:50,668 - INFO - End of iteration
+2024-11-22 20:18:50,668 - INFO - End of iteration
+2024-11-22 20:18:50,683 - INFO - End of iteration
+2024-11-22 20:18:50,688 - INFO - End of iteration
+2024-11-22 20:18:50,688 - INFO - End of iteration
+2024-11-22 20:18:50,688 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,688 - INFO - ENTRY PRICE = 63975.0, num_of_lots = 13, loss_for_trade = 52
+2024-11-22 20:18:50,688 - INFO - End of iteration
+2024-11-22 20:18:50,688 - INFO - End of iteration
+2024-11-22 20:18:50,703 - INFO - End of iteration
+2024-11-22 20:18:50,705 - INFO - End of iteration
+2024-11-22 20:18:50,705 - INFO - End of iteration
+2024-11-22 20:18:50,705 - INFO - End of iteration
+2024-11-22 20:18:50,718 - INFO - End of iteration
+2024-11-22 20:18:50,718 - INFO - End of iteration
+2024-11-22 20:18:50,718 - INFO - End of iteration
+2024-11-22 20:18:50,718 - INFO - End of iteration
+2024-11-22 20:18:50,734 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,734 - INFO - EXIT PRICE = 66040.0, num_of_lots = 13, P&L = 2684.5
+2024-11-22 20:18:50,734 - INFO - End of iteration
+2024-11-22 20:18:50,738 - INFO - End of iteration
+2024-11-22 20:18:50,738 - INFO - End of iteration
+2024-11-22 20:18:50,738 - INFO - End of iteration
+2024-11-22 20:18:50,750 - INFO - End of iteration
+2024-11-22 20:18:50,754 - INFO - End of iteration
+2024-11-22 20:18:50,754 - INFO - End of iteration
+2024-11-22 20:18:50,754 - INFO - End of iteration
+2024-11-22 20:18:50,768 - INFO - End of iteration
+2024-11-22 20:18:50,768 - INFO - End of iteration
+2024-11-22 20:18:50,768 - INFO - End of iteration
+2024-11-22 20:18:50,768 - INFO - End of iteration
+2024-11-22 20:18:50,783 - INFO - End of iteration
+2024-11-22 20:18:50,784 - INFO - End of iteration
+2024-11-22 20:18:50,784 - INFO - End of iteration
+2024-11-22 20:18:50,784 - INFO - End of iteration
+2024-11-22 20:18:50,784 - INFO - End of iteration
+2024-11-22 20:18:50,801 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,801 - INFO - ENTRY PRICE = 62240.0, num_of_lots = 7, loss_for_trade = 96
+2024-11-22 20:18:50,801 - INFO - End of iteration
+2024-11-22 20:18:50,801 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,801 - INFO - EXIT PRICE = 61285.0, num_of_lots = 7, P&L = -668.5
+2024-11-22 20:18:50,801 - INFO - End of iteration
+2024-11-22 20:18:50,801 - INFO - End of iteration
+2024-11-22 20:18:50,801 - INFO - End of iteration
+2024-11-22 20:18:50,818 - INFO - End of iteration
+2024-11-22 20:18:50,818 - INFO - End of iteration
+2024-11-22 20:18:50,818 - INFO - End of iteration
+2024-11-22 20:18:50,818 - INFO - End of iteration
+2024-11-22 20:18:50,818 - INFO - End of iteration
+2024-11-22 20:18:50,833 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,833 - INFO - ENTRY PRICE = 61480.0, num_of_lots = 17, loss_for_trade = 41
+2024-11-22 20:18:50,833 - INFO - End of iteration
+2024-11-22 20:18:50,833 - INFO - End of iteration
+2024-11-22 20:18:50,833 - INFO - End of iteration
+2024-11-22 20:18:50,833 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,833 - INFO - EXIT PRICE = 61425.0, num_of_lots = 17, P&L = -93.5
+2024-11-22 20:18:50,833 - INFO - End of iteration
+2024-11-22 20:18:50,833 - INFO - End of iteration
+2024-11-22 20:18:50,850 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,850 - INFO - ENTRY PRICE = 63110.0, num_of_lots = 12, loss_for_trade = 59
+2024-11-22 20:18:50,850 - INFO - End of iteration
+2024-11-22 20:18:50,850 - INFO - End of iteration
+2024-11-22 20:18:50,850 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,850 - INFO - EXIT PRICE = 63595.0, num_of_lots = 12, P&L = 582.0
+2024-11-22 20:18:50,850 - INFO - End of iteration
+2024-11-22 20:18:50,850 - INFO - End of iteration
+2024-11-22 20:18:50,866 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,867 - INFO - ENTRY PRICE = 64335.0, num_of_lots = 10, loss_for_trade = 67
+2024-11-22 20:18:50,867 - INFO - End of iteration
+2024-11-22 20:18:50,867 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,867 - INFO - EXIT PRICE = 63665.0, num_of_lots = 10, P&L = -670.0
+2024-11-22 20:18:50,867 - INFO - End of iteration
+2024-11-22 20:18:50,867 - INFO - End of iteration
+2024-11-22 20:18:50,867 - INFO - End of iteration
+2024-11-22 20:18:50,867 - INFO - End of iteration
+2024-11-22 20:18:50,883 - INFO - End of iteration
+2024-11-22 20:18:50,885 - INFO - End of iteration
+2024-11-22 20:18:50,885 - INFO - End of iteration
+2024-11-22 20:18:50,885 - INFO - End of iteration
+2024-11-22 20:18:50,885 - INFO - End of iteration
+2024-11-22 20:18:50,902 - INFO - End of iteration
+2024-11-22 20:18:50,902 - INFO - End of iteration
+2024-11-22 20:18:50,902 - INFO - End of iteration
+2024-11-22 20:18:50,902 - INFO - End of iteration
+2024-11-22 20:18:50,917 - INFO - End of iteration
+2024-11-22 20:18:50,918 - INFO - End of iteration
+2024-11-22 20:18:50,918 - INFO - End of iteration
+2024-11-22 20:18:50,918 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,918 - INFO - ENTRY PRICE = 61260.0, num_of_lots = 12, loss_for_trade = 59
+2024-11-22 20:18:50,918 - INFO - End of iteration
+2024-11-22 20:18:50,918 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,918 - INFO - EXIT PRICE = 60670.0, num_of_lots = 12, P&L = -708.0
+2024-11-22 20:18:50,918 - INFO - End of iteration
+2024-11-22 20:18:50,937 - INFO - End of iteration
+2024-11-22 20:18:50,940 - INFO - End of iteration
+2024-11-22 20:18:50,940 - INFO - End of iteration
+2024-11-22 20:18:50,940 - INFO - End of iteration
+2024-11-22 20:18:50,953 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,954 - INFO - ENTRY PRICE = 61445.0, num_of_lots = 20, loss_for_trade = 32
+2024-11-22 20:18:50,954 - INFO - End of iteration
+2024-11-22 20:18:50,955 - INFO - End of iteration
+2024-11-22 20:18:50,955 - INFO - End of iteration
+2024-11-22 20:18:50,955 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,955 - INFO - EXIT PRICE = 62940.0, num_of_lots = 20, P&L = 2990.0
+2024-11-22 20:18:50,966 - INFO - End of iteration
+2024-11-22 20:18:50,970 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:50,971 - INFO - ENTRY PRICE = 63675.0, num_of_lots = 6, loss_for_trade = 104
+2024-11-22 20:18:50,971 - INFO - End of iteration
+2024-11-22 20:18:50,972 - INFO - End of iteration
+2024-11-22 20:18:50,972 - INFO - End of iteration
+2024-11-22 20:18:50,983 - INFO - End of iteration
+2024-11-22 20:18:50,988 - INFO - End of iteration
+2024-11-22 20:18:50,988 - INFO - End of iteration
+2024-11-22 20:18:50,988 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:50,988 - INFO - EXIT PRICE = 65965.0, num_of_lots = 6, P&L = 1374.0
+2024-11-22 20:18:50,988 - INFO - End of iteration
+2024-11-22 20:18:51,000 - INFO - End of iteration
+2024-11-22 20:18:51,002 - INFO - End of iteration
+2024-11-22 20:18:51,002 - INFO - End of iteration
+2024-11-22 20:18:51,002 - INFO - End of iteration
+2024-11-22 20:18:51,002 - INFO - End of iteration
+2024-11-22 20:18:51,019 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:51,019 - INFO - ENTRY PRICE = 67760.0, num_of_lots = 11, loss_for_trade = 63
+2024-11-22 20:18:51,019 - INFO - End of iteration
+2024-11-22 20:18:51,019 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:51,019 - INFO - EXIT PRICE = 67130.0, num_of_lots = 11, P&L = -693.0
+2024-11-22 20:18:51,019 - INFO - End of iteration
+2024-11-22 20:18:51,019 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:51,019 - INFO - ENTRY PRICE = 67820.0, num_of_lots = 14, loss_for_trade = 49
+2024-11-22 20:18:51,019 - INFO - End of iteration
+2024-11-22 20:18:51,019 - INFO - End of iteration
+2024-11-22 20:18:51,035 - INFO - End of iteration
+2024-11-22 20:18:51,035 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:51,035 - INFO - EXIT PRICE = 67810.0, num_of_lots = 14, P&L = -14.0
+2024-11-22 20:18:51,035 - INFO - End of iteration
+2024-11-22 20:18:51,035 - INFO - End of iteration
+2024-11-22 20:18:51,035 - INFO - End of iteration
+2024-11-22 20:18:51,051 - INFO - End of iteration
+2024-11-22 20:18:51,051 - INFO - End of iteration
+2024-11-22 20:18:51,051 - INFO - End of iteration
+2024-11-22 20:18:51,051 - INFO - End of iteration
+2024-11-22 20:18:51,051 - INFO - End of iteration
+2024-11-22 20:18:51,070 - INFO - End of iteration
+2024-11-22 20:18:51,072 - INFO - End of iteration
+2024-11-22 20:18:51,072 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:51,072 - INFO - ENTRY PRICE = 68550.0, num_of_lots = 13, loss_for_trade = 52
+2024-11-22 20:18:51,072 - INFO - End of iteration
+2024-11-22 20:18:51,072 - INFO - End of iteration
+2024-11-22 20:18:51,086 - INFO - End of iteration
+2024-11-22 20:18:51,089 - INFO - End of iteration
+2024-11-22 20:18:51,092 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:51,092 - INFO - EXIT PRICE = 68645.0, num_of_lots = 13, P&L = 123.5
+2024-11-22 20:18:51,092 - INFO - End of iteration
+2024-11-22 20:18:51,095 - INFO - End of iteration
+2024-11-22 20:18:51,099 - INFO - End of iteration
+2024-11-22 20:18:51,103 - INFO - End of iteration
+2024-11-22 20:18:51,106 - INFO - End of iteration
+2024-11-22 20:18:51,110 - INFO - End of iteration
+2024-11-22 20:18:51,113 - INFO - End of iteration
+2024-11-22 20:18:51,117 - INFO - End of iteration
+2024-11-22 20:18:51,121 - INFO - End of iteration
+2024-11-22 20:18:51,124 - INFO - End of iteration
+2024-11-22 20:18:51,127 - INFO - End of iteration
+2024-11-22 20:18:51,130 - INFO - End of iteration
+2024-11-22 20:18:51,134 - INFO - End of iteration
+2024-11-22 20:18:51,137 - INFO - End of iteration
+2024-11-22 20:18:51,140 - INFO - End of iteration
+2024-11-22 20:18:51,143 - INFO - End of iteration
+2024-11-22 20:18:51,147 - INFO - End of iteration
+2024-11-22 20:18:51,149 - INFO - End of iteration
+2024-11-22 20:18:51,149 - INFO - End of iteration
+2024-11-22 20:18:51,149 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:51,149 - INFO - ENTRY PRICE = 67605.0, num_of_lots = 9, loss_for_trade = 80
+2024-11-22 20:18:51,149 - INFO - End of iteration
+2024-11-22 20:18:51,149 - INFO - End of iteration
+2024-11-22 20:18:51,149 - INFO - End of iteration
+2024-11-22 20:18:51,165 - INFO - End of iteration
+2024-11-22 20:18:51,165 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:18:51,165 - INFO - EXIT PRICE = 67810.0, num_of_lots = 9, P&L = 184.5
+2024-11-22 20:18:51,165 - INFO - End of iteration
+2024-11-22 20:18:51,165 - INFO - End of iteration
+2024-11-22 20:18:51,165 - INFO - End of iteration
+2024-11-22 20:18:51,165 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:18:51,165 - INFO - ENTRY PRICE = 68580.0, num_of_lots = 15, loss_for_trade = 48
+2024-11-22 20:18:51,165 - INFO - End of iteration
+2024-11-22 20:18:51,165 - INFO - -------- Backtesting Summary --------
+2024-11-22 20:18:51,165 - INFO - Total P&L: 20751.5, Number of trades: 43
+2024-11-22 20:18:51,165 - INFO - Total Positive Trades: 23, Total Negative Trades: 20
+2024-11-22 20:18:51,165 - INFO - Max Profit: 4080.0, Max Loss: -720.0
+
+
+
+
+
+
+
+
+
+
+
+2024-11-22 20:19:12,799 - INFO - End of iteration
+2024-11-22 20:19:12,799 - INFO - End of iteration
+2024-11-22 20:19:12,799 - INFO - End of iteration
+2024-11-22 20:19:12,813 - INFO - End of iteration
+2024-11-22 20:19:12,816 - INFO - End of iteration
+2024-11-22 20:19:12,820 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:12,820 - INFO - ENTRY PRICE = 66260.0, num_of_lots = 13, loss_for_trade = 54
+2024-11-22 20:19:12,820 - INFO - End of iteration
+2024-11-22 20:19:12,823 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:12,824 - INFO - EXIT PRICE = 66795.0, num_of_lots = 13, P&L = 695.5
+2024-11-22 20:19:12,824 - INFO - End of iteration
+2024-11-22 20:19:12,827 - INFO - End of iteration
+2024-11-22 20:19:12,834 - INFO - End of iteration
+2024-11-22 20:19:12,843 - INFO - End of iteration
+2024-11-22 20:19:12,844 - INFO - End of iteration
+2024-11-22 20:19:12,868 - INFO - End of iteration
+2024-11-22 20:19:12,876 - INFO - End of iteration
+2024-11-22 20:19:12,896 - INFO - End of iteration
+2024-11-22 20:19:12,905 - INFO - End of iteration
+2024-11-22 20:19:12,922 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:12,923 - INFO - ENTRY PRICE = 55790.0, num_of_lots = 5, loss_for_trade = 134
+2024-11-22 20:19:12,923 - INFO - End of iteration
+2024-11-22 20:19:12,937 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:12,938 - INFO - EXIT PRICE = 57125.0, num_of_lots = 5, P&L = 667.5
+2024-11-22 20:19:12,938 - INFO - End of iteration
+2024-11-22 20:19:12,947 - INFO - End of iteration
+2024-11-22 20:19:12,955 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:12,956 - INFO - ENTRY PRICE = 57145.0, num_of_lots = 20, loss_for_trade = 24
+2024-11-22 20:19:12,956 - INFO - End of iteration
+2024-11-22 20:19:12,967 - INFO - End of iteration
+2024-11-22 20:19:12,970 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:12,970 - INFO - EXIT PRICE = 57665.0, num_of_lots = 20, P&L = 1040.0
+2024-11-22 20:19:12,970 - INFO - End of iteration
+2024-11-22 20:19:12,974 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:12,975 - INFO - ENTRY PRICE = 58250.0, num_of_lots = 20, loss_for_trade = 35
+2024-11-22 20:19:12,975 - INFO - End of iteration
+2024-11-22 20:19:12,980 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:12,980 - INFO - EXIT PRICE = 58600.0, num_of_lots = 20, P&L = 700.0
+2024-11-22 20:19:12,980 - INFO - End of iteration
+2024-11-22 20:19:12,983 - INFO - End of iteration
+2024-11-22 20:19:12,987 - INFO - End of iteration
+2024-11-22 20:19:12,991 - INFO - End of iteration
+2024-11-22 20:19:12,995 - INFO - End of iteration
+2024-11-22 20:19:12,998 - INFO - End of iteration
+2024-11-22 20:19:13,002 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,002 - INFO - ENTRY PRICE = 58775.0, num_of_lots = 5, loss_for_trade = 122
+2024-11-22 20:19:13,002 - INFO - End of iteration
+2024-11-22 20:19:13,006 - INFO - End of iteration
+2024-11-22 20:19:13,009 - INFO - End of iteration
+2024-11-22 20:19:13,014 - INFO - End of iteration
+2024-11-22 20:19:13,016 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,016 - INFO - EXIT PRICE = 62440.0, num_of_lots = 5, P&L = 1832.5
+2024-11-22 20:19:13,016 - INFO - End of iteration
+2024-11-22 20:19:13,016 - INFO - End of iteration
+2024-11-22 20:19:13,016 - INFO - End of iteration
+2024-11-22 20:19:13,032 - INFO - End of iteration
+2024-11-22 20:19:13,032 - INFO - End of iteration
+2024-11-22 20:19:13,032 - INFO - End of iteration
+2024-11-22 20:19:13,045 - INFO - End of iteration
+2024-11-22 20:19:13,049 - INFO - End of iteration
+2024-11-22 20:19:13,049 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,049 - INFO - ENTRY PRICE = 61955.0, num_of_lots = 4, loss_for_trade = 150
+2024-11-22 20:19:13,049 - INFO - End of iteration
+2024-11-22 20:19:13,049 - INFO - End of iteration
+2024-11-22 20:19:13,062 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,062 - INFO - EXIT PRICE = 61745.0, num_of_lots = 4, P&L = -84.0
+2024-11-22 20:19:13,062 - INFO - End of iteration
+2024-11-22 20:19:13,063 - INFO - End of iteration
+2024-11-22 20:19:13,063 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,063 - INFO - ENTRY PRICE = 61985.0, num_of_lots = 20, loss_for_trade = 14
+2024-11-22 20:19:13,063 - INFO - End of iteration
+2024-11-22 20:19:13,063 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,063 - INFO - EXIT PRICE = 61840.0, num_of_lots = 20, P&L = -290.0
+2024-11-22 20:19:13,063 - INFO - End of iteration
+2024-11-22 20:19:13,063 - INFO - End of iteration
+2024-11-22 20:19:13,078 - INFO - End of iteration
+2024-11-22 20:19:13,078 - INFO - End of iteration
+2024-11-22 20:19:13,078 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,078 - INFO - ENTRY PRICE = 60050.0, num_of_lots = 20, loss_for_trade = 11
+2024-11-22 20:19:13,078 - INFO - End of iteration
+2024-11-22 20:19:13,078 - INFO - End of iteration
+2024-11-22 20:19:13,078 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,078 - INFO - EXIT PRICE = 60400.0, num_of_lots = 20, P&L = 700.0
+2024-11-22 20:19:13,078 - INFO - End of iteration
+2024-11-22 20:19:13,095 - INFO - End of iteration
+2024-11-22 20:19:13,095 - INFO - End of iteration
+2024-11-22 20:19:13,095 - INFO - End of iteration
+2024-11-22 20:19:13,095 - INFO - End of iteration
+2024-11-22 20:19:13,112 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,112 - INFO - ENTRY PRICE = 60000.0, num_of_lots = 9, loss_for_trade = 79
+2024-11-22 20:19:13,112 - INFO - End of iteration
+2024-11-22 20:19:13,112 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,112 - INFO - EXIT PRICE = 60790.0, num_of_lots = 9, P&L = 711.0
+2024-11-22 20:19:13,112 - INFO - End of iteration
+2024-11-22 20:19:13,112 - INFO - End of iteration
+2024-11-22 20:19:13,112 - INFO - End of iteration
+2024-11-22 20:19:13,112 - INFO - End of iteration
+2024-11-22 20:19:13,129 - INFO - End of iteration
+2024-11-22 20:19:13,129 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,129 - INFO - ENTRY PRICE = 60850.0, num_of_lots = 11, loss_for_trade = 64
+2024-11-22 20:19:13,129 - INFO - End of iteration
+2024-11-22 20:19:13,129 - INFO - End of iteration
+2024-11-22 20:19:13,129 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,129 - INFO - EXIT PRICE = 62230.0, num_of_lots = 11, P&L = 1518.0
+2024-11-22 20:19:13,129 - INFO - End of iteration
+2024-11-22 20:19:13,147 - INFO - End of iteration
+2024-11-22 20:19:13,147 - INFO - End of iteration
+2024-11-22 20:19:13,147 - INFO - End of iteration
+2024-11-22 20:19:13,162 - INFO - End of iteration
+2024-11-22 20:19:13,162 - INFO - End of iteration
+2024-11-22 20:19:13,162 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,162 - INFO - ENTRY PRICE = 60560.0, num_of_lots = 20, loss_for_trade = 16
+2024-11-22 20:19:13,162 - INFO - End of iteration
+2024-11-22 20:19:13,162 - INFO - End of iteration
+2024-11-22 20:19:13,214 - INFO - End of iteration
+2024-11-22 20:19:13,214 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,214 - INFO - EXIT PRICE = 61465.0, num_of_lots = 20, P&L = 1810.0
+2024-11-22 20:19:13,214 - INFO - End of iteration
+2024-11-22 20:19:13,233 - INFO - End of iteration
+2024-11-22 20:19:13,244 - INFO - End of iteration
+2024-11-22 20:19:13,257 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,257 - INFO - ENTRY PRICE = 64115.0, num_of_lots = 3, loss_for_trade = 181
+2024-11-22 20:19:13,257 - INFO - End of iteration
+2024-11-22 20:19:13,267 - INFO - End of iteration
+2024-11-22 20:19:13,274 - INFO - End of iteration
+2024-11-22 20:19:13,278 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,278 - INFO - EXIT PRICE = 65225.0, num_of_lots = 3, P&L = 333.0
+2024-11-22 20:19:13,278 - INFO - End of iteration
+2024-11-22 20:19:13,283 - INFO - End of iteration
+2024-11-22 20:19:13,286 - INFO - End of iteration
+2024-11-22 20:19:13,290 - INFO - End of iteration
+2024-11-22 20:19:13,295 - INFO - End of iteration
+2024-11-22 20:19:13,299 - INFO - End of iteration
+2024-11-22 20:19:13,303 - INFO - End of iteration
+2024-11-22 20:19:13,306 - INFO - End of iteration
+2024-11-22 20:19:13,311 - INFO - End of iteration
+2024-11-22 20:19:13,315 - INFO - End of iteration
+2024-11-22 20:19:13,318 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,318 - INFO - ENTRY PRICE = 60455.0, num_of_lots = 20, loss_for_trade = 27
+2024-11-22 20:19:13,318 - INFO - End of iteration
+2024-11-22 20:19:13,322 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,322 - INFO - EXIT PRICE = 60725.0, num_of_lots = 20, P&L = 540.0
+2024-11-22 20:19:13,322 - INFO - End of iteration
+2024-11-22 20:19:13,326 - INFO - End of iteration
+2024-11-22 20:19:13,330 - INFO - End of iteration
+2024-11-22 20:19:13,334 - INFO - End of iteration
+2024-11-22 20:19:13,337 - INFO - End of iteration
+2024-11-22 20:19:13,341 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,341 - INFO - ENTRY PRICE = 60985.0, num_of_lots = 19, loss_for_trade = 37
+2024-11-22 20:19:13,341 - INFO - End of iteration
+2024-11-22 20:19:13,346 - INFO - End of iteration
+2024-11-22 20:19:13,350 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,350 - INFO - EXIT PRICE = 61200.0, num_of_lots = 19, P&L = 408.5
+2024-11-22 20:19:13,350 - INFO - End of iteration
+2024-11-22 20:19:13,353 - INFO - End of iteration
+2024-11-22 20:19:13,356 - INFO - End of iteration
+2024-11-22 20:19:13,361 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,362 - INFO - ENTRY PRICE = 60230.0, num_of_lots = 20, loss_for_trade = 4
+2024-11-22 20:19:13,362 - INFO - End of iteration
+2024-11-22 20:19:13,368 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,368 - INFO - EXIT PRICE = 60185.0, num_of_lots = 20, P&L = -90.0
+2024-11-22 20:19:13,368 - INFO - End of iteration
+2024-11-22 20:19:13,372 - INFO - End of iteration
+2024-11-22 20:19:13,375 - INFO - End of iteration
+2024-11-22 20:19:13,397 - INFO - End of iteration
+2024-11-22 20:19:13,401 - INFO - End of iteration
+2024-11-22 20:19:13,404 - INFO - End of iteration
+2024-11-22 20:19:13,407 - INFO - End of iteration
+2024-11-22 20:19:13,411 - INFO - End of iteration
+2024-11-22 20:19:13,411 - INFO - End of iteration
+2024-11-22 20:19:13,411 - INFO - End of iteration
+2024-11-22 20:19:13,411 - INFO - End of iteration
+2024-11-22 20:19:13,411 - INFO - End of iteration
+2024-11-22 20:19:13,426 - INFO - End of iteration
+2024-11-22 20:19:13,426 - INFO - End of iteration
+2024-11-22 20:19:13,426 - INFO - End of iteration
+2024-11-22 20:19:13,426 - INFO - End of iteration
+2024-11-22 20:19:13,426 - INFO - End of iteration
+2024-11-22 20:19:13,442 - INFO - End of iteration
+2024-11-22 20:19:13,442 - INFO - End of iteration
+2024-11-22 20:19:13,442 - INFO - End of iteration
+2024-11-22 20:19:13,442 - INFO - End of iteration
+2024-11-22 20:19:13,442 - INFO - End of iteration
+2024-11-22 20:19:13,458 - INFO - End of iteration
+2024-11-22 20:19:13,458 - INFO - End of iteration
+2024-11-22 20:19:13,458 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,458 - INFO - ENTRY PRICE = 57490.0, num_of_lots = 7, loss_for_trade = 95
+2024-11-22 20:19:13,458 - INFO - End of iteration
+2024-11-22 20:19:13,458 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,458 - INFO - EXIT PRICE = 56540.0, num_of_lots = 7, P&L = -665.0
+2024-11-22 20:19:13,458 - INFO - End of iteration
+2024-11-22 20:19:13,458 - INFO - End of iteration
+2024-11-22 20:19:13,473 - INFO - End of iteration
+2024-11-22 20:19:13,473 - INFO - End of iteration
+2024-11-22 20:19:13,473 - INFO - End of iteration
+2024-11-22 20:19:13,473 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,473 - INFO - ENTRY PRICE = 56130.0, num_of_lots = 15, loss_for_trade = 46
+2024-11-22 20:19:13,473 - INFO - End of iteration
+2024-11-22 20:19:13,489 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,489 - INFO - EXIT PRICE = 55670.0, num_of_lots = 15, P&L = -690.0
+2024-11-22 20:19:13,489 - INFO - End of iteration
+2024-11-22 20:19:13,489 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,489 - INFO - ENTRY PRICE = 57410.0, num_of_lots = 20, loss_for_trade = 32
+2024-11-22 20:19:13,489 - INFO - End of iteration
+2024-11-22 20:19:13,489 - INFO - End of iteration
+2024-11-22 20:19:13,489 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,489 - INFO - EXIT PRICE = 57360.0, num_of_lots = 20, P&L = -100.0
+2024-11-22 20:19:13,489 - INFO - End of iteration
+2024-11-22 20:19:13,504 - INFO - End of iteration
+2024-11-22 20:19:13,504 - INFO - End of iteration
+2024-11-22 20:19:13,520 - INFO - End of iteration
+2024-11-22 20:19:13,520 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,520 - INFO - ENTRY PRICE = 58075.0, num_of_lots = 20, loss_for_trade = 12
+2024-11-22 20:19:13,520 - INFO - End of iteration
+2024-11-22 20:19:13,520 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,520 - INFO - EXIT PRICE = 57950.0, num_of_lots = 20, P&L = -250.0
+2024-11-22 20:19:13,520 - INFO - End of iteration
+2024-11-22 20:19:13,536 - INFO - End of iteration
+2024-11-22 20:19:13,536 - INFO - End of iteration
+2024-11-22 20:19:13,551 - INFO - End of iteration
+2024-11-22 20:19:13,551 - INFO - End of iteration
+2024-11-22 20:19:13,567 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,567 - INFO - ENTRY PRICE = 58545.0, num_of_lots = 18, loss_for_trade = 39
+2024-11-22 20:19:13,567 - INFO - End of iteration
+2024-11-22 20:19:13,567 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,567 - INFO - EXIT PRICE = 58155.0, num_of_lots = 18, P&L = -702.0
+2024-11-22 20:19:13,567 - INFO - End of iteration
+2024-11-22 20:19:13,567 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,567 - INFO - ENTRY PRICE = 58885.0, num_of_lots = 18, loss_for_trade = 39
+2024-11-22 20:19:13,567 - INFO - End of iteration
+2024-11-22 20:19:13,567 - INFO - End of iteration
+2024-11-22 20:19:13,582 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,582 - INFO - EXIT PRICE = 58550.0, num_of_lots = 18, P&L = -603.0
+2024-11-22 20:19:13,582 - INFO - End of iteration
+2024-11-22 20:19:13,582 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,582 - INFO - ENTRY PRICE = 59050.0, num_of_lots = 6, loss_for_trade = 112
+2024-11-22 20:19:13,582 - INFO - End of iteration
+2024-11-22 20:19:13,582 - INFO - End of iteration
+2024-11-22 20:19:13,582 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,582 - INFO - EXIT PRICE = 58750.0, num_of_lots = 6, P&L = -180.0
+2024-11-22 20:19:13,582 - INFO - End of iteration
+2024-11-22 20:19:13,582 - INFO - End of iteration
+2024-11-22 20:19:13,598 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,598 - INFO - ENTRY PRICE = 58690.0, num_of_lots = 20, loss_for_trade = 27
+2024-11-22 20:19:13,598 - INFO - End of iteration
+2024-11-22 20:19:13,598 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,598 - INFO - EXIT PRICE = 58420.0, num_of_lots = 20, P&L = -540.0
+2024-11-22 20:19:13,598 - INFO - End of iteration
+2024-11-22 20:19:13,598 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,598 - INFO - ENTRY PRICE = 58785.0, num_of_lots = 20, loss_for_trade = 2
+2024-11-22 20:19:13,598 - INFO - End of iteration
+2024-11-22 20:19:13,598 - INFO - End of iteration
+2024-11-22 20:19:13,598 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,598 - INFO - EXIT PRICE = 60265.0, num_of_lots = 20, P&L = 2960.0
+2024-11-22 20:19:13,598 - INFO - End of iteration
+2024-11-22 20:19:13,614 - INFO - End of iteration
+2024-11-22 20:19:13,614 - INFO - End of iteration
+2024-11-22 20:19:13,614 - INFO - End of iteration
+2024-11-22 20:19:13,614 - INFO - End of iteration
+2024-11-22 20:19:13,614 - INFO - End of iteration
+2024-11-22 20:19:13,629 - INFO - End of iteration
+2024-11-22 20:19:13,629 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,629 - INFO - ENTRY PRICE = 58820.0, num_of_lots = 20, loss_for_trade = 25
+2024-11-22 20:19:13,629 - INFO - End of iteration
+2024-11-22 20:19:13,629 - INFO - End of iteration
+2024-11-22 20:19:13,629 - INFO - End of iteration
+2024-11-22 20:19:13,629 - INFO - End of iteration
+2024-11-22 20:19:13,645 - INFO - End of iteration
+2024-11-22 20:19:13,645 - INFO - End of iteration
+2024-11-22 20:19:13,645 - INFO - End of iteration
+2024-11-22 20:19:13,645 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,645 - INFO - EXIT PRICE = 60860.0, num_of_lots = 20, P&L = 4080.0
+2024-11-22 20:19:13,645 - INFO - End of iteration
+2024-11-22 20:19:13,645 - INFO - End of iteration
+2024-11-22 20:19:13,661 - INFO - End of iteration
+2024-11-22 20:19:13,661 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,661 - INFO - ENTRY PRICE = 60640.0, num_of_lots = 12, loss_for_trade = 56
+2024-11-22 20:19:13,661 - INFO - End of iteration
+2024-11-22 20:19:13,661 - INFO - End of iteration
+2024-11-22 20:19:13,661 - INFO - End of iteration
+2024-11-22 20:19:13,661 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,661 - INFO - EXIT PRICE = 62550.0, num_of_lots = 12, P&L = 2292.0
+2024-11-22 20:19:13,661 - INFO - End of iteration
+2024-11-22 20:19:13,680 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,680 - INFO - ENTRY PRICE = 63000.0, num_of_lots = 20, loss_for_trade = 18
+2024-11-22 20:19:13,680 - INFO - End of iteration
+2024-11-22 20:19:13,684 - INFO - End of iteration
+2024-11-22 20:19:13,687 - INFO - End of iteration
+2024-11-22 20:19:13,690 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,690 - INFO - EXIT PRICE = 63685.0, num_of_lots = 20, P&L = 1370.0
+2024-11-22 20:19:13,690 - INFO - End of iteration
+2024-11-22 20:19:13,694 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,694 - INFO - ENTRY PRICE = 64460.0, num_of_lots = 8, loss_for_trade = 90
+2024-11-22 20:19:13,694 - INFO - End of iteration
+2024-11-22 20:19:13,695 - INFO - End of iteration
+2024-11-22 20:19:13,695 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,695 - INFO - EXIT PRICE = 63630.0, num_of_lots = 8, P&L = -664.0
+2024-11-22 20:19:13,695 - INFO - End of iteration
+2024-11-22 20:19:13,695 - INFO - End of iteration
+2024-11-22 20:19:13,695 - INFO - End of iteration
+2024-11-22 20:19:13,712 - INFO - End of iteration
+2024-11-22 20:19:13,715 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,715 - INFO - ENTRY PRICE = 64670.0, num_of_lots = 15, loss_for_trade = 48
+2024-11-22 20:19:13,715 - INFO - End of iteration
+2024-11-22 20:19:13,718 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,718 - INFO - EXIT PRICE = 64190.0, num_of_lots = 15, P&L = -720.0
+2024-11-22 20:19:13,718 - INFO - End of iteration
+2024-11-22 20:19:13,722 - INFO - End of iteration
+2024-11-22 20:19:13,725 - INFO - End of iteration
+2024-11-22 20:19:13,728 - INFO - End of iteration
+2024-11-22 20:19:13,731 - INFO - End of iteration
+2024-11-22 20:19:13,734 - INFO - End of iteration
+2024-11-22 20:19:13,737 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,737 - INFO - ENTRY PRICE = 64335.0, num_of_lots = 12, loss_for_trade = 56
+2024-11-22 20:19:13,738 - INFO - End of iteration
+2024-11-22 20:19:13,741 - INFO - End of iteration
+2024-11-22 20:19:13,744 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,744 - INFO - EXIT PRICE = 63845.0, num_of_lots = 12, P&L = -588.0
+2024-11-22 20:19:13,744 - INFO - End of iteration
+2024-11-22 20:19:13,744 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,744 - INFO - ENTRY PRICE = 64510.0, num_of_lots = 14, loss_for_trade = 50
+2024-11-22 20:19:13,744 - INFO - End of iteration
+2024-11-22 20:19:13,744 - INFO - End of iteration
+2024-11-22 20:19:13,744 - INFO - End of iteration
+2024-11-22 20:19:13,744 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,744 - INFO - EXIT PRICE = 64630.0, num_of_lots = 14, P&L = 168.0
+2024-11-22 20:19:13,744 - INFO - End of iteration
+2024-11-22 20:19:13,761 - INFO - End of iteration
+2024-11-22 20:19:13,761 - INFO - End of iteration
+2024-11-22 20:19:13,761 - INFO - End of iteration
+2024-11-22 20:19:13,761 - INFO - End of iteration
+2024-11-22 20:19:13,761 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,761 - INFO - ENTRY PRICE = 63975.0, num_of_lots = 13, loss_for_trade = 52
+2024-11-22 20:19:13,761 - INFO - End of iteration
+2024-11-22 20:19:13,777 - INFO - End of iteration
+2024-11-22 20:19:13,780 - INFO - End of iteration
+2024-11-22 20:19:13,784 - INFO - End of iteration
+2024-11-22 20:19:13,788 - INFO - End of iteration
+2024-11-22 20:19:13,791 - INFO - End of iteration
+2024-11-22 20:19:13,794 - INFO - End of iteration
+2024-11-22 20:19:13,798 - INFO - End of iteration
+2024-11-22 20:19:13,801 - INFO - End of iteration
+2024-11-22 20:19:13,804 - INFO - End of iteration
+2024-11-22 20:19:13,807 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,807 - INFO - EXIT PRICE = 66040.0, num_of_lots = 13, P&L = 2684.5
+2024-11-22 20:19:13,807 - INFO - End of iteration
+2024-11-22 20:19:13,812 - INFO - End of iteration
+2024-11-22 20:19:13,815 - INFO - End of iteration
+2024-11-22 20:19:13,818 - INFO - End of iteration
+2024-11-22 20:19:13,821 - INFO - End of iteration
+2024-11-22 20:19:13,824 - INFO - End of iteration
+2024-11-22 20:19:13,827 - INFO - End of iteration
+2024-11-22 20:19:13,827 - INFO - End of iteration
+2024-11-22 20:19:13,827 - INFO - End of iteration
+2024-11-22 20:19:13,827 - INFO - End of iteration
+2024-11-22 20:19:13,827 - INFO - End of iteration
+2024-11-22 20:19:13,843 - INFO - End of iteration
+2024-11-22 20:19:13,843 - INFO - End of iteration
+2024-11-22 20:19:13,843 - INFO - End of iteration
+2024-11-22 20:19:13,843 - INFO - End of iteration
+2024-11-22 20:19:13,843 - INFO - End of iteration
+2024-11-22 20:19:13,858 - INFO - End of iteration
+2024-11-22 20:19:13,858 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,858 - INFO - ENTRY PRICE = 62240.0, num_of_lots = 7, loss_for_trade = 96
+2024-11-22 20:19:13,858 - INFO - End of iteration
+2024-11-22 20:19:13,858 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,858 - INFO - EXIT PRICE = 61285.0, num_of_lots = 7, P&L = -668.5
+2024-11-22 20:19:13,858 - INFO - End of iteration
+2024-11-22 20:19:13,858 - INFO - End of iteration
+2024-11-22 20:19:13,858 - INFO - End of iteration
+2024-11-22 20:19:13,874 - INFO - End of iteration
+2024-11-22 20:19:13,874 - INFO - End of iteration
+2024-11-22 20:19:13,874 - INFO - End of iteration
+2024-11-22 20:19:13,874 - INFO - End of iteration
+2024-11-22 20:19:13,874 - INFO - End of iteration
+2024-11-22 20:19:13,890 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,890 - INFO - ENTRY PRICE = 61480.0, num_of_lots = 17, loss_for_trade = 41
+2024-11-22 20:19:13,890 - INFO - End of iteration
+2024-11-22 20:19:13,890 - INFO - End of iteration
+2024-11-22 20:19:13,890 - INFO - End of iteration
+2024-11-22 20:19:13,890 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,890 - INFO - EXIT PRICE = 61425.0, num_of_lots = 17, P&L = -93.5
+2024-11-22 20:19:13,890 - INFO - End of iteration
+2024-11-22 20:19:13,890 - INFO - End of iteration
+2024-11-22 20:19:13,905 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,905 - INFO - ENTRY PRICE = 63110.0, num_of_lots = 12, loss_for_trade = 59
+2024-11-22 20:19:13,905 - INFO - End of iteration
+2024-11-22 20:19:13,905 - INFO - End of iteration
+2024-11-22 20:19:13,905 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,905 - INFO - EXIT PRICE = 63595.0, num_of_lots = 12, P&L = 582.0
+2024-11-22 20:19:13,905 - INFO - End of iteration
+2024-11-22 20:19:13,905 - INFO - End of iteration
+2024-11-22 20:19:13,905 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,905 - INFO - ENTRY PRICE = 64335.0, num_of_lots = 10, loss_for_trade = 67
+2024-11-22 20:19:13,905 - INFO - End of iteration
+2024-11-22 20:19:13,921 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,921 - INFO - EXIT PRICE = 63665.0, num_of_lots = 10, P&L = -670.0
+2024-11-22 20:19:13,921 - INFO - End of iteration
+2024-11-22 20:19:13,921 - INFO - End of iteration
+2024-11-22 20:19:13,921 - INFO - End of iteration
+2024-11-22 20:19:13,921 - INFO - End of iteration
+2024-11-22 20:19:13,921 - INFO - End of iteration
+2024-11-22 20:19:13,936 - INFO - End of iteration
+2024-11-22 20:19:13,936 - INFO - End of iteration
+2024-11-22 20:19:13,936 - INFO - End of iteration
+2024-11-22 20:19:13,936 - INFO - End of iteration
+2024-11-22 20:19:13,936 - INFO - End of iteration
+2024-11-22 20:19:13,952 - INFO - End of iteration
+2024-11-22 20:19:13,952 - INFO - End of iteration
+2024-11-22 20:19:13,952 - INFO - End of iteration
+2024-11-22 20:19:13,952 - INFO - End of iteration
+2024-11-22 20:19:13,952 - INFO - End of iteration
+2024-11-22 20:19:13,968 - INFO - End of iteration
+2024-11-22 20:19:13,968 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,968 - INFO - ENTRY PRICE = 61260.0, num_of_lots = 12, loss_for_trade = 59
+2024-11-22 20:19:13,968 - INFO - End of iteration
+2024-11-22 20:19:13,968 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,968 - INFO - EXIT PRICE = 60670.0, num_of_lots = 12, P&L = -708.0
+2024-11-22 20:19:13,968 - INFO - End of iteration
+2024-11-22 20:19:13,968 - INFO - End of iteration
+2024-11-22 20:19:13,968 - INFO - End of iteration
+2024-11-22 20:19:13,983 - INFO - End of iteration
+2024-11-22 20:19:13,983 - INFO - End of iteration
+2024-11-22 20:19:13,983 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,983 - INFO - ENTRY PRICE = 61445.0, num_of_lots = 20, loss_for_trade = 32
+2024-11-22 20:19:13,983 - INFO - End of iteration
+2024-11-22 20:19:13,983 - INFO - End of iteration
+2024-11-22 20:19:13,983 - INFO - End of iteration
+2024-11-22 20:19:13,999 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:13,999 - INFO - EXIT PRICE = 62940.0, num_of_lots = 20, P&L = 2990.0
+2024-11-22 20:19:13,999 - INFO - End of iteration
+2024-11-22 20:19:13,999 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:13,999 - INFO - ENTRY PRICE = 63675.0, num_of_lots = 6, loss_for_trade = 104
+2024-11-22 20:19:13,999 - INFO - End of iteration
+2024-11-22 20:19:13,999 - INFO - End of iteration
+2024-11-22 20:19:13,999 - INFO - End of iteration
+2024-11-22 20:19:13,999 - INFO - End of iteration
+2024-11-22 20:19:14,015 - INFO - End of iteration
+2024-11-22 20:19:14,015 - INFO - End of iteration
+2024-11-22 20:19:14,015 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:14,015 - INFO - EXIT PRICE = 65965.0, num_of_lots = 6, P&L = 1374.0
+2024-11-22 20:19:14,015 - INFO - End of iteration
+2024-11-22 20:19:14,015 - INFO - End of iteration
+2024-11-22 20:19:14,015 - INFO - End of iteration
+2024-11-22 20:19:14,030 - INFO - End of iteration
+2024-11-22 20:19:14,030 - INFO - End of iteration
+2024-11-22 20:19:14,030 - INFO - End of iteration
+2024-11-22 20:19:14,030 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:14,030 - INFO - ENTRY PRICE = 67760.0, num_of_lots = 11, loss_for_trade = 63
+2024-11-22 20:19:14,030 - INFO - End of iteration
+2024-11-22 20:19:14,030 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:14,030 - INFO - EXIT PRICE = 67130.0, num_of_lots = 11, P&L = -693.0
+2024-11-22 20:19:14,030 - INFO - End of iteration
+2024-11-22 20:19:14,046 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:14,046 - INFO - ENTRY PRICE = 67820.0, num_of_lots = 14, loss_for_trade = 49
+2024-11-22 20:19:14,046 - INFO - End of iteration
+2024-11-22 20:19:14,046 - INFO - End of iteration
+2024-11-22 20:19:14,046 - INFO - End of iteration
+2024-11-22 20:19:14,046 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:14,046 - INFO - EXIT PRICE = 67810.0, num_of_lots = 14, P&L = -14.0
+2024-11-22 20:19:14,046 - INFO - End of iteration
+2024-11-22 20:19:14,046 - INFO - End of iteration
+2024-11-22 20:19:14,061 - INFO - End of iteration
+2024-11-22 20:19:14,061 - INFO - End of iteration
+2024-11-22 20:19:14,061 - INFO - End of iteration
+2024-11-22 20:19:14,061 - INFO - End of iteration
+2024-11-22 20:19:14,061 - INFO - End of iteration
+2024-11-22 20:19:14,077 - INFO - End of iteration
+2024-11-22 20:19:14,077 - INFO - End of iteration
+2024-11-22 20:19:14,077 - INFO - End of iteration
+2024-11-22 20:19:14,077 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:14,077 - INFO - ENTRY PRICE = 68550.0, num_of_lots = 13, loss_for_trade = 52
+2024-11-22 20:19:14,077 - INFO - End of iteration
+2024-11-22 20:19:14,077 - INFO - End of iteration
+2024-11-22 20:19:14,093 - INFO - End of iteration
+2024-11-22 20:19:14,093 - INFO - End of iteration
+2024-11-22 20:19:14,093 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:14,093 - INFO - EXIT PRICE = 68645.0, num_of_lots = 13, P&L = 123.5
+2024-11-22 20:19:14,093 - INFO - End of iteration
+2024-11-22 20:19:14,093 - INFO - End of iteration
+2024-11-22 20:19:14,093 - INFO - End of iteration
+2024-11-22 20:19:14,108 - INFO - End of iteration
+2024-11-22 20:19:14,108 - INFO - End of iteration
+2024-11-22 20:19:14,108 - INFO - End of iteration
+2024-11-22 20:19:14,108 - INFO - End of iteration
+2024-11-22 20:19:14,108 - INFO - End of iteration
+2024-11-22 20:19:14,124 - INFO - End of iteration
+2024-11-22 20:19:14,124 - INFO - End of iteration
+2024-11-22 20:19:14,124 - INFO - End of iteration
+2024-11-22 20:19:14,124 - INFO - End of iteration
+2024-11-22 20:19:14,124 - INFO - End of iteration
+2024-11-22 20:19:14,140 - INFO - End of iteration
+2024-11-22 20:19:14,140 - INFO - End of iteration
+2024-11-22 20:19:14,140 - INFO - End of iteration
+2024-11-22 20:19:14,140 - INFO - End of iteration
+2024-11-22 20:19:14,140 - INFO - End of iteration
+2024-11-22 20:19:14,155 - INFO - End of iteration
+2024-11-22 20:19:14,155 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:14,155 - INFO - ENTRY PRICE = 67605.0, num_of_lots = 9, loss_for_trade = 80
+2024-11-22 20:19:14,155 - INFO - End of iteration
+2024-11-22 20:19:14,155 - INFO - End of iteration
+2024-11-22 20:19:14,155 - INFO - End of iteration
+2024-11-22 20:19:14,155 - INFO - End of iteration
+2024-11-22 20:19:14,171 - INFO - <------ LONG EXIT ------>
+2024-11-22 20:19:14,171 - INFO - EXIT PRICE = 67810.0, num_of_lots = 9, P&L = 184.5
+2024-11-22 20:19:14,171 - INFO - End of iteration
+2024-11-22 20:19:14,171 - INFO - End of iteration
+2024-11-22 20:19:14,171 - INFO - End of iteration
+2024-11-22 20:19:14,171 - INFO - <------ LONG ENTRY ------>
+2024-11-22 20:19:14,171 - INFO - ENTRY PRICE = 68580.0, num_of_lots = 15, loss_for_trade = 48
+2024-11-22 20:19:14,171 - INFO - End of iteration
+2024-11-22 20:19:14,171 - INFO - -------- Backtesting Summary --------
+2024-11-22 20:19:14,171 - INFO - Total P&L: 20751.5, Number of trades: 43
+2024-11-22 20:19:14,171 - INFO - Total Positive Trades: 23, Total Negative Trades: 20
+2024-11-22 20:19:14,171 - INFO - Max Profit: 4080.0, Max Loss: -720.0

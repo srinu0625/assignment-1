@@ -2,11 +2,10 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\candles\es contracts\ES U 240.csv"
-file_path2 = r"D:\candles\es contracts\ES U day.csv"
+file_path1 = r"D:\data\cl 240.csv"
+file_path2 = r"D:\data\cl d.csv"
 
-output_file_path_long =  r"D:\Output_TradeBooks\ES U LONG TRADES.csv"
-output_file_path_short =  r"D:\Output_TradeBooks\ES U SHORT TRADES.csv"
+output_file_path = r"D:\back_test vs outputs\CL A3_`BACKTEST_combined_trades.xlsx"  # Single Excel output
 
 
 # Load the data
@@ -47,8 +46,8 @@ bull = bear = flag = False
 # Trading parameters
 number_of_positions = num_of_trades = 0
 entry_price = exit_price = 0
-contract_size = 5
-tick_val = 0.25
+contract_size = 100
+tick_val = 0.01
 max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0
@@ -177,42 +176,42 @@ for index1, row1 in data1.iterrows():
                         # Bullish entry-------------------
                         if local_high1 > 0:
                             if (local_low1 > prev_local_low1) and (local_high1 < local_low2) and (current_high1 > previous_high1) and not bear and not flag:
-                                loss_for_trade = abs(local_high1 - current_low1 + (tick_val * 4)) * contract_size
+                                loss_for_trade = abs(current_high1 - current_low1 + (tick_val * 4)) * contract_size
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
                                     continue
                                 else:
                                     num_of_lots = math.floor(risk / loss_for_trade)
                                     if num_of_lots >= max_num_lots:
-                                        num_of_lots = 5
-                                    entry_price = local_high1 + (tick_val * 2)
-                                    exit_price = current_low1 - (tick_val * 2)
-                                    print("\033[32m<------ LONG ENTRY ------>(CH1 > LH1) AND (LL1 >= LL2)\033[0m")
-                                    print("       ENTRY PRICE  = ", entry_price)
-                                    print("        num_of_lots = ", round(num_of_lots))
-                                    print("     loss_for_trade = ", round(loss_for_trade))
-                                    print("--------------------------------------------------")
-                                    bull = True
-                                    flag = True
+                                        num_of_lots = max_num_lots
+                                entry_price = current_high1 + (tick_val * 2)
+                                exit_price = current_low1 - (tick_val * 2)
+                                print("\033[32m<------ LONG ENTRY ------>(CH1 > LH1) AND (LL1 >= LL2)\033[0m")
+                                print("       ENTRY PRICE  = ", entry_price)
+                                print("        num_of_lots = ", round(num_of_lots))
+                                print("     loss_for_trade = ", round(loss_for_trade))
+                                print("--------------------------------------------------")
+                                bull = True
+                                flag = True
                                     
 
-                                     # Record the trade entry
-                                    trade_entries_long.append({
-                                        'Type': 'Long',
-                                        'Entry Time': current_time1,
-                                        'Entry Price': entry_price,
-                                        'Local High': local_high1,
-                                        'Local Low': local_low1,
-                                        "prev_local_high1":prev_local_high1,
-                                        "prev_local_low1":prev_local_low1,
-                                        'Prev  High': previous_high1,
-                                        'Prev  Low': previous_low1,
-                                        'Current High': current_high1,
-                                        'Current Low': current_low1,
-                                        'local_high2':local_high2
-                                         })
+                                    # Record the trade entry
+                                trade_entries_long.append({
+                                    'Type': 'Long',
+                                    'Entry Time': current_time1,
+                                    'Entry Price': entry_price,
+                                    'Local High': local_high1,
+                                    'Local Low': local_low1,
+                                    "prev_local_high1":prev_local_high1,
+                                    "prev_local_low1":prev_local_low1,
+                                    'Prev  High': previous_high1,
+                                    'Prev  Low': previous_low1,
+                                    'Current High': current_high1,
+                                    'Current Low': current_low1,
+                                    'local_high2':local_high2
+                                        })
 
-                                    continue
+                                continue
 
                         # updating exit price----------------------------------
                         if(bull and current_low1 > exit_price):
@@ -281,16 +280,16 @@ for index1, row1 in data1.iterrows():
                          # bearish candle-------------------------------------------------------------------------
                         if local_low1 > 0:
                             if (local_high1 < prev_local_high1) and (local_low1 > local_high2 ) and (current_low1 < previous_low1) and not bull and not flag:
-                                loss_for_trade = abs(local_low1 - current_high1 + ( tick_val * 4)) * contract_size
+                                loss_for_trade = abs(current_low1 - current_high1 + ( tick_val * 4)) * contract_size
                                 if loss_for_trade > risk:
                                     num_of_lots = 1
                                     continue  
                                 else:
                                     num_of_lots = math.floor(risk / loss_for_trade )
                                     if num_of_lots >=max_num_lots:
-                                       num_of_lots = 5
-                                    entry_price = local_low1 - (tick_val * 2)
-                                    exit_price = current_high1 + (tick_val * 2)
+                                       num_of_lots = max_num_lots
+                                entry_price = current_low1 - (tick_val * 2)
+                                exit_price = current_high1 + (tick_val * 2)
                                 print("\033[31m<------ SHORT ENTRY ------>(LH1 < PLH1) AND (LH1 <= LH2)\033[0m")  # ANSI escape codes for this color coding to work
                                 print("        ENTRY PRICE = ", entry_price)
                                 print("        num_of_lots = ",round(num_of_lots))
@@ -389,10 +388,7 @@ for index1, row1 in data1.iterrows():
                        print("-----------------------------------End of iteration-------------------------------------")
 
 # Save trade entries to a CSV file
-trade_entries_long_df = pd.DataFrame(trade_entries_long)
-trade_entries_long_df.to_csv(output_file_path_long, index=False)
-trade_entries_short_df = pd.DataFrame(trade_entries_short)
-trade_entries_short_df.to_csv(output_file_path_short, index=False)
+combined_trades = pd.DataFrame(trade_entries_long + trade_entries_short )
 
 max_loss_color = "\033[31m" if max_loss < 0 else "\033[32m"
 max_profit_color = "\033[31m" if max_profit < 0 else "\033[32m"
@@ -413,7 +409,7 @@ print("        num of trades = ", num_of_trades)
 print("Total Positive Trades =", total_positive_trades)
 print("Total Negative Trades =", total_negative_trades)
 
-# Prepare summary statistics
+#  Prepare summary statistics
 summary_stats_long = {
     'Type': 'Summary',
     'Entry Time': '',
@@ -448,9 +444,6 @@ summary_stats_short = summary_stats_long.copy()
 trade_entries_long.append(summary_stats_long)
 trade_entries_short.append(summary_stats_short)
 
-# Save the trade entries along with summary statistics to CSV files
-trade_entries_long_df = pd.DataFrame(trade_entries_long)
-trade_entries_long_df.to_csv(output_file_path_long, index=False)
 
-trade_entries_short_df = pd.DataFrame(trade_entries_short)
-trade_entries_short_df.to_csv(output_file_path_short, index=False)
+
+
