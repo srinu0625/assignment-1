@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\ARB_office\data\cl 240.csv"
-file_path2 = r"D:\ARB_office\data\cl d.csv"
+file_path1 = r"D:\ARB_office\data\bt 240.csv"
+file_path2 = r"D:\ARB_office\data\bt d.csv"
 # Load the data
 try:
     data1 = pd.read_csv(file_path1)
@@ -12,8 +12,8 @@ except Exception as e:
     print("Error loading data:", e)
     exit()
 
-contract_size = 100
-tick_val = 0.01
+contract_size = 0.1
+tick_val = 5
 
 ## Column names
 high_column_name = 'High'
@@ -95,8 +95,8 @@ for index1, row1 in data1.iterrows():
                                 prev_local_high1 = local_high1
                             local_high1 = temp_high1
 
-                        # if current_low1 < prev_local_low1 and current_high1 < prev_local_high1:
-                        #     local_high1 = prev_local_high1 
+                        if current_low1 < prev_local_low1 and current_high1 < prev_local_high1:
+                             local_high1 = prev_local_high1 
                               
                         # Printing data for data2
                         print("----240 MIN :----", current_time1)
@@ -132,8 +132,8 @@ for index1, row1 in data1.iterrows():
                                 prev_local_high2 = local_high2
                             local_high2 = temp_high2
 
-                        # if current_low1 < prev_local_low1 and current_high1 < prev_local_high1:
-                        #      local_low1 = prev_local_low1
+                        if current_low1 < prev_local_low1 and current_high1 < prev_local_high1:
+                             local_low1 = prev_local_low1
 
                         # Printing data for data2
                         print("---- DAILY :----", current_time2)

@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\data\es 240.csv"
-file_path2 = r"D:\data\es d.csv"
+file_path1 = r"C:\Users\lenovo\Downloads\es 240 min.csv"
+file_path2 = r"C:\Users\lenovo\Downloads\es 60 min.csv"
 
 # Load the data
 try:
@@ -209,7 +209,7 @@ for index1, row1 in data1.iterrows():
                         # bearish candle-------------------------------------------------------------------------
                         if local_low1 > 0:
                             if (local_high1 < prev_local_high1) and  (current_low1 < previous_low1) and (current_high1 > previous_high1) and (current_low1 < previous_low1) and not bull and not flag:
-                                entry_price = current_low11 - (tick_val * 2)
+                                entry_price = current_low1 - (tick_val * 2)
                             else:
                                 entry_price = current_low1 - (tick_val * 2)
                             loss_for_trade = abs(current_low1 - current_high1 + ( tick_val * 4)) * contract_size

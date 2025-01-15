@@ -1,6 +1,6 @@
 import pandas as pd
 
-file_path = r"C:\Users\lenovo\Downloads\ES 1 HOUR.csv"
+file_path = r"C:\Users\lenovo\Downloads\snp 240 min.csv"
 
 # Load the data
 try:
@@ -38,7 +38,7 @@ for i in range(9, len(df)):  # Start from 9 to ensure we have enough data for SM
     try:
         sma = round(df['SMA'].iloc[i], 2)  # Current day's SMA
         date_time = df['Date (GMT)'].iloc[i]  # Date and Time for the current row
-        prev_sma = round(df['SMA'].iloc[i-1], 2)  # Previous day's SMA
+        prev_sma = round(df['SMA'].iloc[i], 2)  # Previous day's SMA
 
         # Print the current SMA along with the Date and Time at each index
         print(f"Index {i} - Date: {date_time} - SMA: {sma}")
@@ -136,12 +136,15 @@ else:
 
 # Additional summary statistics
 print("\nTrading Performance Summary:")
-print(f"Max Profit: \033[92m{max_profit:.2f}\033[0m")
-print(f"Max Loss: \033[91m{max_loss:.2f}\033[0m")
-print(f"Positive PnL: \033[92m{positive_pnl:.2f}\033[0m")
-print(f"Negative PnL: \033[91m{negative_pnl:.2f}\033[0m")
-print(f"Total Long PnL: \033[94m{total_long_pnl:.2f}\033[0m")
+print(f"     Max Profit: \033[92m{max_profit:.2f}\033[0m")
+print(f"       Max Loss: \033[91m{max_loss:.2f}\033[0m")
+print(f"   Positive PnL: \033[92m{positive_pnl:.2f}\033[0m")
+print(f"   Negative PnL: \033[91m{negative_pnl:.2f}\033[0m")
+print(f" Total Long PnL: \033[94m{total_long_pnl:.2f}\033[0m")
 print(f"Total Short PnL: \033[94m{total_short_pnl:.2f}\033[0m")
-print(f"Total P&L: \033[95m{TOTAL_P_L:.2f}\033[0m")
-print(f"Success Rate: \033[92m{success_rate:.2f}%\033[0m")
-print(f"Failure Rate: \033[91m{failure_rate:.2f}%\033[0m")
+print(f"      Total P&L: \033[95m{TOTAL_P_L:.2f}\033[0m")
+print(f"Positive Trades: \033[92m{total_positive_trades}\033[0m")
+print(f"Negative Trades: \033[91m{total_negative_trades}\033[0m")
+print(f"   Total Trades: {num_of_trades}")
+print(f"   Success Rate: \033[92m{success_rate:.2f}%\033[0m")
+print(f"   Failure Rate: \033[91m{failure_rate:.2f}%\033[0m")
