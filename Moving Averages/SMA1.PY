@@ -1,6 +1,6 @@
 import pandas as pd
 
-file_path = r"C:\Users\lenovo\Downloads\snp 60 min.csv"
+file_path = r"D:\candles\snp 5min.csv"
 
 # Load the data
 try:
@@ -13,7 +13,7 @@ except Exception as e:
 print("Column names:", df.columns)
 
 # Calculate 100-day Simple Moving Average (SMA)
-df['SMA'] = df['close'].rolling(window=9).mean()
+df['SMA'] = df['close'].rolling(window=2).mean()
 
 # Initialize variables
 position = 0  # 0 = no position, 1 = in long position, 2 = in short position
@@ -34,7 +34,7 @@ num_of_trades = 0
 trades = []
 
 # Iterate over each row to simulate trades based on SMA
-for i in range(9, len(df)):  # Start from 100 to ensure we have enough data for SMA calculation
+for i in range(2, len(df)):  # Start from 5 to ensure we have enough data for SMA calculation
     try:
         sma = round(df['SMA'].iloc[i], 2)  # Current day's SMA
         date_time = df['Date (GMT)'].iloc[i]  # Date and Time for the current row
@@ -44,7 +44,7 @@ for i in range(9, len(df)):  # Start from 100 to ensure we have enough data for 
         print(f"Index {i} - Date: {date_time} - SMA: {sma}")
 
         # LONG ENTRY: Current price > SMA (buy signal)
-        if df['High'].iloc[i] > sma and position == 0:
+        if df['close'].iloc[i] > sma and position == 0:
             Entry_price = df['close'].iloc[i]  # Entry at the close of the current candle (long)
             Entry_time = date_time
             position = 1  # Long position
@@ -84,7 +84,7 @@ for i in range(9, len(df)):  # Start from 100 to ensure we have enough data for 
             position = 0  # Exit the long position
 
         # SHORT ENTRY: Current price < SMA (sell signal for short)
-        elif df['low'].iloc[i] < sma and position == 0:
+        elif df['close'].iloc[i] < sma and position == 0:
             Entry_price = df['close'].iloc[i]  # Entry at the close of the current candle (short)
             Entry_time = date_time
             position = 2  # Short position

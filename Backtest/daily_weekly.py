@@ -152,7 +152,7 @@ for index1, row1 in data1.iterrows():
                             daily_high = high1
                         if daily_low == 0 or low1 < daily_low:
                             daily_low = low1
-                        daily_close = close1
+                            daily_close = close1
 
                         # Logic for daily candle completion (every 96th 15-min interval = 1 day)
                         if daily_candle_count % 96 == 0:

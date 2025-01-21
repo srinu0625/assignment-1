@@ -1,6 +1,6 @@
 import pandas as pd
 
-file_path = r"C:\Users\lenovo\Downloads\snp 240 min.csv"
+file_path = r"C:\Users\lenovo\Downloads\ES 1 HOUR.csv"
 
 # Load the data
 try:
@@ -12,8 +12,16 @@ except Exception as e:
 # Print column names to verify
 print("Column names:", df.columns)
 
-# Calculate 9-day Simple Moving Average (SMA)
-df['SMA'] = df['close'].rolling(window=9).mean()
+# Calculate EMA
+n = 9  # Period for EMA
+multiplier = 2 / (n + 1)
+# Initialize the first EMA value using SMA
+# Formula for calculating EMA
+def calculate_ema(price_today, ema_yesterday, time_period):
+    multiplier = 2 / (1 + time_period)
+    ema = (price_today * multiplier) + (ema_yesterday * (1 - multiplier))
+    return ema
+
 
 # Initialize variables
 position = 0  # 0 = no position, 1 = in long position, 2 = in short position
@@ -30,43 +38,42 @@ total_positive_trades = 0
 total_negative_trades = 0
 num_of_trades = 0
 
-# Initialize list to store trades
-trades = []
-
-# Iterate over each row to simulate trades based on SMA
-for i in range(9, len(df)):  # Start from 9 to ensure we have enough data for SMA calculation
+# Iterate over each row to simulate trades based on EMA
+for i in range(n, len(df)):  # Start from n to ensure EMA is available
     try:
-        sma = round(df['SMA'].iloc[i], 2)  # Current day's SMA
+        close_today = df['close'].iloc[i]  # Today's close price
+        ema_yesterday = df['ema'].iloc[i-1]  # Yesterday's EMA
+        ema = (close_today * multiplier) + (ema_yesterday * (1 - multiplier))  # EMA formula
+        df.at[i, 'ema'] = ema  # Update the EMA for today (use .at to avoid warnings)
+        
+        ema = round(ema, 2)  # Current day's EMA
         date_time = df['Date (GMT)'].iloc[i]  # Date and Time for the current row
-        prev_sma = round(df['SMA'].iloc[i], 2)  # Previous day's SMA
 
-        # Print the current SMA along with the Date and Time at each index
-        print(f"Index {i} - Date: {date_time} - SMA: {sma}")
+        # Print the current EMA along with the Date and Time at each index
+        print(f"Index {i} - Date: {date_time} - EMA: {ema}")
 
-        # LONG ENTRY: Current price > SMA (buy signal)
-        if df['close'].iloc[i] > sma and position == 0:
+        # LONG ENTRY: Current price > EMA (buy signal)
+        if df['close'].iloc[i] > ema and position == 0:
             Entry_price = df['close'].iloc[i]  # Entry at the close of the current candle (long)
             Entry_time = date_time
             position = 1  # Long position
             print("\033[32m<------ LONG ENTRY ------>\033[0m")
             print(f" ENTRY PRICE = {Entry_price}")
             print(f" Entry Date = {Entry_time}")
-            print(f"SMA at entry: {sma}")
+            print(f"EMA at entry: {ema}")
 
-        # LONG EXIT: Current price < SMA (sell signal for long)
-        elif df['close'].iloc[i] < sma and position == 1:
+        # LONG EXIT: Current price < EMA (sell signal for long)
+        elif df['close'].iloc[i] < ema and position == 1:
             Exit_price = df['close'].iloc[i]  # Exit at the close price of the current candle (long)
             Exit_time = date_time
             # Calculate P&L for long
             pnl = (Exit_price - Entry_price) * num_of_lots * contract_size
             TOTAL_P_L += pnl
             total_long_pnl += pnl
-           
+
             # Update max profit, max loss, positive/negative PnL
-            if pnl > max_profit:
-                max_profit = pnl
-            if pnl < max_loss:
-                max_loss = pnl
+            max_profit = max(max_profit, pnl)
+            max_loss = min(max_loss, pnl)
             if pnl > 0:
                 positive_pnl += pnl
                 total_positive_trades += 1
@@ -78,23 +85,23 @@ for i in range(9, len(df)):  # Start from 9 to ensure we have enough data for SM
             print("\033[32m<------ LONG EXIT ------>\033[0m")
             print(f" EXIT PRICE = {Exit_price}")
             print(f" Exit Date = {Exit_time}")
-            print(f"SMA at exit: {sma}")
+            print(f"EMA at exit: {ema}")
             print(f"P&L for this trade: {pnl}, Cumulative P&L: {TOTAL_P_L}")
             print("-----------------------------------")
             position = 0  # Exit the long position
 
-        # SHORT ENTRY: Current price < SMA (sell signal for short)
-        elif df['close'].iloc[i] < sma and position == 0:
+        # SHORT ENTRY: Current price < EMA (sell signal for short)
+        elif df['close'].iloc[i] < ema and position == 0:
             Entry_price = df['close'].iloc[i]  # Entry at the close of the current candle (short)
             Entry_time = date_time
             position = 2  # Short position
             print("\033[31m<------ SHORT ENTRY ------>\033[0m")
             print(f" ENTRY PRICE = {Entry_price}")
             print(f" Entry Date = {Entry_time}")
-            print(f"SMA at entry: {sma}")
+            print(f"EMA at entry: {ema}")
 
-        # SHORT EXIT: Current price > SMA (buy signal to exit short)
-        elif df['close'].iloc[i] > sma and position == 2:
+        # SHORT EXIT: Current price > EMA (buy signal to exit short)
+        elif df['close'].iloc[i] > ema and position == 2:
             Exit_price = df['close'].iloc[i]  # Exit at the close of the current candle (short)
             Exit_time = date_time
             # Calculate P&L for short
@@ -103,10 +110,8 @@ for i in range(9, len(df)):  # Start from 9 to ensure we have enough data for SM
             total_short_pnl += pnl
 
             # Update max profit, max loss, positive/negative PnL
-            if pnl > max_profit:
-                max_profit = pnl
-            if pnl < max_loss:
-                max_loss = pnl
+            max_profit = max(max_profit, pnl)
+            max_loss = min(max_loss, pnl)
             if pnl > 0:
                 positive_pnl += pnl
                 total_positive_trades += 1
@@ -118,7 +123,7 @@ for i in range(9, len(df)):  # Start from 9 to ensure we have enough data for SM
             print("\033[31m<------ SHORT EXIT ------>\033[0m")
             print(f" EXIT PRICE = {Exit_price}")
             print(f" Exit Date = {Exit_time}")
-            print(f"SMA at exit: {sma}")
+            print(f"EMA at exit: {ema}")
             print(f"P&L for this trade: {pnl}, Cumulative P&L: {TOTAL_P_L}")
             print("-----------------------------------")
             position = 0  # Exit the short position
