@@ -46,7 +46,7 @@ sns.heatmap(
     fmt='.2f',
     linewidths=0.5
 )
-plt.title('Correlation Matrix of metals')
+plt.title('Correlation Matrix of comodities')
 
 # Save the plot as a file (e.g., PNG) in the desired directory
 save_path = r"D:\PNL output\correlation.png"  # Update the path here
