@@ -1,6 +1,6 @@
 import pandas as pd
 
-file_path = r"C:\Users\lenovo\Downloads\snp 60 min.csv"
+file_path = r"D:\candles\snp 1Y.csv"
 
 # Load the data
 try:
@@ -13,14 +13,16 @@ except Exception as e:
 print("Column names:", df.columns)
 
 # Calculate 100-day Simple Moving Average (SMA)
-df['SMA'] = df['close'].rolling(window=9).mean()
+n = 4
+df['SMA'] = df['close'].rolling(window=n).mean()
 
 # Initialize variables
 position = 0  # 0 = no position, 1 = in long position, 2 = in short position
 Entry_price = Exit_time = Entry_time = Exit_price = 0
-cumulative_pnl = total_long_pnl = total_short_pnl = TOTAL_P_L = 0
+cumulative_pnl = total_long_pnl = total_short_pnl = total_pnl = 0
 contract_size = 5  # Given contract size is 5
-num_of_lots = 1  # Define number of lots (can be adjusted)
+num_of_lots = 1
+trade_cost = 1.30  # Define number of lots (can be adjusted)
 
 max_profit = float('-inf')
 max_loss = float('inf')
@@ -32,9 +34,15 @@ num_of_trades = 0
 
 # Initialize list to store trades
 trades = []
+# Max Drawdown and Run-up variables
+equity_curve = []  # Track cumulative P&L for each trade
+highest_equity = 0  # Tracks the highest equity value so far
+lowest_equity = 0  # Tracks the lowest equity value so far
+max_drawdown = 0
+max_runup = 0
 
 # Iterate over each row to simulate trades based on SMA
-for i in range(9, len(df)):  # Start from 100 to ensure we have enough data for SMA calculation
+for i in range(n, len(df)):  # Start from 5 to ensure we have enough data for SMA calculation
     try:
         sma = round(df['SMA'].iloc[i], 2)  # Current day's SMA
         date_time = df['Date (GMT)'].iloc[i]  # Date and Time for the current row
@@ -44,7 +52,7 @@ for i in range(9, len(df)):  # Start from 100 to ensure we have enough data for 
         print(f"Index {i} - Date: {date_time} - SMA: {sma}")
 
         # LONG ENTRY: Current price > SMA (buy signal)
-        if df['High'].iloc[i] > sma and position == 0:
+        if df['close'].iloc[i] > sma and position == 0:
             Entry_price = df['close'].iloc[i]  # Entry at the close of the current candle (long)
             Entry_time = date_time
             position = 1  # Long position
@@ -54,12 +62,12 @@ for i in range(9, len(df)):  # Start from 100 to ensure we have enough data for 
             print(f"SMA at entry: {sma}")
 
         # LONG EXIT: Current price < SMA (sell signal for long)
-        elif df['close'].iloc[i] < sma and position == 1:
+        elif df['Low'].iloc[i] < sma and position == 1:
             Exit_price = df['close'].iloc[i]  # Exit at the close price of the current candle (long)
             Exit_time = date_time
             # Calculate P&L for long
             pnl = (Exit_price - Entry_price) * num_of_lots * contract_size
-            TOTAL_P_L += pnl
+            total_pnl += pnl
             total_long_pnl += pnl
            
             # Update max profit, max loss, positive/negative PnL
@@ -75,16 +83,26 @@ for i in range(9, len(df)):  # Start from 100 to ensure we have enough data for 
                 total_negative_trades += 1
             num_of_trades += 1
 
+            # Update Peak Equity and Trough Equity
+            highest_equity = max(highest_equity, total_pnl)  # Update peak equity
+            lowest_equity = min(lowest_equity, total_pnl)  # Update trough equity
+
+            # Calculate Drawdown and Run-up
+            drawdown = highest_equity - total_pnl
+            runup = total_pnl - lowest_equity
+            max_drawdown = max(max_drawdown, drawdown)
+            max_runup = max(max_runup, runup)
+
             print("\033[32m<------ LONG EXIT ------>\033[0m")
             print(f" EXIT PRICE = {Exit_price}")
             print(f" Exit Date = {Exit_time}")
             print(f"SMA at exit: {sma}")
-            print(f"P&L for this trade: {pnl}, Cumulative P&L: {TOTAL_P_L}")
+            print(f"P&L for this trade: {pnl}, Cumulative P&L: {total_pnl}")
             print("-----------------------------------")
             position = 0  # Exit the long position
 
         # SHORT ENTRY: Current price < SMA (sell signal for short)
-        elif df['low'].iloc[i] < sma and position == 0:
+        elif df['close'].iloc[i] < sma and position == 0:
             Entry_price = df['close'].iloc[i]  # Entry at the close of the current candle (short)
             Entry_time = date_time
             position = 2  # Short position
@@ -94,12 +112,12 @@ for i in range(9, len(df)):  # Start from 100 to ensure we have enough data for 
             print(f"SMA at entry: {sma}")
 
         # SHORT EXIT: Current price > SMA (buy signal to exit short)
-        elif df['close'].iloc[i] > sma and position == 2:
+        elif df['High'].iloc[i] > sma and position == 2:
             Exit_price = df['close'].iloc[i]  # Exit at the close of the current candle (short)
             Exit_time = date_time
             # Calculate P&L for short
             pnl = (Entry_price - Exit_price) * num_of_lots * contract_size
-            TOTAL_P_L += pnl
+            total_pnl += pnl
             total_short_pnl += pnl
 
             # Update max profit, max loss, positive/negative PnL
@@ -115,11 +133,22 @@ for i in range(9, len(df)):  # Start from 100 to ensure we have enough data for 
                 total_negative_trades += 1
             num_of_trades += 1
 
+            # Update Peak Equity and Trough Equity
+            highest_equity = max(highest_equity, total_pnl)  # Update peak equity
+            lowest_equity = min(lowest_equity, total_pnl)  # Update trough equity
+
+            # Calculate Drawdown and Run-up
+            drawdown = highest_equity - total_pnl
+            runup = total_pnl - lowest_equity
+            max_drawdown = max(max_drawdown, drawdown)
+            max_runup = max(max_runup, runup)
+
+
             print("\033[31m<------ SHORT EXIT ------>\033[0m")
             print(f" EXIT PRICE = {Exit_price}")
             print(f" Exit Date = {Exit_time}")
             print(f"SMA at exit: {sma}")
-            print(f"P&L for this trade: {pnl}, Cumulative P&L: {TOTAL_P_L}")
+            print(f"P&L for this trade: {pnl}, Cumulative P&L: {total_pnl}")
             print("-----------------------------------")
             position = 0  # Exit the short position
 
@@ -127,6 +156,9 @@ for i in range(9, len(df)):  # Start from 100 to ensure we have enough data for 
         print("Error:", e)
 
 # Calculate success rate and failure rate
+Net = total_pnl - num_of_trades * trade_cost
+TradeCost = num_of_trades * trade_cost
+
 if num_of_trades > 0:  # To avoid division by zero
     success_rate = (total_positive_trades / num_of_trades) * 100
     failure_rate = (total_negative_trades / num_of_trades) * 100
@@ -134,17 +166,45 @@ else:
     success_rate = 0
     failure_rate = 0
 
-# Additional summary statistics
+#  Additional summary statistics
 print("\nTrading Performance Summary:")
-print(f"     Max Profit: \033[92m{max_profit:.2f}\033[0m")
-print(f"       Max Loss: \033[91m{max_loss:.2f}\033[0m")
-print(f"   Positive PnL: \033[92m{positive_pnl:.2f}\033[0m")
-print(f"   Negative PnL: \033[91m{negative_pnl:.2f}\033[0m")
-print(f" Total Long PnL: \033[94m{total_long_pnl:.2f}\033[0m")
-print(f"Total Short PnL: \033[94m{total_short_pnl:.2f}\033[0m")
-print(f"      Total P&L: \033[95m{TOTAL_P_L:.2f}\033[0m")
-print(f"Positive Trades: \033[92m{total_positive_trades}\033[0m")
-print(f"Negative Trades: \033[91m{total_negative_trades}\033[0m")
-print(f"   Total Trades: {num_of_trades}")
-print(f"   Success Rate: \033[92m{success_rate:.2f}%\033[0m")
-print(f"   Failure Rate: \033[91m{failure_rate:.2f}%\033[0m")
+print(f"     Max Profit = \033[92m{max_profit}\033[0m")
+print(f"       Max Loss = \033[91m{max_loss}\033[0m")
+print(f"   Positive PnL = \033[92m{positive_pnl}\033[0m")
+print(f"   Negative PnL = \033[91m{negative_pnl}\033[0m")
+print(f" Total Long PnL = \033[94m{total_long_pnl}\033[0m")
+print(f"Total Short PnL = \033[94m{total_short_pnl}\033[0m")
+print(f"          Gross = {total_pnl}")
+print(f"     Trade Cost = {TradeCost}")
+print(f"            Net = {Net}")
+print(f"   Max Drawdown = {max_drawdown}")
+print(f"     Max Run-up = {max_runup}")
+print(f"Positive Trades = \033[92m{total_positive_trades}\033[0m")
+print(f"Negative Trades = \033[91m{total_negative_trades}\033[0m")
+print(f"   Total Trades = {num_of_trades}")
+print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
+print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
+
+
+
+#  Additional summary statistics
+print("\nTrading Performance Summary:")
+
+print(f"{max_profit}")
+print(f"{max_loss}")
+print(f"{positive_pnl}")
+print(f"{negative_pnl}")
+print(f"{total_long_pnl}")
+print(f"{total_short_pnl}")
+print(f"{total_pnl}")
+print(f"{TradeCost}")
+print(f"{Net}")
+print(f"{max_drawdown}")
+print(f"{max_runup}")
+print(f"{total_positive_trades}")
+print(f"{total_negative_trades}")
+print(f"{num_of_trades}")
+print(f"{success_rate}%")
+print(f"{failure_rate}%")
+
+print("------------")

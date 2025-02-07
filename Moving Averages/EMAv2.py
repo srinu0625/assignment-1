@@ -1,6 +1,6 @@
 import pandas as pd
 
-file_path = r"D:\candles\snp 1M.csv"
+file_path = r"D:\candles\snp daily.csv"
 
 # Load the data
 try:
@@ -13,7 +13,7 @@ except Exception as e:
 print("Column names:", df.columns)
 
 # Calculate EMA
-n = 20  # Period for EMA
+n = 100  # Period for EMA
 multiplier = 2 / (n + 1)
 # Initialize the first EMA value using SMA
 df['ema'] = df['close'].rolling(window=n).mean()  # Initial SMA for first n periods
@@ -64,7 +64,7 @@ for i in range(n, len(df)):  # Start from n to ensure EMA is available
             print("-----------------------------------------")
 
         # LONG exit: Current price < EMA (sell signal for long)
-        elif df['close'].iloc[i] < ema and position == 1:
+        elif df['Low'].iloc[i] < ema and position == 1:
             Exit_price = df['close'].iloc[i]  # exit at the close price of the current candle (long)
             Exit_time = date_time
             # Calculate P&L for long
@@ -114,7 +114,7 @@ for i in range(n, len(df)):  # Start from n to ensure EMA is available
             print(f"EMA at entry: {ema}")
 
         # SHORT exit: Current price > EMA (buy signal to exit short)
-        elif df['close'].iloc[i] > ema and position == 2:
+        elif df['High'].iloc[i] > ema and position == 2:
             Exit_price = df['close'].iloc[i]  # exit at the close of the current candle (short)
             Exit_time = date_time
             # Calculate P&L for short
