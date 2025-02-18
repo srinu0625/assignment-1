@@ -4,24 +4,34 @@ import seaborn as sns           # A Python library for data visualization, espec
 import matplotlib.pyplot as plt # A plotting library used for visualizations.
 
 # File paths for S&P 500 and Gold data
-file_path1 = r"D:\candles\snp daily.csv" # S&P 500
-file_path2 = r"D:\candles\nq daily.csv"  # NASDAQ
-file_path3 = r"D:\candles\ym daily.csv"  # dow jones
+file_path1 = r"D:\candles\cl daily.csv" # S&P 500
+file_path2 = r"D:\candles\br. daily.csv"  # NASDAQ
+file_path3 = r"D:\candles\ng daily.csv" 
+file_path4 = r"D:\candles\rbob daily.csv"  # dow jones
+file_path5 = r"D:\candles\go daily.csv"  # NASDAQ
+file_path6 = r"D:\candles\ho daily.csv"  # NASDAQ
 
 # Load the data
 try:
     data1 = pd.read_csv(file_path1)
     data2 = pd.read_csv(file_path2)
     data3 = pd.read_csv(file_path3)
+    data4 = pd.read_csv(file_path4)
+    data5 = pd.read_csv(file_path5)
+    data6 = pd.read_csv(file_path6)
+                        
 except Exception as e:
     print("Error loading data:", e)
     exit()
 
 # Create a DataFrame with the 'Close' prices of all datasets
 combined_df = pd.DataFrame({
-    's&p': data1['close'],  # S&P 500
-    'nq': data2['close'],  # NASDAQ
-    'dow': data3['close'],  # Dow jones
+    'crude': data1['close'],  # S&P 500
+    'brent crude': data2['close'],  # NASDAQ
+    'natual gas': data3['close'],  # Dow jones
+    'rbob natural gas': data4['close'],  # Dow jones
+    'gas oil': data5['close'],  # NASDAQ
+    'heating oil':data6['close'],#heating oil
 })
 
 # Drop rows with missing values
@@ -40,7 +50,7 @@ print(correlation_matrix)
 print("-----------------------------------------------")
 
 # Visualize the correlation matrix with a heatmap
-plt.figure(figsize=(5, 3))
+plt.figure(figsize=(8, 3))
 sns.heatmap(
     correlation_matrix,
     annot=True,
@@ -49,7 +59,7 @@ sns.heatmap(
     fmt='.2f',
     linewidths=0.5
 )
-plt.title('Correlation Matrix of Assets')
+plt.title('Correlation Matrix of Energies')
 
 # Save the plot as a file (e.g., PNG) in the desired directory
 save_path = r"D:\PNL output\correlation.png"  # Update the path here
