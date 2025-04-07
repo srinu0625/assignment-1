@@ -1,6 +1,8 @@
 import pandas as pd
+import time
 
-file_path = r"D:\candles\snp daily.csv"
+
+file_path = r"C:\Users\lenovo\Downloads\ES Jun25_30min.csv"
 
 # Load the data
 try:
@@ -15,15 +17,18 @@ print("Column names:", df.columns)
 # Calculate EMA
 n = 9  # Period for EMA
 multiplier = 2 / (n + 1)
-df['ema'] = df['close'].rolling(window=n).mean()  # Initial SMA for first n periods
+df['ema'] = df['Close'].rolling(window=n).mean()  # Initial SMA for first n periods
 
 # Calculate RSI (14-period)
 rsi_period = 14
-delta = df['close'].diff()
-gain = delta.clip(lower=0)
-loss = -delta.clip(upper=0)
-avg_gain = gain.rolling(window=rsi_period).mean()
-avg_loss = loss.rolling(window=rsi_period).mean()
+# Correct RSI using Wilder's smoothing (like TradingView)
+delta = df['Close'].diff()
+gain = delta.where(delta > 0, 0)
+loss = -delta.where(delta < 0, 0)
+
+avg_gain = gain.ewm(alpha=1/rsi_period, min_periods=rsi_period).mean()
+avg_loss = loss.ewm(alpha=1/rsi_period, min_periods=rsi_period).mean()
+
 rs = avg_gain / avg_loss
 df['rsi'] = 100 - (100 / (1 + rs))
 df['rsi'] = df['rsi'].round(2)
@@ -49,15 +54,15 @@ max_runup = 0
 
 for i in range(max(n, rsi_period), len(df)):
     try:
-        close_today = df['close'].iloc[i]
+        close_today = df['Close'].iloc[i]
         ema_yesterday = df['ema'].iloc[i-1]
-        high = df['high'].iloc[i]
-        low = df['low'].iloc[i]
+        high = df['High'].iloc[i]
+        low = df['Low'].iloc[i]
         ema = (close_today * multiplier) + (ema_yesterday * (1 - multiplier))
         df.at[i, 'ema'] = ema
         ema = round(ema, 2)
         rsi = df['rsi'].iloc[i]
-        date_time = df['Date (GMT)'].iloc[i]
+        date_time = df['Date(GMT)'].iloc[i]
 
         # LONG Entry
         if close_today > ema and rsi > 65 and position == 0:
@@ -70,6 +75,7 @@ for i in range(max(n, rsi_period), len(df)):
             print(f"RSI at entry = {rsi}")
             print(f"High = {high}, Low = {low}")
             print("-----------------------------------------")
+            time.sleep(1)
             position = 1
             
         # LONG Exit
@@ -104,6 +110,7 @@ for i in range(max(n, rsi_period), len(df)):
             print(f"  Current Drawdown = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f"    Current Run-up = {runup},      Max Run-up = {max_runup}")
             print("-------------------------------------------------")
+            time.sleep(1)
             position = 0
 
         # SHORT Entry
@@ -118,6 +125,7 @@ for i in range(max(n, rsi_period), len(df)):
             print(f"RSI at entry = {rsi}")
             print(f"High = {high}, Low = {low}")
             print("-----------------------------------------")
+            time.sleep(1)
 
         # SHORT Exit
         elif position == 2 and (close_today > ema or rsi > 50):
@@ -152,6 +160,7 @@ for i in range(max(n, rsi_period), len(df)):
             print(f"  Current Drawdown = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f"    Current Run-up = {runup},      Max Run-up = {max_runup}")
             print("-------------------------------------------------------")
+            time.sleep(1)
             position = 0
 
     except Exception as e:
@@ -163,20 +172,22 @@ TradeCost = num_of_trades * trade_cost
 success_rate = round((total_positive_trades / num_of_trades) * 100, 2) if num_of_trades > 0 else 0
 failure_rate = round((total_negative_trades / num_of_trades) * 100, 2) if num_of_trades > 0 else 0
 
+#  Additional summary statistics
 print("\nTrading Performance Summary:")
-print(f"Max Profit = {max_profit}")
-print(f"Max Loss = {max_loss}")
-print(f"Positive PnL = {positive_pnl}")
-print(f"Negative PnL = {negative_pnl}")
-print(f"Total Long PnL = {total_long_pnl}")
-print(f"Total Short PnL = {total_short_pnl}")
-print(f"Gross = {total_pnl}")
-print(f"Trade Cost = {TradeCost}")
-print(f"Net = {Net}")
-print(f"Max Drawdown = {max_drawdown}")
-print(f"Max Run-up = {max_runup}")
-print(f"Positive Trades = {total_positive_trades}")
-print(f"Negative Trades = {total_negative_trades}")
-print(f"Total Trades = {num_of_trades}")
-print(f"Success Rate = {success_rate}%")
-print(f"Failure Rate = {failure_rate}%")
+print(f"     Max Profit = \033[92m{max_profit}\033[0m")
+print(f"       Max Loss = \033[91m{max_loss}\033[0m")
+print(f"   Positive PnL = \033[92m{positive_pnl}\033[0m")
+print(f"   Negative PnL = \033[91m{negative_pnl}\033[0m")
+print(f" Total Long PnL = \033[94m{total_long_pnl}\033[0m")
+print(f"Total Short PnL = \033[94m{total_short_pnl}\033[0m")
+print(f"          Gross = {total_pnl}")
+print(f"     Trade Cost = {round(TradeCost,2)}")
+print(f"            Net = {Net}")
+print(f"   Max Drawdown = {max_drawdown}")
+print(f"     Max Run-up = {max_runup}")
+print(f"Positive Trades = \033[92m{total_positive_trades}\033[0m")
+print(f"Negative Trades = \033[91m{total_negative_trades}\033[0m")
+print(f"   Total Trades = {num_of_trades}")
+print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
+print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
+
