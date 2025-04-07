@@ -51,6 +51,8 @@ for i in range(max(n, rsi_period), len(df)):
     try:
         close_today = df['close'].iloc[i]
         ema_yesterday = df['ema'].iloc[i-1]
+        high = df['high'].iloc[i]
+        low = df['low'].iloc[i]
         ema = (close_today * multiplier) + (ema_yesterday * (1 - multiplier))
         df.at[i, 'ema'] = ema
         ema = round(ema, 2)
@@ -66,6 +68,7 @@ for i in range(max(n, rsi_period), len(df)):
             print(f"  entry Date = {Entry_time}")
             print(f"EMA at entry = {ema}")
             print(f"RSI at entry = {rsi}")
+            print(f"High = {high}, Low = {low}")
             print("-----------------------------------------")
             position = 1
             
@@ -95,8 +98,8 @@ for i in range(max(n, rsi_period), len(df)):
             print("\033[32m<------ LONG exit ------>\033[0m")
             print(f"        exit PRICE = {Exit_price}")
             print(f"        exit Date  = {Exit_time}")
-            print(f"       EMA at exit = {ema}")
-            print(f"       RSI at exit = {rsi}")          
+            print(f"       RSI at exit = {rsi}")
+            print(f"       High = {high}, Low = {low}")
             print(f"P&L for this trade = {pnl},    Cumulative P&L = {total_pnl}")
             print(f"  Current Drawdown = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f"    Current Run-up = {runup},      Max Run-up = {max_runup}")
@@ -113,6 +116,7 @@ for i in range(max(n, rsi_period), len(df)):
             print(f"  entry Date = {Entry_time}")
             print(f"EMA at entry = {ema}")
             print(f"RSI at entry = {rsi}")
+            print(f"High = {high}, Low = {low}")
             print("-----------------------------------------")
 
         # SHORT Exit
@@ -142,8 +146,8 @@ for i in range(max(n, rsi_period), len(df)):
             print("\033[31m<------ SHORT exit ------>\033[0m")
             print(f"        exit PRICE = {Exit_price}")
             print(f"         exit Date = {Exit_time}")
-            print(f"       EMA at exit = {ema}")
-            print(f"       RSI at exit = {rsi}")  
+            print(f"       RSI at exit = {rsi}")
+            print(f"       High = {high}, Low = {low}")
             print(f"P&L for this trade = {pnl},    Cumulative P&L = {total_pnl}")
             print(f"  Current Drawdown = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f"    Current Run-up = {runup},      Max Run-up = {max_runup}")
