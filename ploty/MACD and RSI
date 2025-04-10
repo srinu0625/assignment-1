@@ -1,9 +1,7 @@
 import pandas as pd
 import time
-import os
-import re
 
-file_path = r"C:\Users\lenovo\Desktop\New folder (2)\NQ Jun25_5min.csv"
+file_path = r"C:\Users\lenovo\Desktop\New folder (2)\ES Jun25_60min.csv"
  
 # Load CSV
 try:
@@ -34,7 +32,7 @@ df['macd_signal'] = df['macd'].ewm(span=9, adjust=False).mean()
 # Backtest Logic
 position = 0
 Entry_price = Entry_time = Exit_price = Exit_time = 0
-contract_size = 20
+contract_size = 5
 num_of_lots = 1
 trade_cost = 1.30
 
@@ -71,7 +69,7 @@ for i in range(26, len(df)):  # 26 = max lookback period for MACD
             print(f"        RSI = {rsi}")
             print(f"High = {high}, Low = {low}")
             print("-----------------------------------------")
-            #time.sleep(0.5)
+            #time.sleep(1)
 
         # LONG EXIT
         elif position == 1 and (macd < signal or rsi < 50):
@@ -111,7 +109,7 @@ for i in range(26, len(df)):  # 26 = max lookback period for MACD
             print(f"  Current Drawdown = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f"    Current Run-up = {runup},      Max Run-up = {max_runup}") 
             print("---------------------------------------------------------------")
-            #time.sleep(0.5)
+            #time.sleep(1)
             position = 0
 
         # SHORT ENTRY
@@ -127,7 +125,7 @@ for i in range(26, len(df)):  # 26 = max lookback period for MACD
             print(f"        RSI = {rsi}")
             print(f"High = {high}, Low = {low}")
             print("------------------------------------------")
-            #time.sleep(0.5)
+            #time.sleep(1)
 
         # SHORT EXIT
         elif position == 2 and (macd > signal or rsi > 50):
@@ -167,7 +165,7 @@ for i in range(26, len(df)):  # 26 = max lookback period for MACD
             print(f"  Current Drawdown = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f"    Current Run-up = {runup},      Max Run-up = {max_runup}")
             print("---------------------------------------------------------------")
-            #time.sleep(0.5)
+            #time.sleep(1)
             position = 0
 
     except Exception as e:
@@ -178,16 +176,6 @@ TradeCost = num_of_trades * trade_cost
 Net = total_pnl - TradeCost
 success_rate = round((total_positive_trades / num_of_trades) * 100, 2) if num_of_trades > 0 else 0
 failure_rate = round((total_negative_trades / num_of_trades) * 100, 2) if num_of_trades > 0 else 0
-
-# 🔥 Dynamically print product and timeframe info
-file_name = os.path.basename(file_path)
-match = re.search(r'([A-Z]+)\s+\w+_(\d+min)', file_name)
-if match:
-    product = match.group(1)
-    timeframe = match.group(2)
-    print(f"\n\033[1mTrading Performance Summary for {product} {timeframe} EMA and RSI:\033[0m")
-else:
-    print("\n\033[1mTrading Performance Summary:\033[0m")
 
 #  Additional summary statistics
 print("\nTrading Performance Summary:")
