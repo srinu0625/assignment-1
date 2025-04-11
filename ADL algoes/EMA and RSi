@@ -3,7 +3,7 @@ import time
 import os
 import re
 
-file_path = r"C:\Users\lenovo\Desktop\New folder (2)\NQ Jun25_10min.csv"
+file_path = r"C:\Users\lenovo\Desktop\New folder (2)\GC Jun25_15min.csv"
 
 # Load the data
 try:
@@ -35,7 +35,7 @@ df['rsi'] = df['rsi'].round(2)
 position = 0
 Entry_price = Exit_time = Entry_time = Exit_price = 0
 cumulative_pnl = total_long_pnl = total_short_pnl = total_pnl = 0
-contract_size = 20
+contract_size = 100
 num_of_lots = 1
 trade_cost = 1.30
 
