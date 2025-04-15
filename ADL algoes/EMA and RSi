@@ -3,7 +3,7 @@ import time
 import os
 import re
 
-file_path = r"C:\Users\lenovo\Desktop\New folder (2)\GC Jun25_15min.csv"
+file_path = r"C:\Users\lenovo\Desktop\New folder (2)\CL Jun25_240min.csv"
 
 # Load the data
 try:
@@ -66,13 +66,13 @@ for i in range(max(n, rsi_period), len(df)):
         if close_today > ema and rsi > 65 and position == 0:
             Entry_price = close_today
             Entry_time = date_time
-            print("\033[32m<------ LONG entry ------>\033[0m")
+            print("\033[1;32m========== LONG ENTRY =========\033[0m")
             print(f" entry PRICE = {Entry_price}")
             print(f"  entry Date = {Entry_time}")
             print(f"EMA at entry = {ema}")
             print(f"RSI at entry = {rsi}")
             print(f"High = {high}, Low = {low}")
-            print("-----------------------------------------")
+            print("================================\n")
             position = 1
 
         # LONG Exit
@@ -98,7 +98,7 @@ for i in range(max(n, rsi_period), len(df)):
             runup = total_pnl - lowest_equity
             max_drawdown = max(max_drawdown, drawdown)
             max_runup = max(max_runup, runup)
-            print("\033[32m<------ LONG exit ------>\033[0m")
+            print("\033[1;32m========== LONG EXIT =========\033[0m")
             print(f"        exit PRICE = {Exit_price}")
             print(f"        exit Date  = {Exit_time}")
             print(f"       RSI at exit = {rsi}")
@@ -106,7 +106,7 @@ for i in range(max(n, rsi_period), len(df)):
             print(f"P&L for this trade = {pnl},    Cumulative P&L = {total_pnl}")
             print(f"  Current Drawdown = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f"    Current Run-up = {runup},      Max Run-up = {max_runup}")
-            print("-------------------------------------------------")
+            print("================================\n")
             position = 0
 
         # SHORT Entry
@@ -114,13 +114,13 @@ for i in range(max(n, rsi_period), len(df)):
             Entry_price = close_today
             Entry_time = date_time
             position = 2
-            print("\033[31m<------ SHORT entry ------>\033[0m")
+            print("\033[1;31m========== SHORT ENTRY =========\033[0m")
             print(f" entry PRICE = {Entry_price}")
             print(f"  entry Date = {Entry_time}")
             print(f"EMA at entry = {ema}")
             print(f"RSI at entry = {rsi}")
             print(f"High = {high}, Low = {low}")
-            print("-----------------------------------------")
+            print("================================\n")
 
         # SHORT Exit
         elif position == 2 and (close_today > ema or rsi > 50):
@@ -145,7 +145,7 @@ for i in range(max(n, rsi_period), len(df)):
             runup = total_pnl - lowest_equity
             max_drawdown = max(max_drawdown, drawdown)
             max_runup = max(max_runup, runup)
-            print("\033[31m<------ SHORT exit ------>\033[0m")
+            print("\033[1;31m========== SHORT EXIT =========\033[0m")
             print(f"        exit PRICE = {Exit_price}")
             print(f"         exit Date = {Exit_time}")
             print(f"       RSI at exit = {rsi}")
@@ -153,7 +153,7 @@ for i in range(max(n, rsi_period), len(df)):
             print(f"P&L for this trade = {pnl},    Cumulative P&L = {total_pnl}")
             print(f"  Current Drawdown = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f"    Current Run-up = {runup},      Max Run-up = {max_runup}")
-            print("-------------------------------------------------------")
+            print("================================\n")
             position = 0
 
     except Exception as e:

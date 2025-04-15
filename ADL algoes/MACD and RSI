@@ -3,7 +3,7 @@ import time
 import os
 import re
 
-file_path = r"C:\Users\lenovo\Desktop\New folder (2)\CL Jun25_10min.csv"
+file_path = r"C:\Users\lenovo\Desktop\New folder (2)\CL Jun25_240min.csv"
 
 # Load CSV
 try:
@@ -176,17 +176,20 @@ if match:
 else:
     print("\n\033[1mTrading Performance Summary:\033[0m")
 
-print(f"\n Max Profit         : \033[92m{max_profit}\033[0m")
-print(f" Max Loss           : \033[91m{max_loss}\033[0m")
-print(f" Total Long PnL     : \033[94m{total_long_pnl}\033[0m")
-print(f" Total Short PnL    : \033[94m{total_short_pnl}\033[0m")
-print(f" Positive PnL       : \033[92m{positive_pnl}\033[0m")
-print(f" Negative PnL       : \033[91m{negative_pnl}\033[0m")
-print(f" Gross PnL          : {total_pnl}")
-print(f" Total Trade Cost   : {round(TradeCost,2)}")
-print(f" Net PnL            : {Net}")
-print(f" Max Drawdown       : {max_drawdown}")
-print(f" Max Run-up         : {max_runup}")
-print(f" Total Trades       : {num_of_trades}")
-print(f" Success Rate       : \033[92m{success_rate:.2f}%\033[0m")
-print(f" Failure Rate       : \033[91m{failure_rate:.2f}%\033[0m")
+# 📊 Summary Print
+print(f"     Max Profit = \033[92m{max_profit}\033[0m")
+print(f"       Max Loss = \033[91m{max_loss}\033[0m")
+print(f"   Positive PnL = \033[92m{positive_pnl}\033[0m")
+print(f"   Negative PnL = \033[91m{negative_pnl}\033[0m")
+print(f" Total Long PnL = \033[94m{total_long_pnl}\033[0m")
+print(f"Total Short PnL = \033[94m{total_short_pnl}\033[0m")
+print(f"          Gross = {total_pnl}")
+print(f"     Trade Cost = {round(TradeCost,2)}")
+print(f"            Net = {Net}")
+print(f"   Max Drawdown = {max_drawdown}")
+print(f"     Max Run-up = {max_runup}")
+print(f"Positive Trades = \033[92m{total_positive_trades}\033[0m")
+print(f"Negative Trades = \033[91m{total_negative_trades}\033[0m")
+print(f"   Total Trades = {num_of_trades}")
+print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
+print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
