@@ -1,0 +1,125 @@
+{
+  "name": "ThreeWayArbitrage",
+  "version": "1.0",
+  "inputs": [
+    { "name": "ProductA", "type": "Product" },
+    { "name": "ProductB", "type": "Product" },
+    { "name": "ProductC", "type": "Product" },
+    { "name": "X", "type": "Integer", "default": 10 },
+    { "name": "Y", "type": "Integer", "default": 10 },
+    { "name": "W", "type": "Integer", "default": 5 },
+    { "name": "V", "type": "Integer", "default": 5 },
+    { "name": "HedgeRatioB", "type": "Decimal", "default": 1.0 },
+    { "name": "HedgeRatioC", "type": "Decimal", "default": 1.0 }
+  ],
+  "variables": [
+    { "name": "payupTick", "type": "Integer", "default": -1 }
+  ],
+  "workflow": [
+    {
+      "name": "InitializeOrders",
+      "action": "PlaceOrders",
+      "params": {
+        "product": "$ProductA",
+        "orders": [
+          { "side": "Buy", "quantity": 1, "count": 5, "queueHolder": true },
+          { "side": "Sell", "quantity": 1, "count": 5, "queueHolder": true }
+        ]
+      }
+    },
+    {
+      "name": "MaintainSellOrders",
+      "condition": {
+        "or": [
+          { "expression": "$A_QuotePrice > $A_BestAsk" },
+          {
+            "and": [
+              { "expression": "$B_BestAsk + $C_BestAsk - $A_QuotePrice <= 0" },
+              { "expression": "$B_BestAskQuantity >= $B_BestBidQuantity" },
+              { "expression": "$B_BestAskQuantity >= $X" },
+              { "expression": "$C_BestAskQuantity >= $Y" }
+            ]
+          }
+        ]
+      },
+      "action": "KeepOrdersAlive",
+      "params": { "product": "$ProductA", "side": "Sell" }
+    },
+    {
+      "name": "MaintainBuyOrders",
+      "condition": {
+        "or": [
+          { "expression": "$A_QuotePrice < $A_BestBid" },
+          {
+            "and": [
+              { "expression": "$B_BestBid + $C_BestBid - $A_QuotePrice >= 0" },
+              { "expression": "$B_BestBidQuantity >= $B_BestAskQuantity" },
+              { "expression": "$B_BestBidQuantity >= $X" },
+              { "expression": "$C_BestBidQuantity >= $Y" }
+            ]
+          }
+        ]
+      },
+      "action": "KeepOrdersAlive",
+      "params": { "product": "$ProductA", "side": "Buy" }
+    },
+    {
+      "name": "OnQuoteOrderFilled",
+      "trigger": "OrderFilled",
+      "condition": { "product": "$ProductA" },
+      "action": "SendHedgeOrders",
+      "params": {
+        "hedgeOrders": [
+          {
+            "product": "$ProductB",
+            "side": "Opposite",
+            "quantity": "FilledQuantity * $HedgeRatioB",
+            "payupTick": "$payupTick",
+            "payupAdjustment": {
+              "condition": "$B_BestQuantity <= $W",
+              "increasePayup": true
+            }
+          },
+          {
+            "product": "$ProductC",
+            "side": "Opposite",
+            "quantity": "FilledQuantity * $HedgeRatioC",
+            "payupTick": "$payupTick",
+            "payupAdjustment": {
+              "condition": "$C_BestQuantity <= $V",
+              "increasePayup": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "HandlePartialFills",
+      "trigger": "OrderPartiallyFilledAndCancelled",
+      "condition": { "product": "$ProductA" },
+      "action": "ResendOriginalQuoteAmount"
+    },
+    {
+      "name": "HandlePartialHedgeInsufficient",
+      "trigger": "OrderPartiallyFilled",
+      "condition": {
+        "and": [
+          { "product": "$ProductA" },
+          { "expression": "HedgeOrderQuantity < 1" }
+        ]
+      },
+      "action": "HoldUntilSufficient"
+    },
+    {
+      "name": "MarketOpenCheck",
+      "description": "Check conditions before B and C markets open",
+      "condition": {
+        "and": [
+          { "marketOpen": "$ProductA" },
+          { "marketNotOpen": ["$ProductB", "$ProductC"] }
+        ]
+      },
+      "action": "CheckOnlyFirstCondition"
+    }
+  ]
+}
