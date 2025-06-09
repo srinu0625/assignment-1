@@ -1,0 +1,4910 @@
+{
+  "id": "6893b179-6aee-45e9-9b57-bcac3d8408d6",
+  "name": "Auction period",
+  "description": "",
+  "orderSide": true,
+  "variables": [
+    "e35034d6-0f79-492e-878a-64839a018ebd",
+    "ea04e7a5-bec8-49a4-825a-a2be4e31184f",
+    "a10733be-09d5-4272-938a-48f2cc762f8d",
+    "825839c0-dc3d-4dad-be4c-06ef05fc6b13",
+    "52a4d80d-6a84-4ede-8fb9-242d4c25b596",
+    "9dffeb19-7ce3-4106-9dd8-619d5124692c"
+  ],
+  "exports": [],
+  "bookmarks": [],
+  "content": [
+    {
+      "defName": "Instrument",
+      "defId": "9387710D-FC3E-42AA-AFFD-EB154BCFBAC7",
+      "guid": "a10733be-09d5-4272-938a-48f2cc762f8d",
+      "x": -1021.1053504154193,
+      "y": 803.1337342381737,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Instrument0",
+          "hasCustomName": true
+        },
+        {
+          "name": "instrumentId",
+          "value": "14055931747490604616"
+        },
+        {
+          "name": "type",
+          "value": "userDefined"
+        },
+        {
+          "name": "account",
+          "value": "1319771"
+        },
+        {
+          "name": "instrumentAlias",
+          "value": "DI1 Jan26"
+        },
+        {
+          "name": "exchangeAlias",
+          "value": "B3"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 25
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Analytics",
+      "defId": "C8DE91C8-C9B6-446D-9431-CE1780DD4B1F",
+      "guid": "ea1ede07-264e-4d87-8062-a29ec3bb41b9",
+      "x": -836.1053504154193,
+      "y": 972.1337342381737,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Analytics0",
+          "hasCustomName": true
+        },
+        {
+          "name": "intervalType",
+          "value": "minutes"
+        },
+        {
+          "name": "dataAccessMethod",
+          "value": "index"
+        },
+        {
+          "name": "barsToKeep",
+          "value": 2
+        },
+        {
+          "name": "exposedOutputs",
+          "value": [
+            "close",
+            "onBarComplete"
+          ]
+        },
+        {
+          "name": "instrumentAlias",
+          "value": "(not selected)"
+        },
+        {
+          "name": "indicator",
+          "value": "none"
+        },
+        {
+          "name": "field",
+          "value": "open"
+        },
+        {
+          "name": "movingAvgType",
+          "value": "simple"
+        },
+        {
+          "name": "movingAvgTypeSlowK",
+          "value": "simple"
+        },
+        {
+          "name": "movingAvgTypeSlowD",
+          "value": "simple"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 80
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Number",
+      "defId": "794959B3-80F3-46DD-976F-B7BB517A2BAA",
+      "guid": "825839c0-dc3d-4dad-be4c-06ef05fc6b13",
+      "x": -993.1053504154193,
+      "y": 964.6337342381737,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Interva",
+          "hasCustomName": true
+        },
+        {
+          "name": "value",
+          "value": 30
+        },
+        {
+          "name": "orderTypeValue",
+          "value": "limit"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "type",
+          "value": "userDefined"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Number",
+      "defId": "794959B3-80F3-46DD-976F-B7BB517A2BAA",
+      "guid": "cdd5fb48-86e5-4f85-9979-cf605916435b",
+      "x": -928.1053504154193,
+      "y": 1021.6337342381737,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Index",
+          "hasCustomName": true
+        },
+        {
+          "name": "value",
+          "value": 1
+        },
+        {
+          "name": "orderTypeValue",
+          "value": "limit"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "type",
+          "value": "static"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "981fa29e-03e7-4284-bb11-9258844f2e6b",
+      "x": -630.6053504154193,
+      "y": 931.6337342381737,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Analytics0:close_i",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "ea1ede07-264e-4d87-8062-a29ec3bb41b9"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "949e789f-9999-44f0-8143-150910f96764"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "real"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": []
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Field",
+      "defId": "1A993F9B-2146-4CF3-827D-B2D714AD1ACA",
+      "guid": "1ce1b917-6216-4f14-89e9-d99ecddf04fa",
+      "x": -988.1053504154193,
+      "y": 673.6337342381737,
+      "properties": [
+        {
+          "name": "name",
+          "value": "LTP",
+          "hasCustomName": true
+        },
+        {
+          "name": "fieldName",
+          "value": "lastTradePrice"
+        },
+        {
+          "name": "lookupType"
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Field",
+      "defId": "1A993F9B-2146-4CF3-827D-B2D714AD1ACA",
+      "guid": "27a9d4cb-bcb3-455a-982a-613bb1ca2587",
+      "x": -864.1053504154193,
+      "y": 710.6337342381737,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Ask price",
+          "hasCustomName": true
+        },
+        {
+          "name": "fieldName",
+          "value": "askPrice"
+        },
+        {
+          "name": "lookupType",
+          "value": "best"
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Field",
+      "defId": "1A993F9B-2146-4CF3-827D-B2D714AD1ACA",
+      "guid": "3790edd2-01fc-40a8-bb78-34b461b6b960",
+      "x": -793.1053504154193,
+      "y": 760.6337342381737,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Ask Qty",
+          "hasCustomName": true
+        },
+        {
+          "name": "fieldName",
+          "value": "askQuantity"
+        },
+        {
+          "name": "lookupType",
+          "value": "best"
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Field",
+      "defId": "1A993F9B-2146-4CF3-827D-B2D714AD1ACA",
+      "guid": "15035212-dfb2-4502-8899-51c5945adde8",
+      "x": -856.0121304199951,
+      "y": 824.77356423131,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Bid Price",
+          "hasCustomName": true
+        },
+        {
+          "name": "fieldName",
+          "value": "bidPrice"
+        },
+        {
+          "name": "lookupType",
+          "value": "best"
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Field",
+      "defId": "1A993F9B-2146-4CF3-827D-B2D714AD1ACA",
+      "guid": "7027ad5c-428f-4461-b2d2-ad248ec4261a",
+      "x": -793.1221772881104,
+      "y": 887.6337342381737,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Bid Qty",
+          "hasCustomName": true
+        },
+        {
+          "name": "fieldName",
+          "value": "bidQuantity"
+        },
+        {
+          "name": "lookupType",
+          "value": "best"
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "efddbeed-9755-4677-9b9f-6471959c2628",
+      "x": 714.3391355257128,
+      "y": 809.1873180150478,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Long exit Cond ",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6] >= [5b91e260-bc56-4352-a2c7-6f62f1864e88.ee63f34b-41b1-42d4-a914-48c5eabce82b] + ([e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e] * [57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e] ) OR [1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6] <= [e9f8225c-32e4-4c9d-9c21-2ec70572141f.ee63f34b-41b1-42d4-a914-48c5eabce82b] - ([e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e] - [57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e] ) OR [7027ad5c-428f-4461-b2d2-ad248ec4261a.2680ad90-b020-450b-8d61-84a472a7b2d6] < 50"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "e457ea84-e10d-4729-899d-e0d643737761": {
+              "guid": "e457ea84-e10d-4729-899d-e0d643737761",
+              "name": "output",
+              "type": "generic",
+              "input": false
+            },
+            "5ea2ed64-c931-4489-af45-e3b66f7d7803": {
+              "guid": "5ea2ed64-c931-4489-af45-e3b66f7d7803",
+              "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            },
+            "4459c5c9-90a6-41ee-8bf4-bcf0ebec155e": {
+              "guid": "4459c5c9-90a6-41ee-8bf4-bcf0ebec155e",
+              "name": "5b91e260-bc56-4352-a2c7-6f62f1864e88.ee63f34b-41b1-42d4-a914-48c5eabce82b",
+              "type": "real",
+              "input": true
+            },
+            "79988ff9-bf5a-4c1a-bed2-883c4700a752": {
+              "guid": "79988ff9-bf5a-4c1a-bed2-883c4700a752",
+              "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+              "type": "real",
+              "input": true
+            },
+            "b2e18ada-0558-44fd-9cd8-9e150650f41a": {
+              "guid": "b2e18ada-0558-44fd-9cd8-9e150650f41a",
+              "name": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+              "type": "real",
+              "input": true
+            },
+            "b111e051-bf51-4a0b-bb80-2b527c97ad31": {
+              "guid": "b111e051-bf51-4a0b-bb80-2b527c97ad31",
+              "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            },
+            "107190d0-fc3d-4e9b-b5eb-753015fafb4c": {
+              "guid": "107190d0-fc3d-4e9b-b5eb-753015fafb4c",
+              "name": "e9f8225c-32e4-4c9d-9c21-2ec70572141f.ee63f34b-41b1-42d4-a914-48c5eabce82b",
+              "type": "real",
+              "input": true
+            },
+            "01240f70-d125-44d8-88d9-4a3e95d0bec1": {
+              "guid": "01240f70-d125-44d8-88d9-4a3e95d0bec1",
+              "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+              "type": "real",
+              "input": true
+            },
+            "28d32081-392d-43ef-845e-fc5c6d47142c": {
+              "guid": "28d32081-392d-43ef-845e-fc5c6d47142c",
+              "name": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+              "type": "real",
+              "input": true
+            },
+            "bc3baacc-b765-47dd-b598-b95d15aba74b": {
+              "guid": "bc3baacc-b765-47dd-b598-b95d15aba74b",
+              "name": "7027ad5c-428f-4461-b2d2-ad248ec4261a.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 30
+          }
+        },
+        {
+          "name": "generic",
+          "value": {
+            "e457ea84-e10d-4729-899d-e0d643737761": "bool"
+          }
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "op",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 714,
+                  "line": 1,
+                  "column": 715
+                }
+              },
+              "op": "OR",
+              "left": {
+                "type": "op",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 714,
+                    "line": 1,
+                    "column": 715
+                  }
+                },
+                "op": "OR",
+                "left": {
+                  "type": "op",
+                  "loc": {
+                    "start": {
+                      "offset": 0,
+                      "line": 1,
+                      "column": 1
+                    },
+                    "end": {
+                      "offset": 314,
+                      "line": 1,
+                      "column": 315
+                    }
+                  },
+                  "op": ">=",
+                  "left": {
+                    "type": "connector",
+                    "loc": {
+                      "start": {
+                        "offset": 0,
+                        "line": 1,
+                        "column": 1
+                      },
+                      "end": {
+                        "offset": 75,
+                        "line": 1,
+                        "column": 76
+                      }
+                    },
+                    "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                    "blockId": "1ce1b917-6216-4f14-89e9-d99ecddf04fa",
+                    "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                    "connDataType": "generic"
+                  },
+                  "right": {
+                    "type": "op",
+                    "loc": {
+                      "start": {
+                        "offset": 78,
+                        "line": 1,
+                        "column": 79
+                      },
+                      "end": {
+                        "offset": 314,
+                        "line": 1,
+                        "column": 315
+                      }
+                    },
+                    "op": "+",
+                    "left": {
+                      "type": "connector",
+                      "loc": {
+                        "start": {
+                          "offset": 79,
+                          "line": 1,
+                          "column": 80
+                        },
+                        "end": {
+                          "offset": 154,
+                          "line": 1,
+                          "column": 155
+                        }
+                      },
+                      "name": "5b91e260-bc56-4352-a2c7-6f62f1864e88.ee63f34b-41b1-42d4-a914-48c5eabce82b",
+                      "blockId": "5b91e260-bc56-4352-a2c7-6f62f1864e88",
+                      "connId": "ee63f34b-41b1-42d4-a914-48c5eabce82b",
+                      "connDataType": "generic"
+                    },
+                    "right": {
+                      "type": "op",
+                      "loc": {
+                        "start": {
+                          "offset": 158,
+                          "line": 1,
+                          "column": 159
+                        },
+                        "end": {
+                          "offset": 312,
+                          "line": 1,
+                          "column": 313
+                        }
+                      },
+                      "op": "*",
+                      "left": {
+                        "type": "connector",
+                        "loc": {
+                          "start": {
+                            "offset": 158,
+                            "line": 1,
+                            "column": 159
+                          },
+                          "end": {
+                            "offset": 233,
+                            "line": 1,
+                            "column": 234
+                          }
+                        },
+                        "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "blockId": "e35034d6-0f79-492e-878a-64839a018ebd",
+                        "connId": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "connDataType": "generic"
+                      },
+                      "right": {
+                        "type": "connector",
+                        "loc": {
+                          "start": {
+                            "offset": 236,
+                            "line": 1,
+                            "column": 237
+                          },
+                          "end": {
+                            "offset": 311,
+                            "line": 1,
+                            "column": 312
+                          }
+                        },
+                        "name": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "blockId": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4",
+                        "connId": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "connDataType": "generic"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "type": "op",
+                  "loc": {
+                    "start": {
+                      "offset": 316,
+                      "line": 1,
+                      "column": 317
+                    },
+                    "end": {
+                      "offset": 631,
+                      "line": 1,
+                      "column": 632
+                    }
+                  },
+                  "op": "<=",
+                  "left": {
+                    "type": "connector",
+                    "loc": {
+                      "start": {
+                        "offset": 317,
+                        "line": 1,
+                        "column": 318
+                      },
+                      "end": {
+                        "offset": 392,
+                        "line": 1,
+                        "column": 393
+                      }
+                    },
+                    "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                    "blockId": "1ce1b917-6216-4f14-89e9-d99ecddf04fa",
+                    "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                    "connDataType": "generic"
+                  },
+                  "right": {
+                    "type": "op",
+                    "loc": {
+                      "start": {
+                        "offset": 395,
+                        "line": 1,
+                        "column": 396
+                      },
+                      "end": {
+                        "offset": 631,
+                        "line": 1,
+                        "column": 632
+                      }
+                    },
+                    "op": "-",
+                    "left": {
+                      "type": "connector",
+                      "loc": {
+                        "start": {
+                          "offset": 396,
+                          "line": 1,
+                          "column": 397
+                        },
+                        "end": {
+                          "offset": 471,
+                          "line": 1,
+                          "column": 472
+                        }
+                      },
+                      "name": "e9f8225c-32e4-4c9d-9c21-2ec70572141f.ee63f34b-41b1-42d4-a914-48c5eabce82b",
+                      "blockId": "e9f8225c-32e4-4c9d-9c21-2ec70572141f",
+                      "connId": "ee63f34b-41b1-42d4-a914-48c5eabce82b",
+                      "connDataType": "generic"
+                    },
+                    "right": {
+                      "type": "op",
+                      "loc": {
+                        "start": {
+                          "offset": 475,
+                          "line": 1,
+                          "column": 476
+                        },
+                        "end": {
+                          "offset": 629,
+                          "line": 1,
+                          "column": 630
+                        }
+                      },
+                      "op": "-",
+                      "left": {
+                        "type": "connector",
+                        "loc": {
+                          "start": {
+                            "offset": 475,
+                            "line": 1,
+                            "column": 476
+                          },
+                          "end": {
+                            "offset": 550,
+                            "line": 1,
+                            "column": 551
+                          }
+                        },
+                        "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "blockId": "e35034d6-0f79-492e-878a-64839a018ebd",
+                        "connId": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "connDataType": "generic"
+                      },
+                      "right": {
+                        "type": "connector",
+                        "loc": {
+                          "start": {
+                            "offset": 553,
+                            "line": 1,
+                            "column": 554
+                          },
+                          "end": {
+                            "offset": 628,
+                            "line": 1,
+                            "column": 629
+                          }
+                        },
+                        "name": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "blockId": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4",
+                        "connId": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "connDataType": "generic"
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "type": "op",
+                "loc": {
+                  "start": {
+                    "offset": 633,
+                    "line": 1,
+                    "column": 634
+                  },
+                  "end": {
+                    "offset": 714,
+                    "line": 1,
+                    "column": 715
+                  }
+                },
+                "op": "<",
+                "left": {
+                  "type": "connector",
+                  "loc": {
+                    "start": {
+                      "offset": 634,
+                      "line": 1,
+                      "column": 635
+                    },
+                    "end": {
+                      "offset": 709,
+                      "line": 1,
+                      "column": 710
+                    }
+                  },
+                  "name": "7027ad5c-428f-4461-b2d2-ad248ec4261a.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "blockId": "7027ad5c-428f-4461-b2d2-ad248ec4261a",
+                  "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "connDataType": "generic"
+                },
+                "right": {
+                  "type": "number",
+                  "loc": {
+                    "start": {
+                      "offset": 712,
+                      "line": 1,
+                      "column": 713
+                    },
+                    "end": {
+                      "offset": 714,
+                      "line": 1,
+                      "column": 715
+                    }
+                  },
+                  "value": 50
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "efddbeed-9755-4677-9b9f-6471959c2628"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "1f00b386-0e0e-41c1-ac9a-72cf6e19e989",
+      "x": -653.1594044694733,
+      "y": 794.84995045439,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Instrument0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "a10733be-09d5-4272-938a-48f2cc762f8d"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "4591f37d-348f-454c-b6f8-5eac9457a124"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "string"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "89c6f30f-9869-4e9d-ad84-38ef9eb25dee",
+            "2503a7fa-19de-41a8-8094-8311045367fa",
+            "370e63c1-31a3-4980-8af3-4a3cf8f4b3de",
+            "2a57dddc-60d5-45f5-9955-d4dfeca99651",
+            "abb553b1-452b-4487-8631-e349637d5c91",
+            "e1be4885-e538-45d0-9353-39cb93fa8e69",
+            "9a6a5c61-67f2-44bc-b6f4-30f56996a22b",
+            "7215a8a1-60a3-4360-b083-4c864c4bd581"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "7215a8a1-60a3-4360-b083-4c864c4bd581",
+      "x": -77.91380966446349,
+      "y": 485.7100267861988,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Instrument0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "1f00b386-0e0e-41c1-ac9a-72cf6e19e989"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "string"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "89c6f30f-9869-4e9d-ad84-38ef9eb25dee",
+      "x": -63.12818540859773,
+      "y": 1023.0628028339712,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Instrument0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "1f00b386-0e0e-41c1-ac9a-72cf6e19e989"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "string"
+          }
+        },
+        {
+          "name": "sourceConnector"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "abb553b1-452b-4487-8631-e349637d5c91",
+      "x": 829.4355488328083,
+      "y": 493.926417510237,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Instrument0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "1f00b386-0e0e-41c1-ac9a-72cf6e19e989"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "string"
+          }
+        },
+        {
+          "name": "sourceConnector"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "22154a6d-3d9a-4519-991d-0a83b2e90e91",
+      "x": -692.2941976628679,
+      "y": 1194.6921483277704,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Formula6",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6] > [ea1ede07-264e-4d87-8062-a29ec3bb41b9.949e789f-9999-44f0-8143-150910f96764] + ([57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e] * [e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e]) AND [3790edd2-01fc-40a8-bb78-34b461b6b960.2680ad90-b020-450b-8d61-84a472a7b2d6] > 100"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "6358ca6d-9af1-48f1-a2d7-bd31a3961e32": {
+              "guid": "6358ca6d-9af1-48f1-a2d7-bd31a3961e32",
+              "name": "output",
+              "type": "generic",
+              "input": false
+            },
+            "299d4b65-00c8-41c0-a00a-2bd9dca18ceb": {
+              "guid": "299d4b65-00c8-41c0-a00a-2bd9dca18ceb",
+              "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            },
+            "70dd353a-1e57-4767-b3a3-0af43ec12859": {
+              "guid": "70dd353a-1e57-4767-b3a3-0af43ec12859",
+              "name": "ea1ede07-264e-4d87-8062-a29ec3bb41b9.949e789f-9999-44f0-8143-150910f96764",
+              "type": "real",
+              "input": true
+            },
+            "0c299d3c-00a9-4d45-8283-a0a6612112b4": {
+              "guid": "0c299d3c-00a9-4d45-8283-a0a6612112b4",
+              "name": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+              "type": "real",
+              "input": true
+            },
+            "9ed4c803-3ffd-43b0-81cb-2159d36d6f9a": {
+              "guid": "9ed4c803-3ffd-43b0-81cb-2159d36d6f9a",
+              "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+              "type": "real",
+              "input": true
+            },
+            "a7efc4b2-dbe9-440e-98ec-60348dab25d3": {
+              "guid": "a7efc4b2-dbe9-440e-98ec-60348dab25d3",
+              "name": "3790edd2-01fc-40a8-bb78-34b461b6b960.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 30
+          }
+        },
+        {
+          "name": "generic",
+          "value": {
+            "6358ca6d-9af1-48f1-a2d7-bd31a3961e32": "bool"
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "22154a6d-3d9a-4519-991d-0a83b2e90e91"
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "op",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 397,
+                  "line": 1,
+                  "column": 398
+                }
+              },
+              "op": "AND",
+              "left": {
+                "type": "op",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 312,
+                    "line": 1,
+                    "column": 313
+                  }
+                },
+                "op": ">",
+                "left": {
+                  "type": "connector",
+                  "loc": {
+                    "start": {
+                      "offset": 0,
+                      "line": 1,
+                      "column": 1
+                    },
+                    "end": {
+                      "offset": 75,
+                      "line": 1,
+                      "column": 76
+                    }
+                  },
+                  "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "blockId": "1ce1b917-6216-4f14-89e9-d99ecddf04fa",
+                  "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "connDataType": "generic"
+                },
+                "right": {
+                  "type": "op",
+                  "loc": {
+                    "start": {
+                      "offset": 77,
+                      "line": 1,
+                      "column": 78
+                    },
+                    "end": {
+                      "offset": 312,
+                      "line": 1,
+                      "column": 313
+                    }
+                  },
+                  "op": "+",
+                  "left": {
+                    "type": "connector",
+                    "loc": {
+                      "start": {
+                        "offset": 78,
+                        "line": 1,
+                        "column": 79
+                      },
+                      "end": {
+                        "offset": 153,
+                        "line": 1,
+                        "column": 154
+                      }
+                    },
+                    "name": "ea1ede07-264e-4d87-8062-a29ec3bb41b9.949e789f-9999-44f0-8143-150910f96764",
+                    "blockId": "ea1ede07-264e-4d87-8062-a29ec3bb41b9",
+                    "connId": "949e789f-9999-44f0-8143-150910f96764",
+                    "connDataType": "generic"
+                  },
+                  "right": {
+                    "type": "op",
+                    "loc": {
+                      "start": {
+                        "offset": 157,
+                        "line": 1,
+                        "column": 158
+                      },
+                      "end": {
+                        "offset": 310,
+                        "line": 1,
+                        "column": 311
+                      }
+                    },
+                    "op": "*",
+                    "left": {
+                      "type": "connector",
+                      "loc": {
+                        "start": {
+                          "offset": 157,
+                          "line": 1,
+                          "column": 158
+                        },
+                        "end": {
+                          "offset": 232,
+                          "line": 1,
+                          "column": 233
+                        }
+                      },
+                      "name": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                      "blockId": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4",
+                      "connId": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                      "connDataType": "generic"
+                    },
+                    "right": {
+                      "type": "connector",
+                      "loc": {
+                        "start": {
+                          "offset": 235,
+                          "line": 1,
+                          "column": 236
+                        },
+                        "end": {
+                          "offset": 310,
+                          "line": 1,
+                          "column": 311
+                        }
+                      },
+                      "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                      "blockId": "e35034d6-0f79-492e-878a-64839a018ebd",
+                      "connId": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                      "connDataType": "generic"
+                    }
+                  }
+                }
+              },
+              "right": {
+                "type": "op",
+                "loc": {
+                  "start": {
+                    "offset": 315,
+                    "line": 1,
+                    "column": 316
+                  },
+                  "end": {
+                    "offset": 397,
+                    "line": 1,
+                    "column": 398
+                  }
+                },
+                "op": ">",
+                "left": {
+                  "type": "connector",
+                  "loc": {
+                    "start": {
+                      "offset": 316,
+                      "line": 1,
+                      "column": 317
+                    },
+                    "end": {
+                      "offset": 391,
+                      "line": 1,
+                      "column": 392
+                    }
+                  },
+                  "name": "3790edd2-01fc-40a8-bb78-34b461b6b960.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "blockId": "3790edd2-01fc-40a8-bb78-34b461b6b960",
+                  "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "connDataType": "generic"
+                },
+                "right": {
+                  "type": "number",
+                  "loc": {
+                    "start": {
+                      "offset": 394,
+                      "line": 1,
+                      "column": 395
+                    },
+                    "end": {
+                      "offset": 397,
+                      "line": 1,
+                      "column": 398
+                    }
+                  },
+                  "value": 100
+                }
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "0d18a537-b8b9-492a-afca-5daab52dd6ff",
+      "x": -687.3797109793782,
+      "y": 1375.8839313511353,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Formula6",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6] < [ea1ede07-264e-4d87-8062-a29ec3bb41b9.949e789f-9999-44f0-8143-150910f96764] - ([57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e] * [e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e]) AND [7027ad5c-428f-4461-b2d2-ad248ec4261a.2680ad90-b020-450b-8d61-84a472a7b2d6] > 100"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "b979be5e-8216-419b-80f7-bc2f86b70cc3": {
+              "guid": "b979be5e-8216-419b-80f7-bc2f86b70cc3",
+              "name": "output",
+              "type": "generic",
+              "input": false
+            },
+            "37baf218-13cc-48a9-9510-a973a6f63165": {
+              "guid": "37baf218-13cc-48a9-9510-a973a6f63165",
+              "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            },
+            "8f636b55-e502-4f13-9769-5e8778929436": {
+              "guid": "8f636b55-e502-4f13-9769-5e8778929436",
+              "name": "ea1ede07-264e-4d87-8062-a29ec3bb41b9.949e789f-9999-44f0-8143-150910f96764",
+              "type": "real",
+              "input": true
+            },
+            "92259c1d-ff93-4b01-b96e-cf0e8f98ee87": {
+              "guid": "92259c1d-ff93-4b01-b96e-cf0e8f98ee87",
+              "name": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+              "type": "real",
+              "input": true
+            },
+            "06086f75-da13-47b1-8eff-2970bc3e2d40": {
+              "guid": "06086f75-da13-47b1-8eff-2970bc3e2d40",
+              "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+              "type": "real",
+              "input": true
+            },
+            "dc735f5f-c144-4938-9dbc-e52031337f36": {
+              "guid": "dc735f5f-c144-4938-9dbc-e52031337f36",
+              "name": "7027ad5c-428f-4461-b2d2-ad248ec4261a.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 30
+          }
+        },
+        {
+          "name": "generic",
+          "value": {
+            "b979be5e-8216-419b-80f7-bc2f86b70cc3": "bool"
+          }
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "op",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 397,
+                  "line": 1,
+                  "column": 398
+                }
+              },
+              "op": "AND",
+              "left": {
+                "type": "op",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 312,
+                    "line": 1,
+                    "column": 313
+                  }
+                },
+                "op": "<",
+                "left": {
+                  "type": "connector",
+                  "loc": {
+                    "start": {
+                      "offset": 0,
+                      "line": 1,
+                      "column": 1
+                    },
+                    "end": {
+                      "offset": 75,
+                      "line": 1,
+                      "column": 76
+                    }
+                  },
+                  "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "blockId": "1ce1b917-6216-4f14-89e9-d99ecddf04fa",
+                  "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "connDataType": "generic"
+                },
+                "right": {
+                  "type": "op",
+                  "loc": {
+                    "start": {
+                      "offset": 77,
+                      "line": 1,
+                      "column": 78
+                    },
+                    "end": {
+                      "offset": 312,
+                      "line": 1,
+                      "column": 313
+                    }
+                  },
+                  "op": "-",
+                  "left": {
+                    "type": "connector",
+                    "loc": {
+                      "start": {
+                        "offset": 78,
+                        "line": 1,
+                        "column": 79
+                      },
+                      "end": {
+                        "offset": 153,
+                        "line": 1,
+                        "column": 154
+                      }
+                    },
+                    "name": "ea1ede07-264e-4d87-8062-a29ec3bb41b9.949e789f-9999-44f0-8143-150910f96764",
+                    "blockId": "ea1ede07-264e-4d87-8062-a29ec3bb41b9",
+                    "connId": "949e789f-9999-44f0-8143-150910f96764",
+                    "connDataType": "generic"
+                  },
+                  "right": {
+                    "type": "op",
+                    "loc": {
+                      "start": {
+                        "offset": 157,
+                        "line": 1,
+                        "column": 158
+                      },
+                      "end": {
+                        "offset": 310,
+                        "line": 1,
+                        "column": 311
+                      }
+                    },
+                    "op": "*",
+                    "left": {
+                      "type": "connector",
+                      "loc": {
+                        "start": {
+                          "offset": 157,
+                          "line": 1,
+                          "column": 158
+                        },
+                        "end": {
+                          "offset": 232,
+                          "line": 1,
+                          "column": 233
+                        }
+                      },
+                      "name": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                      "blockId": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4",
+                      "connId": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                      "connDataType": "generic"
+                    },
+                    "right": {
+                      "type": "connector",
+                      "loc": {
+                        "start": {
+                          "offset": 235,
+                          "line": 1,
+                          "column": 236
+                        },
+                        "end": {
+                          "offset": 310,
+                          "line": 1,
+                          "column": 311
+                        }
+                      },
+                      "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                      "blockId": "e35034d6-0f79-492e-878a-64839a018ebd",
+                      "connId": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                      "connDataType": "generic"
+                    }
+                  }
+                }
+              },
+              "right": {
+                "type": "op",
+                "loc": {
+                  "start": {
+                    "offset": 315,
+                    "line": 1,
+                    "column": 316
+                  },
+                  "end": {
+                    "offset": 397,
+                    "line": 1,
+                    "column": 398
+                  }
+                },
+                "op": ">",
+                "left": {
+                  "type": "connector",
+                  "loc": {
+                    "start": {
+                      "offset": 316,
+                      "line": 1,
+                      "column": 317
+                    },
+                    "end": {
+                      "offset": 391,
+                      "line": 1,
+                      "column": 392
+                    }
+                  },
+                  "name": "7027ad5c-428f-4461-b2d2-ad248ec4261a.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "blockId": "7027ad5c-428f-4461-b2d2-ad248ec4261a",
+                  "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "connDataType": "generic"
+                },
+                "right": {
+                  "type": "number",
+                  "loc": {
+                    "start": {
+                      "offset": 394,
+                      "line": 1,
+                      "column": 395
+                    },
+                    "end": {
+                      "offset": 397,
+                      "line": 1,
+                      "column": 398
+                    }
+                  },
+                  "value": 100
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "0d18a537-b8b9-492a-afca-5daab52dd6ff"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "MarketState",
+      "defId": "C7AD9325-2504-4DF6-8EFB-D7EE33F47080",
+      "guid": "2985b1f9-f1ce-4bbc-9157-d620e9676674",
+      "x": -894.899580083688,
+      "y": 1126.5291799910603,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Open auction",
+          "hasCustomName": true
+        },
+        {
+          "name": "state",
+          "value": "pre_open"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 120,
+            "height": 30
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "370e63c1-31a3-4980-8af3-4a3cf8f4b3de",
+      "x": -1047.5624427430037,
+      "y": 1117.7734715276924,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Instrument0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "1f00b386-0e0e-41c1-ac9a-72cf6e19e989"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "string"
+          }
+        },
+        {
+          "name": "sourceConnector"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "MarketState",
+      "defId": "C7AD9325-2504-4DF6-8EFB-D7EE33F47080",
+      "guid": "6376f392-332b-48b7-8128-16185eef77ab",
+      "x": -881.2854671624483,
+      "y": 1304.506526461102,
+      "properties": [
+        {
+          "name": "name",
+          "value": "open auction",
+          "hasCustomName": true
+        },
+        {
+          "name": "state",
+          "value": "pre_open"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 120,
+            "height": 30
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "e1be4885-e538-45d0-9353-39cb93fa8e69",
+      "x": -1041.6455097438848,
+      "y": 1293.166407459977,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Instrument0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "1f00b386-0e0e-41c1-ac9a-72cf6e19e989"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "string"
+          }
+        },
+        {
+          "name": "sourceConnector"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "OnceTrue",
+      "defId": "C02A46B7-E810-43AE-96F8-2C053E71C3CF",
+      "guid": "df9f3586-a373-40bf-bcdf-9dc77a7d8c42",
+      "x": -687.717237413013,
+      "y": 1122.6668622439956,
+      "properties": [
+        {
+          "name": "name",
+          "value": "OnceTrue0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "And",
+      "defId": "DE39F2F3-73B9-4D29-9223-6B8DF8D63EEA",
+      "guid": "c61d9728-c706-4c90-b6ed-b158efc91337",
+      "x": -564.3692719531172,
+      "y": 1130.8722311726042,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Long entry Cond",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Generator",
+      "defId": "197F74F7-3A63-4191-A761-538485367671",
+      "guid": "2d616c96-00d5-4494-b232-76a736bf1eef",
+      "x": -17.471827132488784,
+      "y": 608.5347096872886,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Generator4",
+          "hasCustomName": true
+        },
+        {
+          "name": "mode",
+          "value": "boolTrue"
+        },
+        {
+          "name": "dateTime",
+          "value": 1745495546962000000
+        },
+        {
+          "name": "Connectors",
+          "value": []
+        },
+        {
+          "name": "color",
+          "value": "rgb(200, 200, 200)"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 50,
+            "height": 50
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "OnceTrue",
+      "defId": "C02A46B7-E810-43AE-96F8-2C053E71C3CF",
+      "guid": "434e2b30-6145-4145-8627-53f43c9fcec4",
+      "x": -679.37702982662,
+      "y": 1299.8784068282898,
+      "properties": [
+        {
+          "name": "name",
+          "value": "OnceTrue1",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "And",
+      "defId": "DE39F2F3-73B9-4D29-9223-6B8DF8D63EEA",
+      "guid": "438f454f-afbf-479b-951f-7a0fb8eda6b1",
+      "x": -559.053113926106,
+      "y": 1305.749106954021,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Short entry Cond",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Generator",
+      "defId": "197F74F7-3A63-4191-A761-538485367671",
+      "guid": "a3edadde-f4f8-4797-80c6-7fe29e48fbe2",
+      "x": -2.1416554074801297,
+      "y": 1146.0276413784948,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Generator5",
+          "hasCustomName": true
+        },
+        {
+          "name": "mode",
+          "value": "boolTrue"
+        },
+        {
+          "name": "dateTime",
+          "value": 1745495546962000000
+        },
+        {
+          "name": "Connectors",
+          "value": []
+        },
+        {
+          "name": "color",
+          "value": "rgb(200, 200, 200)"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 50,
+            "height": 50
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "MarketState",
+      "defId": "C7AD9325-2504-4DF6-8EFB-D7EE33F47080",
+      "guid": "5a14b9d2-53cc-4178-a430-4a416ef07596",
+      "x": 565.5854574316756,
+      "y": 717.9689290834825,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Close auction",
+          "hasCustomName": true
+        },
+        {
+          "name": "state",
+          "value": "closing_auction"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 120,
+            "height": 30
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "2a57dddc-60d5-45f5-9955-d4dfeca99651",
+      "x": 425.7244119835614,
+      "y": 728.2754306696007,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Instrument0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "1f00b386-0e0e-41c1-ac9a-72cf6e19e989"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "string"
+          }
+        },
+        {
+          "name": "sourceConnector"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "OnceTrue",
+      "defId": "C02A46B7-E810-43AE-96F8-2C053E71C3CF",
+      "guid": "2075960f-f4ad-4ef5-b5a7-648242e54a9c",
+      "x": 720.8172555497069,
+      "y": 661.1475460202607,
+      "properties": [
+        {
+          "name": "name",
+          "value": "OnceTrue2",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "MarketState",
+      "defId": "C7AD9325-2504-4DF6-8EFB-D7EE33F47080",
+      "guid": "8bed749a-64df-426f-9f48-1a2f5ebc20db",
+      "x": 586.1952515601855,
+      "y": 1281.1091484142719,
+      "properties": [
+        {
+          "name": "name",
+          "value": "close auction",
+          "hasCustomName": true
+        },
+        {
+          "name": "state",
+          "value": "closing_auction"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 120,
+            "height": 30
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "2503a7fa-19de-41a8-8094-8311045367fa",
+      "x": 455.26762742556105,
+      "y": 1300.1996567608326,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Instrument0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "1f00b386-0e0e-41c1-ac9a-72cf6e19e989"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "string"
+          }
+        },
+        {
+          "name": "sourceConnector"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "OnceTrue",
+      "defId": "C02A46B7-E810-43AE-96F8-2C053E71C3CF",
+      "guid": "b5c2b8b7-bbd8-4205-935a-13f459f0e4fa",
+      "x": 736.4790287048439,
+      "y": 1214.889827613184,
+      "properties": [
+        {
+          "name": "name",
+          "value": "OnceTrue3",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "DiscreteOrder",
+      "defId": "D46E9727-DC49-4163-86EA-7631E3057F0D",
+      "guid": "423c4da9-2371-4ff7-9dec-6a4748f37dee",
+      "x": 95.30163716735925,
+      "y": 512.9459911414227,
+      "properties": [
+        {
+          "name": "name",
+          "value": "DiscreteOrder0",
+          "hasCustomName": true
+        },
+        {
+          "name": "side",
+          "value": "buy"
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "onExtMod",
+          "value": "StopManaging"
+        },
+        {
+          "name": "leaveOnPauseCancel",
+          "value": []
+        },
+        {
+          "name": "tag",
+          "value": ""
+        },
+        {
+          "name": "openCloseStrategyflags",
+          "value": false
+        },
+        {
+          "name": "openClose",
+          "value": "NA"
+        },
+        {
+          "name": "TradingStrategy",
+          "value": "NA"
+        },
+        {
+          "name": "ReverseSpreadOC",
+          "value": "NA"
+        },
+        {
+          "name": "cloneIncomingOrder",
+          "value": false
+        },
+        {
+          "name": "formula",
+          "value": [
+            {
+              "defID": "938c2d73-7ba6-4562-af6b-6f276185af98",
+              "fieldName": "price",
+              "formula": "[27a9d4cb-bcb3-455a-982a-613bb1ca2587.2680ad90-b020-450b-8d61-84a472a7b2d6] + (0.25)"
+            },
+            {
+              "defID": "57e70386-1293-4682-9da9-6a1867f8c750",
+              "fieldName": "quantity",
+              "formula": "1"
+            }
+          ]
+        },
+        {
+          "name": "color",
+          "value": "rgb(255, 255, 255)"
+        },
+        {
+          "name": "connectors",
+          "value": {}
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 80
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "ebe017dc-d714-48f6-a5ed-3fd0d7170ef1"
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "quantity": {
+              "type": "number",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 1,
+                  "line": 1,
+                  "column": 2
+                }
+              },
+              "value": 1
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "DiscreteOrder",
+      "defId": "D46E9727-DC49-4163-86EA-7631E3057F0D",
+      "guid": "e0464b2d-98e2-4bd2-b7aa-4cb169e4e3e3",
+      "x": 102.5268848798809,
+      "y": 1060.2585053649389,
+      "properties": [
+        {
+          "name": "name",
+          "value": "DiscreteOrder0",
+          "hasCustomName": true
+        },
+        {
+          "name": "side",
+          "value": "sell"
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "onExtMod",
+          "value": "StopManaging"
+        },
+        {
+          "name": "leaveOnPauseCancel",
+          "value": []
+        },
+        {
+          "name": "tag",
+          "value": ""
+        },
+        {
+          "name": "openCloseStrategyflags",
+          "value": false
+        },
+        {
+          "name": "openClose",
+          "value": "NA"
+        },
+        {
+          "name": "TradingStrategy",
+          "value": "NA"
+        },
+        {
+          "name": "ReverseSpreadOC",
+          "value": "NA"
+        },
+        {
+          "name": "cloneIncomingOrder",
+          "value": false
+        },
+        {
+          "name": "formula",
+          "value": [
+            {
+              "defID": "938c2d73-7ba6-4562-af6b-6f276185af98",
+              "fieldName": "price",
+              "formula": "[15035212-dfb2-4502-8899-51c5945adde8.2680ad90-b020-450b-8d61-84a472a7b2d6] - (0.25)"
+            },
+            {
+              "defID": "57e70386-1293-4682-9da9-6a1867f8c750",
+              "fieldName": "quantity",
+              "formula": "1"
+            }
+          ]
+        },
+        {
+          "name": "color",
+          "value": "rgb(255, 255, 255)"
+        },
+        {
+          "name": "connectors",
+          "value": {}
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 80
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "b3494ae5-361a-45e3-86b2-c72015339917"
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "quantity": {
+              "type": "number",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 1,
+                  "line": 1,
+                  "column": 2
+                }
+              },
+              "value": 1
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "c8140549-fa65-45fb-919d-d8dd4940aa1b",
+      "x": -687.678175405706,
+      "y": 703.0118367397845,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Ask price",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "27a9d4cb-bcb3-455a-982a-613bb1ca2587"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "2680ad90-b020-450b-8d61-84a472a7b2d6"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "real"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "fe9e4434-0c67-4c7f-afdb-db98d3716d78"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "fe9e4434-0c67-4c7f-afdb-db98d3716d78",
+      "x": -929.7170364307458,
+      "y": 357.7279165206368,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Ask price",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "c8140549-fa65-45fb-919d-d8dd4940aa1b"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "real"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Add",
+      "defId": "07E550ED-9E08-48EB-A668-3EE94AC1ED46",
+      "guid": "9b32007a-7a65-4923-b7f7-6478f4d0c54b",
+      "x": -754.720070294742,
+      "y": 369.70465689666645,
+      "properties": [
+        {
+          "name": "name",
+          "value": "buy price",
+          "hasCustomName": true
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Number",
+      "defId": "794959B3-80F3-46DD-976F-B7BB517A2BAA",
+      "guid": "e35034d6-0f79-492e-878a-64839a018ebd",
+      "x": -845.7038896867625,
+      "y": 395.65409249673104,
+      "properties": [
+        {
+          "name": "name",
+          "value": "contract size",
+          "hasCustomName": true
+        },
+        {
+          "name": "value",
+          "value": 0.005
+        },
+        {
+          "name": "orderTypeValue",
+          "value": "limit"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "type",
+          "value": "userDefined"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "f603f208-2a0c-4e0b-8b06-0e4519f27cc8",
+      "x": -719.4522229772821,
+      "y": 841.7992486288019,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Bid Price",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "15035212-dfb2-4502-8899-51c5945adde8"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "2680ad90-b020-450b-8d61-84a472a7b2d6"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "real"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "5241e4a3-1c9c-46df-bdae-053c39c1a654"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "5241e4a3-1c9c-46df-bdae-053c39c1a654",
+      "x": -923.606727413464,
+      "y": 469.75062947368184,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Bid Price",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "f603f208-2a0c-4e0b-8b06-0e4519f27cc8"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "real"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Subtract",
+      "defId": "BF3461E3-7AA2-4C49-96CE-D6423946DC01",
+      "guid": "e28956d4-1e76-45b4-a966-34818857474f",
+      "x": -747.2982470282141,
+      "y": 484.38187815040106,
+      "properties": [
+        {
+          "name": "name",
+          "value": "sell price",
+          "hasCustomName": true
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 30,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Number",
+      "defId": "794959B3-80F3-46DD-976F-B7BB517A2BAA",
+      "guid": "ea04e7a5-bec8-49a4-825a-a2be4e31184f",
+      "x": -840.4125225720682,
+      "y": 510.3879458783934,
+      "properties": [
+        {
+          "name": "name",
+          "value": "contract size",
+          "hasCustomName": true
+        },
+        {
+          "name": "value",
+          "value": 0.005
+        },
+        {
+          "name": "orderTypeValue",
+          "value": "limit"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "type",
+          "value": "userDefined"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "ValueExtractor",
+      "defId": "2B392926-6814-4444-B23E-2320078FCB64",
+      "guid": "934f3833-2379-401a-9ee0-58a4da72d2af",
+      "x": -183.54048448783624,
+      "y": 592.7192417731469,
+      "properties": [
+        {
+          "name": "name",
+          "value": "ValueExtractor0",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "if ( [c61d9728-c706-4c90-b6ed-b158efc91337.21012d11-f309-4c5c-afd1-21ddb31392f7] , True , False)"
+        },
+        {
+          "name": "connectors",
+          "value": {}
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 120,
+            "height": 55
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "080e1958-62fc-484f-8522-5af1ac6424ec"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "97a5b309-39ff-403f-832c-a18ed4717dad": "bool",
+            "27318463-032d-41c0-94da-fd00329f22fb": "bool"
+          }
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "if",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 96,
+                  "line": 1,
+                  "column": 97
+                }
+              },
+              "condition": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 5,
+                    "line": 1,
+                    "column": 6
+                  },
+                  "end": {
+                    "offset": 80,
+                    "line": 1,
+                    "column": 81
+                  }
+                },
+                "name": "c61d9728-c706-4c90-b6ed-b158efc91337.21012d11-f309-4c5c-afd1-21ddb31392f7",
+                "blockId": "c61d9728-c706-4c90-b6ed-b158efc91337",
+                "connId": "21012d11-f309-4c5c-afd1-21ddb31392f7",
+                "connDataType": "generic"
+              },
+              "then": {
+                "type": "bool",
+                "loc": {
+                  "start": {
+                    "offset": 83,
+                    "line": 1,
+                    "column": 84
+                  },
+                  "end": {
+                    "offset": 87,
+                    "line": 1,
+                    "column": 88
+                  }
+                },
+                "value": true
+              },
+              "else": {
+                "type": "bool",
+                "loc": {
+                  "start": {
+                    "offset": 90,
+                    "line": 1,
+                    "column": 91
+                  },
+                  "end": {
+                    "offset": 95,
+                    "line": 1,
+                    "column": 96
+                  }
+                },
+                "value": false
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Order",
+      "defId": "DEC271C9-38E8-499A-ADA2-795B51544FE3",
+      "guid": "52a4d80d-6a84-4ede-8fb9-242d4c25b596",
+      "x": 991.6729727379836,
+      "y": 554.3740942200172,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order0",
+          "hasCustomName": true
+        },
+        {
+          "name": "type",
+          "value": "limit"
+        },
+        {
+          "name": "side",
+          "value": "sell"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "Autospreader",
+          "value": false
+        },
+        {
+          "name": "onExtMod",
+          "value": "StopManaging"
+        },
+        {
+          "name": "leaveOnPauseCancel",
+          "value": []
+        },
+        {
+          "name": "ignoreInputsAfterAdd",
+          "value": false
+        },
+        {
+          "name": "autoResubmit",
+          "value": true
+        },
+        {
+          "name": "submitInSuspendedState",
+          "value": false
+        },
+        {
+          "name": "Connectors",
+          "value": []
+        },
+        {
+          "name": "tag",
+          "value": ""
+        },
+        {
+          "name": "openCloseStrategyflags",
+          "value": false
+        },
+        {
+          "name": "openClose",
+          "value": "NA"
+        },
+        {
+          "name": "TradingStrategy",
+          "value": "NA"
+        },
+        {
+          "name": "ReverseSpreadOC",
+          "value": "NA"
+        },
+        {
+          "name": "color",
+          "value": "rgb(255, 255, 255)"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 90,
+            "height": 90
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Order",
+      "defId": "DEC271C9-38E8-499A-ADA2-795B51544FE3",
+      "guid": "9dffeb19-7ce3-4106-9dd8-619d5124692c",
+      "x": 1006.8272187529908,
+      "y": 1080.1962756547068,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order1",
+          "hasCustomName": true
+        },
+        {
+          "name": "type",
+          "value": "limit"
+        },
+        {
+          "name": "side",
+          "value": "buy"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "Autospreader",
+          "value": false
+        },
+        {
+          "name": "onExtMod",
+          "value": "StopManaging"
+        },
+        {
+          "name": "leaveOnPauseCancel",
+          "value": []
+        },
+        {
+          "name": "ignoreInputsAfterAdd",
+          "value": false
+        },
+        {
+          "name": "autoResubmit",
+          "value": true
+        },
+        {
+          "name": "submitInSuspendedState",
+          "value": false
+        },
+        {
+          "name": "Connectors",
+          "value": []
+        },
+        {
+          "name": "tag",
+          "value": ""
+        },
+        {
+          "name": "openCloseStrategyflags",
+          "value": false
+        },
+        {
+          "name": "openClose",
+          "value": "NA"
+        },
+        {
+          "name": "TradingStrategy",
+          "value": "NA"
+        },
+        {
+          "name": "ReverseSpreadOC",
+          "value": "NA"
+        },
+        {
+          "name": "color",
+          "value": "rgb(255, 255, 255)"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 90,
+            "height": 90
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "b8378a52-c596-4d23-b7df-bf81ab95b108",
+      "x": -645.5630928781372,
+      "y": 982.8747259446079,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Analytics0:onBarComplete",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "ea1ede07-264e-4d87-8062-a29ec3bb41b9"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "8123391e-495a-4e94-9e20-588b3aa6f6ac"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "message"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "ee613434-dca8-4cd3-ab91-d98506432ab6",
+            "a051ac4b-3296-4d6e-96d6-b1f2e55afe46"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "ee613434-dca8-4cd3-ab91-d98506432ab6",
+      "x": -417.25301634711377,
+      "y": 594.757758816822,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Analytics0:onBarComplete",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "b8378a52-c596-4d23-b7df-bf81ab95b108"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "message"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "a051ac4b-3296-4d6e-96d6-b1f2e55afe46",
+      "x": -391.3540776410059,
+      "y": 1130.535378967431,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Analytics0:onBarComplete",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "b8378a52-c596-4d23-b7df-bf81ab95b108"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "message"
+          }
+        },
+        {
+          "name": "sourceConnector"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "ValueExtractor",
+      "defId": "2B392926-6814-4444-B23E-2320078FCB64",
+      "guid": "79383c1d-888e-4a95-b99f-56927610082d",
+      "x": -167.160597322682,
+      "y": 1125.9047953289062,
+      "properties": [
+        {
+          "name": "name",
+          "value": "ValueExtractor1",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "if ( [438f454f-afbf-479b-951f-7a0fb8eda6b1.21012d11-f309-4c5c-afd1-21ddb31392f7] , True , False )"
+        },
+        {
+          "name": "connectors",
+          "value": {}
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 120,
+            "height": 55
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "615cd730-7ae1-4314-9cef-030203ef7a51"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "97a5b309-39ff-403f-832c-a18ed4717dad": "bool",
+            "27318463-032d-41c0-94da-fd00329f22fb": "bool"
+          }
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "if",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 97,
+                  "line": 1,
+                  "column": 98
+                }
+              },
+              "condition": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 5,
+                    "line": 1,
+                    "column": 6
+                  },
+                  "end": {
+                    "offset": 80,
+                    "line": 1,
+                    "column": 81
+                  }
+                },
+                "name": "438f454f-afbf-479b-951f-7a0fb8eda6b1.21012d11-f309-4c5c-afd1-21ddb31392f7",
+                "blockId": "438f454f-afbf-479b-951f-7a0fb8eda6b1",
+                "connId": "21012d11-f309-4c5c-afd1-21ddb31392f7",
+                "connDataType": "generic"
+              },
+              "then": {
+                "type": "bool",
+                "loc": {
+                  "start": {
+                    "offset": 83,
+                    "line": 1,
+                    "column": 84
+                  },
+                  "end": {
+                    "offset": 87,
+                    "line": 1,
+                    "column": 88
+                  }
+                },
+                "value": true
+              },
+              "else": {
+                "type": "bool",
+                "loc": {
+                  "start": {
+                    "offset": 90,
+                    "line": 1,
+                    "column": 91
+                  },
+                  "end": {
+                    "offset": 95,
+                    "line": 1,
+                    "column": 96
+                  }
+                },
+                "value": false
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Stopwatch",
+      "defId": "33A6555D-F064-40EF-9255-1EC375119BDE",
+      "guid": "053ce6cf-d022-433c-878a-50e2b874e958",
+      "x": -281.02986081980475,
+      "y": 715.4726319817329,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Stopwatch0",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "+10000"
+        },
+        {
+          "name": "connectors",
+          "value": {}
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 50,
+            "height": 50
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "ed08d83f-9017-47bd-9ff8-6a457f1f79ba"
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "number",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 6,
+                  "line": 1,
+                  "column": 7
+                }
+              },
+              "value": 10000
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Stopwatch",
+      "defId": "33A6555D-F064-40EF-9255-1EC375119BDE",
+      "guid": "3caf105f-dea8-461c-9795-2547decee2d3",
+      "x": -260.67630705903815,
+      "y": 1251.1690954778921,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Stopwatch0",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "+10000"
+        },
+        {
+          "name": "connectors",
+          "value": {}
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 50,
+            "height": 50
+          }
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "number",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 6,
+                  "line": 1,
+                  "column": 7
+                }
+              },
+              "value": 10000
+            }
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "33cb3638-d819-454f-9a80-6bf1d2718141"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "bf718781-7c32-493e-9a00-a92961f118f4",
+      "x": -663.01946370947,
+      "y": 389.85066611909053,
+      "properties": [
+        {
+          "name": "name",
+          "value": "buy price",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "9b32007a-7a65-4923-b7f7-6478f4d0c54b"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "18ced375-cd46-4f86-8ea7-e98022eedb1b"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "real"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "757146d8-be95-4932-bc4c-8971a5dcd007"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "757146d8-be95-4932-bc4c-8971a5dcd007",
+      "x": 801.4708437301492,
+      "y": 536.4707124773779,
+      "properties": [
+        {
+          "name": "name",
+          "value": "buy price",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "bf718781-7c32-493e-9a00-a92961f118f4"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "real"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "1113f777-6cb0-4342-8d4a-d64d773aca9a",
+      "x": -661.5646081531897,
+      "y": 504.7842550652313,
+      "properties": [
+        {
+          "name": "name",
+          "value": "sell price",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "e28956d4-1e76-45b4-a966-34818857474f"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "a369364c-ad28-440f-b154-c3059c04bae4"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "real"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "20fc5872-2aa8-427a-88b4-f395b773137c"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "20fc5872-2aa8-427a-88b4-f395b773137c",
+      "x": 815.3394947578637,
+      "y": 1053.8199148573099,
+      "properties": [
+        {
+          "name": "name",
+          "value": "sell price",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "1113f777-6cb0-4342-8d4a-d64d773aca9a"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "real"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "9a6a5c61-67f2-44bc-b6f4-30f56996a22b",
+      "x": 855.7243313104661,
+      "y": 1000.174248168902,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Instrument0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "1f00b386-0e0e-41c1-ac9a-72cf6e19e989"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "string"
+          }
+        },
+        {
+          "name": "sourceConnector"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "SingleOrderContainer",
+      "defId": "D0AA95CF-FBEE-4742-92E5-FF49F899A6CA",
+      "guid": "d5d792cd-10c2-4766-8dc4-781d4434ea54",
+      "x": 250.7515941176372,
+      "y": 537.8532990387937,
+      "properties": [
+        {
+          "name": "name",
+          "value": "SingleOrderContainer0",
+          "hasCustomName": true
+        },
+        {
+          "name": "onExtMod",
+          "value": "StopManaging"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 100
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "ValueAccumulator",
+      "defId": "7C23E28F-AF94-4D4D-9E4D-0AD5584D0F4F",
+      "guid": "0eba04ee-f9e9-446b-827c-fd4db804b91a",
+      "x": 470.85552233428274,
+      "y": 604.9259199763433,
+      "properties": [
+        {
+          "name": "name",
+          "value": "ValueAccumulator0",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[d5d792cd-10c2-4766-8dc4-781d4434ea54.9daac2cc-6614-411d-aee4-b49603b5ab26] "
+        },
+        {
+          "name": "connectors",
+          "value": {}
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 40
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "4f08a877-4599-467a-88d4-a4d021747c97"
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "if",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 0,
+                  "column": 0
+                },
+                "end": {
+                  "offset": 0,
+                  "line": 0,
+                  "column": 0
+                }
+              },
+              "condition": {
+                "type": "bool",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 0,
+                    "column": 0
+                  },
+                  "end": {
+                    "offset": 0,
+                    "line": 0,
+                    "column": 0
+                  }
+                },
+                "value": true
+              },
+              "then": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 75,
+                    "line": 1,
+                    "column": 76
+                  }
+                },
+                "name": "d5d792cd-10c2-4766-8dc4-781d4434ea54.9daac2cc-6614-411d-aee4-b49603b5ab26",
+                "blockId": "d5d792cd-10c2-4766-8dc4-781d4434ea54",
+                "connId": "9daac2cc-6614-411d-aee4-b49603b5ab26",
+                "connDataType": "generic"
+              },
+              "else": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 75,
+                    "line": 1,
+                    "column": 76
+                  }
+                },
+                "name": "d5d792cd-10c2-4766-8dc4-781d4434ea54.9daac2cc-6614-411d-aee4-b49603b5ab26",
+                "blockId": "d5d792cd-10c2-4766-8dc4-781d4434ea54",
+                "connId": "9daac2cc-6614-411d-aee4-b49603b5ab26",
+                "connDataType": "generic"
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "dd9ce6dc-6442-4f49-92f8-fc6a17e535d0",
+      "x": 1138.261377211323,
+      "y": 629.7654569732765,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order0:fills",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "52a4d80d-6a84-4ede-8fb9-242d4c25b596"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "9a5c027e-9579-4a23-a8d7-4073c3a2d88c"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "message"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "8eaa3da9-e147-4ff9-9b8d-17b892f35b38"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "8eaa3da9-e147-4ff9-9b8d-17b892f35b38",
+      "x": 335.65106205980237,
+      "y": 457.95318940400784,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order0:fills",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "dd9ce6dc-6442-4f49-92f8-fc6a17e535d0"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "message"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "2dd99940-2eb8-49fd-aba9-4fee217601a9",
+      "x": 586.6207759539286,
+      "y": 523.2991955345352,
+      "properties": [
+        {
+          "name": "name",
+          "value": "ValueAccumulator0:accVal",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "0eba04ee-f9e9-446b-827c-fd4db804b91a"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "4c544af7-be31-4af0-9001-f9ad73a541b2"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "real"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "df715d68-1c21-4a72-b9b4-021d60967752"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "df715d68-1c21-4a72-b9b4-021d60967752",
+      "x": 775.5850765679465,
+      "y": 585.8640724743543,
+      "properties": [
+        {
+          "name": "name",
+          "value": "ValueAccumulator0:accVal",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "2dd99940-2eb8-49fd-aba9-4fee217601a9"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "real"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "SingleOrderContainer",
+      "defId": "D0AA95CF-FBEE-4742-92E5-FF49F899A6CA",
+      "guid": "e4d66cbb-82e9-4098-b7c1-21a4c2fbba91",
+      "x": 260.61816069608255,
+      "y": 1088.1972906362346,
+      "properties": [
+        {
+          "name": "name",
+          "value": "SingleOrderContainer1",
+          "hasCustomName": true
+        },
+        {
+          "name": "onExtMod",
+          "value": "StopManaging"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 100
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "ValueAccumulator",
+      "defId": "7C23E28F-AF94-4D4D-9E4D-0AD5584D0F4F",
+      "guid": "137ff02e-ac08-46fc-a7f4-d1bb2952ba56",
+      "x": 475.93678302556145,
+      "y": 1156.865013536173,
+      "properties": [
+        {
+          "name": "name",
+          "value": "ValueAccumulator1",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[e4d66cbb-82e9-4098-b7c1-21a4c2fbba91.9daac2cc-6614-411d-aee4-b49603b5ab26] "
+        },
+        {
+          "name": "connectors",
+          "value": {}
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 40
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "7119ea04-31eb-4db9-b9d1-685ba4c9f744"
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "if",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 0,
+                  "column": 0
+                },
+                "end": {
+                  "offset": 0,
+                  "line": 0,
+                  "column": 0
+                }
+              },
+              "condition": {
+                "type": "bool",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 0,
+                    "column": 0
+                  },
+                  "end": {
+                    "offset": 0,
+                    "line": 0,
+                    "column": 0
+                  }
+                },
+                "value": true
+              },
+              "then": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 75,
+                    "line": 1,
+                    "column": 76
+                  }
+                },
+                "name": "e4d66cbb-82e9-4098-b7c1-21a4c2fbba91.9daac2cc-6614-411d-aee4-b49603b5ab26",
+                "blockId": "e4d66cbb-82e9-4098-b7c1-21a4c2fbba91",
+                "connId": "9daac2cc-6614-411d-aee4-b49603b5ab26",
+                "connDataType": "generic"
+              },
+              "else": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 75,
+                    "line": 1,
+                    "column": 76
+                  }
+                },
+                "name": "e4d66cbb-82e9-4098-b7c1-21a4c2fbba91.9daac2cc-6614-411d-aee4-b49603b5ab26",
+                "blockId": "e4d66cbb-82e9-4098-b7c1-21a4c2fbba91",
+                "connId": "9daac2cc-6614-411d-aee4-b49603b5ab26",
+                "connDataType": "generic"
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "5888ca39-5aed-45eb-9d42-b60d10903ee1",
+      "x": 596.487342532374,
+      "y": 1073.643187131976,
+      "properties": [
+        {
+          "name": "name",
+          "value": "ValueAccumulator1:accVal",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "137ff02e-ac08-46fc-a7f4-d1bb2952ba56"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "4c544af7-be31-4af0-9001-f9ad73a541b2"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "real"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "673e9075-bf2b-46c9-9ef1-f6ef997093e4"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "673e9075-bf2b-46c9-9ef1-f6ef997093e4",
+      "x": 789.6235868156374,
+      "y": 1098.9943132351273,
+      "properties": [
+        {
+          "name": "name",
+          "value": "ValueAccumulator1:accVal",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "5888ca39-5aed-45eb-9d42-b60d10903ee1"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "real"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "9944e0b3-1153-45ca-9460-12e4f93cbff5",
+      "x": 1151.2129517805895,
+      "y": 1157.7824837713506,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order1:fills",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "9dffeb19-7ce3-4106-9dd8-619d5124692c"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "9a5c027e-9579-4a23-a8d7-4073c3a2d88c"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "message"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "023095a7-a2b5-40e3-b279-7520766e61cd"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "023095a7-a2b5-40e3-b279-7520766e61cd",
+      "x": 347.7709542685177,
+      "y": 1008.0278779860095,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order1:fills",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "9944e0b3-1153-45ca-9460-12e4f93cbff5"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "message"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "MsgInfoExtractor",
+      "defId": "9E4FD2E5-1C34-436C-9AB7-AB1A16F13C74",
+      "guid": "5b91e260-bc56-4352-a2c7-6f62f1864e88",
+      "x": 377.3968332099357,
+      "y": 657.5085125663849,
+      "properties": [
+        {
+          "name": "name",
+          "value": "MsgInfoExtractor0",
+          "hasCustomName": true
+        },
+        {
+          "name": "Connectors",
+          "value": [
+            "fillPrice"
+          ]
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 50
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "MsgInfoExtractor",
+      "defId": "9E4FD2E5-1C34-436C-9AB7-AB1A16F13C74",
+      "guid": "e9f8225c-32e4-4c9d-9c21-2ec70572141f",
+      "x": 400.7149301575571,
+      "y": 1217.142839309298,
+      "properties": [
+        {
+          "name": "name",
+          "value": "MsgInfoExtractor1",
+          "hasCustomName": true
+        },
+        {
+          "name": "Connectors",
+          "value": [
+            "fillPrice"
+          ]
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 50
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "e6a20999-ae51-4811-81f8-a625ba7bcaa7",
+      "x": 729.1122441554196,
+      "y": 1335.2535200999691,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Short exit Cond",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6] <= [e9f8225c-32e4-4c9d-9c21-2ec70572141f.ee63f34b-41b1-42d4-a914-48c5eabce82b] - ([e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e] * 10) OR [1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6] >= [e9f8225c-32e4-4c9d-9c21-2ec70572141f.ee63f34b-41b1-42d4-a914-48c5eabce82b] + ([e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e] * 4) OR [3790edd2-01fc-40a8-bb78-34b461b6b960.2680ad90-b020-450b-8d61-84a472a7b2d6] < 50"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "3fb1138b-1c08-4724-a123-3f6f3ec3e9ce": {
+              "guid": "3fb1138b-1c08-4724-a123-3f6f3ec3e9ce",
+              "name": "output",
+              "type": "generic",
+              "input": false
+            },
+            "aabd8a1e-1501-450e-95d8-47465f3d71be": {
+              "guid": "aabd8a1e-1501-450e-95d8-47465f3d71be",
+              "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            },
+            "b4a4dab4-f463-4035-ac73-0b64604725d2": {
+              "guid": "b4a4dab4-f463-4035-ac73-0b64604725d2",
+              "name": "e9f8225c-32e4-4c9d-9c21-2ec70572141f.ee63f34b-41b1-42d4-a914-48c5eabce82b",
+              "type": "real",
+              "input": true
+            },
+            "5dc0be24-49a3-414a-a2e0-bc69f3da0da0": {
+              "guid": "5dc0be24-49a3-414a-a2e0-bc69f3da0da0",
+              "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+              "type": "real",
+              "input": true
+            },
+            "a4a49a0c-e6ca-4e07-ae3b-2f6b9b7a7d58": {
+              "guid": "a4a49a0c-e6ca-4e07-ae3b-2f6b9b7a7d58",
+              "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            },
+            "bfb61756-8632-4cd0-b790-5adb44eb26ef": {
+              "guid": "bfb61756-8632-4cd0-b790-5adb44eb26ef",
+              "name": "e9f8225c-32e4-4c9d-9c21-2ec70572141f.ee63f34b-41b1-42d4-a914-48c5eabce82b",
+              "type": "real",
+              "input": true
+            },
+            "184ef2dd-8d0f-4043-b37f-34c35de545c9": {
+              "guid": "184ef2dd-8d0f-4043-b37f-34c35de545c9",
+              "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+              "type": "real",
+              "input": true
+            },
+            "9b81cbca-ec11-46ce-8ada-6a875da926d1": {
+              "guid": "9b81cbca-ec11-46ce-8ada-6a875da926d1",
+              "name": "3790edd2-01fc-40a8-bb78-34b461b6b960.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 30
+          }
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3fb1138b-1c08-4724-a123-3f6f3ec3e9ce": "bool"
+          }
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "op",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 565,
+                  "line": 1,
+                  "column": 566
+                }
+              },
+              "op": "OR",
+              "left": {
+                "type": "op",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 565,
+                    "line": 1,
+                    "column": 566
+                  }
+                },
+                "op": "OR",
+                "left": {
+                  "type": "op",
+                  "loc": {
+                    "start": {
+                      "offset": 0,
+                      "line": 1,
+                      "column": 1
+                    },
+                    "end": {
+                      "offset": 240,
+                      "line": 1,
+                      "column": 241
+                    }
+                  },
+                  "op": "<=",
+                  "left": {
+                    "type": "connector",
+                    "loc": {
+                      "start": {
+                        "offset": 0,
+                        "line": 1,
+                        "column": 1
+                      },
+                      "end": {
+                        "offset": 75,
+                        "line": 1,
+                        "column": 76
+                      }
+                    },
+                    "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                    "blockId": "1ce1b917-6216-4f14-89e9-d99ecddf04fa",
+                    "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                    "connDataType": "generic"
+                  },
+                  "right": {
+                    "type": "op",
+                    "loc": {
+                      "start": {
+                        "offset": 78,
+                        "line": 1,
+                        "column": 79
+                      },
+                      "end": {
+                        "offset": 240,
+                        "line": 1,
+                        "column": 241
+                      }
+                    },
+                    "op": "-",
+                    "left": {
+                      "type": "connector",
+                      "loc": {
+                        "start": {
+                          "offset": 79,
+                          "line": 1,
+                          "column": 80
+                        },
+                        "end": {
+                          "offset": 154,
+                          "line": 1,
+                          "column": 155
+                        }
+                      },
+                      "name": "e9f8225c-32e4-4c9d-9c21-2ec70572141f.ee63f34b-41b1-42d4-a914-48c5eabce82b",
+                      "blockId": "e9f8225c-32e4-4c9d-9c21-2ec70572141f",
+                      "connId": "ee63f34b-41b1-42d4-a914-48c5eabce82b",
+                      "connDataType": "generic"
+                    },
+                    "right": {
+                      "type": "op",
+                      "loc": {
+                        "start": {
+                          "offset": 158,
+                          "line": 1,
+                          "column": 159
+                        },
+                        "end": {
+                          "offset": 238,
+                          "line": 1,
+                          "column": 239
+                        }
+                      },
+                      "op": "*",
+                      "left": {
+                        "type": "connector",
+                        "loc": {
+                          "start": {
+                            "offset": 158,
+                            "line": 1,
+                            "column": 159
+                          },
+                          "end": {
+                            "offset": 233,
+                            "line": 1,
+                            "column": 234
+                          }
+                        },
+                        "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "blockId": "e35034d6-0f79-492e-878a-64839a018ebd",
+                        "connId": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "connDataType": "generic"
+                      },
+                      "right": {
+                        "type": "number",
+                        "loc": {
+                          "start": {
+                            "offset": 236,
+                            "line": 1,
+                            "column": 237
+                          },
+                          "end": {
+                            "offset": 238,
+                            "line": 1,
+                            "column": 239
+                          }
+                        },
+                        "value": 10
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "type": "op",
+                  "loc": {
+                    "start": {
+                      "offset": 242,
+                      "line": 1,
+                      "column": 243
+                    },
+                    "end": {
+                      "offset": 482,
+                      "line": 1,
+                      "column": 483
+                    }
+                  },
+                  "op": ">=",
+                  "left": {
+                    "type": "connector",
+                    "loc": {
+                      "start": {
+                        "offset": 243,
+                        "line": 1,
+                        "column": 244
+                      },
+                      "end": {
+                        "offset": 318,
+                        "line": 1,
+                        "column": 319
+                      }
+                    },
+                    "name": "1ce1b917-6216-4f14-89e9-d99ecddf04fa.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                    "blockId": "1ce1b917-6216-4f14-89e9-d99ecddf04fa",
+                    "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                    "connDataType": "generic"
+                  },
+                  "right": {
+                    "type": "op",
+                    "loc": {
+                      "start": {
+                        "offset": 321,
+                        "line": 1,
+                        "column": 322
+                      },
+                      "end": {
+                        "offset": 482,
+                        "line": 1,
+                        "column": 483
+                      }
+                    },
+                    "op": "+",
+                    "left": {
+                      "type": "connector",
+                      "loc": {
+                        "start": {
+                          "offset": 322,
+                          "line": 1,
+                          "column": 323
+                        },
+                        "end": {
+                          "offset": 397,
+                          "line": 1,
+                          "column": 398
+                        }
+                      },
+                      "name": "e9f8225c-32e4-4c9d-9c21-2ec70572141f.ee63f34b-41b1-42d4-a914-48c5eabce82b",
+                      "blockId": "e9f8225c-32e4-4c9d-9c21-2ec70572141f",
+                      "connId": "ee63f34b-41b1-42d4-a914-48c5eabce82b",
+                      "connDataType": "generic"
+                    },
+                    "right": {
+                      "type": "op",
+                      "loc": {
+                        "start": {
+                          "offset": 401,
+                          "line": 1,
+                          "column": 402
+                        },
+                        "end": {
+                          "offset": 480,
+                          "line": 1,
+                          "column": 481
+                        }
+                      },
+                      "op": "*",
+                      "left": {
+                        "type": "connector",
+                        "loc": {
+                          "start": {
+                            "offset": 401,
+                            "line": 1,
+                            "column": 402
+                          },
+                          "end": {
+                            "offset": 476,
+                            "line": 1,
+                            "column": 477
+                          }
+                        },
+                        "name": "e35034d6-0f79-492e-878a-64839a018ebd.1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "blockId": "e35034d6-0f79-492e-878a-64839a018ebd",
+                        "connId": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+                        "connDataType": "generic"
+                      },
+                      "right": {
+                        "type": "number",
+                        "loc": {
+                          "start": {
+                            "offset": 479,
+                            "line": 1,
+                            "column": 480
+                          },
+                          "end": {
+                            "offset": 480,
+                            "line": 1,
+                            "column": 481
+                          }
+                        },
+                        "value": 4
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "type": "op",
+                "loc": {
+                  "start": {
+                    "offset": 484,
+                    "line": 1,
+                    "column": 485
+                  },
+                  "end": {
+                    "offset": 565,
+                    "line": 1,
+                    "column": 566
+                  }
+                },
+                "op": "<",
+                "left": {
+                  "type": "connector",
+                  "loc": {
+                    "start": {
+                      "offset": 485,
+                      "line": 1,
+                      "column": 486
+                    },
+                    "end": {
+                      "offset": 560,
+                      "line": 1,
+                      "column": 561
+                    }
+                  },
+                  "name": "3790edd2-01fc-40a8-bb78-34b461b6b960.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "blockId": "3790edd2-01fc-40a8-bb78-34b461b6b960",
+                  "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                  "connDataType": "generic"
+                },
+                "right": {
+                  "type": "number",
+                  "loc": {
+                    "start": {
+                      "offset": 563,
+                      "line": 1,
+                      "column": 564
+                    },
+                    "end": {
+                      "offset": 565,
+                      "line": 1,
+                      "column": 566
+                    }
+                  },
+                  "value": 50
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "e6a20999-ae51-4811-81f8-a625ba7bcaa7"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Or",
+      "defId": "C166B5D7-6487-4CA2-A5F0-A93B9E502639",
+      "guid": "91fbb7d7-c981-4560-a802-8b6e97945c6c",
+      "x": 873.7933788448702,
+      "y": 1286.9045779722783,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Or0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Or",
+      "defId": "C166B5D7-6487-4CA2-A5F0-A93B9E502639",
+      "guid": "e9276c40-381d-449a-82ef-a3cdbc2d0ead",
+      "x": 822.2766351836085,
+      "y": 710.342279825265,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Or1",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Number",
+      "defId": "794959B3-80F3-46DD-976F-B7BB517A2BAA",
+      "guid": "57fe26d5-eca2-4a97-8dee-1b270e5fbde4",
+      "x": -819.418196937909,
+      "y": 615.8423159701417,
+      "properties": [
+        {
+          "name": "name",
+          "value": "tick Size",
+          "hasCustomName": true
+        },
+        {
+          "name": "value",
+          "value": 10
+        },
+        {
+          "name": "orderTypeValue",
+          "value": "limit"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "type",
+          "value": "static"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "sourceBlock": "a10733be-09d5-4272-938a-48f2cc762f8d",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "ea1ede07-264e-4d87-8062-a29ec3bb41b9",
+      "targetConnector": "8ccda67d-087d-481d-8026-ba4e6bb3bb8d",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "825839c0-dc3d-4dad-be4c-06ef05fc6b13",
+      "sourceConnector": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+      "targetBlock": "ea1ede07-264e-4d87-8062-a29ec3bb41b9",
+      "targetConnector": "a25c883a-13f8-485b-9420-cab1466714d9",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "cdd5fb48-86e5-4f85-9979-cf605916435b",
+      "sourceConnector": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+      "targetBlock": "ea1ede07-264e-4d87-8062-a29ec3bb41b9",
+      "targetConnector": "e056238b-0d88-48aa-8e9e-99a1be28aee5",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "ea1ede07-264e-4d87-8062-a29ec3bb41b9",
+      "sourceConnector": "949e789f-9999-44f0-8143-150910f96764",
+      "targetBlock": "981fa29e-03e7-4284-bb11-9258844f2e6b",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "a10733be-09d5-4272-938a-48f2cc762f8d",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "1ce1b917-6216-4f14-89e9-d99ecddf04fa",
+      "targetConnector": "10f01cca-6699-4dbd-a2f3-47a3347606fd",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "a10733be-09d5-4272-938a-48f2cc762f8d",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "27a9d4cb-bcb3-455a-982a-613bb1ca2587",
+      "targetConnector": "10f01cca-6699-4dbd-a2f3-47a3347606fd",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "a10733be-09d5-4272-938a-48f2cc762f8d",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "3790edd2-01fc-40a8-bb78-34b461b6b960",
+      "targetConnector": "10f01cca-6699-4dbd-a2f3-47a3347606fd",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "a10733be-09d5-4272-938a-48f2cc762f8d",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "15035212-dfb2-4502-8899-51c5945adde8",
+      "targetConnector": "10f01cca-6699-4dbd-a2f3-47a3347606fd",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "a10733be-09d5-4272-938a-48f2cc762f8d",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "7027ad5c-428f-4461-b2d2-ad248ec4261a",
+      "targetConnector": "10f01cca-6699-4dbd-a2f3-47a3347606fd",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "a10733be-09d5-4272-938a-48f2cc762f8d",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "1f00b386-0e0e-41c1-ac9a-72cf6e19e989",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "370e63c1-31a3-4980-8af3-4a3cf8f4b3de",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "2985b1f9-f1ce-4bbc-9157-d620e9676674",
+      "targetConnector": "6dba7d56-24ed-45dc-80ac-27692b76df51",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "e1be4885-e538-45d0-9353-39cb93fa8e69",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "6376f392-332b-48b7-8128-16185eef77ab",
+      "targetConnector": "6dba7d56-24ed-45dc-80ac-27692b76df51",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "2985b1f9-f1ce-4bbc-9157-d620e9676674",
+      "sourceConnector": "3dfae577-de4c-4a5c-b9a4-b070a3897697",
+      "targetBlock": "df9f3586-a373-40bf-bcdf-9dc77a7d8c42",
+      "targetConnector": "1b57c2af-851e-43c7-80b5-18bd577350b7",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "df9f3586-a373-40bf-bcdf-9dc77a7d8c42",
+      "sourceConnector": "b272d78b-8b80-4b93-a1b9-54dfa56bb841",
+      "targetBlock": "c61d9728-c706-4c90-b6ed-b158efc91337",
+      "targetConnector": "46f46b2c-3ba7-46c0-89bc-6345df22cae2",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "434e2b30-6145-4145-8627-53f43c9fcec4",
+      "sourceConnector": "b272d78b-8b80-4b93-a1b9-54dfa56bb841",
+      "targetBlock": "438f454f-afbf-479b-951f-7a0fb8eda6b1",
+      "targetConnector": "46f46b2c-3ba7-46c0-89bc-6345df22cae2",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "6376f392-332b-48b7-8128-16185eef77ab",
+      "sourceConnector": "3dfae577-de4c-4a5c-b9a4-b070a3897697",
+      "targetBlock": "434e2b30-6145-4145-8627-53f43c9fcec4",
+      "targetConnector": "1b57c2af-851e-43c7-80b5-18bd577350b7",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "2a57dddc-60d5-45f5-9955-d4dfeca99651",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "5a14b9d2-53cc-4178-a430-4a416ef07596",
+      "targetConnector": "6dba7d56-24ed-45dc-80ac-27692b76df51",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "5a14b9d2-53cc-4178-a430-4a416ef07596",
+      "sourceConnector": "3dfae577-de4c-4a5c-b9a4-b070a3897697",
+      "targetBlock": "2075960f-f4ad-4ef5-b5a7-648242e54a9c",
+      "targetConnector": "1b57c2af-851e-43c7-80b5-18bd577350b7",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "2503a7fa-19de-41a8-8094-8311045367fa",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "8bed749a-64df-426f-9f48-1a2f5ebc20db",
+      "targetConnector": "6dba7d56-24ed-45dc-80ac-27692b76df51",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "8bed749a-64df-426f-9f48-1a2f5ebc20db",
+      "sourceConnector": "3dfae577-de4c-4a5c-b9a4-b070a3897697",
+      "targetBlock": "b5c2b8b7-bbd8-4205-935a-13f459f0e4fa",
+      "targetConnector": "1b57c2af-851e-43c7-80b5-18bd577350b7",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "7215a8a1-60a3-4360-b083-4c864c4bd581",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "423c4da9-2371-4ff7-9dec-6a4748f37dee",
+      "targetConnector": "fe5831de-5900-4da4-a046-e9d4fd76b36e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "89c6f30f-9869-4e9d-ad84-38ef9eb25dee",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "e0464b2d-98e2-4bd2-b7aa-4cb169e4e3e3",
+      "targetConnector": "fe5831de-5900-4da4-a046-e9d4fd76b36e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "27a9d4cb-bcb3-455a-982a-613bb1ca2587",
+      "sourceConnector": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+      "targetBlock": "c8140549-fa65-45fb-919d-d8dd4940aa1b",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "fe9e4434-0c67-4c7f-afdb-db98d3716d78",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "9b32007a-7a65-4923-b7f7-6478f4d0c54b",
+      "targetConnector": "0219fcdc-8b15-4c7c-b398-7666471ddbea",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "e35034d6-0f79-492e-878a-64839a018ebd",
+      "sourceConnector": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+      "targetBlock": "9b32007a-7a65-4923-b7f7-6478f4d0c54b",
+      "targetConnector": "b856ffc1-7d6e-4d96-b086-1e055c039357",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "15035212-dfb2-4502-8899-51c5945adde8",
+      "sourceConnector": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+      "targetBlock": "f603f208-2a0c-4e0b-8b06-0e4519f27cc8",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "ea04e7a5-bec8-49a4-825a-a2be4e31184f",
+      "sourceConnector": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+      "targetBlock": "e28956d4-1e76-45b4-a966-34818857474f",
+      "targetConnector": "2e8e77cc-efb9-4de3-9ba9-fa43b474db1f",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "5241e4a3-1c9c-46df-bdae-053c39c1a654",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "e28956d4-1e76-45b4-a966-34818857474f",
+      "targetConnector": "54dbade5-e639-482a-9ede-b8c126af9c8b",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "2d616c96-00d5-4494-b232-76a736bf1eef",
+      "sourceConnector": "0ae2c950-4f94-4988-8fd3-386829f781b4",
+      "targetBlock": "423c4da9-2371-4ff7-9dec-6a4748f37dee",
+      "targetConnector": "f601e43c-adf6-48ad-8523-75efca6c54c8",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "ea1ede07-264e-4d87-8062-a29ec3bb41b9",
+      "sourceConnector": "8123391e-495a-4e94-9e20-588b3aa6f6ac",
+      "targetBlock": "b8378a52-c596-4d23-b7df-bf81ab95b108",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "ee613434-dca8-4cd3-ab91-d98506432ab6",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "934f3833-2379-401a-9ee0-58a4da72d2af",
+      "targetConnector": "1deb727d-51f8-41b2-83e1-0214670485ec",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "a051ac4b-3296-4d6e-96d6-b1f2e55afe46",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "79383c1d-888e-4a95-b99f-56927610082d",
+      "targetConnector": "1deb727d-51f8-41b2-83e1-0214670485ec",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "ee613434-dca8-4cd3-ab91-d98506432ab6",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "053ce6cf-d022-433c-878a-50e2b874e958",
+      "targetConnector": "a8fbf951-3cb2-43dc-8ea4-fdabe745577b",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "053ce6cf-d022-433c-878a-50e2b874e958",
+      "sourceConnector": "52c9d2b3-f5aa-43f4-aac2-e03c2fe7d0d8",
+      "targetBlock": "934f3833-2379-401a-9ee0-58a4da72d2af",
+      "targetConnector": "0a54fdc4-d10b-4b9a-baa8-288240ca5f62",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "a051ac4b-3296-4d6e-96d6-b1f2e55afe46",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "3caf105f-dea8-461c-9795-2547decee2d3",
+      "targetConnector": "a8fbf951-3cb2-43dc-8ea4-fdabe745577b",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "3caf105f-dea8-461c-9795-2547decee2d3",
+      "sourceConnector": "52c9d2b3-f5aa-43f4-aac2-e03c2fe7d0d8",
+      "targetBlock": "79383c1d-888e-4a95-b99f-56927610082d",
+      "targetConnector": "0a54fdc4-d10b-4b9a-baa8-288240ca5f62",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "934f3833-2379-401a-9ee0-58a4da72d2af",
+      "sourceConnector": "27318463-032d-41c0-94da-fd00329f22fb",
+      "targetBlock": "2d616c96-00d5-4494-b232-76a736bf1eef",
+      "targetConnector": "3aa679fd-222c-4cbe-87d0-15615b0486ee",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "a3edadde-f4f8-4797-80c6-7fe29e48fbe2",
+      "sourceConnector": "0ae2c950-4f94-4988-8fd3-386829f781b4",
+      "targetBlock": "e0464b2d-98e2-4bd2-b7aa-4cb169e4e3e3",
+      "targetConnector": "f601e43c-adf6-48ad-8523-75efca6c54c8",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "79383c1d-888e-4a95-b99f-56927610082d",
+      "sourceConnector": "27318463-032d-41c0-94da-fd00329f22fb",
+      "targetBlock": "a3edadde-f4f8-4797-80c6-7fe29e48fbe2",
+      "targetConnector": "3aa679fd-222c-4cbe-87d0-15615b0486ee",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "abb553b1-452b-4487-8631-e349637d5c91",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "52a4d80d-6a84-4ede-8fb9-242d4c25b596",
+      "targetConnector": "945f664b-2c67-4492-856b-f9977ac113b4",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "9b32007a-7a65-4923-b7f7-6478f4d0c54b",
+      "sourceConnector": "18ced375-cd46-4f86-8ea7-e98022eedb1b",
+      "targetBlock": "bf718781-7c32-493e-9a00-a92961f118f4",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "e28956d4-1e76-45b4-a966-34818857474f",
+      "sourceConnector": "a369364c-ad28-440f-b154-c3059c04bae4",
+      "targetBlock": "1113f777-6cb0-4342-8d4a-d64d773aca9a",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "757146d8-be95-4932-bc4c-8971a5dcd007",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "52a4d80d-6a84-4ede-8fb9-242d4c25b596",
+      "targetConnector": "c2f3c996-0295-4a9a-8300-ade3855822d6",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "9a6a5c61-67f2-44bc-b6f4-30f56996a22b",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "9dffeb19-7ce3-4106-9dd8-619d5124692c",
+      "targetConnector": "945f664b-2c67-4492-856b-f9977ac113b4",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "20fc5872-2aa8-427a-88b4-f395b773137c",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "9dffeb19-7ce3-4106-9dd8-619d5124692c",
+      "targetConnector": "c2f3c996-0295-4a9a-8300-ade3855822d6",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "423c4da9-2371-4ff7-9dec-6a4748f37dee",
+      "sourceConnector": "bc0f50e2-c7e6-4b12-83e7-d7e18ea2acd5",
+      "targetBlock": "d5d792cd-10c2-4766-8dc4-781d4434ea54",
+      "targetConnector": "78c8196c-4236-4c10-8c42-62a4589f2d8b",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "d5d792cd-10c2-4766-8dc4-781d4434ea54",
+      "sourceConnector": "a00603be-ce1e-4f99-8950-ed8d8fceeb74",
+      "targetBlock": "0eba04ee-f9e9-446b-827c-fd4db804b91a",
+      "targetConnector": "93e2199d-2a71-4c4d-a90c-6a79cc5e8e43",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "52a4d80d-6a84-4ede-8fb9-242d4c25b596",
+      "sourceConnector": "9a5c027e-9579-4a23-a8d7-4073c3a2d88c",
+      "targetBlock": "dd9ce6dc-6442-4f49-92f8-fc6a17e535d0",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "8eaa3da9-e147-4ff9-9b8d-17b892f35b38",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "0eba04ee-f9e9-446b-827c-fd4db804b91a",
+      "targetConnector": "79f49e7a-bfff-4fe1-960e-78ade4d7df0f",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "0eba04ee-f9e9-446b-827c-fd4db804b91a",
+      "sourceConnector": "4c544af7-be31-4af0-9001-f9ad73a541b2",
+      "targetBlock": "2dd99940-2eb8-49fd-aba9-4fee217601a9",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "df715d68-1c21-4a72-b9b4-021d60967752",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "52a4d80d-6a84-4ede-8fb9-242d4c25b596",
+      "targetConnector": "02d6b042-1a9c-4533-8628-2ede52881596",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "e4d66cbb-82e9-4098-b7c1-21a4c2fbba91",
+      "sourceConnector": "a00603be-ce1e-4f99-8950-ed8d8fceeb74",
+      "targetBlock": "137ff02e-ac08-46fc-a7f4-d1bb2952ba56",
+      "targetConnector": "93e2199d-2a71-4c4d-a90c-6a79cc5e8e43",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "137ff02e-ac08-46fc-a7f4-d1bb2952ba56",
+      "sourceConnector": "4c544af7-be31-4af0-9001-f9ad73a541b2",
+      "targetBlock": "5888ca39-5aed-45eb-9d42-b60d10903ee1",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "e0464b2d-98e2-4bd2-b7aa-4cb169e4e3e3",
+      "sourceConnector": "bc0f50e2-c7e6-4b12-83e7-d7e18ea2acd5",
+      "targetBlock": "e4d66cbb-82e9-4098-b7c1-21a4c2fbba91",
+      "targetConnector": "78c8196c-4236-4c10-8c42-62a4589f2d8b",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "673e9075-bf2b-46c9-9ef1-f6ef997093e4",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "9dffeb19-7ce3-4106-9dd8-619d5124692c",
+      "targetConnector": "02d6b042-1a9c-4533-8628-2ede52881596",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "9dffeb19-7ce3-4106-9dd8-619d5124692c",
+      "sourceConnector": "9a5c027e-9579-4a23-a8d7-4073c3a2d88c",
+      "targetBlock": "9944e0b3-1153-45ca-9460-12e4f93cbff5",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "023095a7-a2b5-40e3-b279-7520766e61cd",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "137ff02e-ac08-46fc-a7f4-d1bb2952ba56",
+      "targetConnector": "79f49e7a-bfff-4fe1-960e-78ade4d7df0f",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "d5d792cd-10c2-4766-8dc4-781d4434ea54",
+      "sourceConnector": "a00603be-ce1e-4f99-8950-ed8d8fceeb74",
+      "targetBlock": "5b91e260-bc56-4352-a2c7-6f62f1864e88",
+      "targetConnector": "8d36e715-f531-4ebd-a628-13c09006c573",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "e4d66cbb-82e9-4098-b7c1-21a4c2fbba91",
+      "sourceConnector": "a00603be-ce1e-4f99-8950-ed8d8fceeb74",
+      "targetBlock": "e9f8225c-32e4-4c9d-9c21-2ec70572141f",
+      "targetConnector": "8d36e715-f531-4ebd-a628-13c09006c573",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "b5c2b8b7-bbd8-4205-935a-13f459f0e4fa",
+      "sourceConnector": "b272d78b-8b80-4b93-a1b9-54dfa56bb841",
+      "targetBlock": "91fbb7d7-c981-4560-a802-8b6e97945c6c",
+      "targetConnector": "c521ca6c-748c-4083-a59f-c0cdd941f701",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "e6a20999-ae51-4811-81f8-a625ba7bcaa7",
+      "sourceConnector": "3fb1138b-1c08-4724-a123-3f6f3ec3e9ce",
+      "targetBlock": "91fbb7d7-c981-4560-a802-8b6e97945c6c",
+      "targetConnector": "ec8b149c-6c97-4234-8eff-5662e3baf538",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "91fbb7d7-c981-4560-a802-8b6e97945c6c",
+      "sourceConnector": "bacad4ed-cd8c-4dd1-a0b8-15045f5a5258",
+      "targetBlock": "9dffeb19-7ce3-4106-9dd8-619d5124692c",
+      "targetConnector": "11c573bd-bb71-4f5f-9389-58e48d35fd97",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "2075960f-f4ad-4ef5-b5a7-648242e54a9c",
+      "sourceConnector": "b272d78b-8b80-4b93-a1b9-54dfa56bb841",
+      "targetBlock": "e9276c40-381d-449a-82ef-a3cdbc2d0ead",
+      "targetConnector": "c521ca6c-748c-4083-a59f-c0cdd941f701",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "e9276c40-381d-449a-82ef-a3cdbc2d0ead",
+      "sourceConnector": "bacad4ed-cd8c-4dd1-a0b8-15045f5a5258",
+      "targetBlock": "52a4d80d-6a84-4ede-8fb9-242d4c25b596",
+      "targetConnector": "11c573bd-bb71-4f5f-9389-58e48d35fd97",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "22154a6d-3d9a-4519-991d-0a83b2e90e91",
+      "sourceConnector": "6358ca6d-9af1-48f1-a2d7-bd31a3961e32",
+      "targetBlock": "c61d9728-c706-4c90-b6ed-b158efc91337",
+      "targetConnector": "3b3ebbe4-bdc8-4fcd-b240-7da80140e7fc",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "0d18a537-b8b9-492a-afca-5daab52dd6ff",
+      "sourceConnector": "b979be5e-8216-419b-80f7-bc2f86b70cc3",
+      "targetBlock": "438f454f-afbf-479b-951f-7a0fb8eda6b1",
+      "targetConnector": "3b3ebbe4-bdc8-4fcd-b240-7da80140e7fc",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "efddbeed-9755-4677-9b9f-6471959c2628",
+      "sourceConnector": "e457ea84-e10d-4729-899d-e0d643737761",
+      "targetBlock": "e9276c40-381d-449a-82ef-a3cdbc2d0ead",
+      "targetConnector": "ec8b149c-6c97-4234-8eff-5662e3baf538",
+      "className": "Edge"
+    }
+  ],
+  "lastModifiedTime": 1749482466404,
+  "ignoreMarketState": false,
+  "graphIdToViewport": {
+    "6893b179-6aee-45e9-9b57-bcac3d8408d6": {
+      "x": -1074.5624427430037,
+      "y": 223.82636445047444,
+      "scale": 0.6269191710493337
+    }
+  },
+  "showInMDT": 0,
+  "isSOA": false,
+  "isOmaOta": false,
+  "isPREnabled": false
+}
