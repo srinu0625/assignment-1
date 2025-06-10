@@ -1,0 +1,812 @@
+{
+  "name": "Modified Three Way Arbitrage",
+  "version": 0,
+  "blockDefinitions": [
+    {
+      "defName": "S W 1",
+      "defId": "535F15BC-A990-46A8-A681-82C22791ECC3",
+      "guid": "base_price_block",
+      "x": 50,
+      "y": 50,
+      "properties": [
+        {
+          "name": "name",
+          "value": "BasePrice",
+          "hasCustomName": true
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "output_price": {
+              "guid": "output_price",
+              "name": "output",
+              "type": "real",
+              "input": false
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Memory",
+      "defId": "D1234567-890A-BCDE-F123-4567890ABCDE",
+      "guid": "previous_price_block",
+      "x": 50,
+      "y": 100,
+      "properties": [
+        {
+          "name": "name",
+          "value": "PreviousPrice",
+          "hasCustomName": true
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "input_price": {
+              "guid": "input_price",
+              "name": "input",
+              "type": "real",
+              "input": true
+            },
+            "output_prev_price": {
+              "guid": "output_prev_price",
+              "name": "output",
+              "type": "real",
+              "input": false
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Number",
+      "defId": "794959B3-80F3-46DD-976F-B7BB517A2BAA",
+      "guid": "tick_size_block",
+      "x": 150,
+      "y": 50,
+      "properties": [
+        {
+          "name": "name",
+          "value": "TickSize",
+          "hasCustomName": true
+        },
+        {
+          "name": "value",
+          "value": 0.01
+        },
+        {
+          "name": "type",
+          "value": "static"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "output_tick": {
+              "guid": "output_tick",
+              "name": "output",
+              "type": "real",
+              "input": false
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "market_direction",
+      "x": 150,
+      "y": 100,
+      "properties": [
+        {
+          "name": "name",
+          "value": "MarketDirection",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[base_price_block.output_price] > [previous_price_block.output_prev_price]"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "output_direction": {
+              "guid": "output_direction",
+              "name": "output",
+              "type": "bool",
+              "input": false
+            },
+            "input_current_price": {
+              "guid": "input_current_price",
+              "name": "base_price_block.output_price",
+              "type": "real",
+              "input": true
+            },
+            "input_previous_price": {
+              "guid": "input_previous_price",
+              "name": "previous_price_block.output_prev_price",
+              "type": "real",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 30
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "price_level_1",
+      "x": 250,
+      "y": 50,
+      "properties": [
+        {
+          "name": "name",
+          "value": "PriceLevel1",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[base_price_block.output_price] + (0 * [tick_size_block.output_tick] * ([market_direction.output_direction] ? 1 : -1))"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "output_price_1": {
+              "guid": "output_price_1",
+              "name": "output",
+              "type": "real",
+              "input": false
+            },
+            "input_base_price": {
+              "guid": "input_base_price",
+              "name": "base_price_block.output_price",
+              "type": "real",
+              "input": true
+            },
+            "input_tick_size": {
+              "guid": "input_tick_size",
+              "name": "tick_size_block.output_tick",
+              "type": "real",
+              "input": true
+            },
+            "input_direction": {
+              "guid": "input_direction",
+              "name": "market_direction.output_direction",
+              "type": "bool",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 30
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "price_level_2",
+      "x": 250,
+      "y": 100,
+      "properties": [
+        {
+          "name": "name",
+          "value": "PriceLevel2",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[base_price_block.output_price] + (1 * [tick_size_block.output_tick] * ([market_direction.output_direction] ? 1 : -1))"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "output_price_2": {
+              "guid": "output_price_2",
+              "name": "output",
+              "type": "real",
+              "input": false
+            },
+            "input_base_price": {
+              "guid": "input_base_price",
+              "name": "base_price_block.output_price",
+              "type": "real",
+              "input": true
+            },
+            "input_tick_size": {
+              "guid": "input_tick_size",
+              "name": "tick_size_block.output_tick",
+              "type": "real",
+              "input": true
+            },
+            "input_direction": {
+              "guid": "input_direction",
+              "name": "market_direction.output_direction",
+              "type": "bool",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 30
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "price_level_3",
+      "x": 250,
+      "y": 150,
+      "properties": [
+        {
+          "name": "name",
+          "value": "PriceLevel3",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[base_price_block.output_price] + (2 * [tick_size_block.output_tick] * ([market_direction.output_direction] ? 1 : -1))"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "output_price_3": {
+              "guid": "output_price_3",
+              "name": "output",
+              "type": "real",
+              "input": false
+            },
+            "input_base_price": {
+              "guid": "input_base_price",
+              "name": "base_price_block.output_price",
+              "type": "real",
+              "input": true
+            },
+            "input_tick_size": {
+              "guid": "input_tick_size",
+              "name": "tick_size_block.output_tick",
+              "type": "real",
+              "input": true
+            },
+            "input_direction": {
+              "guid": "input_direction",
+              "name": "market_direction.output_direction",
+              "type": "bool",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 30
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "price_level_4",
+      "x": 250,
+      "y": 200,
+      "properties": [
+        {
+          "name": "name",
+          "value": "PriceLevel4",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[base_price_block.output_price] + (3 * [tick_size_block.output_tick] * ([market_direction.output_direction] ? 1 : -1))"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "output_price_4": {
+              "guid": "output_price_4",
+              "name": "output",
+              "type": "real",
+              "input": false
+            },
+            "input_base_price": {
+              "guid": "input_base_price",
+              "name": "base_price_block.output_price",
+              "type": "real",
+              "input": true
+            },
+            "input_tick_size": {
+              "guid": "input_tick_size",
+              "name": "tick_size_block.output_tick",
+              "type": "real",
+              "input": true
+            },
+            "input_direction": {
+              "guid": "input_direction",
+              "name": "market_direction.output_direction",
+              "type": "bool",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 30
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "price_level_5",
+      "x": 250,
+      "y": 250,
+      "properties": [
+        {
+          "name": "name",
+          "value": "PriceLevel5",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[base_price_block.output_price] + (4 * [tick_size_block.output_tick] * ([market_direction.output_direction] ? 1 : -1))"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "output_price_5": {
+              "guid": "output_price_5",
+              "name": "output",
+              "type": "real",
+              "input": false
+            },
+            "input_base_price": {
+              "guid": "input_base_price",
+              "name": "base_price_block.output_price",
+              "type": "real",
+              "input": true
+            },
+            "input_tick_size": {
+              "guid": "input_tick_size",
+              "name": "tick_size_block.output_tick",
+              "type": "real",
+              "input": true
+            },
+            "input_direction": {
+              "guid": "input_direction",
+              "name": "market_direction.output_direction",
+              "type": "bool",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 30
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Order",
+      "defId": "F1234567-890A-BCDE-F123-4567890ABCDE",
+      "guid": "order_1",
+      "x": 350,
+      "y": 50,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order1",
+          "hasCustomName": true
+        },
+        {
+          "name": "side",
+          "value": "[market_direction.output_direction] ? 'buy' : 'sell'"
+        },
+        {
+          "name": "price",
+          "value": "[price_level_1.output_price_1]"
+        },
+        {
+          "name": "quantity",
+          "value": 1
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "input_price": {
+              "guid": "input_price",
+              "name": "price_level_1.output_price_1",
+              "type": "real",
+              "input": true
+            },
+            "input_direction": {
+              "guid": "input_direction",
+              "name": "market_direction.output_direction",
+              "type": "bool",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Order",
+      "defId": "F1234567-890A-BCDE-F123-4567890ABCDE",
+      "guid": "order_2",
+      "x": 350,
+      "y": 100,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order2",
+          "hasCustomName": true
+        },
+        {
+          "name": "side",
+          "value": "[market_direction.output_direction] ? 'buy' : 'sell'"
+        },
+        {
+          "name": "price",
+          "value": "[price_level_2.output_price_2]"
+        },
+        {
+          "name": "quantity",
+          "value": 1
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "input_price": {
+              "guid": "input_price",
+              "name": "price_level_2.output_price_2",
+              "type": "real",
+              "input": true
+            },
+            "input_direction": {
+              "guid": "input_direction",
+              "name": "market_direction.output_direction",
+              "type": "bool",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Order",
+      "defId": "F1234567-890A-BCDE-F123-4567890ABCDE",
+      "guid": "order_3",
+      "x": 350,
+      "y": 150,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order3",
+          "hasCustomName": true
+        },
+        {
+          "name": "side",
+          "value": "[market_direction.output_direction] ? 'buy' : 'sell'"
+        },
+        {
+          "name": "price",
+          "value": "[price_level_3.output_price_3]"
+        },
+        {
+          "name": "quantity",
+          "value": 1
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "input_price": {
+              "guid": "input_price",
+              "name": "price_level_3.output_price_3",
+              "type": "real",
+              "input": true
+            },
+            "input_direction": {
+              "guid": "input_direction",
+              "name": "market_direction.output_direction",
+              "type": "bool",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Order",
+      "defId": "F1234567-890A-BCDE-F123-4567890ABCDE",
+      "guid": "order_4",
+      "x": 350,
+      "y": 200,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order4",
+          "hasCustomName": true
+        },
+        {
+          "name": "side",
+          "value": "[market_direction.output_direction] ? 'buy' : 'sell'"
+        },
+        {
+          "name": "price",
+          "value": "[price_level_4.output_price_4]"
+        },
+        {
+          "name": "quantity",
+          "value": 1
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "input_price": {
+              "guid": "input_price",
+              "name": "price_level_4.output_price_4",
+              "type": "real",
+              "input": true
+            },
+            "input_direction": {
+              "guid": "input_direction",
+              "name": "market_direction.output_direction",
+              "type": "bool",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Order",
+      "defId": "F1234567-890A-BCDE-F123-4567890ABCDE",
+      "guid": "order_5",
+      "x": 350,
+      "y": 250,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order5",
+          "hasCustomName": true
+        },
+        {
+          "name": "side",
+          "value": "[market_direction.output_direction] ? 'buy' : 'sell'"
+        },
+        {
+          "name": "price",
+          "value": "[price_level_5.output_price_5]"
+        },
+        {
+          "name": "quantity",
+          "value": 1
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "input_price": {
+              "guid": "input_price",
+              "name": "price_level_5.output_price_5",
+              "type": "real",
+              "input": true
+            },
+            "input_direction": {
+              "guid": "input_direction",
+              "name": "market_direction.output_direction",
+              "type": "bool",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    }
+  ],
+  "connectors": [
+    {
+      "from": "base_price_block.output_price",
+      "to": "previous_price_block.input_price"
+    },
+    {
+      "from": "base_price_block.output_price",
+      "to": "market_direction.input_current_price"
+    },
+    {
+      "from": "previous_price_block.output_prev_price",
+      "to": "market_direction.input_previous_price"
+    },
+    {
+      "from": "base_price_block.output_price",
+      "to": "price_level_1.input_base_price"
+    },
+    {
+      "from": "tick_size_block.output_tick",
+      "to": "price_level_1.input_tick_size"
+    },
+    {
+      "from": "market_direction.output_direction",
+      "to": "price_level_1.input_direction"
+    },
+    {
+      "from": "base_price_block.output_price",
+      "to": "price_level_2.input_base_price"
+    },
+    {
+      "from": "tick_size_block.output_tick",
+      "to": "price_level_2.input_tick_size"
+    },
+    {
+      "from": "market_direction.output_direction",
+      "to": "price_level_2.input_direction"
+    },
+    {
+      "from": "base_price_block.output_price",
+      "to": "price_level_3.input_base_price"
+    },
+    {
+      "from": "tick_size_block.output_tick",
+      "to": "price_level_3.input_tick_size"
+    },
+    {
+      "from": "market_direction.output_direction",
+      "to": "price_level_3.input_direction"
+    },
+    {
+      "from": "base_price_block.output_price",
+      "to": "price_level_4.input_base_price"
+    },
+    {
+      "from": "tick_size_block.output_tick",
+      "to": "price_level_4.input_tick_size"
+    },
+    {
+      "from": "market_direction.output_direction",
+      "to": "price_level_4.input_direction"
+    },
+    {
+      "from": "base_price_block.output_price",
+      "to": "price_level_5.input_base_price"
+    },
+    {
+      "from": "tick_size_block.output_tick",
+      "to": "price_level_5.input_tick_size"
+    },
+    {
+      "from": "market_direction.output_direction",
+      "to": "price_level_5.input_direction"
+    },
+    {
+      "from": "price_level_1.output_price_1",
+      "to": "order_1.input_price"
+    },
+    {
+      "from": "market_direction.output_direction",
+      "to": "order_1.input_direction"
+    },
+    {
+      "from": "price_level_2.output_price_2",
+      "to": "order_2.input_price"
+    },
+    {
+      "from": "market_direction.output_direction",
+      "to": "order_2.input_direction"
+    },
+    {
+      "from": "price_level_3.output_price_3",
+      "to": "order_3.input_price"
+    },
+    {
+      "from": "market_direction.output_direction",
+      "to": "order_3.input_direction"
+    },
+    {
+      "from": "price_level_4.output_price_4",
+      "to": "order_4.input_price"
+    },
+    {
+      "from": "market_direction.output_direction",
+      "to": "order_4.input_direction"
+    },
+    {
+      "from": "price_level_5.output_price_5",
+      "to": "order_5.input_price"
+    },
+    {
+      "from": "market_direction.output_direction",
+      "to": "order_5.input_direction"
+    }
+  ]
+}
