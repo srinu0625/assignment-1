@@ -4,7 +4,7 @@ import os
 
 
 # Load CSV
-file_path = r"D:\Data\NQ Jun25_Daily.csv"
+file_path = r"D:\Data\ES Jun25_Daily.csv"
 try:
     df = pd.read_csv(file_path)
     df.columns = df.columns.str.strip()
@@ -144,7 +144,7 @@ for i in range(window, len(df)):
             if len(cumulative_pnl) > 1:
                 peak = max(cumulative_pnl[:-1])
                 trough = min(cumulative_pnl[:-1])
-                max_drawdown = min(max_drawdown, total_pnl - peak)
+                max_drawdown = min(max_drawdown,  total_pnl - peak)
                 max_runup = max(max_runup, total_pnl - trough)
 
             print(f"\033[1;31m[SHORT EXIT] {date} Entry price: {exit_price:.2f} | PnL: {pnl:.2f} | Total: {total_pnl:.2f}\033[0m")

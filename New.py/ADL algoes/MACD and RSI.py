@@ -3,24 +3,17 @@ import time
 import os
 import re
 
-file_path = r"C:\Users\lenovo\Desktop\Data\ES Jun25_60min.csv"
+file_path = r"D:\\Data\\ES Jun25_Daily.csv"
 
-# Load the data
+# Load CSV
 try:
     df = pd.read_csv(file_path)
+    df.columns = df.columns.str.strip()
 except Exception as e:
     print("Error loading data:", e)
     exit()
 
-# Print column names to verify
-print("Column names:", df.columns)
-
-# Calculate EMA
-n = 9  # Period for EMA
-multiplier = 2 / (n + 1)
-df['ema'] = df['Close'].rolling(window=n).mean()  # Initial SMA for first n periods
-
-# Calculate RSI (14-period)
+# Calculate RSI
 rsi_period = 14
 delta = df['Close'].diff()
 gain = delta.where(delta > 0, 0)
@@ -31,53 +24,55 @@ rs = avg_gain / avg_loss
 df['rsi'] = 100 - (100 / (1 + rs))
 df['rsi'] = df['rsi'].round(2)
 
-# Initialize variables
+# Calculate MACD
+ema_fast = df['Close'].ewm(span=12, adjust=False).mean()
+ema_slow = df['Close'].ewm(span=26, adjust=False).mean()
+df['macd'] = ema_fast - ema_slow
+df['macd_signal'] = df['macd'].ewm(span=9, adjust=False).mean()
+
+# Backtest Logic
 position = 0
-Entry_price = Exit_time = Entry_time = Exit_price = 0
-cumulative_pnl = total_long_pnl = total_short_pnl = total_pnl = 0
+Entry_price = Entry_time = Exit_price = Exit_time = 0
 contract_size = 100
 num_of_lots = 1
 trade_cost = 1.30
 
-max_profit = float('-inf')
-max_loss = float('inf')
+# Performance Metrics
+total_pnl = total_long_pnl = total_short_pnl = 0
 positive_pnl = negative_pnl = 0
 total_positive_trades = total_negative_trades = num_of_trades = 0
-
+max_profit = float('-inf')
+max_loss = float('inf')
+highest_equity = lowest_equity = max_drawdown = max_runup = 0
 equity_curve = []
-highest_equity = 0
-lowest_equity = 0
-max_drawdown = 0
-max_runup = 0
 
-for i in range(max(n, rsi_period), len(df)):
+for i in range(26, len(df)):
     try:
         close_today = df['Close'].iloc[i]
-        ema_yesterday = df['ema'].iloc[i-1]
+        date_time = df['Date(GMT)'].iloc[i]
         high = df['High'].iloc[i]
         low = df['Low'].iloc[i]
-        ema = (close_today * multiplier) + (ema_yesterday * (1 - multiplier))
-        df.at[i, 'ema'] = ema
-        ema = round(ema, 2)
         rsi = df['rsi'].iloc[i]
-        date_time = df['Date(GMT)'].iloc[i]
+        macd = df['macd'].iloc[i]
+        signal = df['macd_signal'].iloc[i]
 
-        # LONG Entry
-        if close_today > ema and rsi > 65 and position == 0:
+        # LONG ENTRY
+        if macd > signal and rsi > 65 and position == 0:
             Entry_price = close_today
             Entry_time = date_time
+            position = 1
             print("\033[1;32m========== LONG ENTRY =========\033[0m")
-            print(f" entry PRICE = {Entry_price}")
-            print(f"  entry Date = {Entry_time}")
-            print(f"EMA at entry = {ema}")
-            print(f"RSI at entry = {rsi}")
-            print(f"High = {high}, Low = {low}")
+            print(f" Entry Time      : {Entry_time}")
+            print(f" Entry Price     : {Entry_price}")
+            print(f" MACD            : {macd:.2f}")
+            print(f" Signal Line     : {signal:.2f}")
+            print(f" RSI             : {rsi}")
+            print(f" High / Low      : {high} / {low}")
             print("================================\n")
             time.sleep(0.5)
-            position = 1
 
-        # LONG Exit
-        elif position == 1 and (close_today < ema or rsi < 50):
+        # LONG EXIT
+        elif position == 1 and (macd < signal or rsi < 50):
             Exit_price = close_today
             Exit_time = date_time
             pnl = (Exit_price - Entry_price) * num_of_lots * contract_size
@@ -100,33 +95,37 @@ for i in range(max(n, rsi_period), len(df)):
             max_drawdown = max(max_drawdown, drawdown)
             max_runup = max(max_runup, runup)
             print("\033[1;32m========== LONG EXIT =========\033[0m")
-            print(f"        exit PRICE = {Exit_price}")
-            print(f"        exit Date  = {Exit_time}")
-            print(f"       RSI at exit = {rsi}")
-            print(f"       High = {high}, Low = {low}")
-            print(f"P&L for this trade = {pnl},    Cumulative P&L = {total_pnl}")
-            print(f"  Current Drawdown = {drawdown}, Max Drawdown = {max_drawdown}")
-            print(f"    Current Run-up = {runup},      Max Run-up = {max_runup}")
+            print(f" Exit Time       : {Exit_time}")
+            print(f" Exit Price      : {Exit_price}")
+            print(f" MACD            : {macd:.2f}")
+            print(f" Signal Line     : {signal:.2f}")
+            print(f" RSI             : {rsi}")
+            print(f" High / Low      : {high} / {low}")
+            print(f" Trade P&L       : {pnl}")
+            print(f" Cumulative P&L  : {total_pnl}")
+            print(f" Drawdown        : {drawdown}, Max Drawdown: {max_drawdown}")
+            print(f" Run-up          : {runup}, Max Run-up: {max_runup}")
             print("================================\n")
             time.sleep(0.5)
             position = 0
 
-        # SHORT Entry
-        elif close_today < ema and rsi < 35 and position == 0:
+        # SHORT ENTRY
+        elif macd < signal and rsi < 35 and position == 0:
             Entry_price = close_today
             Entry_time = date_time
             position = 2
             print("\033[1;31m========== SHORT ENTRY =========\033[0m")
-            print(f" entry PRICE = {Entry_price}")
-            print(f"  entry Date = {Entry_time}")
-            print(f"EMA at entry = {ema}")
-            print(f"RSI at entry = {rsi}")
-            print(f"High = {high}, Low = {low}")
+            print(f" Entry Time      : {Entry_time}")
+            print(f" Entry Price     : {Entry_price}")
+            print(f" MACD            : {macd:.2f}")
+            print(f" Signal Line     : {signal:.2f}")
+            print(f" RSI             : {rsi}")
+            print(f" High / Low      : {high} / {low}")
             print("================================\n")
             time.sleep(0.5)
 
-        # SHORT Exit
-        elif position == 2 and (close_today > ema or rsi > 50):
+        # SHORT EXIT
+        elif position == 2 and (macd > signal or rsi > 50):
             Exit_price = close_today
             Exit_time = date_time
             pnl = (Entry_price - Exit_price) * num_of_lots * contract_size
@@ -149,13 +148,16 @@ for i in range(max(n, rsi_period), len(df)):
             max_drawdown = max(max_drawdown, drawdown)
             max_runup = max(max_runup, runup)
             print("\033[1;31m========== SHORT EXIT =========\033[0m")
-            print(f"        exit PRICE = {Exit_price}")
-            print(f"         exit Date = {Exit_time}")
-            print(f"       RSI at exit = {rsi}")
-            print(f"       High = {high}, Low = {low}")
-            print(f"P&L for this trade = {pnl},    Cumulative P&L = {total_pnl}")
-            print(f"  Current Drawdown = {drawdown}, Max Drawdown = {max_drawdown}")
-            print(f"    Current Run-up = {runup},      Max Run-up = {max_runup}")
+            print(f" Exit Time       : {Exit_time}")
+            print(f" Exit Price      : {Exit_price}")
+            print(f" MACD            : {macd:.2f}")
+            print(f" Signal Line     : {signal:.2f}")
+            print(f" RSI             : {rsi}")
+            print(f" High / Low      : {high} / {low}")
+            print(f" Trade P&L       : {pnl}")
+            print(f" Cumulative P&L  : {total_pnl}")
+            print(f" Drawdown        : {drawdown}, Max Drawdown: {max_drawdown}")
+            print(f" Run-up          : {runup}, Max Run-up: {max_runup}")
             print("================================\n")
             time.sleep(0.5)
             position = 0
@@ -163,19 +165,18 @@ for i in range(max(n, rsi_period), len(df)):
     except Exception as e:
         print("Error:", e)
 
-# Final Metrics
-Net = total_pnl - num_of_trades * trade_cost
+# Final Summary
 TradeCost = num_of_trades * trade_cost
+Net = total_pnl - TradeCost
 success_rate = round((total_positive_trades / num_of_trades) * 100, 2) if num_of_trades > 0 else 0
 failure_rate = round((total_negative_trades / num_of_trades) * 100, 2) if num_of_trades > 0 else 0
 
-# 🔥 Dynamically print product and timeframe info
 file_name = os.path.basename(file_path)
 match = re.search(r'([A-Z]+)\s+\w+_(\d+min)', file_name)
 if match:
     product = match.group(1)
     timeframe = match.group(2)
-    print(f"\n\033[1mTrading Performance Summary for {product} {timeframe} EMA and RSI:\033[0m")
+    print(f"\n\033[1mTrading Performance Summary for {product} {timeframe} MACD and RSI:\033[0m")
 else:
     print("\n\033[1mTrading Performance Summary:\033[0m")
 
