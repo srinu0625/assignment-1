@@ -3,7 +3,7 @@ import time
 import os
 import re
 
-file_path = r"D:\\Data\\GC Jun25_daily.csv"
+file_path = r"D:\\Data\\GC Jun25_5min.csv"
 
 # Load the data
 try:
@@ -52,8 +52,8 @@ lowest_equity = 0
 max_drawdown = 0
 max_runup = 0
 
-long_rsi_pct_threshold = 3 # Long RSI % change threshold
-short_rsi_pct_threshold = -3 # Short RSI % change threshold
+long_rsi_pct_threshold = 60 # Long RSI % change threshold
+short_rsi_pct_threshold = -40 # Short RSI % change threshold
 
 # MAIN LOOP
 for i in range(max(n, rsi_period, 5), len(df)):
@@ -88,10 +88,10 @@ for i in range(max(n, rsi_period, 5), len(df)):
         print(f"RSI             : {rsi}")
         print(f"RSI % Change 5d : {rsi_color}{rsi_pct}%\033[0m")
         print(f"---------------------------------------------")
-        # time.sleep(1)
+        time.sleep(1)
 
         # LONG ENTRY
-        if close_today > ema and rsi > 65 and rsi_pct > long_rsi_pct_threshold and position == 0:
+        if close_today > ema and rsi > 60 and rsi_pct > long_rsi_pct_threshold and position == 0:
             Entry_price = close_today
             Entry_time = date_time
             position = 1
@@ -102,10 +102,10 @@ for i in range(max(n, rsi_period, 5), len(df)):
             print(f" RSI at entry    = {rsi} (+{rsi_pct}%)")
             print(f" High = {high}, Low = {low}")
             print("================================")
-            # time.sleep(1)
-
+            time.sleep(1)
+# 
         # LONG EXIT
-        elif position == 1 and (close_today < ema or rsi < 50 or rsi_pct < 0):
+        elif position == 1 and (close_today < ema or rsi < 45 or rsi_pct < 0):
             Exit_price = close_today
             Exit_time = date_time
             pnl = (Exit_price - Entry_price) * num_of_lots * contract_size
@@ -136,11 +136,11 @@ for i in range(max(n, rsi_period, 5), len(df)):
             print(f" Drawdown        = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f" Run-up          = {runup},   Max Run-up    = {max_runup}")
             print("================================")
-            # time.sleep(1)
+            time.sleep(1)
             position = 0
 
         # SHORT ENTRY
-        elif close_today < ema and rsi < 35 and rsi_pct < short_rsi_pct_threshold and position == 0:
+        elif close_today < ema and rsi < 40 and rsi_pct < short_rsi_pct_threshold and position == 0:
             Entry_price = close_today
             Entry_time = date_time
             position = 2
@@ -151,10 +151,10 @@ for i in range(max(n, rsi_period, 5), len(df)):
             print(f" RSI at entry    = {rsi} ({rsi_pct}%)")
             print(f" High = {high}, Low = {low}")
             print("================================")
-            # time.sleep(1)
+            time.sleep(1)
 
         # SHORT EXIT
-        elif position == 2 and (close_today > ema or rsi > 50 or rsi_pct > 0):
+        elif position == 2 and (close_today > ema or rsi > 55 or rsi_pct > 0):
             Exit_price = close_today
             Exit_time = date_time
             pnl = (Entry_price - Exit_price) * num_of_lots * contract_size
@@ -185,7 +185,7 @@ for i in range(max(n, rsi_period, 5), len(df)):
             print(f" Drawdown        = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f" Run-up          = {runup},   Max Run-up    = {max_runup}")
             print("================================")
-            # time.sleep(1)
+            time.sleep(1)
             position = 0
 
     except Exception as e:
@@ -222,3 +222,21 @@ print(f"Negative Trades = \033[91m{total_negative_trades}\033[0m")
 print(f"   Total Trades = {num_of_trades}")
 print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
 print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
+
+
+print(f"\033[92m{max_profit}\033[0m")
+print(f"\033[91m{max_loss}\033[0m")
+print(f"\033[92m{positive_pnl}\033[0m")
+print(f"\033[91m{negative_pnl}\033[0m")
+print(f"\033[94m{total_long_pnl}\033[0m")
+print(f"\033[94m{total_short_pnl}\033[0m")
+print(f"{total_pnl}")
+print(f"{round(TradeCost,2)}")
+print(f"{Net}")
+print(f"{max_drawdown}")
+print(f"{max_runup}")
+print(f"\033[92m{total_positive_trades}\033[0m")
+print(f"\033[91m{total_negative_trades}\033[0m")
+print(f"{num_of_trades}")
+print(f"\033[92m{success_rate:.2f}%\033[0m")
+print(f"\033[91m{failure_rate:.2f}%\033[0m")
