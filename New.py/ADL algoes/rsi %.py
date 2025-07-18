@@ -3,7 +3,7 @@ import time
 import os
 import re
 
-file_path = r"D:\\Data\\GC Jun25_5min.csv"
+file_path = r"D:\\Data\\GC Jun25_daily.csv"
 
 # Load the data
 try:
@@ -91,7 +91,7 @@ for i in range(max(n, rsi_period, 5), len(df)):
         time.sleep(1)
 
         # LONG ENTRY
-        if close_today > ema and rsi > 60 and rsi_pct > long_rsi_pct_threshold and position == 0:
+        if close_today > ema and rsi > 60 and rsi_pct > long_rsi_pct_threshold  and position == 0:
             Entry_price = close_today
             Entry_time = date_time
             position = 1
@@ -102,7 +102,7 @@ for i in range(max(n, rsi_period, 5), len(df)):
             print(f" RSI at entry    = {rsi} (+{rsi_pct}%)")
             print(f" High = {high}, Low = {low}")
             print("================================")
-            time.sleep(1)
+            time.sleep(0.2)
 # 
         # LONG EXIT
         elif position == 1 and (close_today < ema or rsi < 45 or rsi_pct < 0):
@@ -136,7 +136,7 @@ for i in range(max(n, rsi_period, 5), len(df)):
             print(f" Drawdown        = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f" Run-up          = {runup},   Max Run-up    = {max_runup}")
             print("================================")
-            time.sleep(1)
+            time.sleep(0.2)
             position = 0
 
         # SHORT ENTRY
@@ -151,7 +151,7 @@ for i in range(max(n, rsi_period, 5), len(df)):
             print(f" RSI at entry    = {rsi} ({rsi_pct}%)")
             print(f" High = {high}, Low = {low}")
             print("================================")
-            time.sleep(1)
+            time.sleep(0.2)
 
         # SHORT EXIT
         elif position == 2 and (close_today > ema or rsi > 55 or rsi_pct > 0):
@@ -185,7 +185,7 @@ for i in range(max(n, rsi_period, 5), len(df)):
             print(f" Drawdown        = {drawdown}, Max Drawdown = {max_drawdown}")
             print(f" Run-up          = {runup},   Max Run-up    = {max_runup}")
             print("================================")
-            time.sleep(1)
+            time.sleep(0.2)
             position = 0
 
     except Exception as e:
