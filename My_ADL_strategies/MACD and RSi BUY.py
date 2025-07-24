@@ -1,17 +1,14 @@
+# Buy-side only MACD + RSI Logic
 import pandas as pd
 import time
 import os
 import re
 
-file_path = r"D:\\Data\\ES Jun25_Daily.csv"
+file_path = r"C:\Users\lenovo\Downloads\ES 15min.csv"  # Update with your file path
 
 # Load CSV
-try:
-    df = pd.read_csv(file_path)
-    df.columns = df.columns.str.strip()
-except Exception as e:
-    print("Error loading data:", e)
-    exit()
+df = pd.read_csv(file_path)
+df.columns = df.columns.str.strip()
 
 # Calculate RSI
 rsi_period = 14
@@ -33,12 +30,12 @@ df['macd_signal'] = df['macd'].ewm(span=9, adjust=False).mean()
 # Backtest Logic
 position = 0
 Entry_price = Entry_time = Exit_price = Exit_time = 0
-contract_size = 100
+contract_size = 50  # ES contract size
 num_of_lots = 1
 trade_cost = 1.30
 
 # Performance Metrics
-total_pnl = total_long_pnl = total_short_pnl = 0
+total_pnl = total_long_pnl = 0
 positive_pnl = negative_pnl = 0
 total_positive_trades = total_negative_trades = num_of_trades = 0
 max_profit = float('-inf')
@@ -57,10 +54,10 @@ for i in range(26, len(df)):
         signal = df['macd_signal'].iloc[i]
 
         # LONG ENTRY
-        if macd > signal and rsi > 65 and position == 0:
+        if macd > signal and rsi < 40 and position == 0:
             Entry_price = close_today
             Entry_time = date_time
-            position = 1
+            position = 1    
             print("\033[1;32m========== LONG ENTRY =========\033[0m")
             print(f" Entry Time      : {Entry_time}")
             print(f" Entry Price     : {Entry_price}")
@@ -69,10 +66,9 @@ for i in range(26, len(df)):
             print(f" RSI             : {rsi}")
             print(f" High / Low      : {high} / {low}")
             print("================================\n")
-            time.sleep(0.5)
 
         # LONG EXIT
-        elif position == 1 and (macd < signal or rsi < 50):
+        elif position == 1 and macd < signal and rsi > 70:
             Exit_price = close_today
             Exit_time = date_time
             pnl = (Exit_price - Entry_price) * num_of_lots * contract_size
@@ -106,60 +102,6 @@ for i in range(26, len(df)):
             print(f" Drawdown        : {drawdown}, Max Drawdown: {max_drawdown}")
             print(f" Run-up          : {runup}, Max Run-up: {max_runup}")
             print("================================\n")
-            time.sleep(0.5)
-            position = 0
-
-        # SHORT ENTRY
-        elif macd < signal and rsi < 35 and position == 0:
-            Entry_price = close_today
-            Entry_time = date_time
-            position = 2
-            print("\033[1;31m========== SHORT ENTRY =========\033[0m")
-            print(f" Entry Time      : {Entry_time}")
-            print(f" Entry Price     : {Entry_price}")
-            print(f" MACD            : {macd:.2f}")
-            print(f" Signal Line     : {signal:.2f}")
-            print(f" RSI             : {rsi}")
-            print(f" High / Low      : {high} / {low}")
-            print("================================\n")
-            time.sleep(0.5)
-
-        # SHORT EXIT
-        elif position == 2 and (macd > signal or rsi > 50):
-            Exit_price = close_today
-            Exit_time = date_time
-            pnl = (Entry_price - Exit_price) * num_of_lots * contract_size
-            total_pnl += pnl
-            total_short_pnl += pnl
-            equity_curve.append(total_pnl)
-            max_profit = max(max_profit, pnl)
-            max_loss = min(max_loss, pnl)
-            if pnl > 0:
-                positive_pnl += pnl
-                total_positive_trades += 1
-            else:
-                negative_pnl += pnl
-                total_negative_trades += 1
-            num_of_trades += 1
-            highest_equity = max(highest_equity, total_pnl)
-            lowest_equity = min(lowest_equity, total_pnl)
-            drawdown = highest_equity - total_pnl
-            runup = total_pnl - lowest_equity
-            max_drawdown = max(max_drawdown, drawdown)
-            max_runup = max(max_runup, runup)
-            print("\033[1;31m========== SHORT EXIT =========\033[0m")
-            print(f" Exit Time       : {Exit_time}")
-            print(f" Exit Price      : {Exit_price}")
-            print(f" MACD            : {macd:.2f}")
-            print(f" Signal Line     : {signal:.2f}")
-            print(f" RSI             : {rsi}")
-            print(f" High / Low      : {high} / {low}")
-            print(f" Trade P&L       : {pnl}")
-            print(f" Cumulative P&L  : {total_pnl}")
-            print(f" Drawdown        : {drawdown}, Max Drawdown: {max_drawdown}")
-            print(f" Run-up          : {runup}, Max Run-up: {max_runup}")
-            print("================================\n")
-            time.sleep(0.5)
             position = 0
 
     except Exception as e:
@@ -176,17 +118,15 @@ match = re.search(r'([A-Z]+)\s+\w+_(\d+min)', file_name)
 if match:
     product = match.group(1)
     timeframe = match.group(2)
-    print(f"\n\033[1mTrading Performance Summary for {product} {timeframe} MACD and RSI:\033[0m")
+    print(f"\n\033[1mTrading Performance Summary for {product} {timeframe} (Buy-side Only):\033[0m")
 else:
-    print("\n\033[1mTrading Performance Summary:\033[0m")
+    print("\n\033[1mTrading Performance Summary (Buy-side Only):\033[0m")
 
-# 📊 Summary Print
 print(f"     Max Profit = \033[92m{max_profit}\033[0m")
 print(f"       Max Loss = \033[91m{max_loss}\033[0m")
 print(f"   Positive PnL = \033[92m{positive_pnl}\033[0m")
 print(f"   Negative PnL = \033[91m{negative_pnl}\033[0m")
 print(f" Total Long PnL = \033[94m{total_long_pnl}\033[0m")
-print(f"Total Short PnL = \033[94m{total_short_pnl}\033[0m")
 print(f"          Gross = {total_pnl}")
 print(f"     Trade Cost = {round(TradeCost,2)}")
 print(f"            Net = {Net}")

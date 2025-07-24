@@ -14,7 +14,7 @@ from sklearn.metrics import accuracy_score, classification_report
 # 2. Load WTI Price Data from CSV
 # ========================
 # Make sure the CSV file is in the same folder, or give full path
-df = pd.read_csv("wti_sample.csv", parse_dates=["Date"])
+df = pd.read_csv(r"D:\\Data\\GC Jun25_daily.csv", parse_dates=["Date"])
 df = df.sort_values("Date")  # Ensure data is in date order
 
 # ========================
