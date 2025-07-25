@@ -1,9 +1,12 @@
 import pandas as pd
+import time
 import os
 import re
 
 # -------------------- Config --------------------
-file_path = r"D:\\Data\\ES Jun25_5min.csv"  # change if needed
+file_path   = r"C:\Users\lenovo\Downloads\NQ daily.csv"                 # change if needed
+output_path = r"C:\Users\lenovo\Desktop\Trade Logs\NQ_daily_trades.xlsx"    # change if needed
+
 time_col   = 'Date(GMT)'
 open_col   = 'Open'
 high_col   = 'High'
@@ -13,9 +16,11 @@ close_col  = 'Close'
 rsi_period    = 14
 atr_period    = 14
 atr_mult_sl   = 1.5   # 1.5 * ATR for stop-loss
-contract_size = 50    # pick what you use; 5 in ATR script, 100 in MACD script
+contract_size = 20
 num_of_lots   = 1
 trade_cost    = 1.30
+
+os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
 # -------------------- Load --------------------
 try:
@@ -24,6 +29,13 @@ try:
 except Exception as e:
     print("Error loading data:", e)
     raise SystemExit
+
+# Calculate EMA
+ema = df['ema50'].iloc[i]
+
+n = 50
+df['ema50'] = df[close_col].ewm(span=n, adjust=False).mean()
+
 
 # -------------------- Indicators --------------------
 def wilder_atr(df, high_col, low_col, close_col, period=14):
@@ -45,7 +57,7 @@ gain = delta.where(delta > 0, 0.0)
 loss = -delta.where(delta < 0, 0.0)
 avg_gain = gain.ewm(alpha=1/rsi_period, min_periods=rsi_period, adjust=False).mean()
 avg_loss = loss.ewm(alpha=1/rsi_period, min_periods=rsi_period, adjust=False).mean()
-rs = avg_gain / (avg_loss.replace(0, 1e-10))  # Avoid division by zero
+rs = avg_gain / (avg_loss.replace(0, 1e-10))  # Avoid div by zero
 df['RSI'] = 100 - (100 / (1 + rs))
 
 # MACD
@@ -59,7 +71,9 @@ df['TR'], df['ATR'] = wilder_atr(df, high_col, low_col, close_col, period=atr_pe
 
 # -------------------- Backtest --------------------
 position = 0   # 0 = flat, 1 = long, -1 = short
-entry_price = entry_time = 0
+entry_price = entry_time = None
+entry_index = None
+entry_side  = None
 
 total_pnl = total_long_pnl = total_short_pnl = 0.0
 positive_pnl = negative_pnl = 0.0
@@ -67,32 +81,44 @@ total_positive_trades = total_negative_trades = 0
 num_of_trades = 0
 max_profit = float('-inf')
 max_loss   = float('inf')
-highest_equity = lowest_equity = max_drawdown = max_runup = 0.0
+highest_equity = 0.0
+lowest_equity  = 0.0
+max_drawdown = 0.0
+max_runup = 0.0
 equity_curve = []
+
+# one-row-per-trade, in execution order
+trade_log = []
 
 for i in range(max(atr_period, 26), len(df)):
     try:
-        date  = df[time_col].iloc[i]
-        close = df[close_col].iloc[i]
-        rsi   = df['RSI'].iloc[i]
-        macd  = df['MACD'].iloc[i]
-        signal= df['Signal'].iloc[i]
-        atr   = df['ATR'].iloc[i]
+        date   = df[time_col].iloc[i]
+        close  = df[close_col].iloc[i]
+        high   = df[high_col].iloc[i]
+        low    = df[low_col].iloc[i]
+        rsi    = df['RSI'].iloc[i]
+        macd   = df['MACD'].iloc[i]
+        signal = df['Signal'].iloc[i]
+        atr    = df['ATR'].iloc[i]
 
         # ---------------- Long Entry ----------------
-        if position == 0 and (macd > signal) and (rsi < 50):
+        if position == 0 and (macd > signal) and (rsi < 50) and (close > df['ema50'].iloc[i]):
             position = 1
             entry_price = close
             entry_time  = date
+            entry_index = i
+            entry_side  = 'LONG'
+
             print("\033[1;32m========== LONG ENTRY =========\033[0m")
             print(f" Entry Time   : {entry_time}")
             print(f" Entry Price  : {entry_price}")
             print(f" MACD / Sig   : {macd:.4f} / {signal:.4f}")
             print(f" RSI          : {rsi:.2f}")
             print(f" ATR          : {atr:.4f}")
+            print(f" EMA50        : {ema:.2f}")
             print("================================\n")
             continue
-
+            time.sleep(0.1)  # Optional: to avoid too fast execution in real-time scenarios
         # ---------------- Long Exit ----------------
         if position == 1:
             stop_loss = entry_price - atr_mult_sl * atr
@@ -113,8 +139,12 @@ for i in range(max(atr_period, 26), len(df)):
                     total_negative_trades += 1
                 num_of_trades += 1
 
-                highest_equity = max(highest_equity, total_pnl)
-                lowest_equity  = min(lowest_equity, total_pnl if equity_curve else 0)
+                if len(equity_curve) == 1:
+                    highest_equity = lowest_equity = total_pnl
+                else:
+                    highest_equity = max(highest_equity, total_pnl)
+                    lowest_equity  = min(lowest_equity, total_pnl)
+
                 drawdown = highest_equity - total_pnl
                 runup    = total_pnl - lowest_equity
                 max_drawdown = max(max_drawdown, drawdown)
@@ -126,24 +156,56 @@ for i in range(max(atr_period, 26), len(df)):
                 print(f" MACD / Sig   : {macd:.4f} / {signal:.4f}")
                 print(f" RSI          : {rsi:.2f}")
                 print(f" ATR          : {atr:.4f}")
+                print(f" EMA50        : {ema:.2f}")
                 print(f" Trade P&L    : {pnl:.2f}")
                 print(f" Cum. P&L     : {total_pnl:.2f}")
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}    | Max RU: {max_runup:.2f}")
                 print("================================\n")
 
+                # append one row for this full trade
+                trade_log.append({
+                    "Side": entry_side,
+                    "Entry Time": entry_time,
+                    "Entry Index": entry_index,
+                    "Entry Price": entry_price,
+                    "Exit Time": date,
+                    "Exit Index": i,
+                    "Exit Price": exit_price,
+                    "P&L": pnl,
+                    "Cum_PnL": total_pnl,
+                    "Bars_Held": i - entry_index if entry_index is not None else None,
+                    "Entry MACD": df['MACD'].iloc[entry_index],
+                    "Entry Signal": df['Signal'].iloc[entry_index],
+                    "Entry RSI": df['RSI'].iloc[entry_index],
+                    "Exit MACD": macd,
+                    "Exit Signal": signal,
+                    "Exit RSI": rsi,
+                    "ATR Exit": atr,
+                    "Drawdown": drawdown,
+                    "Max_Drawdown": max_drawdown,
+                    "Runup": runup,
+                    "Max_Runup": max_runup
+                })
+
+                # reset
                 position = 0
+                entry_price = entry_time = entry_index = entry_side = None
                 continue
 
         # ---------------- Short Entry ----------------
-        if position == 0 and (macd < signal) and (rsi > 50):
+        if position == 0 and (macd < signal) and (rsi > 50) and (close < df['ema50'].iloc[i]):
             position = -1
             entry_price = close
             entry_time  = date
+            entry_index = i
+            entry_side  = 'SHORT'
+
             print("\033[1;31m========== SHORT ENTRY =========\033[0m")
             print(f" Entry Time   : {entry_time}")
             print(f" Entry Price  : {entry_price}")
             print(f" MACD / Sig   : {macd:.4f} / {signal:.4f}")
+            print(f" EMA50        : {ema:.2f}")
             print(f" RSI          : {rsi:.2f}")
             print(f" ATR          : {atr:.4f}")
             print("================================\n")
@@ -169,8 +231,12 @@ for i in range(max(atr_period, 26), len(df)):
                     total_negative_trades += 1
                 num_of_trades += 1
 
-                highest_equity = max(highest_equity, total_pnl)
-                lowest_equity  = min(lowest_equity, total_pnl if equity_curve else 0)
+                if len(equity_curve) == 1:
+                    highest_equity = lowest_equity = total_pnl
+                else:
+                    highest_equity = max(highest_equity, total_pnl)
+                    lowest_equity  = min(lowest_equity, total_pnl)
+
                 drawdown = highest_equity - total_pnl
                 runup    = total_pnl - lowest_equity
                 max_drawdown = max(max_drawdown, drawdown)
@@ -182,13 +248,41 @@ for i in range(max(atr_period, 26), len(df)):
                 print(f" MACD / Sig   : {macd:.4f} / {signal:.4f}")
                 print(f" RSI          : {rsi:.2f}")
                 print(f" ATR          : {atr:.4f}")
+                print(f" EMA50        : {ema:.2f}")
                 print(f" Trade P&L    : {pnl:.2f}")
                 print(f" Cum. P&L     : {total_pnl:.2f}")
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}    | Max RU: {max_runup:.2f}")
                 print("================================\n")
 
+                # append one row for this full trade
+                trade_log.append({
+                    "Side": entry_side,
+                    "Entry Time": entry_time,
+                    "Entry Index": entry_index,
+                    "Entry Price": entry_price,
+                    "Exit Time": date,
+                    "Exit Index": i,
+                    "Exit Price": exit_price,
+                    "P&L": pnl,
+                    "Cum_PnL": total_pnl,
+                    "Bars_Held": i - entry_index if entry_index is not None else None,
+                    "Entry MACD": df['MACD'].iloc[entry_index],
+                    "Entry Signal": df['Signal'].iloc[entry_index],
+                    "Entry RSI": df['RSI'].iloc[entry_index],
+                    "Exit MACD": macd,
+                    "Exit Signal": signal,
+                    "Exit RSI": rsi,
+                    "ATR Exit": atr,
+                    "Drawdown": drawdown,
+                    "Max_Drawdown": max_drawdown,
+                    "Runup": runup,
+                    "Max_Runup": max_runup
+                })
+
+                # reset
                 position = 0
+                entry_price = entry_time = entry_index = entry_side = None
                 continue
 
     except Exception as e:
@@ -226,6 +320,8 @@ print(f"   Total Trades = {num_of_trades}")
 print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
 print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
 
+
+# Raw values (if you need to parse programmatically)
 print(f"\033[92m{max_profit}\033[0m")
 print(f"\033[91m{max_loss}\033[0m")
 print(f"\033[92m{positive_pnl}\033[0m")
@@ -242,22 +338,13 @@ print(f"\033[91m{total_negative_trades}\033[0m")
 print(f"{num_of_trades}")
 print(f"\033[92m{success_rate:.2f}%\033[0m")
 print(f"\033[91m{failure_rate:.2f}%\033[0m")
-
-# high  = df[high_col].iloc[i]
-# low   = df[low_col].iloc[i]
-# macd_prev   = df['MACD'].iloc[i-1]
-# signal_prev = df['Signal'].iloc[i-1]
-# macd_cross_up = (macd_prev <= signal_prev) and (macd > signal)
-# macd_cross_dn = (macd_prev >= signal_prev) and (macd < signal)
-
-# # Long exit
-# if position == 1:
-#     stop_loss = entry_price - atr_mult_sl * atr
-#     if macd_cross_dn or (low <= stop_loss):
-#         ...
-# # Short exit
-# if position == -1:
-#     stop_loss = entry_price + atr_mult_sl * atr
-#     if macd_cross_up or (high >= stop_loss):
-#         ...
-
+# -------------------- Save trades to Excel (chronological, mixed long/short) --------------------
+if trade_log:
+    trades_df = pd.DataFrame(trade_log)
+    try:
+        trades_df.to_excel(output_path, index=False)
+        print(f"\nTrades saved (in execution order) to: {output_path}")
+    except Exception as e:
+        print(f"\nFailed to save trades to Excel: {e}")
+else:
+    print("\nNo trades to save.")
