@@ -4,8 +4,8 @@ import os
 import re
 
 # -------------------- Config --------------------
-file_path   = r"C:\Users\lenovo\Downloads\NQ daily.csv"                 # change if needed
-output_path = r"C:\Users\lenovo\Desktop\Trade Logs\NQ_daily_trades.xlsx"    # change if needed
+file_path   = r"C:\Users\lenovo\Downloads\ES 5min.csv"                 # change if needed
+output_path = r"C:\Users\lenovo\Desktop\Trade Logs\ES_5min_trades.xlsx"    # change if needed
 
 time_col   = 'Date(GMT)'
 open_col   = 'Open'
@@ -16,7 +16,7 @@ close_col  = 'Close'
 rsi_period    = 14
 atr_period    = 14
 atr_mult_sl   = 1.5   # 1.5 * ATR for stop-loss
-contract_size = 20
+contract_size = 50
 num_of_lots   = 1
 trade_cost    = 1.30
 
@@ -31,7 +31,7 @@ except Exception as e:
     raise SystemExit
 
 # Calculate EMA
-ema = df['ema50'].iloc[i]
+
 
 n = 50
 df['ema50'] = df[close_col].ewm(span=n, adjust=False).mean()
@@ -100,6 +100,7 @@ for i in range(max(atr_period, 26), len(df)):
         macd   = df['MACD'].iloc[i]
         signal = df['Signal'].iloc[i]
         atr    = df['ATR'].iloc[i]
+        ema    = df['ema50'].iloc[i]
 
         # ---------------- Long Entry ----------------
         if position == 0 and (macd > signal) and (rsi < 50) and (close > df['ema50'].iloc[i]):
