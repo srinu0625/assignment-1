@@ -1,7 +1,7 @@
 import pandas as pd
 import math
 
-file_path = r"D:\candles\ES H 240.csv"
+file_path = r"D:\Data\ES Jun25_60min.csv" 
 
 # Load the data
 try:
@@ -18,7 +18,7 @@ print("1st row", data.iloc[0].tolist())
 # Assuming the column names for high and low are 'High' and 'Low'
 high_column_name = 'High'
 low_column_name  = 'Low'
-time_column_name = 'Date (GMT)'
+time_column_name = 'Date(GMT)'
 
 # temp column names
 temp_high = 0
@@ -41,8 +41,8 @@ num_of_trades = 0
 
 # P&L calculation
 entry_price = 0
-exit_price  = 0
-contract_size = 5
+exit_price = 0
+contract_size = 50
 # defining tick size
 tick_val = 1
 
@@ -62,6 +62,14 @@ negative_pnl = 0
 num_of_lots  = 0
 max_num_lots = 5
 risk = 450
+
+# additional tracking for performance metrics
+total_positive_trades = 0
+total_negative_trades = 0
+max_drawdown = 0
+max_runup = 0
+peak_pnl = 0
+trough_pnl = 0
 
 # Iterate over each row of the DataFrame
 for index, row in data.iterrows():
@@ -97,11 +105,9 @@ for index, row in data.iterrows():
 
             # Printing data
             print("Time:", current_time)
-            print("Current High :", current_high, "Previous High :", previous_high, "local_high :", local_high
-                  , " temp_high :", temp_high)
-            print("Current Low :", current_low, "Previous Low :", previous_low, "local_low :", local_low
-                  , " temp_low :", temp_low)
-            
+            print("Current High :", current_high, "Previous High :", previous_high, "local_high :", local_high, " temp_high :", temp_high)
+            print("Current Low :", current_low, "Previous Low :", previous_low, "local_low :", local_low, " temp_low :", temp_low)
+
             # bullish candle---------------------------------------------------------------------------
             max_loss_for_trade = (local_high - local_low + (tick_val * 4)) * contract_size 
             if current_high > local_high and local_high != 0 and local_low != 0 and not bear and not flag :
@@ -230,19 +236,27 @@ for index, row in data.iterrows():
         finally:
             print("-----------------------------------End of iteration-------------------------------------")
 
-max_loss_color = "\033[31m" if max_loss < 0 else "\033[32m"
-max_profit_color = "\033[31m" if max_profit < 0 else "\033[32m"
-positive_pnl_color = "\033[31m" if positive_pnl < 0 else "\033[32m"
-negative_pnl_color = "\033[31m" if negative_pnl < 0 else "\033[32m"
-total_long_pnl_color = "\033[31m" if total_long_pnl < 0 else "\033[32m"
-total_short_pnl_color = "\033[31m" if total_short_pnl < 0 else "\033[32m"
-TOTAL_P_L_colour = "\033[31m" if TOTAL_P_L < 0 else "\033[32m"
+# Final stats
+TradeCost = num_of_trades * 3
+Net = TOTAL_P_L - TradeCost
+max_drawdown = peak_pnl - trough_pnl if TOTAL_P_L < peak_pnl else 0
+max_runup = peak_pnl
+success_rate = (total_positive_trades / num_of_trades) * 100 if num_of_trades else 0
+failure_rate = 100 - success_rate
 
-print("        max_profit = ", max_profit_color,round(max_profit,2),"\033[0m")
-print("          max_loss = ", max_loss_color, round(max_loss,2),"\033[0m")
-print("      positive_pnl = ", positive_pnl_color,round(positive_pnl,2),"\033[0m")
-print("      negative_pnl = ", negative_pnl_color, round(negative_pnl,2),"\033[0m")
-print("   total_long_pnl  = ", total_long_pnl_color,round(total_long_pnl,2),"\033[0m")
-print("  total_short_pnl  = ", total_short_pnl_color, round(total_short_pnl,2),"\033[0m")
-print("         TOTAL_P_L = ", TOTAL_P_L_colour, round(TOTAL_P_L,2),"\033[0m")
-print("     num of trades = ", num_of_trades)
+print(f"     Max Profit = \033[92m{max_profit:.2f}\033[0m")
+print(f"       Max Loss = \033[91m{max_loss:.2f}\033[0m")
+print(f"   Positive PnL = \033[92m{positive_pnl:.2f}\033[0m")
+print(f"   Negative PnL = \033[91m{negative_pnl:.2f}\033[0m")
+print(f" Total Long PnL = \033[94m{total_long_pnl:.2f}\033[0m")
+print(f"Total Short PnL = \033[94m{total_short_pnl:.2f}\033[0m")
+print(f"          Gross = {TOTAL_P_L:.2f}")
+print(f"     Trade Cost = {TradeCost:.2f}")
+print(f"            Net = {Net:.2f}")
+print(f"   Max Drawdown = {max_drawdown:.2f}")
+print(f"     Max Run-up = {max_runup:.2f}")
+print(f"Positive Trades = \033[92m{total_positive_trades}\033[0m")
+print(f"Negative Trades = \033[91m{total_negative_trades}\033[0m")
+print(f"   Total Trades = {num_of_trades}")
+print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
+print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")

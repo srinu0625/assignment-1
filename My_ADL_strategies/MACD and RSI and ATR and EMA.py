@@ -3,9 +3,8 @@ import time
 import os
 import re
 
-# -------------------- Config --------------------
-file_path   = r"C:\Users\lenovo\Downloads\ES 5min.csv"                 # change if needed
-output_path = r"C:\Users\lenovo\Desktop\Trade Logs\ES_5min_trades.xlsx"    # change if needed
+file_path   = r"C:\Users\lenovo\Downloads\ES daily.csv"                 
+output_path = r"C:\Users\lenovo\Desktop\Trade Logs\ES daily_trades.xlsx"    
 
 time_col   = 'Date(GMT)'
 open_col   = 'Open'
@@ -16,7 +15,7 @@ close_col  = 'Close'
 rsi_period    = 14
 atr_period    = 14
 atr_mult_sl   = 1.5   # 1.5 * ATR for stop-loss
-contract_size = 50
+contract_size = 50  # e.g., for CL futures
 num_of_lots   = 1
 trade_cost    = 1.30
 
@@ -119,7 +118,7 @@ for i in range(max(atr_period, 26), len(df)):
             print(f" EMA50        : {ema:.2f}")
             print("================================\n")
             continue
-            time.sleep(0.1)  # Optional: to avoid too fast execution in real-time scenarios
+            time.sleep(0.1)  # to avoid too fast execution in real-time scenarios
         # ---------------- Long Exit ----------------
         if position == 1:
             stop_loss = entry_price - atr_mult_sl * atr
@@ -322,23 +321,6 @@ print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
 print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
 
 
-# Raw values (if you need to parse programmatically)
-print(f"\033[92m{max_profit}\033[0m")
-print(f"\033[91m{max_loss}\033[0m")
-print(f"\033[92m{positive_pnl}\033[0m")
-print(f"\033[91m{negative_pnl}\033[0m")
-print(f"\033[94m{total_long_pnl}\033[0m")
-print(f"\033[94m{total_short_pnl}\033[0m")
-print(f"{total_pnl}")
-print(f"{round(TradeCost,2)}")
-print(f"{Net}")
-print(f"{max_drawdown}")
-print(f"{max_runup}")
-print(f"\033[92m{total_positive_trades}\033[0m")
-print(f"\033[91m{total_negative_trades}\033[0m")
-print(f"{num_of_trades}")
-print(f"\033[92m{success_rate:.2f}%\033[0m")
-print(f"\033[91m{failure_rate:.2f}%\033[0m")
 # -------------------- Save trades to Excel (chronological, mixed long/short) --------------------
 if trade_log:
     trades_df = pd.DataFrame(trade_log)
