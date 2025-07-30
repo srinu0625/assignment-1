@@ -287,7 +287,7 @@ failure_rate = 100 - success_rate
 
 print(f"     Max Profit = \033[92m{max_profit:.2f}\033[0m")
 print(f"       Max Loss = \033[91m{max_loss:.2f}\033[0m")
-print(f"   Positive PnL = \033[92m{positive_pnl:.2f}\033[0m")
+print(f"   Positive PnL = \033[92m{positive_pnl:.2f}\033[0m")  b
 print(f"   Negative PnL = \033[91m{negative_pnl:.2f}\033[0m")
 print(f" Total Long PnL = \033[94m{total_long_pnl:.2f}\033[0m")
 print(f"Total Short PnL = \033[94m{total_short_pnl:.2f}\033[0m")
