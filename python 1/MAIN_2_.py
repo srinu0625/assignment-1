@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\Data\ES Jun25_240min.csv"
-file_path2 = r"D:\Data\ES Jun25_daily.csv"
+file_path1 = r"D:\Data\ES Jun25_5min.csv"
+file_path2 = r"D:\Data\ES Jun25_10min.csv"
 
 # Load the data
 try:
@@ -88,16 +88,16 @@ for index1, row1 in data1.iterrows():
                             temp_high = current_high2
                         if current_high2 > previous_high2:
                             local_low2 = temp_low
-                        if current_low2 < previous_low2:
+                        if current_low2  < previous_low2:
                             temp_low = current_low2
-                        if current_low2 < previous_low2:
+                        if current_low2  < previous_low2:
                             local_high2 = temp_high
 
                         print("DAILY Time:", current_time2)
                         print("Current High2:", current_high2, "Previous High2:", previous_high2, "local_high2:", local_high2, "temp_high2:", temp_high)
                         print("Current Low2:", current_low2, "Previous Low2:", previous_low2, "local_low2:", local_low2, "temp_low2:", temp_low)
                         print("   ")
-                        # time.sleep(1.5)
+                        time.sleep(1)
 
                         if current_high1 > previous_high1:
                             temp_high = current_high1
@@ -111,7 +111,7 @@ for index1, row1 in data1.iterrows():
                         print("HOURLY Time:", current_time1)
                         print("Current High1:", current_high1, "Previous High1:", previous_high1, "local_high1:", local_high1, "temp_high1:", temp_high)
                         print("Current Low1:", current_low1, "Previous Low1:", previous_low1, "local_low1:", local_low1, "temp_low1:", temp_low)
-                        # time.sleep(1.5)
+                        time.sleep(1)
                         print("-------------------------------------------------------------------------------------------")
 
                         if bull and current_low1 < exit_price:
