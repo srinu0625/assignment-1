@@ -2,8 +2,8 @@ import pandas as pd
 import math
 import time
 
-file_path1 = r"D:\New folder\es 60 min.csv"
-file_path2 = r"D:\New folder\es day.csv"
+file_path1 = r"D:\Data\ES Jun25_60min.csv"
+file_path2 = r"D:\Data\ES Jun25_Daily.csv"
 
 # Load the data
 try:
@@ -16,7 +16,7 @@ except Exception as e:
 # Assuming the column names for high and low are 'High' and 'Low'
 high_column_name = 'High'
 low_column_name  = 'Low'
-time_column_name = 'Date (GMT)'
+time_column_name = 'Date(GMT)'
 
 # temp column names
 temp_high = 0
@@ -109,14 +109,12 @@ for index1, row1 in data1.iterrows():
                         if(current_low1 < previous_low1):
                             local_high1 = temp_high
                          
-
                         # Printing data for data1
-
                         print("HOURLY Time:", current_time1)
                         print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :", local_high1, " temp_high1 :", temp_high)
                         print("Current Low1 :", current_low1, "Previous Low1 :", previous_low1, "local_low1 :", local_low1, " temp_low1 :", temp_low)
                         print("   ")
-                        time.sleep(0)
+                        time.sleep(1.5)
 
                         # case 1 for data2-----------------------------------------------------------------------------------
                         if (current_high2 > previous_high2):
@@ -132,12 +130,12 @@ for index1, row1 in data1.iterrows():
                             local_high2 = temp_high
                        
                         #Printing data for data2
-
                         print("DAILY Time:", current_time2)
                         print("Current High2 :", current_high2, "Previous High2 :", previous_high2, "local_high2 :", local_high2, " temp_high2 :", temp_high)
                         print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2, "local_low2 :", local_low2, " temp_low2 :", temp_low)
-                        time.sleep(0)
+                        time.sleep(1.5)
                         print("-------------------------------------------------------------------------------------------")
+
                         # updating exit price----------------------------------
                         if(bull and local_low1 > exit_price):
                            exit_price = local_low1

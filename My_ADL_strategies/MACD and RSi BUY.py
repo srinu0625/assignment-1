@@ -1,6 +1,7 @@
 # Buy-side only MACD + RSI Logic WITH entry/exit-style rows saved to Excel
 import pandas as pd
 import numpy as np
+import time
 import os
 import re
 
@@ -81,6 +82,7 @@ for i in range(26, len(df)):  # MACD slow EMA needs 26 bars
             print(f" RSI             : {rsi}")
             print(f" High / Low      : {high} / {low}")
             print("================================\n")
+            time.sleep(0.5)
 
             # Log row (ENTRY)
             trade_log_rows.append({
@@ -140,6 +142,7 @@ for i in range(26, len(df)):  # MACD slow EMA needs 26 bars
             print(f" Drawdown        : {drawdown:.2f}, Max Drawdown: {max_drawdown:.2f}")
             print(f" Run-up          : {runup:.2f}, Max Run-up: {max_runup:.2f}")
             print("================================\n")
+            time.sleep(0.5)  # Simulate processing time
 
             # Log row (EXIT)
             trade_log_rows.append({

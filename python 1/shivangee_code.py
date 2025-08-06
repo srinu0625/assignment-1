@@ -17,8 +17,8 @@ print("1st row", data.iloc[0].tolist())
 
 # Assuming the column names for high and low are 'High' and 'Low'
 high_column_name = 'High'
-low_column_name = 'Low'
-time_column_name = 'Date (GMT)'
+low_column_name  = 'Low'
+time_column_name = 'Date(GMT)'
 # temp column names
 temp_high = 0
 temp_low = 0
@@ -80,14 +80,11 @@ for index, row in data.iterrows():
             if(bear and previous_high < exit_price):
                exit_price = previous_high
 
-            
-
             # Printing data
             print("Time:", current_time)
             print("Current High :", current_high, "Previous High :", previous_high)
             print("Current Low :", current_low, "Previous Low :", previous_low)
         
-
             # bullish candle---------------------------------------------------------------------------
             max_loss_for_trade = (previous_high - previous_low + (tick_val * 4)) * contract_size
             if current_high > previous_high and previous_high != 0 and previous_low != 0 and not bear and not flag:
@@ -109,6 +106,7 @@ for index, row in data.iterrows():
                 bull = True
                 flag = True
                 continue
+
             # bullish exit---
             if current_low < exit_price and bull and flag:
                 exit_price = exit_price - (tick_val * 2)
