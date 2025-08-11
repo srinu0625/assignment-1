@@ -21,15 +21,16 @@ df1.set_index('Date(GMT)', inplace=True)
 df2.set_index('Date(GMT)', inplace=True)
 
 # Keep only 'Close'
-df1 = df1[['Close']].rename(columns={'Close': 'CL'})
-df2 = df2[['Close']].rename(columns={'Close': 'BRN'})
+df1 = df1[['Close']].rename(columns={'Close': 'ES'})
+
+df2 = df2[['Close']].rename(columns={'Close': 'NQ'})
 
 # Merge and resample
 df = pd.merge(df1, df2, left_index=True, right_index=True, how='inner')
 df = df.resample('30T').last().dropna()
 
 # Spread and Z-Score
-df['spread'] = df['CL'] - df['BRN']
+df['spread'] = df['ES'] - df['NQ']
 df['mean'] = df['spread'].rolling(30).mean()
 df['std'] = df['spread'].rolling(30).std()
 df['zscore'] = (df['spread'] - df['mean']) / df['std']
@@ -37,7 +38,7 @@ df['zscore'] = (df['spread'] - df['mean']) / df['std']
 # Backtest
 entry_thresh = 2.5
 exit_thresh = 0
-stop_thresh = 5
+stop_thresh = 4
 position = 0
 entry_cl = 0
 entry_brn = 0
@@ -48,27 +49,27 @@ pnl_list = []
 
 for i in range(30, len(df)):
     z = df['zscore'].iloc[i]
-    cl = df['CL'].iloc[i]
-    brn = df['BRN'].iloc[i]
+    ES = df['ES'].iloc[i]
+    NQ = df['NQ'].iloc[i]
     t = df.index[i]
 
     if position == 0:
         if z > entry_thresh:
             position = -1
-            entry_cl = cl
-            entry_brn = brn
+            entry_cl = ES
+            entry_brn = NQ
             print(f"\033[91m{t} | SHORT ENTRY | Z = {z:.2f}\033[0m")
             time.sleep(0.5)
         elif z < -entry_thresh:
             position = 1
-            entry_cl = cl
-            entry_brn = brn
+            entry_cl = ES
+            entry_brn = NQ
             print(f"\033[92m{t} | LONG ENTRY  | Z = {z:.2f}\033[0m")
             time.sleep(0.5)
 
     elif position == 1:
         if z >= exit_thresh or z <= -stop_thresh:
-            pnl = (cl - entry_cl - (brn - entry_brn)) * contract_size
+            pnl = (ES - entry_cl - (NQ - entry_brn)) * contract_size
             total_pnl += pnl
             pnl_list.append(pnl)
             pnl_color = "\033[92m" if pnl >= 0 else "\033[91m"
@@ -80,7 +81,7 @@ for i in range(30, len(df)):
 
     elif position == -1:
         if z <= exit_thresh or z >= stop_thresh:
-            pnl = -(cl - entry_cl - (brn - entry_brn)) * contract_size
+            pnl = -(ES - entry_cl - (NQ - entry_brn)) * contract_size
             total_pnl += pnl
             pnl_list.append(pnl)
             pnl_color = "\033[92m" if pnl >= 0 else "\033[91m"
@@ -115,7 +116,7 @@ df['position'] = 0
 for i in range(1, len(df)):
     df.iloc[i, df.columns.get_loc('position')] = position
 
-df['pnl'] = df['position'].shift(1) * (df['CL'].diff() - df['BRN'].diff()) * contract_size
+df['pnl'] = df['position'].shift(1) * (df['ES'].diff() - df['NQ'].diff()) * contract_size
 df['cum_pnl'] = df['pnl'].cumsum()
 
 plt.figure(figsize=(14, 6))
