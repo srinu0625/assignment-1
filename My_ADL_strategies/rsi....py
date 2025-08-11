@@ -15,7 +15,7 @@ except Exception as e:
 ema_period = 20
 bb_period = 20
 rsi_period = 14
-contract_size = 10
+contract_size = 1000
 num_of_lots = 1
 trade_cost = 1.30
 
