@@ -97,14 +97,14 @@ win_color = "\033[92m"
 loss_color = "\033[91m"
 
 print("\n==== SUMMARY ====")
-print(f"Total Trades   : {total_trades}")
-print(f"Total PnL      : {total_pnl:.2f}")
-print(f"Winning Trades : {win_color}{wins}\033[0m")
-print(f"Losing Trades  : {loss_color}{losses}\033[0m")
-print(f"Win Rate       : {win_color}{win_rate:.2f}%\033[0m")
-print(f"Failure Rate   : {loss_color}{loss_rate:.2f}%\033[0m")
-print(f"Max Profit     : \033[92m{max(pnl_list):.2f}\033[0m" if pnl_list else "N/A")
-print(f"Max Loss       : \033[91m{min(pnl_list):.2f}\033[0m" if pnl_list else "N/A")
+print(f"Total Trades            : {total_trades}")
+print(f"Total PnL               : {total_pnl:.2f}")
+print(f"Winning Trades          : {win_color}{wins}\033[0m")
+print(f"Losing Trades           : {loss_color}{losses}\033[0m")
+print(f"Win Rate                : {win_color}{win_rate:.2f}%\033[0m")
+print(f"Failure Rate            : {loss_color}{loss_rate:.2f}%\033[0m")
+print(f"Max Profit Per trade    : \033[92m{max(pnl_list):.2f}\033[0m" if pnl_list else "N/A")
+print(f"Max Loss   Per trade    : \033[91m{min(pnl_list):.2f}\033[0m" if pnl_list else "N/A")
 
 # Plotting
 df['position'] = 0

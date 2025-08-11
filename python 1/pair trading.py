@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import time
 
 # Load data
-file1 = r"C:\Users\lenovo\Downloads\NYMEX_CL1!, 15_5c0b5.csv"
-file2 = r"C:\Users\lenovo\Downloads\ICEEUR_DLY_BRN1!, 15_08646.csv"
+file1 = r"C:\Users\lenovo\Documents\es 15min.csv"
+file2 = r"C:\Users\lenovo\Documents\nq 15min.csv"
 
 df1 = pd.read_csv(file1)
 df2 = pd.read_csv(file2)
@@ -37,7 +37,7 @@ df['zscore'] = (df['spread'] - df['mean']) / df['std']
 # Backtest
 entry_thresh = 2.5
 exit_thresh = 0
-stop_thresh = 4
+stop_thresh = 5
 position = 0
 entry_cl = 0
 entry_brn = 0
@@ -58,13 +58,13 @@ for i in range(30, len(df)):
             entry_cl = cl
             entry_brn = brn
             print(f"\033[91m{t} | SHORT ENTRY | Z = {z:.2f}\033[0m")
-            time.sleep(0.3)
+            time.sleep(0.5)
         elif z < -entry_thresh:
             position = 1
             entry_cl = cl
             entry_brn = brn
             print(f"\033[92m{t} | LONG ENTRY  | Z = {z:.2f}\033[0m")
-            time.sleep(0.3)
+            time.sleep(0.5)
 
     elif position == 1:
         if z >= exit_thresh or z <= -stop_thresh:
@@ -75,7 +75,7 @@ for i in range(30, len(df)):
             print(f"{t} | LONG EXIT   | Z = {z:.2f} | PnL = {pnl_color}{pnl:.2f}\033[0m")
 
             print(f"----------------------------------------------------------------")
-            time.sleep(0.3)
+            time.sleep(0.5)
             position = 0
 
     elif position == -1:
@@ -85,9 +85,9 @@ for i in range(30, len(df)):
             pnl_list.append(pnl)
             pnl_color = "\033[92m" if pnl >= 0 else "\033[91m"
             print(f"{t} | SHORT EXIT  | Z = {z:.2f} | PnL = {pnl_color}{pnl:.2f}\033[0m")
-            
-            print(f"------------------------------------------------")
-            time.sleep(0.3)
+
+            print(f"----------------------------------------------------------------")
+            time.sleep(0.5)
             position = 0
 
 # Summary
@@ -101,14 +101,14 @@ win_color = "\033[92m"
 loss_color = "\033[91m"
 
 print("\n==== SUMMARY ====")
-print(f"Total Trades   : {total_trades}")
-print(f"Total PnL      : {total_pnl:.2f}")
-print(f"Winning Trades : {win_color}{wins}\033[0m")
-print(f"Losing Trades  : {loss_color}{losses}\033[0m")
-print(f"Win Rate       : {win_color}{win_rate:.2f}%\033[0m")
-print(f"Failure Rate   : {loss_color}{loss_rate:.2f}%\033[0m")
-print(f"Max Profit     : \033[92m{max(pnl_list):.2f}\033[0m" if pnl_list else "N/A")
-print(f"Max Loss       : \033[91m{min(pnl_list):.2f}\033[0m" if pnl_list else "N/A")
+print(f"Total Trades            : {total_trades}")
+print(f"Total PnL               : {total_pnl:.2f}")
+print(f"Winning Trades          : {win_color}{wins}\033[0m")
+print(f"Losing Trades           : {loss_color}{losses}\033[0m")
+print(f"Win Rate                : {win_color}{win_rate:.2f}%\033[0m")
+print(f"Failure Rate            : {loss_color}{loss_rate:.2f}%\033[0m")
+print(f"Max Profit Per trade    : \033[92m{max(pnl_list):.2f}\033[0m" if pnl_list else "N/A")
+print(f"Max Loss   Per trade    : \033[91m{min(pnl_list):.2f}\033[0m" if pnl_list else "N/A")
 
 # Plotting
 df['position'] = 0
