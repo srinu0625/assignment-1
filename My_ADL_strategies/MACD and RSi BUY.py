@@ -6,8 +6,8 @@ import os
 import re
 
 # --------- PATHS (edit these) ----------
-file_path   = r"C:\Users\lenovo\Downloads\ES 30min.csv"
-output_path = r"D:\trade logs\MACD and RSI\ES_trades_30min.xlsx"
+file_path   = r"C:\Users\lenovo\Documents\si 15min.csv"
+output_path = r"D:\trade logs\MACD and RSI\si_silver_trades_30min.xlsx"
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -18,7 +18,7 @@ df.columns = df.columns.str.strip()
 
 # --------- PARAMETERS ---------
 rsi_period     = 14
-contract_size  = 50
+contract_size  = 5
 num_of_lots    = 1
 trade_cost     = 1.30
 

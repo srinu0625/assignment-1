@@ -2,8 +2,7 @@ import pandas as pd
 import time
 import os
 import re
-
-file_path   = r"C:\Users\lenovo\Downloads\ES daily.csv"                 
+file_path   = r"C:\Users\lenovo\Documents\cp 15min.csv"                 
 output_path = r"C:\Users\lenovo\Desktop\Trade Logs\ES daily_trades.xlsx"    
 
 time_col   = 'Date(GMT)'
@@ -15,7 +14,7 @@ close_col  = 'Close'
 rsi_period    = 14
 atr_period    = 14
 atr_mult_sl   = 1.5   # 1.5 * ATR for stop-loss
-contract_size = 50  # e.g., for CL futures
+contract_size = 5  # e.g., for CL futures
 num_of_lots   = 1
 trade_cost    = 1.30
 
@@ -118,7 +117,7 @@ for i in range(max(atr_period, 26), len(df)):
             print(f" EMA50        : {ema:.2f}")
             print("================================\n")
             continue
-            time.sleep(0.1)  # to avoid too fast execution in real-time scenarios
+            time.sleep(1)  # to avoid too fast execution in real-time scenarios
         # ---------------- Long Exit ----------------
         if position == 1:
             stop_loss = entry_price - atr_mult_sl * atr
@@ -162,6 +161,7 @@ for i in range(max(atr_period, 26), len(df)):
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}    | Max RU: {max_runup:.2f}")
                 print("================================\n")
+                time.sleep( 1)
 
                 # append one row for this full trade
                 trade_log.append({
@@ -209,6 +209,7 @@ for i in range(max(atr_period, 26), len(df)):
             print(f" RSI          : {rsi:.2f}")
             print(f" ATR          : {atr:.4f}")
             print("================================\n")
+            time.sleep(1)
             continue
 
         # ---------------- Short Exit ----------------
@@ -254,6 +255,7 @@ for i in range(max(atr_period, 26), len(df)):
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}    | Max RU: {max_runup:.2f}")
                 print("================================\n")
+                time.sleep(1)
 
                 # append one row for this full trade
                 trade_log.append({
@@ -319,6 +321,7 @@ print(f"Negative Trades = \033[91m{total_negative_trades}\033[0m")
 print(f"   Total Trades = {num_of_trades}")
 print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
 print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
+time.sleep(1)
 
 
 # -------------------- Save trades to Excel (chronological, mixed long/short) --------------------

@@ -6,8 +6,8 @@ import os
 import re
 
 # --------- PATHS (edit these) ----------
-file_path   = r"C:\Users\lenovo\Downloads\ES 30min.csv"
-output_path = r"D:\trade logs\MACD and RSI\ES_trades_30min.xlsx"
+file_path   = r"C:\Users\lenovo\Documents\hg 15min.csv"
+output_path = r"D:\trade logs\MACD and RSI\hg_copper_trades_30min.xlsx"
 
 # Ensure directory exists
 os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -18,7 +18,7 @@ df.columns = df.columns.str.strip()
 
 # --------- PARAMETERS ---------
 rsi_period     = 14
-contract_size  = 50
+contract_size  = 5
 num_of_lots    = 1
 trade_cost     = 1.30
 
@@ -108,7 +108,7 @@ for i in range(26, len(df)):  # MACD slow EMA needs 26 bars
         elif position == 1 and (macd > signal) and (rsi > 40):
             Exit_price = close_today
             Exit_time  = date_time
-            pnl = (Exit_price - Entry_price) * num_of_lots * contract_size
+            pnl = (Entry_price - Exit_price) * num_of_lots * contract_size
             total_pnl += pnl
             total_long_pnl += pnl
             equity_curve.append(total_pnl)

@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 import time
 
 # ==== File paths ====
-file1 = r"C:\Users\lenovo\Documents\es 15min.csv"
-file2 = r"C:\Users\lenovo\Documents\nq 15min.csv"
+file1 = r"D:\Data\GC Jun25_15min.csv"
+file2 = r"C:\Users\lenovo\Documents\si 15min.csv"
 
 # ==== Contract sizes for each product ====
-contract_size_es = 50  # E-mini S&P 500 Futures (ES)
-contract_size_nq = 20  # E-mini NASDAQ-100 Futures (NQ)
+contract_size_es = 5  # E-mini S&P 500 Futures (si)
+contract_size_nq = 5  # E-mini NASDAQ-100 Futures (cp)
 
 # ==== Load and clean data ====
 df1 = pd.read_csv(file1)
@@ -25,18 +25,16 @@ df1.set_index('Date(GMT)', inplace=True)
 df2.set_index('Date(GMT)', inplace=True)
 
 # Keep only Close price
-df1 = df1[['Close']].rename(columns={'Close': 'es'})
-df2 = df2[['Close']].rename(columns={'Close': 'nq'})
+df1 = df1[['Close']].rename(columns={'Close': 'si'})
+df2 = df2[['Close']].rename(columns={'Close': 'cp'})
 
 # Merge datasets
 df = pd.merge(df1, df2, left_index=True, right_index=True, how='inner')
 
-# Resample to 30 minutes
-df = df.resample('30T').last().dropna()
 
 # Calculate spread and z-score
-df['spread'] = df['es'] - df['nq']
-df['mean'] = df['spread'].rolling(30).
+df['spread'] = df['si'] - df['cp']
+df['mean'] = df['spread'].rolling(30)
 df['std'] = df['spread'].rolling(30).std()
 df['zscore'] = (df['spread'] - df['mean']) / df['std']
 
@@ -44,8 +42,8 @@ df['zscore'] = (df['spread'] - df['mean']) / df['std']
 entry_thresh = 2.5
 exit_thresh = 0
 stop_thresh = 4
-position = 0  # 0 = no position, 1 = long es / short nq, -1 = short es / long nq
-entry_es = entry_nq = 0
+position = 0  # 0 = no position, 1 = long si / short cp, -1 = short si / long cp
+entry_si = entry_cp = 0
 total_pnl = 0
 pnl_list = []
 
@@ -57,54 +55,54 @@ df['cum_pnl'] = 0
 # ==== Backtest Loop ====
 for i in range(30, len(df)):
     z = df['zscore'].iloc[i]
-    es = df['es'].iloc[i]
-    nq = df['nq'].iloc[i]
+    si = df['si'].iloc[i]
+    cp = df['cp'].iloc[i]
     t = df.index[i]
 
     if position == 0:
         if z > entry_thresh:
-            position = -1  # Short es, Long nq
-            entry_es = es
-            entry_nq = nq
-            print(f"\033[91m{t} | SHORT ENTRY | Z = {z:.2f} | es = {es:.2f}, nq = {nq:.2f}\033[0m")
+            position = -1  # Short si, Long cp
+            entry_si = si
+            entry_cp = cp
+            print(f"\033[91m{t} | SHORT ENTRY | Z = {z:.2f} | si = {si:.2f}, cp = {cp:.2f}\033[0m")
             # time.sleep(1)  # Simulate processing delay
         elif z < -entry_thresh:
-            position = 1  # Long es, Short nq
-            entry_es = es
-            entry_nq = nq
-            print(f"\033[92m{t} | LONG ENTRY  | Z = {z:.2f} | es = {es:.2f}, nq = {nq:.2f}\033[0m")
+            position = 1  # Long si, Short cp
+            entry_si = si
+            entry_cp = cp
+            print(f"\033[92m{t} | LONG ENTRY  | Z = {z:.2f} | si = {si:.2f}, cp = {cp:.2f}\033[0m")
             # time.sleep(1)  # Simulate processing delay
 
-    elif position == 1:  # Long es, Short nq
+    elif position == 1:  # Long si, Short cp
         if z >= exit_thresh or z <= -stop_thresh:
-            pnl_es = (es - entry_es) * contract_size_es
-            pnl_nq = -(nq - entry_nq) * contract_size_nq
-            pnl = pnl_es + pnl_nq
+            pnl_si = (si - entry_si) * contract_size_es
+            pnl_cp = -(cp - entry_cp) * contract_size_nq
+            pnl = pnl_si + pnl_cp
 
             total_pnl += pnl
             pnl_list.append(pnl)
             pnl_color = "\033[92m" if pnl >= 0 else "\033[91m"
             print(f"{t} | LONG EXIT   | Z = {z:.2f} | "
                   f"PnL = {pnl_color}{pnl:.2f}\033[0m | "
-                  f"Entry es: {entry_es:.2f}, Exit es: {es:.2f} | "
-                  f"Entry nq: {entry_nq:.2f}, Exit nq: {nq:.2f}")
+                  f"Entry si: {entry_si:.2f}, Exit si: {si:.2f} | "
+                  f"Entry cp: {entry_cp:.2f}, Exit cp: {cp:.2f}")
             print("=============================================================")
             # time.sleep(1)  # Simulate processing delay
             position = 0
 
-    elif position == -1:  # Short es, Long nq
+    elif position == -1:  # Short si, Long cp
         if z <= exit_thresh or z >= stop_thresh:
-            pnl_es = -(es - entry_es) * contract_size_es
-            pnl_nq = (nq - entry_nq) * contract_size_nq
-            pnl = pnl_es + pnl_nq
+            pnl_si = -(si - entry_si) * contract_size_es
+            pnl_cp = (cp - entry_cp) * contract_size_nq
+            pnl = pnl_si + pnl_cp
 
             total_pnl += pnl
             pnl_list.append(pnl)
             pnl_color = "\033[92m" if pnl >= 0 else "\033[91m"
             print(f"{t} | SHORT EXIT  | Z = {z:.2f} | "
                   f"PnL = {pnl_color}{pnl:.2f}\033[0m | "
-                  f"Entry es: {entry_es:.2f}, Exit es: {es:.2f} | "
-                  f"Entry nq: {entry_nq:.2f}, Exit nq: {nq:.2f}")
+                  f"Entry si: {entry_si:.2f}, Exit si: {si:.2f} | "
+                  f"Entry cp: {entry_cp:.2f}, Exit cp: {cp:.2f}")
             print("=============================================================")
             # time.sleep(1)  # Simulate processing delay
             position = 0
@@ -146,7 +144,7 @@ plt.legend()
 # PnL - cumulative
 plt.subplot(2, 1, 2)
 plt.plot(pd.Series(pnl_list).cumsum(), label='Cumulative PnL', color='blue')
-plt.title('Cumulative PnL es and nq')
+plt.title('Cumulative PnL si and cp')
 plt.legend()
 
 plt.tight_layout()
