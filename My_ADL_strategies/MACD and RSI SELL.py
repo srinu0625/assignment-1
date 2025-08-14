@@ -6,7 +6,7 @@ import os
 import re
 
 # --------- PATHS (edit these) ----------
-file_path   = r"C:\Users\lenovo\Documents\hg 15min.csv"
+file_path   = r"D:\Data\BR Jun25_15min.csv"
 output_path = r"D:\trade logs\MACD and RSI\hg_copper_trades_30min.xlsx"
 
 # Ensure directory exists
@@ -18,7 +18,7 @@ df.columns = df.columns.str.strip()
 
 # --------- PARAMETERS ---------
 rsi_period     = 14
-contract_size  = 5
+contract_size  = 0.01
 num_of_lots    = 1
 trade_cost     = 1.30
 
@@ -186,21 +186,21 @@ if match:
 else:
     print("\n\033[1mTrading Performance Summary (Buy-side Only):\033[0m")
 
-print(f"     Max Profit = \033[92m{max_profit:.2f}\033[0m")
-print(f"       Max Loss = \033[91m{max_loss:.2f}\033[0m")
-print(f"   Positive PnL = \033[92m{positive_pnl:.2f}\033[0m")
-print(f"   Negative PnL = \033[91m{negative_pnl:.2f}\033[0m")
-print(f" Total Long PnL = \033[94m{total_long_pnl:.2f}\033[0m")
-print(f"          Gross = {total_pnl:.2f}")
-print(f"     Trade Cost = {round(TradeCost, 2)}")
-print(f"            Net = {Net:.2f}")
-print(f"   Max Drawdown = {max_drawdown:.2f}")
-print(f"     Max Run-up = {max_runup:.2f}")
-print(f"Positive Trades = \033[92m{total_positive_trades}\033[0m")
-print(f"Negative Trades = \033[91m{total_negative_trades}\033[0m")
-print(f"   Total Trades = {num_of_trades}")
-print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
-print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
+print(f"Max Profit per trade = \033[92m{max_profit:.2f}\033[0m")
+print(f"  Max Loss per trade = \033[91m{max_loss:.2f}\033[0m")
+print(f"        Positive PnL = \033[92m{positive_pnl:.2f}\033[0m")
+print(f"        Negative PnL = \033[91m{negative_pnl:.2f}\033[0m")
+print(f"      Total Long PnL = \033[94m{total_long_pnl:.2f}\033[0m")
+print(f"               Gross = {total_pnl:.2f}")
+print(f"          Trade Cost = {round(TradeCost, 2)}")
+print(f"                 Net = {Net:.2f}")
+print(f"        Max Drawdown = {max_drawdown:.2f}")
+print(f"          Max Run-up = {max_runup:.2f}")
+print(f"     Positive Trades = \033[92m{total_positive_trades}\033[0m")
+print(f"     Negative Trades = \033[91m{total_negative_trades}\033[0m")
+print(f"        Total Trades = {num_of_trades}")
+print(f"        Success Rate = \033[92m{success_rate:.2f}%\033[0m")
+print(f"        Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
 
 # --------- SAVE TO EXCEL ---------
 if trade_log_rows:

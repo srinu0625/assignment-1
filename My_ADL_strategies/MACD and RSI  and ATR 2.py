@@ -1,9 +1,10 @@
 import pandas as pd
 import os
 import re
+import time
 
 # ==================== CONFIG ====================
-file_path      = r"D:\Data\ES Jun25_5min.csv"   # <--- change this
+file_path      = r"D:\Data\ES Jun25_15min.csv"   # <--- change this
 time_col       = 'Date(GMT)'
 open_col       = 'Open'
 high_col       = 'High'
@@ -12,7 +13,7 @@ close_col      = 'Close'
 
 rsi_period     = 14
 atr_period     = 14
-atr_mult_sl    = 1.5          # SL = 1.5 * ATR
+atr            = 1.5          # SL = 1.5 * ATR
 contract_size  = 50
 num_of_lots    = 1
 trade_cost     = 1.30         # per round-trip (change if per side)
@@ -117,10 +118,11 @@ for i in range(warmup, len(df)):
             print(f" ATR          : {atr:.4f}")
             print("================================\n")
             continue
-
+        time.sleep(0.5)
+  
         # ------------- LONG EXIT -------------
         if position == 1:
-            stop_loss = entry_price - atr_mult_sl * atr
+            stop_loss = entry_price - atr * atr
             if macd_cross_dn or (low <= stop_loss):
                 exit_price = close
                 pnl = (exit_price - entry_price) * num_of_lots * contract_size - trade_cost
@@ -179,6 +181,7 @@ for i in range(warmup, len(df)):
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}    | Max RU: {max_runup:.2f}")
                 print("================================\n")
+                time.sleep(0.5)
 
                 position = 0
                 entry_price = entry_time = entry_index = None
@@ -197,11 +200,12 @@ for i in range(warmup, len(df)):
             print(f" RSI          : {rsi:.2f}")
             print(f" ATR          : {atr:.4f}")
             print("================================\n")
+            time.sleep(0.5)
             continue
 
         # ------------- SHORT EXIT -------------
         if position == -1:
-            stop_loss = entry_price + atr_mult_sl * atr
+            stop_loss = entry_price + atr * atr
             if macd_cross_up or (high >= stop_loss):
                 exit_price = close
                 pnl = (entry_price - exit_price) * num_of_lots * contract_size - trade_cost
@@ -260,6 +264,7 @@ for i in range(warmup, len(df)):
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}    | Max RU: {max_runup:.2f}")
                 print("================================\n")
+                time.sleep(0.5)
 
                 position = 0
                 entry_price = entry_time = entry_index = None
@@ -299,6 +304,7 @@ print(f"Negative Trades = \033[91m{total_negative_trades}\033[0m")
 print(f"   Total Trades = {num_of_trades}")
 print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
 print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
+time.sleep(0.5)
 
 # Raw values (if you need to parse programmatically)
 print(f"\033[92m{max_profit}\033[0m")
@@ -317,6 +323,7 @@ print(f"\033[91m{total_negative_trades}\033[0m")
 print(f"{num_of_trades}")
 print(f"\033[92m{success_rate:.2f}%\033[0m")
 print(f"\033[91m{failure_rate:.2f}%\033[0m")
+time.sleep(0.5)
 
 # ==================== TRADE LOG ====================
 if trade_log:

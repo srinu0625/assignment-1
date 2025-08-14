@@ -2,7 +2,7 @@ import pandas as pd
 import time
 import os
 import re
-file_path   = r"C:\Users\lenovo\Documents\cp 15min.csv"                 
+file_path   = r"D:\Data\ES Jun25_daily.csv"                 
 output_path = r"C:\Users\lenovo\Desktop\Trade Logs\ES daily_trades.xlsx"    
 
 time_col   = 'Date(GMT)'
@@ -14,7 +14,7 @@ close_col  = 'Close'
 rsi_period    = 14
 atr_period    = 14
 atr_mult_sl   = 1.5   # 1.5 * ATR for stop-loss
-contract_size = 5  # e.g., for CL futures
+contract_size = 50  # e.g., for CL futures
 num_of_lots   = 1
 trade_cost    = 1.30
 
@@ -118,6 +118,7 @@ for i in range(max(atr_period, 26), len(df)):
             print("================================\n")
             continue
             time.sleep(1)  # to avoid too fast execution in real-time scenarios
+
         # ---------------- Long Exit ----------------
         if position == 1:
             stop_loss = entry_price - atr_mult_sl * atr

@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 import time
 
 ## ==== File paths ====
-file1 = r"D:\Data\GC Jun25_15min.csv"
-file2 = r"C:\Users\lenovo\Documents\si 15min.csv"
+file1 = r"C:\Users\lenovo\Downloads\ucc 15min.csv"
+file2 = r"C:\Users\lenovo\Downloads\lcc 15min.csv"
 
 # ==== Contract sizes for each product ====
-contract_size_cl = 5  # Crude Oil Futures (si)
-contract_size_brn = 5  # Brent Crude Oil Futures (cp)
+contract_size_ucc = 1  # Crude Oil Futures (ucc)
+contract_size_lcc = 1  # Brent Crude Oil Futures (lcc)
 
 # ==== Load and clean data ====
 df1 = pd.read_csv(file1)
@@ -25,16 +25,16 @@ df1.set_index('Date(GMT)', inplace=True)
 df2.set_index('Date(GMT)', inplace=True)
 
 # Keep only Close price
-df1 = df1[['Close']].rename(columns={'Close': 'si'})
-df2 = df2[['Close']].rename(columns={'Close': 'cp'})
+df1 = df1[['Close']].rename(columns={'Close': 'ucc'})
+df2 = df2[['Close']].rename(columns={'Close': 'lcc'})
 
 # Merge datasets directly without resampling
 df = pd.merge(df1, df2, left_index=True, right_index=True, how='inner')
 
 # Calculate spread and z-score
-df['spread'] = df['si'] - df['cp']
-df['mean'] = df['spread'].rolling(30).mean()
-df['std'] = df['spread'].rolling(30).std()
+df['spread'] = df['ucc'] - df['lcc']
+df['mean'] = df['spread'].rolling(60).mean()
+df['std'] = df['spread'].rolling(60).std()
 df['zscore'] = (df['spread'] - df['mean']) / df['std']
 
 # ==== Backtest Parameters ====
@@ -42,7 +42,7 @@ entry_thresh = 2.5
 exit_thresh = 0
 stop_thresh = 4
 position = 0
-entry_si = entry_cp = 0
+entry_ucc = entry_lcc = 0
 total_pnl = 0
 pnl_list = []
 
@@ -51,56 +51,60 @@ df['trade_pnl'] = 0
 df['cum_pnl'] = 0
 
 # ==== Backtest Loop ====
-for i in range(30, len(df)):
+for i in range(60, len(df)):
     z = df['zscore'].iloc[i]
-    si = df['si'].iloc[i]
-    cp = df['cp'].iloc[i]
+    ucc = df['ucc'].iloc[i]
+    lcc = df['lcc'].iloc[i]
     t = df.index[i]
 
     if position == 0:
         if z > entry_thresh:
-            position = -1  # Short si, Long cp
-            entry_si = si
-            entry_cp = cp
-            print(f"\033[91m{t} | SHORT ENTRY | Z = {z:.2f} | si = {si:.2f}, cp = {cp:.2f}\033[0m")
-            time.sleep(1)
+            position = -1  # Short ucc, Long lcc
+            entry_ucc = ucc
+            entry_lcc = lcc
+            print(f"\033[91m{t} | SHORT ENTRY | Z = {z:.2f} | ucc = {ucc:.2f}, lcc = {lcc:.2f}\033[0m")
+            time.sleep(0.5)
         elif z < -entry_thresh:
-            position = 1  # Long si, Short cp
-            entry_si = si
-            entry_cp = cp
-            print(f"\033[92m{t} | LONG ENTRY  | Z = {z:.2f} | si = {si:.2f}, cp = {cp:.2f}\033[0m")
-            time.sleep(1)
+            position = 1  # Long ucc, Short lcc
+            entry_ucc = ucc
+            entry_lcc = lcc
+            print(f"\033[92m{t} | LONG ENTRY  | Z = {z:.2f} | ucc = {ucc:.2f}, lcc = {lcc:.2f}\033[0m")
+            time.sleep(0.5)
 
     elif position == 1:
         if z >= exit_thresh or z <= -stop_thresh:
-            pnl_cl = (si - entry_si) * contract_size_cl
-            pnl_brn = -(cp - entry_cp) * contract_size_brn
-            pnl = pnl_cl + pnl_brn
+            pnl_ucc = (ucc - entry_ucc) * contract_size_ucc
+            pnl_lcc = -(lcc - entry_lcc) * contract_size_lcc
+            pnl = pnl_ucc + pnl_lcc
             total_pnl += pnl
             pnl_list.append(pnl)
             pnl_color = "\033[92m" if pnl >= 0 else "\033[91m"
-            print(f"{t} | LONG EXIT   | Z = {z:.2f} | "
-                  f"PnL = {pnl_color}{pnl:.2f}\033[0m | "
-                  f"Entry si: {entry_si:.2f}, Exit si: {si:.2f} | "
-                  f"Entry cp: {entry_cp:.2f}, Exit cp: {cp:.2f}")
+            pnl_color = "\033[92m" if pnl > 0 else "\033[91m"
+            print(f"{t} | LONG EXIT   | Z = {z:.2f}")
+            print(f"PnL: {pnl_color}{pnl:.2f}\033[0m")
+
+            print(f"Entry UCC: {entry_ucc:.2f} → Exit UCC: {ucc:.2f}")
+            print(f"Entry LCC: {entry_lcc:.2f} → Exit LCC: {lcc:.2f}")
             print("=============================================================")
-            time.sleep(1)
+
+            time.sleep(0.5)
             position = 0
 
     elif position == -1:
         if z <= exit_thresh or z >= stop_thresh:
-            pnl_cl = -(si - entry_si) * contract_size_cl
-            pnl_brn = (cp - entry_cp) * contract_size_brn
-            pnl = pnl_cl + pnl_brn
+            pnl_ucc = -(ucc - entry_ucc) * contract_size_ucc
+            pnl_lcc = (lcc - entry_lcc) * contract_size_lcc
+            pnl = pnl_ucc + pnl_lcc
             total_pnl += pnl
             pnl_list.append(pnl)
             pnl_color = "\033[92m" if pnl >= 0 else "\033[91m"
-            print(f"{t} | SHORT EXIT  | Z = {z:.2f} | "
-                  f"PnL = {pnl_color}{pnl:.2f}\033[0m | "
-                  f"Entry si: {entry_si:.2f}, Exit si: {si:.2f} | "
-                  f"Entry cp: {entry_cp:.2f}, Exit cp: {cp:.2f}")
+            print(f"{t} | SHORT EXIT  | Z = {z:.2f} ")
+            print(f"PnL : {pnl_color}{pnl:.2f}\033[0m ")
+
+            print(f"Entry ucc: {entry_ucc:.2f}, Exit ucc: {ucc:.2f}")
+            print(f"Entry lcc: {entry_lcc:.2f}, Exit lcc: {lcc:.2f}")
             print("=============================================================")
-            time.sleep(1)
+            time.sleep(0.5)
             position = 0
 
     df.iloc[i, df.columns.get_loc('position')] = position
@@ -140,7 +144,7 @@ plt.legend()
 # Cumulative PnL plot
 plt.subplot(2, 1, 2)
 plt.plot(pd.Series(pnl_list).cumsum(), label='Cumulative PnL', color='blue')
-plt.title('Cumulative PnL GC and SI')
+plt.title('Cumulative PnL ucc and lcc')
 plt.legend()
 
 plt.tight_layout()
