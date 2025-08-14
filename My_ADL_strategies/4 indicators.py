@@ -3,7 +3,7 @@ import time
 import os
 
 # -------------------- Paths & Config --------------------
-file_path   = r"D:\Data\ES Jun25_5min.csv"                 
+file_path   = r"D:\Data\ES Jun25_60min.csv"                 
 output_path = r"C:\Users\lenovo\Desktop\Trade Logs\ES_daily_trades.xlsx"    
 
 time_col   = 'Date(GMT)'
@@ -138,6 +138,7 @@ for i in range(max(atr_period, 200), len(df)):
 
         # LONG → Check Exit
         elif position == 1:
+            # Exit
             if close >= tp_price or close <= sl_price or (macd < signal):
                 exit_price = close
                 pnl = (exit_price - entry_price) * num_of_lots * contract_size - trade_cost
@@ -186,6 +187,7 @@ for i in range(max(atr_period, 200), len(df)):
 
         # SHORT → Check Exit
         elif position == -1:
+            # Exit
             if close <= tp_price or close >= sl_price or (macd > signal):
                 exit_price = close
                 pnl = (entry_price - exit_price) * num_of_lots * contract_size - trade_cost
@@ -259,6 +261,8 @@ print(f"Negative Trades = {total_negative_trades}")
 print(f"   Total Trades = {num_of_trades}")
 print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
 print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
+
+
 
 # -------------------- Save to Excel --------------------
 if trade_log:

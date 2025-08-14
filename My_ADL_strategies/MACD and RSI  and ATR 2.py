@@ -4,7 +4,7 @@ import re
 import time
 
 # ==================== CONFIG ====================
-file_path      = r"D:\Data\ES Jun25_15min.csv"   # <--- change this
+file_path      = r"D:\Data\NQ Jun25_15min.csv"   # <--- change this
 time_col       = 'Date(GMT)'
 open_col       = 'Open'
 high_col       = 'High'
@@ -14,7 +14,7 @@ close_col      = 'Close'
 rsi_period     = 14
 atr_period     = 14
 atr            = 1.5          # SL = 1.5 * ATR
-contract_size  = 50
+contract_size  = 20
 num_of_lots    = 1
 trade_cost     = 1.30         # per round-trip (change if per side)
 export_trades_csv = False     # set True to save trades to CSV
@@ -86,7 +86,8 @@ max_runup = 0.0
 equity_curve = []
 
 trade_log = []
-first_trade_done = False
+first_trade_done = False# EMA filters
+df['ema'] = df[close_col].ewm(span=14, adjust=False).mean()
 
 for i in range(warmup, len(df)):
     try:
@@ -98,14 +99,16 @@ for i in range(warmup, len(df)):
         macd    = df['MACD'].iloc[i]
         signal  = df['Signal'].iloc[i]
         atr     = df['ATR'].iloc[i]
+        ema     = df['ema'].iloc[i]
 
         macd_prev   = df['MACD'].iloc[i-1]
         signal_prev = df['Signal'].iloc[i-1]
         macd_cross_up = (macd_prev <= signal_prev) and (macd > signal)
         macd_cross_dn = (macd_prev >= signal_prev) and (macd < signal)
+        
 
         # ------------- LONG ENTRY -------------
-        if position == 0 and (macd > signal) and (rsi < 50):
+        if position == 0 and (macd > signal) and (ema(rsi) < 50):
             position = 1
             entry_price = close
             entry_time  = date
@@ -122,8 +125,9 @@ for i in range(warmup, len(df)):
   
         # ------------- LONG EXIT -------------
         if position == 1:
-            stop_loss = entry_price - atr * atr
-            if macd_cross_dn or (low <= stop_loss):
+            stop_loss     = entry_price + (2 * atr)
+            target_profit = entry_price - (3 * atr)
+            if close >= target_profit or (close <= stop_loss):
                 exit_price = close
                 pnl = (exit_price - entry_price) * num_of_lots * contract_size - trade_cost
                 total_pnl += pnl
@@ -188,7 +192,7 @@ for i in range(warmup, len(df)):
                 continue
 
         # ------------- SHORT ENTRY -------------
-        if position == 0 and (macd < signal) and (rsi > 50):
+        if position == 0 and (macd < signal) and (ema(rsi) > 50):
             position = -1
             entry_price = close
             entry_time  = date
@@ -205,8 +209,9 @@ for i in range(warmup, len(df)):
 
         # ------------- SHORT EXIT -------------
         if position == -1:
-            stop_loss = entry_price + atr * atr
-            if macd_cross_up or (high >= stop_loss):
+            stop_loss     = entry_price + (2 * atr)
+            target_profit = entry_price - (3 * atr)
+            if close <= target_profit or (close >= stop_loss):
                 exit_price = close
                 pnl = (entry_price - exit_price) * num_of_lots * contract_size - trade_cost
                 total_pnl += pnl
