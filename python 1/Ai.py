@@ -1,134 +1,348 @@
 import pandas as pd
-import matplotlib.pyplot as plt
+import os
+import re
 import time
 
-# Load data
-file1 = r"C:\Users\lenovo\Downloads\NYMEX_CL1!, 15_5c0b5.csv"
-file2 = r"C:\Users\lenovo\Downloads\ICEEUR_DLY_BRN1!, 15_08646.csv"
+# ==================== CONFIG ====================
+file_path         = r"D:\Data\BR Jun25_60min.csv"
+output_path       = r"C:\Users\lenovo\Desktop\Trade Logs\trade_log_BR_30min.xlsx"
+time_col          = 'Date(GMT)'
+open_col          = 'Open'
+high_col          = 'High'
+low_col           = 'Low'
+close_col         = 'Close'
 
-df1 = pd.read_csv(file1)
-df2 = pd.read_csv(file2)
+rsi_period        = 14
+long_threshold    = 50
+short_threshold   = 50
+contract_size     = 1000
+tick_size         = 0.01
+max_loss_per_trade= 0
+limit             = 450
+atr_period        = 14
+num_of_lots       = 1
+trade_cost        = 1
+export_trades_csv = False
+os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
-# Clean column names
-df1.columns = df1.columns.str.strip()
-df2.columns = df2.columns.str.strip()
+# ==================== LOAD ====================
+try:
+    df = pd.read_csv(file_path)
+    df.columns = df.columns.str.strip()
+except Exception as e:
+    print("Error loading data:", e)
+    raise SystemExit
 
-# Parse datetime
-df1['Date(GMT)'] = pd.to_datetime(df1['Date(GMT)'], format='%d-%m-%Y %H.%M')
-df2['Date(GMT)'] = pd.to_datetime(df2['Date(GMT)'], format='%d-%m-%Y %H.%M')
+# ==================== INDICATORS ====================
+def wilder_atr(df, high_col, low_col, close_col, period=14):
+    high = df[high_col]
+    low  = df[low_col]
+    close = df[close_col]
+    prev_close = close.shift(1)
 
-df1.set_index('Date(GMT)', inplace=True)
-df2.set_index('Date(GMT)', inplace=True)
+    tr = pd.concat([
+        high - low,
+        (high - prev_close).abs(),
+        (low  - prev_close).abs()
+    ], axis=1).max(axis=1)
 
-# Keep only 'Close'
-df1 = df1[['Close']].rename(columns={'Close': 'CL'})
-df2 = df2[['Close']].rename(columns={'Close': 'BRN'})
+    atr = tr.ewm(alpha=1/period, adjust=False).mean()  # Wilder smoothing
+    return tr, atr
 
-# Merge and resample
-df = pd.merge(df1, df2, left_index=True, right_index=True, how='inner')
-df = df.resample('30T').last().dropna()
+def compute_rsi(close, period=14):
+    delta = close.diff()
+    gain = delta.where(delta > 0, 0.0)
+    loss = -delta.where(delta < 0, 0.0)
+    avg_gain = gain.ewm(alpha=1/period, min_periods=period, adjust=False).mean()
+    avg_loss = loss.ewm(alpha=1/period, min_periods=period, adjust=False).mean()
+    rs = avg_gain / (avg_loss.replace(0, 1e-10))
+    return 100 - (100 / (1 + rs))
 
-# Spread and Z-Score
-df['spread'] = df['CL'] - df['BRN']
-df['mean'] = df['spread'].rolling(30).mean()
-df['std'] = df['spread'].rolling(30).std()
-df['zscore'] = (df['spread'] - df['mean']) / df['std']
+def compute_macd(close, fast=12, slow=26, signal=9):
+    ema_fast = close.ewm(span=fast, adjust=False).mean()
+    ema_slow = close.ewm(span=slow, adjust=False).mean()
+    macd_line = ema_fast - ema_slow
+    signal_line = macd_line.ewm(span=signal, adjust=False).mean()
+    return macd_line, signal_line
 
-# Backtest
-entry_thresh = 2.5
-exit_thresh = 0
-stop_thresh = 4
-position = 0
-entry_cl = 0
-entry_brn = 0
-contract_size = 100
-pnl = 0
-total_pnl = 0
-pnl_list = []
+# Indicators
+df['RSI']      = compute_rsi(df[close_col], rsi_period)
+df['EMA_RSI']  = df['RSI'].ewm(span=14, adjust=False).mean()   # EMA(RSI,14)
+df['MACD'], df['Signal'] = compute_macd(df[close_col], 12, 26, 9)
+df['TR'], df['ATR']      = wilder_atr(df, high_col, low_col, close_col, period=atr_period)
 
-for i in range(30, len(df)):
-    z = df['zscore'].iloc[i]
-    cl = df['CL'].iloc[i]
-    brn = df['BRN'].iloc[i]
-    t = df.index[i]
+# Warmup to avoid NaNs
+warmup = max(rsi_period, atr_period, 26)
+df = df.reset_index(drop=True)
 
-    if position == 0:
-        if z > entry_thresh:
-            position = -1
-            entry_cl = cl
-            entry_brn = brn
-            print(f"\033[91m{t} | SHORT ENTRY | Z = {z:.2f}\033[0m")
-            time.sleep(0.3)
-        elif z < -entry_thresh:
+# ==================== BACKTEST ====================
+position = 0                  # 0 flat, 1 long, -1 short
+entry_price = entry_time = entry_index = None
+stop_loss = target_profit = None
+
+total_pnl = total_long_pnl = total_short_pnl = 0.0
+positive_pnl = negative_pnl = 0.0
+total_positive_trades = total_negative_trades = 0
+num_of_trades = 0
+max_profit = float('-inf')
+max_loss   = float('inf')
+
+highest_equity = lowest_equity = None
+max_drawdown = max_runup = 0.0
+equity_curve = []
+trade_log = []
+first_trade_done = False
+
+for i in range(warmup, len(df)):
+    try:
+        date        = df[time_col].iloc[i]
+        close       = df[close_col].iloc[i]
+        high        = df[high_col].iloc[i]
+        low         = df[low_col].iloc[i]
+        rsi         = df['RSI'].iloc[i]
+        ema_rsi     = df['EMA_RSI'].iloc[i]
+        macd        = df['MACD'].iloc[i]
+        signal      = df['Signal'].iloc[i]
+        atr         = df['ATR'].iloc[i]
+        macd_prev   = df['MACD'].iloc[i-1]
+        signal_prev = df['Signal'].iloc[i-1]
+
+        # ---------- LONG ENTRY ----------
+        if position == 0 and macd > signal and ema_rsi < long_threshold:
             position = 1
-            entry_cl = cl
-            entry_brn = brn
-            print(f"\033[92m{t} | LONG ENTRY  | Z = {z:.2f}\033[0m")
-            time.sleep(0.3)
+            entry_price = close
+            entry_time  = date
+            entry_index = i
+            stop_loss     = entry_price - (2 * atr)   # store for later bars
+            target_profit = entry_price + (  3 * atr)   # store for later bars
+            print("\033[1;32m========== LONG ENTRY =========\033[0m")
+            print(f" Entry Time   : {entry_time}")
+            print(f" Entry Price  : {entry_price}")
+            print(f" MACD / Sig   : {macd:.4f} / {signal:.4f}")
+            print(f" EMA_RSI      : {ema_rsi:.2f}")
+            print(f" ATR          : {atr:.4f}")
+            print("================================\n")
+            # time.sleep(0.5)
+            continue
 
-    elif position == 1:
-        if z >= exit_thresh or z <= -stop_thresh:
-            pnl = (cl - entry_cl - (brn - entry_brn)) * contract_size
-            total_pnl += pnl
-            pnl_list.append(pnl)
-            pnl_color = "\033[92m" if pnl >= 0 else "\033[91m"
-            print(f"{t} | LONG EXIT   | Z = {z:.2f} | PnL = {pnl_color}{pnl:.2f}\033[0m")
-            time.sleep(0.3)
-            position = 0
+        if position == 1:
+            exit_reason = None
+            exit_price = None
 
-    elif position == -1:
-        if z <= exit_thresh or z >= stop_thresh:
-            pnl = -(cl - entry_cl - (brn - entry_brn)) * contract_size
-            total_pnl += pnl
-            pnl_list.append(pnl)
-            pnl_color = "\033[92m" if pnl >= 0 else "\033[91m"
-            print(f"{t} | SHORT EXIT  | Z = {z:.2f} | PnL = {pnl_color}{pnl:.2f}\033[0m")
-            time.sleep(0.3)
-            position = 0
+            if high >= target_profit:  # hit target intrabar
+                exit_price = target_profit
+                exit_reason = 'Target'
+            elif low <= stop_loss:  # hit stop intrabar
+                exit_price = stop_loss
+                exit_reason = 'Stop'
+            # elif close <= signal:  # hit signal
+            #     exit_price = close
+            #     exit_reason = 'Signal'
 
-# Summary
-total_trades = len(pnl_list)
-wins = sum(1 for p in pnl_list if p > 0)
-losses = total_trades - wins
-win_rate = (wins / total_trades) * 100 if total_trades else 0
-loss_rate = 100 - win_rate
+            if exit_price is not None:
+                #  Now safe to calculate max_loss_per_trade
+                max_loss_per_trade = (entry_price - exit_price) * contract_size
+                if max_loss_per_trade >= limit:
+                    exit_price = entry_price - (tick_size * 2)
+                    exit_reason = "Max Loss"
 
-win_color = "\033[92m"
-loss_color = "\033[91m"
+            if exit_price is not None:
+                pnl = (exit_price - entry_price) * num_of_lots * contract_size - trade_cost
+                total_pnl += pnl
+                total_long_pnl += pnl
+                equity_curve.append(total_pnl)
 
-print("\n==== SUMMARY ====")
-print(f"Total Trades            : {total_trades}")
-print(f"Total PnL               : {total_pnl:.2f}")
-print(f"Winning Trades          : {win_color}{wins}\033[0m")
-print(f"Losing Trades           : {loss_color}{losses}\033[0m")
-print(f"Win Rate                : {win_color}{win_rate:.2f}%\033[0m")
-print(f"Failure Rate            : {loss_color}{loss_rate:.2f}%\033[0m")
-print(f"Max Profit Per trade    : \033[92m{max(pnl_list):.2f}\033[0m" if pnl_list else "N/A")
-print(f"Max Loss   Per trade    : \033[91m{min(pnl_list):.2f}\033[0m" if pnl_list else "N/A")
+                if not first_trade_done:
+                    highest_equity = lowest_equity = total_pnl
+                    first_trade_done = True
 
-# Plotting
-df['position'] = 0
-for i in range(1, len(df)):
-    df.iloc[i, df.columns.get_loc('position')] = position
+                max_profit = max(max_profit, pnl)
+                max_loss   = min(max_loss, pnl)
+                if pnl > 0:
+                    positive_pnl += pnl
+                    total_positive_trades += 1
+                else:
+                    negative_pnl += pnl
+                    total_negative_trades += 1
+                num_of_trades += 1
 
-df['pnl'] = df['position'].shift(1) * (df['CL'].diff() - df['BRN'].diff()) * contract_size
-df['cum_pnl'] = df['pnl'].cumsum()
+                highest_equity = max(highest_equity, total_pnl)
+                lowest_equity  = min(lowest_equity, total_pnl)
+                drawdown = highest_equity - total_pnl
+                runup    = total_pnl - lowest_equity
+                max_drawdown = max(max_drawdown, drawdown)
+                max_runup    = max(max_runup, runup)
 
-plt.figure(figsize=(14, 6))
-plt.subplot(2, 1, 1)
-plt.plot(df['cum_pnl'], label='Cumulative PnL')
-plt.title('Cumulative PnL')
-plt.legend()
+                trade_log.append({
+                    'side': 'long',
+                    'entry_time': entry_time,
+                    'entry_idx': entry_index,
+                    'entry_price': entry_price,
+                    'exit_time': date,
+                    'exit_idx': i,
+                    'exit_price': exit_price,
+                    'pnl': pnl,
+                    'bars_held': i - entry_index,
+                    'exit_reason': exit_reason
+                })
 
-plt.subplot(2, 1, 2)
-plt.plot(df['zscore'], label='Z-Score')
-plt.axhline(entry_thresh, color='red', linestyle='--', label='Entry Threshold')
-plt.axhline(-entry_thresh, color='green', linestyle='--')
-plt.axhline(stop_thresh, color='darkred', linestyle=':')
-plt.axhline(-stop_thresh, color='darkgreen', linestyle=':')
-plt.axhline(0, color='black', linestyle='-')
-plt.title('Z-Score')
-plt.legend()
+                print("\033[1;32m========== LONG EXIT =========\033[0m")
+                print(f" Exit Time    : {date}")
+                print(f" Exit Price   : {exit_price:.2f} | Reason: {exit_reason}")
+                print(f" MACD / Sig   : {macd:.4f} / {signal:.4f}")
+                print(f" EMA_RSI      : {ema_rsi:.2f}")
+                print(f" ATR          : {atr:.4f}")
+                print(f" Trade P&L    : {pnl:.2f}")
+                print(f" Cum. P&L     : {total_pnl:.2f}")
+                print(f" max_loss     : {max_loss_per_trade:.2f}")
+                print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
+                print(f" Run-up       : {runup:.2f}  | Max RU: {max_runup:.2f}")
+                print("================================\n")
+                # time.sleep(0.5)
+                position = 0
+                entry_price = entry_time = entry_index = None
+                stop_loss = target_profit = None
+                continue
 
-plt.tight_layout()
-plt.show()
+        # ---------- SHORT ENTRY ----------
+        if position == 0 and macd < signal and ema_rsi > short_threshold:
+            position = -1
+            entry_price = close
+            entry_time  = date
+            entry_index = i
+            stop_loss     = entry_price + (2 * atr)   # store for later bars
+            target_profit = entry_price - (  3 * atr)   # store for later bars
+            print("\033[1;31m========== SHORT ENTRY =========\033[0m")
+            print(f" Entry Time   : {entry_time}")
+            print(f" Entry Price  : {entry_price}")
+            print(f" MACD / Sig   : {macd:.4f} / {signal:.4f}")
+            print(f" EMA_RSI      : {ema_rsi:.2f}")
+            print(f" ATR          : {atr:.4f}")
+            print("================================\n")
+            # time.sleep(0.5)
+            continue
+
+        if position == -1:
+            exit_reason = None
+            exit_price = None
+
+            if low <= target_profit:  # hit target intrabar
+                exit_price = target_profit
+                exit_reason = 'Target'
+            elif high >= stop_loss:  # hit stop intrabar
+                exit_price = stop_loss
+                exit_reason = 'Stop'
+            # elif close >= signal:  # hit signal
+            #     exit_price = close
+            #     exit_reason = "Signal"
+
+            if exit_price is not None:
+                #  Now safe to calculate max_loss_per_trade
+                max_loss_per_trade = (exit_price - entry_price) * contract_size
+                if max_loss_per_trade >= limit:
+                    exit_price = entry_price + (tick_size * 2)
+                    exit_reason = "Max Loss"
+
+            if exit_price is not None:
+                pnl = (entry_price - exit_price) * num_of_lots * contract_size - trade_cost
+                total_pnl += pnl
+                total_short_pnl += pnl
+                equity_curve.append(total_pnl)
+
+                if not first_trade_done:
+                    highest_equity = lowest_equity = total_pnl
+                    first_trade_done = True
+
+                max_profit = max(max_profit, pnl)
+                max_loss   = min(max_loss, pnl)
+                if pnl > 0:
+                    positive_pnl += pnl
+                    total_positive_trades += 1
+                else:
+                    negative_pnl += pnl
+                    total_negative_trades += 1
+                num_of_trades += 1
+
+                highest_equity = max(highest_equity, total_pnl)
+                lowest_equity  = min(lowest_equity, total_pnl)
+                drawdown = highest_equity - total_pnl
+                runup    = total_pnl - lowest_equity
+                max_drawdown = max(max_drawdown, drawdown)
+                max_runup    = max(max_runup, runup)
+
+                trade_log.append({
+                    'side': 'short',
+                    'entry_time': entry_time,
+                    'entry_idx': entry_index,
+                    'entry_price': entry_price,
+                    'exit_time': date,
+                    'exit_idx': i,
+                    'exit_price': exit_price,
+                    'pnl': pnl,
+                    'bars_held': i - entry_index,
+                    'exit_reason': exit_reason
+                })
+
+                print("\033[1;31m========== SHORT EXIT =========\033[0m")
+                print(f" Exit Time    : {date}")
+                print(f" Exit Price   : {exit_price:.2f} | Reason: {exit_reason}")
+                print(f" MACD / Sig   : {macd:.4f} / {signal:.4f}")
+                print(f" EMA_RSI      : {ema_rsi:.2f}")
+                print(f" ATR          : {atr:.4f}")
+                print(f" Trade P&L    : {pnl:.2f}")
+                print(f" Cum. P&L     : {total_pnl:.2f}")
+                print(f" max_loss     : {max_loss_per_trade:.2f}")
+                print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
+                print(f" Run-up       : {runup:.2f}  | Max RU: {max_runup:.2f}")
+                print("================================\n")
+                # time.sleep(0.5)
+                position = 0
+                entry_price = entry_time = entry_index = None
+                stop_loss = target_profit = None
+                continue
+
+    except Exception as e:
+        print(f"Error at index {i}: {e}")
+
+# ==================== SUMMARY ====================
+TradeCost = num_of_trades * trade_cost
+Net = total_pnl - TradeCost
+success_rate = round((total_positive_trades / num_of_trades) * 100, 2) if num_of_trades else 0
+failure_rate = round((total_negative_trades / num_of_trades) * 100, 2) if num_of_trades else 0
+
+file_name = os.path.basename(file_path)
+match = re.search(r'([A-Z]+)\s+\w+_(\d+min)', file_name)
+if match:
+    product = match.group(1)
+    timeframe = match.group(2)
+    print(f"\n\033[1mTrading Performance Summary for {product} {timeframe} (MACD crossover + EMA(RSI,14) filter + ATR(14) TP/SL):\033[0m")
+else:
+    print("\n\033[1mTrading Performance Summary (MACD crossover + EMA(RSI,14) filter + ATR(14) TP/SL):\033[0m")
+
+print(f"     Max Profit = \033[92m{max_profit:.2f}\033[0m")
+print(f"       Max Loss = \033[91m{max_loss:.2f}\033[0m")
+print(f"   Positive PnL = \033[92m{positive_pnl:.2f}\033[0m")
+print(f"   Negative PnL = \033[91m{negative_pnl:.2f}\033[0m")
+print(f" Total Long PnL = {total_long_pnl:.2f}")
+print(f"Total Short PnL = {total_short_pnl:.2f}")
+print(f"          Gross = {total_pnl:.2f}")
+print(f"     Trade Cost = {TradeCost:.2f}")
+print(f"            Net = {Net:.2f}")
+print(f"   Max Drawdown = {max_drawdown:.2f}")
+print(f"     Max Run-up = {max_runup:.2f}")
+print(f"Positive Trades = {total_positive_trades}")
+print(f"Negative Trades = {total_negative_trades}")
+print(f"   Total Trades = {num_of_trades}")
+print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
+print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
+
+# -------------------- Save to Excel --------------------
+if trade_log:
+    trades_df = pd.DataFrame(trade_log)
+    try:
+        trades_df.to_excel(output_path, index=False)
+        print(f"Trade log saved to: {output_path}")
+    except Exception as e:
+        print(f"\nFailed to save trades to Excel: {e}")
+else:
+    print("\nNo trades to save.")

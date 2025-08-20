@@ -4,7 +4,8 @@ import re
 import time
 
 # ==================== CONFIG ====================
-file_path         = r"D:\Data\CL Jun25_30min.csv"
+file_path         = r"D:\Data\ES Jun25_5min.csv"
+output_path       = r"C:\Users\lenovo\Desktop\Trade Logs\trade_log_ES_Jun25_5min.xlsx"
 time_col          = 'Date(GMT)'
 open_col          = 'Open'
 high_col          = 'High'
@@ -12,12 +13,17 @@ low_col           = 'Low'
 close_col         = 'Close'
 
 rsi_period        = 14
+long_threshold    = 50
+short_threshold   = 50
+contract_size     = 50
+tick_size         = 0.25
+max_loss_per_trade= 0
+limit             = 450
 atr_period        = 14
-contract_size     = 1000
 num_of_lots       = 1
-trade_cost        = 1.30
+trade_cost        = 1
 export_trades_csv = False
-trades_csv_path   = "trades_macd_rsi_atr.csv"
+os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
 # ==================== LOAD ====================
 try:
@@ -89,27 +95,26 @@ first_trade_done = False
 
 for i in range(warmup, len(df)):
     try:
-        date    = df[time_col].iloc[i]
-        close   = df[close_col].iloc[i]
-        high    = df[high_col].iloc[i]
-        low     = df[low_col].iloc[i]
-        rsi     = df['RSI'].iloc[i]
-        ema_rsi = df['EMA_RSI'].iloc[i]
-        macd    = df['MACD'].iloc[i]
-        signal  = df['Signal'].iloc[i]
-        atr     = df['ATR'].iloc[i]
-
+        date        = df[time_col].iloc[i]
+        close       = df[close_col].iloc[i]
+        high        = df[high_col].iloc[i]
+        low         = df[low_col].iloc[i]
+        rsi         = df['RSI'].iloc[i]
+        ema_rsi     = df['EMA_RSI'].iloc[i]
+        macd        = df['MACD'].iloc[i]
+        signal      = df['Signal'].iloc[i]
+        atr         = df['ATR'].iloc[i]
         macd_prev   = df['MACD'].iloc[i-1]
         signal_prev = df['Signal'].iloc[i-1]
 
         # ---------- LONG ENTRY ----------
-        if position == 0 and macd > signal and ema_rsi < 50:
+        if position == 0 and macd > signal and ema_rsi < long_threshold:
             position = 1
             entry_price = close
             entry_time  = date
             entry_index = i
-            stop_loss     = entry_price - (2 * atr)   # store for later bars
-            target_profit = entry_price + (3 * atr)   # store for later bars
+            stop_loss     = entry_price - (1.5 * atr)   # store for later bars
+            target_profit = entry_price + (  2 * atr)   # store for later bars
             print("\033[1;32m========== LONG ENTRY =========\033[0m")
             print(f" Entry Time   : {entry_time}")
             print(f" Entry Price  : {entry_price}")
@@ -120,18 +125,28 @@ for i in range(warmup, len(df)):
             time.sleep(0.5)
             continue
 
-        # ---------- LONG EXIT ----------
         if position == 1:
             exit_reason = None
             exit_price = None
 
             if high >= target_profit:  # hit target intrabar
                 exit_price = target_profit
-                exit_reason = 'TP'
+                exit_reason = 'Target'
             elif low <= stop_loss:  # hit stop intrabar
                 exit_price = stop_loss
-                exit_reason = 'SL'
-            
+                exit_reason = 'Stop'
+            elif close <= signal:  # hit signal
+                exit_price = close
+                exit_reason = 'Signal'
+
+            if exit_price is not None:
+            #  Now safe to calculate max_loss_per_trade
+                max_loss_per_trade = (entry_price - exit_price) * contract_size * num_of_lots
+                if max_loss_per_trade >= limit:
+                    exit_price = entry_price - (tick_size * 2)
+                    exit_reason = "Max Loss"
+
+            # p&l calculation-------------
             if exit_price is not None:
                 pnl = (exit_price - entry_price) * num_of_lots * contract_size - trade_cost
                 total_pnl += pnl
@@ -174,14 +189,15 @@ for i in range(warmup, len(df)):
 
                 print("\033[1;32m========== LONG EXIT =========\033[0m")
                 print(f" Exit Time    : {date}")
-                print(f" Exit Price   : {exit_price} | Reason: {'Hit Target (TP)' if exit_reason == 'TP' else 'Hit Stop Loss (SL)'}")
+                print(f" Exit Price   : {exit_price:.2f} | Reason: {exit_reason}")
                 print(f" MACD / Sig   : {macd:.4f} / {signal:.4f}")
                 print(f" EMA_RSI      : {ema_rsi:.2f}")
                 print(f" ATR          : {atr:.4f}")
                 print(f" Trade P&L    : {pnl:.2f}")
                 print(f" Cum. P&L     : {total_pnl:.2f}")
+                print(f" max_loss     : {max_loss_per_trade:.2f}")
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
-                print(f" Run-up       : {runup:.2f}    | Max RU: {max_runup:.2f}")
+                print(f" Run-up       : {runup:.2f}  | Max RU: {max_runup:.2f}")
                 print("================================\n")
                 time.sleep(0.5)
                 position = 0
@@ -190,13 +206,13 @@ for i in range(warmup, len(df)):
                 continue
 
         # ---------- SHORT ENTRY ----------
-        if position == 0 and macd < signal and ema_rsi > 50:
+        if position == 0 and macd < signal and ema_rsi > short_threshold:
             position = -1
             entry_price = close
             entry_time  = date
             entry_index = i
-            stop_loss     = entry_price + (2 * atr)   # store for later bars
-            target_profit = entry_price - (3 * atr)   # store for later bars
+            stop_loss     = entry_price + (1.5 * atr)   # store for later bars
+            target_profit = entry_price - (2 * atr)   # store for later bars
             print("\033[1;31m========== SHORT ENTRY =========\033[0m")
             print(f" Entry Time   : {entry_time}")
             print(f" Entry Price  : {entry_price}")
@@ -207,18 +223,28 @@ for i in range(warmup, len(df)):
             time.sleep(0.5)
             continue
 
-        # ---------- SHORT EXIT ----------
         if position == -1:
             exit_reason = None
             exit_price = None
 
             if low <= target_profit:  # hit target intrabar
                 exit_price = target_profit
-                exit_reason = 'TP'
+                exit_reason = 'Target'
             elif high >= stop_loss:  # hit stop intrabar
                 exit_price = stop_loss
-                exit_reason = 'SL'
-            
+                exit_reason = 'Stop'
+            elif close >= signal:  # hit signal
+                exit_price = close
+                exit_reason = "Signal"
+
+            if exit_price is not None:
+            #  Now safe to calculate max_loss_per_trade
+                max_loss_per_trade = (exit_price - entry_price) * contract_size * num_of_lots
+                if max_loss_per_trade >= limit:
+                    exit_price = entry_price + (tick_size * 2)
+                    exit_reason = "Max Loss"
+
+            # p&l calculation
             if exit_price is not None:
                 pnl = (entry_price - exit_price) * num_of_lots * contract_size - trade_cost
                 total_pnl += pnl
@@ -261,14 +287,15 @@ for i in range(warmup, len(df)):
 
                 print("\033[1;31m========== SHORT EXIT =========\033[0m")
                 print(f" Exit Time    : {date}")
-                print(f" Exit Price   : {exit_price} | Reason: {'Hit Target (TP)' if exit_reason == 'TP' else 'Hit Stop Loss (SL)'}")
+                print(f" Exit Price   : {exit_price:.2f} | Reason: {exit_reason}")
                 print(f" MACD / Sig   : {macd:.4f} / {signal:.4f}")
                 print(f" EMA_RSI      : {ema_rsi:.2f}")
                 print(f" ATR          : {atr:.4f}")
                 print(f" Trade P&L    : {pnl:.2f}")
                 print(f" Cum. P&L     : {total_pnl:.2f}")
+                print(f" max_loss     : {max_loss_per_trade:.2f}")
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
-                print(f" Run-up       : {runup:.2f}    | Max RU: {max_runup:.2f}")
+                print(f" Run-up       : {runup:.2f}  | Max RU: {max_runup:.2f}")
                 print("================================\n")
                 time.sleep(0.5)
                 position = 0
@@ -311,12 +338,13 @@ print(f"   Total Trades = {num_of_trades}")
 print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
 print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
 
+# -------------------- Save to Excel --------------------
 if trade_log:
     trades_df = pd.DataFrame(trade_log)
-    print("\nLast 10 trades:")
-    print(trades_df.tail(10))
-    if export_trades_csv:
-        trades_df.to_csv(trades_csv_path, index=False)
-        print(f"\nTrade log exported to: {trades_csv_path}")
+    try:
+        trades_df.to_excel(output_path, index=False)
+        print(f"Trade log saved to: {output_path}")
+    except Exception as e:
+        print(f"\nFailed to save trades to Excel: {e}")
 else:
-    print("\nNo trades generated.")
+    print("\nNo trades to save.")

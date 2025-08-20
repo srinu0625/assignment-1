@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import time
 
 ## ==== File paths ====
-file1 = r"C:\Users\lenovo\Downloads\ucc 15min.csv"
-file2 = r"C:\Users\lenovo\Downloads\lcc 15min.csv"
+file1 = r"C:\Users\lenovo\Downloads\lcc 15min.csv"
+file2 = r"C:\Users\lenovo\Downloads\ucc 15min.csv"
 
 # ==== Contract sizes for each product ====
 contract_size_ucc = 1  # Crude Oil Futures (ucc)
@@ -82,7 +82,7 @@ for i in range(60, len(df)):
             pnl_color = "\033[92m" if pnl > 0 else "\033[91m"
             print(f"{t} | LONG EXIT   | Z = {z:.2f}")
             print(f"PnL: {pnl_color}{pnl:.2f}\033[0m")
-
+            
             print(f"Entry UCC: {entry_ucc:.2f} → Exit UCC: {ucc:.2f}")
             print(f"Entry LCC: {entry_lcc:.2f} → Exit LCC: {lcc:.2f}")
             print("=============================================================")
@@ -100,7 +100,7 @@ for i in range(60, len(df)):
             pnl_color = "\033[92m" if pnl >= 0 else "\033[91m"
             print(f"{t} | SHORT EXIT  | Z = {z:.2f} ")
             print(f"PnL : {pnl_color}{pnl:.2f}\033[0m ")
-
+            
             print(f"Entry ucc: {entry_ucc:.2f}, Exit ucc: {ucc:.2f}")
             print(f"Entry lcc: {entry_lcc:.2f}, Exit lcc: {lcc:.2f}")
             print("=============================================================")
