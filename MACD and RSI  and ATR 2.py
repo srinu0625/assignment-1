@@ -4,7 +4,7 @@ import re
 import time
 
 # ==================== CONFIG ====================
-file_path         = r"D:\Data\ES Jun25_5min.csv"
+file_path         = r"D:\Data\ES Jun25_15min.csv"
 output_path       = r"C:\Users\lenovo\Desktop\Trade Logs\trade_log_ES_Jun25_5min.xlsx"
 time_col          = 'Date(GMT)'
 open_col          = 'Open'
