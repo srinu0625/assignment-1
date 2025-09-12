@@ -3,7 +3,7 @@ import time
 import os
 import re
 
-file_path = r"D:\\Data\\ES Jun25_daily.csv"
+file_path = r"D:\\Data\\ES 5min.csv"
 
 # Load CSV
 try:
@@ -69,7 +69,7 @@ for i in range(26, len(df)):
             print(f" RSI             : {rsi}")
             print(f" High / Low      : {high} / {low}")
             print("================================\n")
-            # time.sleep(0.5)
+            time.sleep(0.5)
 
         # LONG EXIT
         elif position == 1 and (macd < signal or rsi > 80):
@@ -106,7 +106,7 @@ for i in range(26, len(df)):
             print(f" Drawdown        : {drawdown}, Max Drawdown: {max_drawdown}")
             print(f" Run-up          : {runup}, Max Run-up: {max_runup}")
             print("================================\n")
-            # time.sleep(0.5)
+            time.sleep(0.5)
             position = 0
 
         # SHORT ENTRY
@@ -122,7 +122,7 @@ for i in range(26, len(df)):
             print(f" RSI             : {rsi}")
             print(f" High / Low      : {high} / {low}")
             print("================================\n")
-            # time.sleep(0.5)
+            time.sleep(0.5)
 
         # SHORT EXIT
         elif position == 2 and (macd > signal or rsi < 40):
@@ -159,7 +159,7 @@ for i in range(26, len(df)):
             print(f" Drawdown        : {drawdown}, Max Drawdown: {max_drawdown}")
             print(f" Run-up          : {runup}, Max Run-up: {max_runup}")
             print("================================\n")
-            # time.sleep(0.5)
+            time.sleep(0.5)         
             position = 0
 
     except Exception as e:

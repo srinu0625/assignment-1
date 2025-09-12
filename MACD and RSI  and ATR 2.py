@@ -4,8 +4,8 @@ import re
 import time
 
 # ==================== CONFIG ====================
-file_path         = r"D:\Data\ES Jun25_15min.csv"
-output_path       = r"C:\Users\lenovo\Desktop\Trade Logs\trade_log_ES_Jun25_5min.xlsx"
+file_path         = r"D:\Data\ES 10Min.csv"
+output_path       = r"C:\Users\lenovo\Downloads\ES 10Min.csv"
 time_col          = 'Date(GMT)'
 open_col          = 'Open'
 high_col          = 'High'

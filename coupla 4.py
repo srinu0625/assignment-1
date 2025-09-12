@@ -4,21 +4,22 @@ import matplotlib.pyplot as plt
 import time
 from colorama import Fore, Style, init
 from scipy.stats import norm   # for normal quantile transform
+from tqdm import tqdm          # <-- added for progress bar
 
 # ==================== INIT ====================
 init(autoreset=True)
 
 # ---- User I/O ----
-file1 = r"D:\Data\ES 240Min.csv"
-file2 = r"D:\Data\NQ 240Min.csv"
+file1 = r"C:\Users\lenovo\Downloads\NK 15min.csv"
+file2 = r"C:\Users\lenovo\Downloads\YM 15min.csv"
 
 contract_size_ucc = 5  # UCC
 contract_size_lcc = 5  # LCC
 
 # ---- Strategy params ----
-window = 50          # rolling window for zscore and rolling percentile
+window = 50              # rolling window for zscore and rolling percentile
 entry_thresh = 2.0
-exit_thresh  = 0.1    # <-- fixed from 0.0 to a realistic small exit threshold
+exit_thresh  = 0.5       # <-- fixed from 0.0 to a realistic small exit threshold
 stop_thresh  = 4.0
 
 # ==================== HELPERS ====================
@@ -75,18 +76,15 @@ rank_window = window  # use same window for rolling percentile; keeps structure 
 
 # Helper: percentile of last value in the window (no look-ahead)
 def pct_of_last(window_values):
-    # window_values is a 1-D array-like of length `rank_window`
     arr = np.asarray(window_values)
     last = arr[-1]
-    # percentile: proportion of values <= last (includes ties)
     return np.sum(arr <= last) / arr.size
 
 # Step 2: rolling rank transform (uniform [0,1]) - no look-ahead
-# we require full window to get stable percentile; min_periods=rank_window means first (window-1) rows will be NaN
 df['u_ucc'] = df['r_ucc'].rolling(window=rank_window, min_periods=rank_window).apply(pct_of_last, raw=True)
 df['u_lcc'] = df['r_lcc'].rolling(window=rank_window, min_periods=rank_window).apply(pct_of_last, raw=True)
 
-# Clip percentiles to avoid exact 0 or 1 which cause +-inf in norm.ppf
+# Clip percentiles to avoid exact 0 or 1
 df['u_ucc'] = df['u_ucc'].clip(eps, 1 - eps)
 df['u_lcc'] = df['u_lcc'].clip(eps, 1 - eps)
 
@@ -94,7 +92,7 @@ df['u_lcc'] = df['u_lcc'].clip(eps, 1 - eps)
 df['z_ucc'] = norm.ppf(df['u_ucc'])
 df['z_lcc'] = norm.ppf(df['u_lcc'])
 
-# Step 4: copula spread = difference
+# Step 4: copula spread
 df['spread'] = df['z_lcc'] - df['z_ucc']
 
 # Step 5: rolling zscore of that spread
@@ -108,10 +106,10 @@ pnl_list = []
 
 df['position'] = 0
 
-for t, row in df.iterrows():
+# Wrap loop in tqdm progress bar
+for t, row in tqdm(df.iterrows(), total=len(df), desc="Backtest Running", ncols=100, colour="yellow"):
     z = row['zscore']
     if np.isnan(z):
-        # not enough history yet or rolling std is zero -> skip
         df.loc[t, 'position'] = position
         continue
 
@@ -131,15 +129,15 @@ for t, row in df.iterrows():
             print_entry(t, z, "LONG lcc / SHORT ucc", ucc, lcc)
             time.sleep(0.5)
 
+
     elif position == +1:  # LONG lcc / SHORT ucc
-        # exit if mean reversion or big adverse (stop)
         if abs(z) < exit_thresh or z <= -stop_thresh:
             pnl_br = -(ucc - entry_br) * contract_size_ucc
             pnl_cl =  (lcc - entry_cl) * contract_size_lcc
             pnl = pnl_br + pnl_cl
             total_pnl += pnl
             pnl_list.append(pnl)
-            print_exit(t, z, "LONG lcc / SHORT ucc", entry_br, ucc, entry_cl, lcc,pnl)
+            print_exit(t, z, "LONG lcc / SHORT ucc", entry_br, ucc, entry_cl, lcc, pnl)
             time.sleep(0.5)
             position = 0
 
@@ -202,4 +200,4 @@ plt.title('Cumulative PnL ucc and lcc')
 plt.legend()
 
 plt.tight_layout()
-plt.show()
+# plt.show()
