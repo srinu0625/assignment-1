@@ -3,7 +3,7 @@ import pandas as pd
 import time
 
 # ==================== CONFIG ====================
-file_path         = r"D:\Data\BR daily.csv"       # <- set your CSV path
+file_path         = r"D:\Data\BR 10min.csv"       # <- set your CSV path
 time_col          = 'Date(GMT)'   # column name containing timestamp
 open_col          = 'Open'
 high_col          = 'High'

@@ -2,14 +2,14 @@ import pandas as pd
 import time
 import os
 import re
-file_path   = r"D:\Data\ES Jun25_daily.csv"                 
+file_path   = r"D:\candles\BR daily.csv"                
 output_path = r"C:\Users\lenovo\Desktop\Trade Logs\ES daily_trades.xlsx"    
 
-time_col   = 'Date(GMT)'
-open_col   = 'Open'
-high_col   = 'High'
-low_col    = 'Low'
-close_col  = 'Close'
+time_col   = 'date'
+open_col   = 'open'
+high_col   = 'high'
+low_col    = 'low'
+close_col  = 'close'
 
 rsi_period    = 14
 atr_period    = 14
