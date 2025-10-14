@@ -8,9 +8,9 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # ======== CONFIG DATA =========
-file_path = r"D:\Data\BR daily.csv"   # path to your file
+file_path = r"D:\Data\BR 240.csv"   # path to your file
 target_cols = ["Open", "High", "Close"]
-No_of_candles = 200  # desired max candles
+No_of_candles = 120  # desired max candles
 
 # ======== LOAD DATA ===============
 df = pd.read_csv(file_path)

@@ -8,9 +8,9 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # ======== CONFIG DATA =========
-file_path = r"D:\Data\BR daily.csv"   # path to your file
+file_path = r"D:\Data\BR 240min.csv"   # path to your file
 target_cols = ["Open", "High", "Close"]
-No_of_candles = 7  # desired max candles
+no_of_candles = 120  # desired max candles
 
 # ======== LOAD DATA ===============
 df = pd.read_csv(file_path)
@@ -21,7 +21,7 @@ print(f"Loaded {len(df)} rows from file.")
 
 # ======== ADAPTIVE LAG SELECTION =========
 usable_rows = len(df) - 50  # keep some for training/testing
-no_of_candles = min(No_of_candles, max(5, usable_rows // 5))
+no_of_candles = min(no_of_candles, max(5, usable_rows // 5))
 print(f"Using {no_of_candles} lag candles (auto-adjusted based on data size).")
 
 # ======== FEATURE CREATION ========= 
