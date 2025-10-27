@@ -13,11 +13,13 @@ warnings.filterwarnings("ignore")
 # ======================================
 product_pairs = {
     "ES": (r"D:\ES 60min.csv", r"D:\ES s.csv"),
-    "NQ": (r"D:\NQ 60min.csv", r"D:\NQ s.csv")
+    "NQ": (r"D:\NQ 60min.csv", r"D:\NQ s.csv"),
+    "SI": (r"D:\SI 60min.csv", r"D:\SI s.csv")
+    # "GC": (r"D:\GC 60min.csv", r"D:\GC s.csv")
 }
 
 target_cols = ["Open", "High", "Close"]
-no_of_candles = 120
+no_of_candles = 200
 summary = []
 
 def safe_slope(x, y):
@@ -52,14 +54,14 @@ def process_product(symbol, file_path):
         except Exception:
             df["Date(GMT)"] = pd.to_datetime(df["Date(GMT)"], errors="coerce")
     else:
-        print(f"⚠️ Date(GMT) column missing in {symbol}")
+        print(" Date(GMT) column missing in {symbol}")
         return None
 
     df = df.dropna(subset=["Date(GMT)"]).sort_values("Date(GMT)").reset_index(drop=True)
     print(f"Loaded {symbol} → shape: {df.shape}, date range: {df['Date(GMT)'].min()} to {df['Date(GMT)'].max()}")
 
     if len(df) < 100:
-        print(f"⚠️ Skipping {symbol} — not enough data ({len(df)} rows).")
+        print(" Skipping {symbol} — not enough data ({len(df)} rows).")
         return None
 
     usable_rows = len(df) - 50
@@ -82,7 +84,7 @@ def process_product(symbol, file_path):
     df = df.dropna().reset_index(drop=True)
 
     if len(df) < 60:
-        print(f"⚠️ Skipping {symbol} — insufficient rows after feature creation.")
+        print(" Skipping {symbol} — insufficient rows after feature creation.")
         return None
 
     features = [f"lag_{i}" for i in range(1, n + 1)] + ["MA5", "MA10", "RSI"]
@@ -143,18 +145,18 @@ for sym, (outright_path, spread_path) in product_pairs.items():
         )
         merged = merged.dropna().reset_index(drop=True)
         pair_results[sym] = merged
-        print(f"✅ Merged {sym} outright vs spread shape: {merged.shape}")
+        print(f" Merged {sym} outright vs spread shape: {merged.shape}")
     else:
-        print(f"❌ Skipping {sym} — missing outright or spread data.")
+        print(f" Skipping {sym} — missing outright or spread data.")
 
 # ======================================
 # HEATMAPS FOR OUTRIGHT VS SPREAD
 # ======================================
 for sym, df in pair_results.items():
-    print(f"\n📊 Generating Heatmaps for {sym} Outright vs Spread")
+    print(f"\nGenerating Heatmaps for {sym} Outright vs Spread")
 
     if df.empty:
-        print(f"⚠️ Merged dataframe for {sym} is empty — skipping heatmaps.")
+        print(f" Merged dataframe for {sym} is empty — skipping heatmaps.")
         continue
 
     returns = df.copy()
@@ -164,7 +166,7 @@ for sym, df in pair_results.items():
     returns = returns.dropna().reset_index(drop=True)
 
     if returns.empty:
-        print(f"⚠️ No returns for {sym} after pct_change — skipping heatmaps.")
+        print(f" No returns for {sym} after pct_change — skipping heatmaps.")
         continue
 
     cols = [c for c in df.columns if c != "Date(GMT)"]
@@ -194,15 +196,8 @@ for sym, df in pair_results.items():
     sns.heatmap(z_matrix, annot=True, fmt=".2f", cmap="RdBu_r", ax=axes[1], annot_kws={"size":8})
     axes[1].set_title("Z-Score Correlation")
 
-    sns.heatmap(hedge_matrix, annot=True, fmt=".2f", cmap="Greens", ax=axes[2], annot_kws={"size":8}, cbar_kws={"label":"Hedge Slope"})
+    sns.heatmap(hedge_matrix, annot=True, fmt=".2f", cmap="Blues", ax=axes[2], annot_kws={"size":8}, cbar_kws={"label":"Hedge Slope"})
     axes[2].set_title("Hedge Ratios (slope)")
 
     plt.tight_layout(rect=[0, 0, 1, 0.95])
     plt.show(block=True)
-
-# ======================================
-# SUMMARY OUTPUT
-# ======================================
-summary_df = pd.DataFrame(summary)
-print("\n===== MODEL SUMMARY =====")
-print(summary_df.round(3))

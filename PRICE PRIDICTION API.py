@@ -1,35 +1,61 @@
 import pandas as pd
+import pandas_datareader.data as web
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.metrics import mean_absolute_error
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import datetime
 import warnings
 warnings.filterwarnings("ignore")
 
-# ======== CONFIG DATA =========
-file_path = r"D:\Data\ES 60min.csv"   # path to your file
+# ======================================
+# CONFIGURATION
+# ======================================
+symbol_stooq = "^SPX"  # S&P 500 Index (close proxy for ES futures)
+start = datetime.datetime(2024, 1, 1)
+end = datetime.datetime(2025, 10, 27)
 target_cols = ["Open", "High", "Close"]
-No_of_candles = 50  # desired max candles
+no_of_candles = 50
 
-# ======== LOAD DATA ===============
-df = pd.read_csv(file_path)
-df["Date(GMT)"] = pd.to_datetime(df["Date(GMT)"], errors="coerce")
-df = df.dropna(subset=["Date(GMT)"]).sort_values("Date(GMT)").reset_index(drop=True)
+print("=======================================")
+print(" Fetching S&P 500 Data (from Stooq API)")
+print("=======================================")
 
-print(f"Loaded {len(df)} rows from file.")
+# ======================================
+# FETCH DATA (NO API KEY NEEDED)
+# ======================================
+try:
+    df = web.DataReader(symbol_stooq, "stooq", start, end)
+    df = df.sort_index()
+    print(f"✅ Data fetched successfully from Stooq ({len(df)} rows)")
+except Exception as e:
+    raise SystemExit(f"❌ Failed to fetch data from Stooq: {e}")
 
-# ======== ADAPTIVE LAG SELECTION =========
-usable_rows = len(df) - 50  # keep some for training/testing
-no_of_candles = min(No_of_candles, max(5, usable_rows // 5))
+# Optionally save data locally
+df.to_csv("SP500_from_Stooq.csv")
+
+# ======================================
+# BASIC CLEANUP (match your CSV structure)
+# ======================================
+df = df.reset_index().rename(columns={"Date": "Date(GMT)"})
+print(f"Loaded {len(df)} rows from Stooq source.")
+
+# ======================================
+# ADAPTIVE LAG SELECTION
+# ======================================
+usable_rows = len(df) - 50
+no_of_candles = min(no_of_candles, max(5, usable_rows // 5))
 print(f"Using {no_of_candles} lag candles (auto-adjusted based on data size).")
 
-# ======== FEATURE CREATION ========= 
+# ======================================
+# FEATURE CREATION
+# ======================================
 for i in range(1, no_of_candles + 1):
     df[f"lag_{i}"] = df["Close"].shift(i)
 
 df["MA5"] = df["Close"].rolling(5).mean()
-df["MA10"] = df["Close"].rolling(10).mean()       
+df["MA10"] = df["Close"].rolling(10).mean()
 
 # RSI (14-period)
 delta = df["Close"].diff()
@@ -44,14 +70,18 @@ df = df.dropna().reset_index(drop=True)
 
 if len(df) < 60:
     raise ValueError(f"❌ Not enough rows ({len(df)}) after feature creation. "
-                     "Please provide more historical data or reduce lag count.")
+                     "Please fetch more data or reduce lag count.")
 
-# ======== DEFINE FEATURES & TARGET =========
+# ======================================
+# DEFINE FEATURES & TARGET
+# ======================================
 features = [f"lag_{i}" for i in range(1, no_of_candles + 1)] + ["MA5", "MA10", "RSI"]
 X = df[features]
 y = df[target_cols]
 
-# ======== TRAIN-TEST SPLIT =========
+# ======================================
+# TRAIN-TEST SPLIT
+# ======================================
 split_idx = int(len(df) * 0.8)
 X_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]
 y_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]
@@ -61,12 +91,16 @@ print(f"Train size: {len(X_train)}, Test size: {len(X_test)}")
 if len(X_train) < 30 or len(X_test) < 10:
     print("⚠️ Warning: Very small dataset; predictions may be rough.")
 
-# ======== TRAIN MODEL =========
+# ======================================
+# TRAIN MODEL
+# ======================================
 base_model = RandomForestRegressor(n_estimators=300, random_state=42)
 model = MultiOutputRegressor(base_model)
 model.fit(X_train, y_train)
 
-# ======== PREDICT & EVALUATE =========
+# ======================================
+# PREDICT & EVALUATE
+# ======================================
 y_pred = model.predict(X_test)
 mae_each = mean_absolute_error(y_test, y_pred, multioutput='raw_values')
 
@@ -75,7 +109,9 @@ print(f"  Open:  {mae_each[0]:.4f}")
 print(f"  High:  {mae_each[1]:.4f}")
 print(f"  Close: {mae_each[2]:.4f}")
 
-# ======== NEXT-CANDLE PREDICTION =========
+# ======================================
+# NEXT-CANDLE PREDICTION
+# ======================================
 last_row = df.iloc[-1]
 future_input = last_row[features].to_frame().T
 next_pred = model.predict(future_input)[0]
@@ -85,7 +121,9 @@ print(f"Next Open:  {next_pred[0]:.2f}")
 print(f"Next High:  {next_pred[1]:.2f}")
 print(f"Next Close: {next_pred[2]:.2f}")
 
-# ======== PLOT RESULTS =========
+# ======================================
+# PLOT RESULTS
+# ======================================
 if len(y_test) > 0:
     fig, axes = plt.subplots(3, 1, figsize=(9, 6), sharex=True)
     cols = ["Open", "High", "Close"]

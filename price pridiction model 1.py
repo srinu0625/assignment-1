@@ -8,7 +8,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 # ======== CONFIG DATA =========
-file_path = r"D:\Data\BR 240min.csv"   # path to your file
+file_path = r"D:\Data\ES 240min.csv"   # path to your file
 target_cols = ["Open", "High", "Close"]
 no_of_candles = 120  # desired max candles
 
