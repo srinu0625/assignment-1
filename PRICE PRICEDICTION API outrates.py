@@ -5,6 +5,8 @@ from sklearn.multioutput import MultiOutputRegressor
 from sklearn.metrics import mean_absolute_error
 import matplotlib.pyplot as plt
 import seaborn as sns
+import pandas_datareader.data as web
+import datetime
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -12,16 +14,22 @@ warnings.filterwarnings("ignore")
 # CONFIGURATION
 # ======================================
 product_pairs = {
-    "ES": (r"D:\SI 60min.csv", r"D:\SI s.csv"),
-    "NQ": (r"D:\NQ 60min.csv", r"D:\NQ s.csv"),
-    "SI": (r"D:\ES 60min.csv", r"D:\ES s.csv")
-    # "GC": (r"D:\GC 60min.csv", r"D:\GC s.csv")
+    "ES": ("^SPX", "^SPXSPREAD"),  # Outright vs Spread (custom pair)
+    "NQ": ("^NDX", "^NDXSPREAD"),
+    "SI": ("SI.F", "SI.SPREAD")
 }
 
+
 target_cols = ["Open", "High", "Close"]
-no_of_candles = 120
+no_of_candles = 200
 summary = []
 
+start = datetime.datetime(2024, 1, 1)
+end = datetime.datetime.now()
+
+# ======================================
+# HELPER FUNCTIONS
+# ======================================
 def safe_slope(x, y):
     if len(x) < 3:
         return np.nan
@@ -30,38 +38,36 @@ def safe_slope(x, y):
     except Exception:
         return np.nan
 
+def fetch_data(symbol):
+    """Fetch OHLC data from Stooq or Yahoo"""
+    try:
+        df = web.DataReader(symbol, "stooq", start, end)
+    except Exception:
+        try:
+            df = web.DataReader(symbol, "yahoo", start, end)
+        except Exception as e:
+            print(f"❌ Failed fetching {symbol}: {e}")
+            return None
+
+    df = df.sort_index().reset_index().rename(columns={"Date": "Date(GMT)"})
+    print(f"Fetched {symbol}: {len(df)} rows")
+    return df
+
 # ======================================
 # FUNCTION: Train & Process Product
 # ======================================
-def process_product(symbol, file_path):
+def process_product(symbol, df):
     print(f"\n==============================")
     print(f" Processing {symbol}")
     print(f"==============================")
 
-    # Read CSV safely with proper parsing
-    try:
-        df = pd.read_csv(file_path, sep=",", engine="python")
-    except Exception as e:
-        print(f"Error reading {file_path}: {e}")
-        return None
-
-    # Parse date column — custom format like 30-05-2022 5.00
-    if "Date(GMT)" in df.columns:
-        try:
-            df["Date(GMT)"] = pd.to_datetime(
-                df["Date(GMT)"], format="%d-%m-%Y %H.%M", errors="coerce"
-            )
-        except Exception:
-            df["Date(GMT)"] = pd.to_datetime(df["Date(GMT)"], errors="coerce")
-    else:
-        print(" Date(GMT) column missing in {symbol}")
+    if df is None or df.empty:
+        print(f"❌ No data for {symbol}")
         return None
 
     df = df.dropna(subset=["Date(GMT)"]).sort_values("Date(GMT)").reset_index(drop=True)
-    print(f"Loaded {symbol} → shape: {df.shape}, date range: {df['Date(GMT)'].min()} to {df['Date(GMT)'].max()}")
-
     if len(df) < 100:
-        print(" Skipping {symbol} — not enough data ({len(df)} rows).")
+        print(f" Skipping {symbol} — not enough data ({len(df)} rows).")
         return None
 
     usable_rows = len(df) - 50
@@ -84,7 +90,7 @@ def process_product(symbol, file_path):
     df = df.dropna().reset_index(drop=True)
 
     if len(df) < 60:
-        print(" Skipping {symbol} — insufficient rows after feature creation.")
+        print(f" Skipping {symbol} — insufficient rows after feature creation.")
         return None
 
     features = [f"lag_{i}" for i in range(1, n + 1)] + ["MA5", "MA10", "RSI"]
@@ -118,7 +124,6 @@ def process_product(symbol, file_path):
         "Pred_Close": next_pred[2]
     })
 
-    # Return only Date + OHLC renamed
     df_renamed = df[["Date(GMT)"] + target_cols].rename(columns={c: f"{symbol}_{c}" for c in target_cols})
     return df_renamed
 
@@ -127,21 +132,25 @@ def process_product(symbol, file_path):
 # ======================================
 pair_results = {}
 
-for sym, (outright_path, spread_path) in product_pairs.items():
-    outright = process_product(f"{sym}_Outright", outright_path)
-    spread = process_product(f"{sym}_Spread", spread_path)
+for sym, (outright_symbol, spread_symbol) in product_pairs.items():
+    outright_df = fetch_data(outright_symbol)
+    spread_df = fetch_data(spread_symbol)
+
+    outright = process_product(f"{sym}_Outright", outright_df)
+    spread = process_product(f"{sym}_Spread", spread_df)
 
     if outright is not None and spread is not None:
         try:
-            outright = outright.set_index("Date(GMT)").resample("60min").last().dropna().reset_index()
-            spread = spread.set_index("Date(GMT)").resample("60min").last().dropna().reset_index()
-            print(f"After resample {sym} outright shape: {outright.shape}, spread shape: {spread.shape}")
+            outright = outright.set_index("Date(GMT)").resample("1D").last().dropna().reset_index()
+            spread = spread.set_index("Date(GMT)").resample("1D").last().dropna().reset_index()
+            print(f"After resample {sym}: outright shape {outright.shape}, spread shape {spread.shape}")
         except Exception as e:
             print(f"Resample failed for {sym}: {e}")
+            continue
 
         merged = pd.merge_asof(
             outright, spread, on="Date(GMT)",
-            direction="nearest", tolerance=pd.Timedelta("2h")
+            direction="nearest", tolerance=pd.Timedelta("2D")
         )
         merged = merged.dropna().reset_index(drop=True)
         pair_results[sym] = merged
