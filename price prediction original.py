@@ -18,7 +18,7 @@ products = {
 }
 
 target_cols = ["Open", "High", "Close"]
-no_of_candles = 120
+no_of_candles = 250
 
 # Data storage
 combined_data = pd.DataFrame()
