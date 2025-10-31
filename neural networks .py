@@ -12,10 +12,9 @@ from keras.models import Sequential
 from keras.layers import Dense
 import warnings
 warnings.filterwarnings("ignore")
-
 # ------------------------- CONFIG -------------------------
 FILE = r"D:\data\ES Daily.csv"
-np.random.seed(42)
+np.random.seed(65)
 
 # ------------------------- DATA -------------------------
 df = pd.read_csv(FILE)
@@ -37,7 +36,7 @@ if 'close' not in df.columns:
 price = df['close'].astype(float)
 df['return'] = price.pct_change()
 
-df['sma_14'] = price.rolling(14).mean()
+df['sma_10'] = price.rolling(10).mean()
 df['sma_20'] = price.rolling(20).mean()
 df['sma_50'] = price.rolling(50).mean()
 
@@ -54,7 +53,7 @@ df['target'] = np.where(df['close'].shift(-1) > df['close'], 1, 0)
 df = df[:-1]
 
 # ------------------------- SPLIT -------------------------
-features = ['return', 'sma_14', 'sma_20', 'rsi', 'macd']
+features = ['return', 'sma_10', 'sma_20', 'rsi', 'macd']
 X, y = df[features], df['target']
 split = int(0.8 * len(df))
 X_train, X_test = X.iloc[:split], X.iloc[split:]
