@@ -62,18 +62,19 @@ price = df['close'].astype(float).copy()
 df['return'] = price.pct_change()
 
 # moving averages (simple)
-df['sma_10'] = price.rolling(10).mean()
-df['sma_20'] = price.rolling(20).mean()
-df['sma_50'] = price.rolling(50).mean()   # extra SMA for plotting
+df['sma_10'] = price.rolling(window=10).mean()
+df['sma_20'] = price.rolling(window=20).mean()
+df['sma_50'] = price.rolling(window=50).mean() # extra SMA for plotting
 
 # a simple RSI proxy (not exact TA-lib but serviceable)
 # We compute RSI on price changes (standard 14)
-delta = price.diff()
+
+ delta = price.diff()
 up = delta.clip(lower=0)
 down = -1 * delta.clip(upper=0)
 roll_up = up.rolling(14).mean()
-roll_down = down.rolling(14).mean()
-rs = roll_up / (roll_down.replace(0, np.nan))
+roll_down= down.rolling(14).mean()
+rs = roll_up /(roll_down.replace(0, np.nan))
 df['rsi'] = 100 - (100 / (1 + rs))
 
 # MACD (12-26 ema minus)

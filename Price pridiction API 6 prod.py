@@ -26,7 +26,7 @@ products = {
 start = datetime.datetime(2018, 1, 1)
 end = datetime.datetime(2025, 10, 27)
 target_cols = ["Open", "High", "Close", "Low"]
-no_of_candles = 245
+no_of_candles = 150
 
 # ======================================
 # MASTER STORAGE
