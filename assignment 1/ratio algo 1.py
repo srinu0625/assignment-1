@@ -15,7 +15,7 @@ except Exception as e:
 
 ## Column names
 high_column_name = 'High'
-low_column_name = 'Low'
+low_column_name  = 'Low'
 time_column_name = 'Date (GMT)'
 
 # Temp variables for tracking highs and lows
@@ -31,12 +31,12 @@ total_positive_trades = 0
 total_negative_trades = 0
 
 current_high1 = 0
-current_low1 = 0
+current_low1  = 0
 current_high2 = 0
-current_low2 = 0
+current_low2  = 0
 
 previous_high2 = 0
-previous_low2 = 0
+previous_low2  = 0
 
 # Trading flags
 bull = bear = flag = False

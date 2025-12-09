@@ -9,12 +9,10 @@ webhook_url = "https://default88ff9cb3e35e4d71b1d7f6c6ed8657.30.environment.api.
 # === RSS Feeds (add or remove as needed) ===
 RSS_FEEDS = {
     "Investing.com": "https://www.investing.com/rss/news_25.rss",
-    "BBC": "https://www.bbc.com/live",
-    "Economic Times": "https://economictimes.indiatimes.com/news/international/donald-trump-action-tracker",
-    "bloomberg": "https://www.bloomberg.com/markets",
-    "livesquawk": "https://www.livesquawk.com/members#newsfeed",
-    "twitter": "https://x.com/financialjuice/status/1986343289922949246",
-    "financialjuice": "https://www.financialjuice.com/home"
+    "BBC": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml",
+    "Economic Times": "https://rss.app/en/rss-feed/the-economic-times-rss-feed",
+    "bloomberg": "https://feeds.bloomberg.com/markets/news.rss"
+    
 }
 
 # === Fetch Headlines from Multiple RSS Sources ===
@@ -58,32 +56,31 @@ def fetch_all_headlines():
 # === Send message to Microsoft Teams ===
 def send_teams_message(message):
     payload = {"message": message}
-    headers = {"Content-Type": "application/json"}
+    headers = {"Content-Types": "application/json"}
 
     try:
         response = requests.post(webhook_url, headers=headers, data=json.dumps(payload), timeout=10)
         print(f"[{datetime.now().strftime('%H:%M:%S')}] ✅ Sent ({response.status_code}): {message[:60]}...")
     except requests.RequestException as e:
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] ❌ Teams send error: {e}")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] ❌ Teams send error : {e}")
 
 # === Main Loop ===
 def main():
     sent_headlines = set()
-    print(f"🔄 Monitoring multiple RSS feeds at {datetime.now().strftime('%H:%M:%S')}")
+    print(f"🔄 Monitoring Multiple RSS feed  at {datetime.now().strftime('%H:%M:%S')}")
 
     while True:
         try:
             headlines = fetch_all_headlines()
             new_headlines = [h for h in headlines if h not in sent_headlines]
-
+ 
             if new_headlines:
                 combined_message = " Latest Headlines:\n" + "\n".join(new_headlines)
                 send_teams_message(combined_message)
                 sent_headlines.update(new_headlines)
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] ✅ {len(new_headlines)} new headlines sent.")
             else:
-                print(f"[{datetime.now().strftime('%H:%M:%S')}] ⏳ No new updates.")
-
+                print(f"[{datetime.now().strftime('%H:%M:%S')}] ⏳ No new updates .")
         except Exception as e:
             print(f"[{datetime.now().strftime('%H:%M:%S')}] ❌ Error: {e}")
 
@@ -91,3 +88,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

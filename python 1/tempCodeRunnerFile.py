@@ -1,1 +1,0 @@
-max_loss_for_trade =  (max(current_high1, local_high1) - local_low1 + ( tick_val * 4)) * contract_size 

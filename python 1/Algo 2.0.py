@@ -1,373 +1,360 @@
+#!/usr/bin/env python3
+"""
+ATR Scaling Backtest (2x, 4x, 8x) with 24-MA filter (enabled).
+Modifications:
+- Entry condition unchanged.
+- Entry fill price:
+    LONG  -> current candle HIGH
+    SHORT -> current candle LOW
+- Exit detection: same (intra-bar HIGH/LOW vs TP/SL levels).
+- Exit fill price:
+    LONG exits  -> current candle LOW
+    SHORT exits -> current candle HIGH
+- Saves detailed CSV of all fills
+"""
+import eikon as ek
 import pandas as pd
-import math
-import time
+import csv
+from datetime import datetime
 
-file_path1 = r"C:\Users\lenovo\Desktop\snp 60 min.csv"
-file_path2 = r"C:\Users\lenovo\Desktop\snp 240 min.csv"
-file_path3 = r"C:\Users\lenovo\Desktop\snp day.csv"
+# -----------------------
+# CONFIG
+# -----------------------
+APP_KEY = "92e0a59a8e994142bab0f82d8294e1df404da224"
+ek.set_app_key(APP_KEY)
 
-# Load the data
-try:
-    data1 = pd.read_csv(file_path1)
-    data2 = pd.read_csv(file_path2)
-    data3 = pd.read_csv(file_path3)
-except Exception as e:
-    print("Error loading data:", e)
-    exit()
+RIC = "ESc1"                # change to desired RIC
+START = "2020-01-01"
+END = None
+INTERVAL = "minute"
+RESAMPLE_PERIOD = "15T"     # set to '1T' to skip resampling
 
-# Assuming the column names for high and low are 'High' and 'Low'
-high_column_name = 'High'
-low_column_name  = 'Low'
-time_column_name = 'Date (GMT)'
+ATR_PERIOD = 14
+MA_PERIOD = 24
+LOOKBACK_HHLL = 50
 
-# temp column names
-temp_high1 = 0
-temp_low1  = 0
-temp_high2 = 0
-temp_low2  = 0
-temp_high3 = 0
-temp_low3  = 0
+UNITS_PER_ENTRY = 3
+SL_MULT = 2.0
+TP_MULTS = [2.0, 4.0, 8.0]  # TP1, TP2, TP3
 
-# local high and local low 
-current_high1 = 0
-current_low1  = 0
-local_high1 = temp_high1
-local_low1 = temp_low1
-local_high2 = temp_high2
-local_low2 = temp_low2
-local_high3 = temp_high3
-local_low3 = temp_low3
-prev_local_high1 = 0 
-prev_local_low1  = 0
-prev_local_high2 = 0 
-prev_local_low2  = 0
-prev_local_high3 = 0 
-prev_local_low3  = 0
+LOG_CSV = "atr_scaling_trades_simple.csv"
+DEBUG = False
 
-# flag 
-bull = False
-bear = False
-flag = False
-
-# num of positions 
-number_of_positions = 0
-
-# num of trades
-num_of_trades = 0
-
-# P&L calculation
-entry_price = 0
-exit_price  = 0
-contract_size = 5
-# defining tick size
-tick_val = 0.25
-
-# maxloss maxprofit
-max_loss   = 0  
-max_profit = 0 
-max_loss_for_trade = 0
-
-# total p&l
-TOTAL_P_L = 0
-
-# total long and short pnl
-total_long_pnl = 0
-total_short_pnl = 0
-positive_pnl = 0
-negative_pnl = 0
-num_of_lots  = 0
-max_num_lots = 20
-risk = 360
-
-#total rows in sheets
-rows_count_240_mins=0
-rows_count_daily=0
-current_hours_count=1
-date_flag = False
-
-previous_date = data1.loc[0,time_column_name].split()[0]
-
-current_time2 = data2.loc[rows_count_240_mins, time_column_name]
-current_high2 = float(data2.loc[rows_count_240_mins,high_column_name])
-previous_high2 = float(data2.loc[rows_count_240_mins-1,high_column_name]) if rows_count_240_mins > 0 else 0
-current_low2 = float(data2.loc[rows_count_240_mins,low_column_name])
-previous_low2 = float(data2.loc[rows_count_240_mins-1,low_column_name]) if rows_count_240_mins > 0 else 0
-
-current_time3 = data3.loc[rows_count_daily, time_column_name]
-current_high3 = float(data3.loc[rows_count_daily,high_column_name])
-previous_high3 = float(data3.loc[rows_count_daily-1,high_column_name]) if rows_count_daily > 0 else 0
-current_low3 = float(data3.loc[rows_count_daily,low_column_name])
-previous_low3 = float(data3.loc[rows_count_daily-1,low_column_name]) if rows_count_daily > 0 else 0
-current_date3 = data3.loc[rows_count_daily,time_column_name].split()[0]
-
-# Iterate over each row of the daily DataFrame (data3)
-for index1, row1 in data1.iterrows():
-    current_date = row1[time_column_name].split()[0]
-    if(previous_date != current_date):
-        date_flag = True
-
-    try:
-        # Extracting current and previous values for high and low from data1
-        current_time1 = row1[time_column_name]
-        current_high1 = float(row1[high_column_name])
-        previous_high1 = float(data1.at[index1 - 1, high_column_name]) if index1 > 0 else 0
-        current_low1 = float(row1[low_column_name])
-        previous_low1 = float(data1.at[index1 - 1, low_column_name]) if index1 > 0 else 0
-
-        # Extracting current and previous values for high and low from data2
-        if(current_hours_count==5 or date_flag):
-            rows_count_240_mins=rows_count_240_mins+1
-            print("Assigned Row number:", rows_count_240_mins)
-            current_time2 = data2.loc[rows_count_240_mins, time_column_name]
-            current_high2 = float(data2.loc[rows_count_240_mins,high_column_name])
-            previous_high2 = float(data2.loc[rows_count_240_mins-1,high_column_name]) if rows_count_240_mins > 0 else 0
-            current_low2 = float(data2.loc[rows_count_240_mins,low_column_name])
-            previous_low2 = float(data2.loc[rows_count_240_mins-1,low_column_name]) if rows_count_240_mins > 0 else 0
-            current_hours_count=1
-
-        # Extracting current and previous values for high and low from data3
-        print(date_flag)
-        if date_flag:
-            rows_count_daily=rows_count_daily+1
-            current_date3 = data3.loc[rows_count_daily,time_column_name].split()[0]
-            current_time3 = data3.loc[rows_count_daily, time_column_name]
-            current_high3 = float(data3.loc[rows_count_daily,high_column_name])
-            previous_high3 = float(data3.loc[rows_count_daily-1,high_column_name]) if rows_count_daily > 0 else 0
-            current_low3 = float(data3.loc[rows_count_daily,low_column_name])
-            previous_low3 = float(data3.loc[rows_count_daily-1,low_column_name]) if rows_count_daily > 0 else 0
-
-        # case 1 for data1-----------------------------------------------------------------------------------
-        if(current_high1 > previous_high1):
-            temp_high1 = current_high1
-            
-
-        if(current_low1 < previous_low1):
-            temp_low1 = current_low1
-        # case 2 for data1-----------------------------------------------------------------------------------
-        if(current_high1 > previous_high1):
-            prev_local_low1 = local_low1
-            local_low1 = temp_low1
-
-        if(current_low1 < previous_low1):
-            prev_local_high1 = local_high1
-            local_high1 = temp_high1
-        
-
-        # Printing data for data1
-
-        print("---60 MIN---:", current_time1)
-        print("Current High1 :", current_high1, "Previous High1 :", previous_high1, "local_high1 :", local_high1,"prev_local_high1 :",prev_local_high1)
-        print("Current Low1 :", current_low1, "Previous Low1 :", previous_low1, "local_low1 :", local_low1,"prev_local_low1 :",prev_local_low1)
-        print("   ")
-        time.sleep(0.5)
-
-    # case 1 for data2-----------------------------------------------------------------------------------
-        if (current_high2 > previous_high2):
-            temp_high2 = current_high2
-
-        if (current_low2 < previous_low2):
-            temp_low2 = current_low2
-        # case 2 for data1-----------------------------------------------------------------------------------
-        if(current_high2 > previous_high2):
-            prev_local_low2 = local_low2
-            local_low2 = temp_low2
-
-        if(current_low2 < previous_low2):
-            prev_local_high2 = local_high2
-            local_high2 = temp_high2
-        
-        # Printing data for data2
-
-        print("---240 MIN---:", current_time2)
-        print("Current High2 :", current_high2, "Previous High2 :", previous_high2, "local_high2 :", local_high2,"prev_local_high2 :",prev_local_high2)
-        print("Current Low2 :", current_low2, "Previous Low2 :", previous_low2, "local_low2 :", local_low2,"prev_local_low2 :",prev_local_low2)
-        print("   ")
-        time.sleep(0.5)
-
-        # case 1 for data3-----------------------------------------------------------------------------------
-        if (current_high3 > previous_high3):
-            temp_high3 = current_high3
-
-        if (current_low3 < previous_low3):
-            temp_low3 = current_low3
-        # case 2 for data1-----------------------------------------------------------------------------------
-        if(current_high3 > previous_high3):
-            prev_local_low3 = local_low3
-            local_low3 = temp_low3
-
-        if(current_low3 < previous_low3):
-            prev_local_high3 = local_high3
-            local_high3 = temp_high3
-
-        # Printing data for data3
-
-        print("----DAILY----:", current_time3)
-        print("Current High3 :", current_high3, "Previous High3 :", previous_high3, "local_high3 :", local_high3,"prev_local_high3 :",prev_local_high3)
-        print("Current Low3 :", current_low3, "Previous Low3 :", previous_low3, "local_low3 :", local_low3,"prev_local_low3 :",prev_local_low3)
-        time.sleep(0.5)
-        print("   ")
-
-        # updating exit price----------------------------------
-        if(bull and local_low1 > exit_price):
-            exit_price = local_low1
-
-        if(bear and local_high1 < exit_price):
-            exit_price = local_high1
+# -----------------------
+# GLOBALS
+# -----------------------
+cum_pnl = 0.0
+peak_pnl = 0.0
+max_runup = 0.0
+max_drawdown = 0.0
 
 
-        # bullish candle    
-        max_loss_for_trade = (local_high1 - current_low1 + ( tick_val * 4)) * contract_size 
-       
-        if (local_low1 > prev_local_low1) and ((local_low1 > local_low2) and (local_low1 > local_low3) and (local_low1 > current_low3)) and not bear and not flag:
-            if max_loss_for_trade > risk:
-               num_of_lots = 1
-               continue  
-            else:
-                max_loss_for_trade <= risk
-                num_of_lots = math.floor(risk / max_loss_for_trade )
-                if num_of_lots >=max_num_lots:
-                   num_of_lots = 5
-            entry_price = local_high1 + (tick_val * 2)
-            exit_price = current_low1 - (tick_val * 2)
-            print("\033[32m<------ LONG ENTRY ------> \033[0m")  # ANSI escape codes for this color coding to work
-            print("       ENTRY PRICE  = ", entry_price)
-            print("   num_of_positions = ", number_of_positions)
-            print("        num_of_lots = ", round(num_of_lots))
-            print(" max_loss_for_trade = ", round(max_loss_for_trade))
-            print("---------------------------------------------------")
-            bull = True
-            flag = True
-            continue
+# -----------------------
+# HELPERS
+# -----------------------
+def printp(msg):
+    if DEBUG:
+        print(msg)
 
-       
-        # Bullish Exit
-        if current_low1 < exit_price and bull and flag:
-            print("exit_price :", exit_price)
-            number_of_positions -= 1
-            num_of_trades += 1
-            bull = False
-            flag = False
 
-            # Calculate P&L
-            pnl = (exit_price - entry_price) * num_of_lots * contract_size
-            TOTAL_P_L += pnl
-            total_long_pnl += pnl
-            integer_pnl = float(pnl)  # Extract the integer part of the P&L
+# -----------------------
+# FETCH + RESAMPLE
+# -----------------------
+def fetch_and_resample(ric, start=START, end=END, interval=INTERVAL, resample_period=RESAMPLE_PERIOD):
+    print(f"[INFO] fetching {ric}...")
+    df = ek.get_timeseries(
+        ric,
+        fields=['CLOSE','HIGH','LOW','OPEN','VOLUME'],
+        start_date=start,
+        end_date=end,
+        interval=interval
+    )
+    if df is None or df.empty:
+        raise RuntimeError("No data returned from Eikon.")
 
-            # declaring maxloss and maxprofit
-            max_profit = max(max_profit, pnl)
-            max_loss = min(max_loss,pnl)
+    df = df.reset_index()
+    df.rename(columns={df.columns[0]: 'DATETIME'}, inplace=True)
+    df['DATETIME'] = pd.to_datetime(df['DATETIME'])
+    df = df.sort_values('DATETIME').reset_index(drop=True)
+    df.set_index('DATETIME', inplace=True)
 
-            # Check if integer part of P&L is positive or negative and set color accordingly
-            if integer_pnl >= 0:
-                pnl_color = "\033[32m"  # Green color
-            else:
-                pnl_color = "\033[31m"  # Red color
+    if resample_period and resample_period != '1T':
+        df_r = df.resample(resample_period).agg({
+            'OPEN': 'first', 'HIGH': 'max', 'LOW': 'min', 'CLOSE': 'last', 'VOLUME': 'sum'
+        }).dropna().reset_index()
+    else:
+        df_r = df.reset_index()
 
-            # Add to total positive or negative P&L based on the result
-            if pnl >= 0:
-                positive_pnl += pnl
-            else:
-                negative_pnl += pnl
+    df_r = df_r[['DATETIME','OPEN','HIGH','LOW','CLOSE','VOLUME']]
+    df_r = df_r.sort_values('DATETIME').reset_index(drop=True)
+    return df_r
 
-            print("\033[32m<------ LONG EXIT ------> \033[0m")  # ANSI escape codes for this color coding to work
-            print("         EXIT PRICE = ", exit_price)
-            print("   num_of_positions = ", number_of_positions)
-            print("        num_of_lots = ", round(-1 * num_of_lots))
-            print("      num_of_trades = ", num_of_trades)
-            print("        max_profit = ", round(max_profit,2))
-            print("          max_loss = ", round(max_loss,2))
-            print("      P&L_Of_trade = ", pnl_color, round(integer_pnl,2),"\033[0m")
-            print("-------------------------------------------------------------------")
-            continue
-                    
-        # bearish candle-------------------------------------------------------------------------
-        max_loss_for_trade = (local_high1 - current_low1 + ( tick_val * 4)) * contract_size
-        
-        if (local_high1 < prev_local_high1) and ((local_high1 < local_high2) and (local_high1 < local_high3) and (local_high1 < current_high3)) and not bull and not flag:
-            if max_loss_for_trade > risk:
-                num_of_lots = 1
-                continue  
-            else:
-                max_loss_for_trade <= risk
-                num_of_lots = math.floor(risk / max_loss_for_trade )
-                number_of_positions += 1
-                if num_of_lots >=max_num_lots:
-                    num_of_lots = 5
-            entry_price = local_low1 - (tick_val * 2)
-            exit_price = current_high1 + (tick_val * 2)
-            print("\033[31m<------ SHORT ENTRY ------>\033[0m")  # ANSI escape codes for this color coding to work
-            print("        ENTRY PRICE = ", entry_price)
-            print("   num_of_positions = ", number_of_positions)
-            print("        num_of_lots = ", round(num_of_lots))
-            print(" max_loss_for_trade = ", round(max_loss_for_trade))
-            print("----------------------------------------------------")
-            bear = True
-            flag = True
-            continue
 
-        # bearish exit        
-        if current_high1 > exit_price and bear and flag:
-            print("exit_price :", exit_price)
-            number_of_positions -= 1
-            num_of_trades += 1
-            bear = False
-            flag = False
+# -----------------------
+# INDICATORS (Wilder ATR)
+# -----------------------
+def compute_indicators(df):
+    df = df.copy()
+    df['DATETIME'] = pd.to_datetime(df['DATETIME'])
+    df = df.sort_values('DATETIME').reset_index(drop=True)
+    df['prev_close'] = df['CLOSE'].shift(1)
 
-            # Calculate P&L
-            pnl = (entry_price - exit_price) * num_of_lots * contract_size      
-            TOTAL_P_L += pnl
-            total_short_pnl += pnl
-            integer_pnl = float(pnl)  # Extract the integer part of the P&L
+    df['tr1'] = df['HIGH'] - df['LOW']
+    df['tr2'] = (df['HIGH'] - df['prev_close']).abs()
+    df['tr3'] = (df['LOW'] - df['prev_close']).abs()
+    df['TR'] = df[['tr1','tr2','tr3']].max(axis=1)
+    df['ATR'] = df['TR'].ewm(alpha=1.0/ATR_PERIOD, adjust=False).mean()
 
-            # declaring maxloss and maxprofit
-            max_profit = max(max_profit,pnl)
-            max_loss   = min(max_loss,pnl)
+    df['MA24'] = df['CLOSE'].rolling(window=MA_PERIOD, min_periods=1).mean()
+    df['HH50'] = df['HIGH'].rolling(window=LOOKBACK_HHLL, min_periods=1).max()
+    df['LL50'] = df['LOW'].rolling(window=LOOKBACK_HHLL, min_periods=1).min()
 
-            # Check if integer part of P&L is positive or negative and set color accordingly
-            if integer_pnl >= 0:
-                pnl_color = "\033[32m"  # Green color
-            else:
-                pnl_color = "\033[31m"  # Red color
+    return df
 
-            # Add to total positive or negative P&L based on the result
-            if pnl >= 0:
-                positive_pnl += pnl
-            else:
-                negative_pnl += pnl
-            print("\033[31m<------ SHORT EXIT ------>\033[0m")  # ANSI escape codes for this color coding to work
-            print("         EXIT PRICE = ", exit_price)
-            print("   num_of_positions = ", number_of_positions)
-            print("        num_of_lots = ", round(-1 * num_of_lots))
-            print("      num_of_trades = ", num_of_trades)
-            print("        max_profit = ", round(max_profit,2))  
-            print("          max_loss = ", round( max_loss,2))
-            print("      P&L_of_trade = ", pnl_color, round(integer_pnl,2),"\033[0m")
-            print("-----------------------------------------------------------------------")
-            continue
-    except Exception as e:
-        print("Error:", e)
 
-    finally:
-        print("-------------------------------------------------------End of iteration--------------------------------------------------")
-        current_hours_count=current_hours_count+1
-        previous_date = data1.loc[index1,time_column_name].split()[0]
-        date_flag = False
-        print("current_hours_count: ",current_hours_count)
+# -----------------------
+# RECORD + PRINT
+# -----------------------
+def record_fill(trades, when, side, reason_title, reason_detail, price, qty, position_before, lot_id=None, atr=None):
+    global cum_pnl, peak_pnl, max_runup, max_drawdown
 
-max_loss_color = "\033[31m" if max_loss < 0 else "\033[32m"
-max_profit_color = "\033[31m" if max_profit < 0 else "\033[32m"
-positive_pnl_color = "\033[31m" if positive_pnl < 0 else "\033[32m"
-negative_pnl_color = "\033[31m" if negative_pnl < 0 else "\033[32m"
-total_long_pnl_color = "\033[31m" if total_long_pnl < 0 else "\033[32m"
-total_short_pnl_color = "\033[31m" if total_short_pnl < 0 else "\033[32m"
-TOTAL_P_L_colour = "\033[31m" if TOTAL_P_L < 0 else "\033[32m"
+    trade_pnl = 0.0
+    entry_price = position_before.get('entry_price') if position_before else None
 
-print("        max_profit = ", max_profit_color,round(max_profit,2),"\033[0m")
-print("          max_loss = ", max_loss_color, round(max_loss,2),"\033[0m")
-print("      positive_pnl = ", positive_pnl_color,round(positive_pnl,2),"\033[0m")
-print("      negative_pnl = ", negative_pnl_color, round(negative_pnl,2),"\033[0m")
-print("   total_long_pnl  = ", total_long_pnl_color,round(total_long_pnl,2),"\033[0m")
-print("  total_short_pnl  = ", total_short_pnl_color, round(total_short_pnl,2),"\033[0m")
-print("         TOTAL_P_L = ", TOTAL_P_L_colour, round(TOTAL_P_L,2),"\033[0m")
-print("     num of trades = ", num_of_trades)
+    if reason_title not in ("ENTRY","INFO") and entry_price is not None:
+        if position_before['side'] == 'long':
+            trade_pnl = (price - entry_price) * qty
+        else:
+            trade_pnl = (entry_price - price) * qty
+
+        cum_pnl += trade_pnl
+        peak_pnl = max(peak_pnl, cum_pnl)
+        max_runup = max(max_runup, cum_pnl)
+        drawdown = cum_pnl - peak_pnl
+        max_drawdown = min(max_drawdown, drawdown)
+
+    qty_remaining = ""
+    if position_before and isinstance(position_before.get('units_remaining',None),(int,float)):
+        try:
+            qty_remaining = max(0, position_before['units_remaining'] - qty)
+        except Exception:
+            qty_remaining = position_before.get('units_remaining')
+
+    row = {
+        'datetime': pd.to_datetime(when).strftime("%Y-%m-%d %H:%M:%S"),
+        'side': side,
+        'reason_title': reason_title,
+        'reason_detail': reason_detail,
+        'entry_price': float(entry_price) if entry_price is not None else "",
+        'exit_price': float(price) if price is not None else "",
+        'qty_exited': float(qty),
+        'qty_remaining': float(qty_remaining) if qty_remaining != "" else "",
+        'position_side': position_before['side'] if position_before else "",
+        'ATR': float(atr) if atr is not None else "",
+        'lot_id': lot_id if lot_id is not None else "",
+        'trade_pnl': round(trade_pnl,2),
+        'cum_pnl': round(cum_pnl,2)
+    }
+    trades.append(row)
+
+    # console print simplified
+    if DEBUG:
+        try:
+            print(f"[{reason_title}] {when} {side} price={price:.4f} qty={qty} lot={lot_id} pnl={trade_pnl:.2f} cum={cum_pnl:.2f}")
+        except Exception:
+            print(f"[{reason_title}] {when} {side} price={price} qty={qty} lot={lot_id} pnl={trade_pnl:.2f} cum={cum_pnl:.2f}")
+
+
+# -----------------------
+# BACKTEST
+# -----------------------
+def sequential_backtest(df):
+    trades = []
+    position = None
+
+    global cum_pnl, peak_pnl, max_runup, max_drawdown
+    cum_pnl = peak_pnl = max_runup = max_drawdown = 0.0
+
+    for i in range(1, len(df)):
+        row = df.loc[i]
+        prev = df.loc[i-1]
+        dt = row['DATETIME']
+
+        # EXIT logic if in position
+        if position is not None:
+            # attach for info
+            position['ATR'] = row['ATR']
+
+            # -----------------------
+            # LONG position exits
+            # -----------------------
+            if position['side'] == 'long':
+                # STOP LOSS (triggered by intra-bar LOW) -> exit fill uses row['LOW']
+                if row['LOW'] <= position['stop']:
+                    # exit all remaining lots at LONG-EXIT-PRICE = row['LOW']
+                    exit_price = row['LOW']
+                    while position['units_remaining'] > 0:
+                        lot_id = position['remaining_lots'].pop(0)
+                        reason_title = "STOP LOSS"
+                        reason_detail = f"BAR LOW {row['LOW']:.4f} <= STOP {position['stop']:.4f}"
+                        record_fill(trades, dt, "SELL", reason_title, reason_detail, exit_price, 1, position, lot_id=lot_id, atr=row['ATR'])
+                        position['units_remaining'] -= 1
+                    position = None
+                    continue
+
+                # TAKE PROFITS (triggered by HIGH) -> exit fill uses row['LOW'] per your rule
+                for idx, tp in enumerate(position['tp_prices']):
+                    if position['tp_hit_flags'][idx]:
+                        continue
+                    if row['HIGH'] >= tp:
+                        exit_price = row['LOW']  # long exit uses candle LOW
+                        lot_id = position['remaining_lots'].pop(0)
+                        reason_title = f"TP{idx+1} HIT"
+                        reason_detail = f"HIGH {row['HIGH']:.4f} >= TP{idx+1} {tp:.4f}"
+                        record_fill(trades, dt, "SELL", reason_title, reason_detail, exit_price, 1, position, lot_id=lot_id, atr=row['ATR'])
+                        position['units_remaining'] -= 1
+                        position['tp_hit_flags'][idx] = True
+
+                        # trail SL updates (INFO records use TP price for clarity)
+                        if idx == 0:
+                            prev_stop = position['stop']
+                            position['stop'] = position['entry_price']
+                            record_fill(trades, dt, "INFO", "STOP MOVED", f"After TP1: stop {prev_stop:.4f} -> {position['stop']:.4f}", tp, 0, position, lot_id=None, atr=row['ATR'])
+                        elif idx == 1:
+                            prev_stop = position['stop']
+                            position['stop'] = position['tp_prices'][0]
+                            record_fill(trades, dt, "INFO", "STOP MOVED", f"After TP2: stop {prev_stop:.4f} -> {position['stop']:.4f}", tp, 0, position, lot_id=None, atr=row['ATR'])
+
+                # clear if fully exited
+                if position and position['units_remaining'] <= 0:
+                    position = None
+                    continue
+
+            # -----------------------
+            # SHORT position exits (mirror)
+            # -----------------------
+            elif position['side'] == 'short':
+                # STOP LOSS (triggered by intra-bar HIGH) -> exit fill uses row['HIGH']
+                if row['HIGH'] >= position['stop']:
+                    exit_price = row['HIGH']
+                    while position['units_remaining'] > 0:
+                        lot_id = position['remaining_lots'].pop(0)
+                        reason_title = "STOP LOSS"
+                        reason_detail = f"BAR HIGH {row['HIGH']:.4f} >= STOP {position['stop']:.4f}"
+                        record_fill(trades, dt, "BUY", reason_title, reason_detail, exit_price, 1, position, lot_id=lot_id, atr=row['ATR'])
+                        position['units_remaining'] -= 1
+                    position = None
+                    continue
+
+                # TAKE PROFITS (triggered by LOW) -> exit fill uses row['HIGH'] per your rule
+                for idx, tp in enumerate(position['tp_prices']):
+                    if position['tp_hit_flags'][idx]:
+                        continue
+                    if row['LOW'] <= tp:
+                        exit_price = row['HIGH']  # short exit uses candle HIGH
+                        lot_id = position['remaining_lots'].pop(0)
+                        reason_title = f"TP{idx+1} HIT"
+                        reason_detail = f"LOW {row['LOW']:.4f} <= TP{idx+1} {tp:.4f}"
+                        record_fill(trades, dt, "BUY", reason_title, reason_detail, exit_price, 1, position, lot_id=lot_id, atr=row['ATR'])
+                        position['units_remaining'] -= 1
+                        position['tp_hit_flags'][idx] = True
+
+                        # trail SL updates (INFO records)
+                        if idx == 0:
+                            prev_stop = position['stop']
+                            position['stop'] = position['entry_price']
+                            record_fill(trades, dt, "INFO", "STOP MOVED", f"After TP1: stop {prev_stop:.4f} -> {position['stop']:.4f}", tp, 0, position, lot_id=None, atr=row['ATR'])
+                        elif idx == 1:
+                            prev_stop = position['stop']
+                            position['stop'] = position['tp_prices'][0]
+                            record_fill(trades, dt, "INFO", "STOP MOVED", f"After TP2: stop {prev_stop:.4f} -> {position['stop']:.4f}", tp, 0, position, lot_id=None, atr=row['ATR'])
+                if position and position['units_remaining'] <= 0:
+                    position = None
+                    continue
+
+        # ENTRY logic (if no position)
+        if position is None and not pd.isna(prev['ATR']):
+            long_cond = (prev['CLOSE'] <= prev['HH50']) and (row['CLOSE'] > prev['HH50']) and (row['CLOSE'] > row['MA24'])
+            short_cond = (prev['CLOSE'] >= prev['LL50']) and (row['CLOSE'] < prev['LL50']) and (row['CLOSE'] < row['MA24'])
+
+            if long_cond or short_cond:
+                # ---- FILL PRICES (modified) ----
+                if long_cond:
+                    # Entry fill = current candle HIGH (as requested)
+                    entry_price = row['HIGH']
+                    atr = row['ATR']
+                    tp_prices = [entry_price + m * atr for m in TP_MULTS]
+                    tp_hit_flags = [False]*len(TP_MULTS)
+                    remaining_lots = list(range(1, UNITS_PER_ENTRY+1))
+                    position = {
+                        'side': 'long',
+                        'entry_price': entry_price,
+                        'units_total': UNITS_PER_ENTRY,
+                        'units_remaining': UNITS_PER_ENTRY,
+                        'stop': entry_price - SL_MULT * atr,
+                        'tp_prices': tp_prices,
+                        'tp_hit_flags': tp_hit_flags,
+                        'remaining_lots': remaining_lots
+                    }
+                    reason_detail = f"Entry at HIGH {entry_price:.4f} | SL {position['stop']:.4f} | TPs {[round(x,4) for x in tp_prices]} | ATR {atr:.4f}"
+                    record_fill(trades, dt, "BUY", "ENTRY", reason_detail, entry_price, UNITS_PER_ENTRY, position, lot_id=None, atr=atr)
+
+                elif short_cond:
+                    # Entry fill = current candle LOW (as requested)
+                    entry_price = row['LOW']
+                    atr = row['ATR']
+                    tp_prices = [entry_price - m * atr for m in TP_MULTS]
+                    tp_hit_flags = [False]*len(TP_MULTS)
+                    remaining_lots = list(range(1, UNITS_PER_ENTRY+1))
+                    position = {
+                        'side': 'short',
+                        'entry_price': entry_price,
+                        'units_total': UNITS_PER_ENTRY,
+                        'units_remaining': UNITS_PER_ENTRY,
+                        'stop': entry_price + SL_MULT * atr,
+                        'tp_prices': tp_prices,
+                        'tp_hit_flags': tp_hit_flags,
+                        'remaining_lots': remaining_lots
+                    }
+                    reason_detail = f"Entry at LOW {entry_price:.4f} | SL {position['stop']:.4f} | TPs {[round(x,4) for x in tp_prices]} | ATR {atr:.4f}"
+                    record_fill(trades, dt, "SELL", "ENTRY", reason_detail, entry_price, UNITS_PER_ENTRY, position, lot_id=None, atr=atr)
+
+                printp(f"ENTRY created at {entry_price} side={'LONG' if long_cond else 'SHORT'} dt={dt}")
+
+    return trades
+
+
+# -----------------------
+# SAVE CSV
+# -----------------------
+def save_trades_csv(trades, filename=LOG_CSV):
+    keys = [
+        "datetime", "side", "reason_title", "reason_detail",
+        "entry_price", "exit_price", "qty_exited", "qty_remaining",
+        "position_side", "ATR", "lot_id", "trade_pnl", "cum_pnl"
+    ]
+    with open(filename, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=keys)
+        writer.writeheader()
+        for t in trades:
+            row = {k: t.get(k, "") for k in keys}
+            writer.writerow(row)
+    print(f"[OK] saved trades to {filename}")
+
+
+# -----------------------
+# MAIN
+# -----------------------
+def main():
+    print("[INFO] start backtest")
+    df = fetch_and_resample(RIC)
+    df = compute_indicators(df)
+    trades = sequential_backtest(df)
+    save_trades_csv(trades)
+    # summary
+    print("Total records:", len(trades))
+    print(f"Cumulative P&L: {cum_pnl:.2f} | Max Runup: {max_runup:.2f} | Max Drawdown: {max_drawdown:.2f}")
+
+
+if __name__ == "__main__":
+    main()

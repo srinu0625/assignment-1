@@ -4,7 +4,7 @@ from datetime import datetime
 
 # ====== CONFIG ======
 API_KEY = "1bd3f619408faa129e6effb6cac22eb9"
-CITY = "chennai"
+CITY    = " Hyderabad " 
 WEBHOOK_URL = "https://default88ff9cb3e35e4d71b1d7f6c6ed8657.30.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/55b4731413d04f6a95975ba9fa82eb79/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Zcwo1Eac1WD4j7-ITfAA5YJTr9t93yezQWVZvRTKe-s"
 
 def get_weather(city):

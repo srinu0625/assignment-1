@@ -122,7 +122,7 @@ for i in range(warmup, len(df)):
             print(f" EMA_RSI      : {ema_rsi:.2f}")
             print(f" ATR          : {atr:.4f}")
             print("================================\n")
-            time.sleep(0.5)
+            time.sleep(1.5)
             continue
 
         if position == 1:
@@ -199,7 +199,7 @@ for i in range(warmup, len(df)):
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}  | Max RU: {max_runup:.2f}")
                 print("================================\n")
-                time.sleep(0.5)
+                time.sleep(1.5)
                 position = 0
                 entry_price = entry_time = entry_index = None
                 stop_loss = target_profit = None
@@ -220,7 +220,7 @@ for i in range(warmup, len(df)):
             print(f" EMA_RSI      : {ema_rsi:.2f}")
             print(f" ATR          : {atr:.4f}")
             print("================================\n")
-            time.sleep(0.5)
+            time.sleep(1.5)
             continue
 
         if position == -1:
@@ -297,7 +297,7 @@ for i in range(warmup, len(df)):
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}  | Max RU: {max_runup:.2f}")
                 print("================================\n")
-                time.sleep(0.5)
+                time.sleep(1.5)
                 position = 0
                 entry_price = entry_time = entry_index = None
                 stop_loss = target_profit = None

@@ -18,10 +18,10 @@ ek.set_app_key(APP_KEY)
 # 🔹 Define news categories
 # -------------------------------------------------------
 NEWS_CATEGORIES = {
-    "Cotton News": "COTTON",
-    "Grains News": "WHEAT OR RICE OR CORN OR GRAINS",
-    "Livestock News": "LIVESTOCK OR CATTLE OR POULTRY",
-    "Agri Policy News": "AGRICULTURE OR FARM POLICY OR AGRI"
+    "Grains News": "WHEAT OR RICE OR CORN OR GRAINS OR RTRS OR DJN  OR BARCHA OR NOTENG OR BNEINT OR IFX ",
+    "Livestock News": "LIVESTOCK OR CATTLE OR POULTRY OR RTRS OR DJN  OR BARCHA OR NOTENG OR BNEINT OR IFX",
+    "Agri Policy News": "AGRICULTURE OR FARM POLICY OR AGRI OR RTRS OR DJN  OR BARCHA OR NOTENG OR BNEINT OR IFX",
+    "Coffee News": "COFFEE OR RTRS OR DJN  OR BARCHA OR NOTENG OR BNEINT OR IFX OR SAUARB OR ARASER OR YAHNEX OR NOTENG OR BRN OR PUBT OR "
 }
 
 # -------------------------------------------------------
