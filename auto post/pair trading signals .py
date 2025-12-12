@@ -14,7 +14,7 @@ PAIRS = [
     ("ESc1", "NQc1"),
     ("ESc1", "YMc1"),
     # Add more pairs as needed
-]
+]d
 
 EIKON_INTERVAL = "minute"
 WINDOW_BARS = 960

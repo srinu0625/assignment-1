@@ -8,11 +8,16 @@ from datetime import datetime
 webhook_url = "https://default88ff9cb3e35e4d71b1d7f6c6ed8657.30.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/55b4731413d04f6a95975ba9fa82eb79/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Zcwo1Eac1WD4j7-ITfAA5YJTr9t93yezQWVZvRTKe-s"
 # === RSS Feeds (add or remove as needed) ===
 RSS_FEEDS = {
-    "Investing.com": "https://www.investing.com/rss/news_25.rss",
-    "BBC": "http://newsrss.bbc.co.uk/rss/newsonline_uk_edition/front_page/rss.xml",
-    "Economic Times": "https://rss.app/en/rss-feed/the-economic-times-rss-feed",
-    "bloomberg": "https://feeds.bloomberg.com/markets/news.rss"
-    
+        "Investing.com - General News": "https://www.investing.com/rss/news.rss",
+        "Investing.com - Forex": "https://www.investing.com/rss/news_1.rss",
+        "Investing.com - Commodities": "https://www.investing.com/rss/news_3.rss",
+        "Investing.com - Stock Market": "https://www.investing.com/rss/news_25.rss",
+        "Investing.com - Economy": "https://www.investing.com/rss/news_206.rss",
+        "Investing.com - Cryptocurrency": "https://www.investing.com/rss/news_279.rss",
+        "Investing.com - Bonds": "https://www.investing.com/rss/news_5.rss",
+        "Investing.com - Energy (Oil/Gas)": "https://www.investing.com/rss/news_17.rss",
+        "Investing.com - Metals (Gold/Silver)": "https://www.investing.com/rss/news_18.rss"
+
 }
 
 # === Fetch Headlines from Multiple RSS Sources ===

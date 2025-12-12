@@ -4,7 +4,7 @@ import time
 
 # -----------------------------------------
 # CONFIG
-CSV_FILE = r"D:\Data\ES 30min.csv"
+CSV_FILE = r"D:\Data\BR 5min.csv"
 TP_MULTS = [2, 4, 6]      # ATR multiples for TP1/TP2/TP3
 SL_MULT = 2               # ATR stop-loss
 UNITS = 3                 # 3 lots

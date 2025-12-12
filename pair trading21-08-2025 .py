@@ -1,168 +1,302 @@
-import pandas as pd
-import matplotlib.pyplot as plt
+#!/usr/bin/env python3
 import time
-from colorama import Fore, Style, init
+import os
+from datetime import datetime, timedelta
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+from statsmodels.tsa.stattools import adfuller
+import eikon as ek
+import xlwings as xw
 
-# Initialize colorama
-init(autoreset=True)
+# =====================
+# === USER CONFIG =====
+# =====================
+EIKON_APP_KEY = "92e0a59a8e994142bab0f82d8294e1df404da224"
 
-## ==== File paths ====
-file1 = r"D:\Data\BR Jun25_15min.csv"
-file2 = r"D:\Data\CL Jun25_15min.csv"
+PAIRS = [
+    ("LGOF6", "LCOF6"),
+    ("LGOG6", "LCOG6"),
+    ("LGOH6", "LCOH6"),
+    ("LGOM6", "LCOM6"),
+    ("LGOU6", "LCOU6"),
+    ("LGOZ6", "LCOZ6"),
+]
 
-# ==== Contract sizes for each product ====
-contract_size_es = 1000  # E-mini    S&P 500 Futures (BR)
-contract_size_nq = 1000  # E-mini Nasdaq-100 Futures (CL)
+EIKON_INTERVAL = "minute"
+WINDOW_BARS = 960
+RESAMPLE_RULE = "15T"
+PVALUE_THRESHOLD = 0.05
+ZSCORE_ENTRY = 2.5
+ZSCORE_EXIT = 0.5
 
-# ==== Load and clean data ====
-df1 = pd.read_csv(file1)
-df2 = pd.read_csv(file2)
+WRITE_TO_EXCEL = True
+EXCEL_PATH = os.path.abspath("PairTrading_Multi 10-12-2025---2.xlsx")
+EXCEL_SHEET = "Dashboard"
 
-df1.columns = df1.columns.str.strip()
-df2.columns = df2.columns.str.strip()
+FETCH_RETRIES = 2
+FETCH_RETRY_SLEEP = 2.0
+MIN_ALIGNED_BARS = 20
 
-# Parse datetime
-df1['Date(GMT)'] = pd.to_datetime(df1['Date(GMT)'], format='%d-%m-%Y %H.%M')
-df2['Date(GMT)'] = pd.to_datetime(df2['Date(GMT)'], format='%d-%m-%Y %H.%M')
+# =====================
+# === HELPERS =========
+# =====================
 
-df1.set_index('Date(GMT)', inplace=True)
-df2.set_index('Date(GMT)', inplace=True)
+def log(msg: str):
+    print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {msg}", flush=True)
 
-# Keep only Close price
-df1 = df1[['Close']].rename(columns={'Close': 'BR'})
-df2 = df2[['Close']].rename(columns={'Close': 'CL'})
+def safe_numeric(s: pd.Series) -> pd.Series:
+    return pd.to_numeric(s, errors="coerce")
 
-# Merge datasets directly without resampling
-df = pd.merge(df1, df2, left_index=True, right_index=True, how='inner')
+def fetch_timeseries(ric: str, count: int, interval: str) -> pd.Series:
+    last_ex = None
+    for attempt in range(1, FETCH_RETRIES + 2):
+        try:
+            df = ek.get_timeseries(ric, count=count, interval=interval)
+            if df is None or df.empty:
+                raise RuntimeError(f"No data for {ric}")
 
-# Calculate spread and z-score
-df['spread'] = df['BR'] - df['CL']
-df['mean'] = df['spread'].rolling(60).mean()
-df['std'] = df['spread'].rolling(60).std()
-df['zscore'] = (df['spread'] - df['mean']) / df['std']
+            cols = [c for c in ["CLOSE","BID","Close","Bid","close","bid"] if c in df.columns]
+            if cols:
+                s = df[cols[0]].copy()
+            else:
+                nc = [c for c in df.columns if pd.api.types.is_numeric_dtype(df[c])]
+                if nc:
+                    s = df[nc[0]].copy()
+                else:
+                    s = safe_numeric(df.iloc[:,0]).copy()
 
-# ==== Backtest Parameters ====
-entry_thresh = 2.5
-exit_thresh = 0
-stop_thresh = 4
-position = 0
-entry_ucc = entry_lcc = 0
-total_pnl = 0
-pnl_list = []
+            s = safe_numeric(s).dropna()
+            if s.empty:
+                raise RuntimeError(f"No numeric values for {ric}")
 
-df['position'] = 0
-df['trade_pnl'] = 0
-df['cum_pnl'] = 0
+            s.index = pd.to_datetime(s.index)
+            return s
 
-def print_entry(t, z, side, BR, CL):
-    # Replace LONG/SHORT words with colored ones
-    side_colored = side.replace("LONG", f"{Fore.GREEN}LONG{Style.RESET_ALL}") \
-                       .replace("SHORT", f"{Fore.RED}SHORT{Style.RESET_ALL}")
-    
-    # First line stays white, only LONG/SHORT highlighted
-    print(f"{t} | ENTRY ({side_colored}) | Z = {z:.2f}")
-    
-    if "LONG BR" in side:
-        print(f"   BR: {Fore.GREEN}{BR:.2f}{Style.RESET_ALL}")
-        print(f"   CL: {Fore.RED}{CL:.2f}{Style.RESET_ALL}")
-    else:
-        print(f"   BR: {Fore.RED}{BR:.2f}{Style.RESET_ALL}")
-        print(f"   CL: {Fore.GREEN}{CL:.2f}{Style.RESET_ALL}")
-    print("-" * 60)
+        except Exception as e:
+            last_ex = e
+            log(f"fetch_timeseries attempt {attempt} failed for {ric}: {e}")
+            if attempt <= FETCH_RETRIES:
+                time.sleep(FETCH_RETRY_SLEEP)
+            else:
+                log(f"Giving up on {ric} for this cycle.")
+                return pd.Series(dtype=float)
 
-def print_exit(t, z, side, entry_ucc, exit_ucc, entry_lcc, exit_lcc, pnl):
-    side_colored = side.replace("LONG", f"{Fore.GREEN}LONG{Style.RESET_ALL}") \
-                       .replace("SHORT", f"{Fore.RED}SHORT{Style.RESET_ALL}")
-    
-    # First line stays white, only LONG/SHORT highlighted
-    print(f"{t} | EXIT ({side_colored}) | Z = {z:.2f}")
-    print(f"   BR: {entry_ucc:.2f} → {exit_ucc:.2f}")
-    print(f"   CL: {entry_lcc:.2f} → {exit_lcc:.2f}")
+    return pd.Series(dtype=float)
 
-    pnl_color = Fore.GREEN if pnl > 0 else Fore.RED
-    print(f"   PnL: {pnl_color}{pnl:.2f}{Style.RESET_ALL}")
-    print("=" * 60)
+def resample_series(s: pd.Series, rule: str | None) -> pd.Series:
+    if s is None or s.empty:
+        return pd.Series(dtype=float)
+    if not rule:
+        return s
+    return s.resample(rule).last().dropna()
 
-# ==== Backtest Loop ====
-for i in range(60, len(df)):
-    z = df['zscore'].iloc[i]
-    BR = df['BR'].iloc[i]
-    CL = df['CL'].iloc[i]
-    t = df.index[i]
+def align_latest(y: pd.Series, x: pd.Series) -> pd.DataFrame:
+    if y is None or x is None or y.empty or x.empty:
+        return pd.DataFrame()
+    df = pd.concat([y, x], axis=1, join="inner").dropna()
+    if df.empty:
+        return pd.DataFrame()
+    df = df.iloc[:, :2].apply(safe_numeric).dropna()
+    df.columns = ["Y", "X"]
+    return df
 
-    if position == 0:
-        if z > entry_thresh:
-            position = -1  # Short BR, Long CL
-            entry_ucc, entry_lcc = BR, CL
-            print_entry(t, z, "SHORT BR / LONG CL", BR, CL)
-            time.sleep(0.5)
-        elif z < -entry_thresh:
-            position = 1  # Long BR, Short CL
-            entry_ucc, entry_lcc = BR, CL
-            print_entry(t, z, "LONG BR / SHORT CL", BR, CL)
-            time.sleep(0.5)
+def engle_granger(df: pd.DataFrame) -> dict:
+    try:
+        if df is None or len(df) < 10:
+            raise RuntimeError("Not enough data for regression")
 
-    elif position == 1:
-        if z >= exit_thresh or z <= -stop_thresh:
-            pnl_ucc = (BR - entry_ucc) * contract_size_es
-            pnl_lcc = -(CL - entry_lcc) * contract_size_nq
-            pnl = pnl_ucc + pnl_lcc
-            total_pnl += pnl
-            pnl_list.append(pnl)
-            print_exit(t, z, "LONG BR / SHORT CL", entry_ucc, BR, entry_lcc, CL, pnl)
-            time.sleep(0.5)
-            position = 0
+        X = sm.add_constant(df["X"].astype(float))
+        Y = df["Y"].astype(float)
+        model = sm.OLS(Y, X).fit()
 
-    elif position == -1:
-        if z <= exit_thresh or z >= stop_thresh:
-            pnl_ucc = -(BR - entry_ucc) * contract_size_es
-            pnl_lcc = (CL - entry_lcc) * contract_size_nq
-            pnl = pnl_ucc + pnl_lcc
-            total_pnl += pnl
-            pnl_list.append(pnl)
-            print_exit(t, z, "SHORT BR / LONG CL", entry_ucc, BR, entry_lcc, CL, pnl)
-            time.sleep(0.5)
-            position = 0
+        intercept = float(model.params.get("const", 0.0))
+        beta = float(model.params.get("X", model.params.iloc[-1]))
 
-    df.iloc[i, df.columns.get_loc('position')] = position
+        resid = Y - (intercept + beta * df["X"].astype(float))
 
-# ==== Summary Stats ====
-total_trades = len(pnl_list)
-wins = sum(1 for p in pnl_list if p > 0)
-losses = total_trades - wins
-win_rate = (wins / total_trades) * 100 if total_trades else 0
-loss_rate = 100 - win_rate
+        try:
+            adf_res = adfuller(resid.dropna(), autolag="AIC")
+            pvalue = float(adf_res[1])
+        except:
+            pvalue = 1.0
 
-print("\n==== SUMMARY ====")
-print(f"Total Trades            : {total_trades}")
-print(f"Total PnL               : {total_pnl:.2f}")
-print(f"Winning Trades          : {Fore.GREEN}{wins}{Style.RESET_ALL}")
-print(f"Losing Trades           : {Fore.RED}{losses}{Style.RESET_ALL}")
-print(f"Win Rate                : {Fore.GREEN}{win_rate:.2f}%{Style.RESET_ALL}")
-print(f"Failure Rate            : {Fore.RED}{loss_rate:.2f}%{Style.RESET_ALL}")
-if pnl_list:
-    print(f"Max Profit Per trade    : {Fore.GREEN}{max(pnl_list):.2f}{Style.RESET_ALL}")
-    print(f"Max Loss Per trade      : {Fore.RED}{min(pnl_list):.2f}{Style.RESET_ALL}")
+        return {"intercept": intercept, "beta": beta, "resid": resid, "pvalue": pvalue}
 
-# ==== Plot ====
-plt.figure(figsize=(14, 6))
+    except Exception as e:
+        log(f"engle_granger error: {e}")
+        zero_resid = pd.Series(0.0, index=df.index if (df is not None and not df.empty) else pd.DatetimeIndex([]))
+        return {"intercept": 0.0, "beta": 0.0, "resid": zero_resid, "pvalue": 1.0}
 
-# Z-score plot
-plt.subplot(2, 1, 1)
-plt.plot(df['zscore'], label='Z-Score')
-plt.axhline(entry_thresh, color='red', linestyle='--', label='Entry Threshold')
-plt.axhline(-entry_thresh, color='green', linestyle='--')
-plt.axhline(stop_thresh, color='darkred', linestyle=':')
-plt.axhline(-stop_thresh, color='darkgreen', linestyle=':')
-plt.axhline(0, color='black', linestyle='-')
-plt.title('Z-Score')
-plt.legend()
+def zscore(s: pd.Series) -> pd.Series:
+    if s is None or s.empty:
+        return pd.Series(dtype=float)
+    m = s.mean()
+    sd = s.std(ddof=1)
+    if sd == 0 or np.isnan(sd):
+        return pd.Series(0.0, index=s.index)
+    return (s - m) / sd
 
-# Cumulative PnL plot
-plt.subplot(2, 1, 2)
-plt.plot(pd.Series(pnl_list).cumsum(), label='Cumulative PnL', color='blue')
-plt.title('Cumulative PnL BR and CL')
-plt.legend()
+def build_signal(df: pd.DataFrame, pv: float):
+    if df is None or df.empty or "spread" not in df.columns or "z" not in df.columns:
+        return "NO_TRADE", float("nan"), float("nan")
 
-plt.tight_layout()
-plt.show()
+    spread = float(df["spread"].iloc[-1])
+    z = float(df["z"].iloc[-1])
+
+    sig = "NO_TRADE"
+
+    if pv < PVALUE_THRESHOLD and not np.isnan(z):
+        if z > ZSCORE_ENTRY:
+            sig = "SELL_SPREAD"
+        elif z < -ZSCORE_ENTRY:
+            sig = "BUY_SPREAD"
+        elif abs(z) < ZSCORE_EXIT:
+            sig = "EXIT"
+        else:
+            sig = "HOLD"
+
+    return sig, spread, z
+
+# =====================
+# === FIXED EXCEL WRITER (FINAL VERSION) ===
+# =====================
+class ExcelWriter:
+    def __init__(self, path: str, sheet: str, pairs: list):
+        self.path = path
+        self.sheet = sheet
+        self.pairs = pairs
+        self.app = xw.App(visible=False, add_book=False)
+
+        if os.path.exists(path):
+            self.wb = self.app.books.open(path)
+        else:
+            self.wb = self.app.books.add()
+            self.wb.save(path)
+
+        try:
+            self.sht = self.wb.sheets[sheet]
+        except:
+            self.sht = self.wb.sheets.add(sheet)
+
+        if self.sht.range("A1").value != "Y":
+            self._init_layout()
+
+        last = self.sht.range("A" + str(self.sht.cells.last_cell.row)).end("up").row
+        self.current_row = last + 1
+        if self.current_row < 2:
+            self.current_row = 2
+
+    def _init_layout(self):
+        headers = ["Y","X","Last_Y","Last_X","Intercept","Beta",
+                   "Spread","Z","ADF_p","Signal","Updated"]
+        self.sht.range("A1").value = headers
+        for i, (y, x) in enumerate(self.pairs, start=2):
+            self.sht.range(f"A{i}").value = y
+            self.sht.range(f"B{i}").value = x
+        self.sht.autofit()
+
+    def write_row(self, row_index, *, last_y, last_x, intercept, beta, spread, z, pvalue, signal):
+        vals = [last_y, last_x, intercept, beta, spread, z, pvalue, signal,
+                datetime.now().strftime('%Y-%m-%d %H:%M:%S')]
+        pair_y = self.pairs[row_index - 2][0] if 0 <= (row_index - 2) < len(self.pairs) else ""
+        pair_x = self.pairs[row_index - 2][1] if 0 <= (row_index - 2) < len(self.pairs) else ""
+        self.sht.range(f"A{self.current_row}").value = [pair_y, pair_x] + vals
+        self.current_row += 1
+
+    def safe_save_close(self):
+        try:
+            self.wb.save(self.path)
+            log("Excel workbook saved.")
+        except Exception as e:
+            log(f"Excel save failed: {e}")
+        finally:
+            try: self.wb.close()
+            except: pass
+            try: self.app.quit()
+            except: pass
+
+# =====================
+# === MAIN LOOP =======
+# =====================
+def main():
+    log("Starting pair trading engine.")
+    try:
+        ek.set_app_key(EIKON_APP_KEY)
+    except Exception as e:
+        log(f"Failed to set Eikon app key: {e}")
+
+    writer = None
+    if WRITE_TO_EXCEL:
+        try:
+            writer = ExcelWriter(EXCEL_PATH, EXCEL_SHEET, PAIRS)
+            log(f"Excel initialized: {EXCEL_PATH} -> sheet '{EXCEL_SHEET}'")
+        except Exception as e:
+            log(f"Excel init failed: {e}")
+            writer = None
+
+    log("Engine running. Ctrl+C to stop.")
+
+    try:
+        while True:
+            now = datetime.now()
+            log(f"Starting processing cycle at {now.strftime('%Y-%m-%d %H:%M:%S')}")
+
+            for i, (ric_y, ric_x) in enumerate(PAIRS, start=2):
+                try:
+                    y = fetch_timeseries(ric_y, WINDOW_BARS, EIKON_INTERVAL)
+                    x = fetch_timeseries(ric_x, WINDOW_BARS, EIKON_INTERVAL)
+
+                    if RESAMPLE_RULE:
+                        y = resample_series(y, RESAMPLE_RULE)
+                        x = resample_series(x, RESAMPLE_RULE)
+
+                    df = align_latest(y, x)
+
+                    if df.empty or len(df) < MIN_ALIGNED_BARS:
+                        log(f"{ric_y}/{ric_x}: insufficient aligned bars ({len(df)}). skipping.")
+                        continue
+
+                    eg = engle_granger(df)
+
+                    df["spread"] = eg["resid"]
+                    df["z"] = zscore(df["spread"])
+
+                    sig, spread, z = build_signal(df, eg["pvalue"])
+
+                    if writer:
+                        writer.write_row(
+                            i,
+                            last_y=float(df["Y"].iloc[-1]),
+                            last_x=float(df["X"].iloc[-1]),
+                            intercept=eg["intercept"],
+                            beta=eg["beta"],
+                            spread=spread,
+                            z=z,
+                            pvalue=eg["pvalue"],
+                            signal=sig
+                        )
+
+                    log(f"{ric_y}/{ric_x} | p={eg['pvalue']:.4f} | z={z:.3f} | {sig}")
+
+                except Exception as e:
+                    log(f"Error processing {ric_y}/{ric_x}: {e}")
+
+            # --- wait until next 15-minute boundary ---
+            now = datetime.now()
+            minutes = (now.minute // 15 + 1) * 15
+            next_run = now.replace(minute=0, second=0, microsecond=0) + timedelta(minutes=minutes)
+            sleep_seconds = max((next_run - datetime.now()).total_seconds(), 0)
+            log(f"Sleeping for {int(sleep_seconds)} seconds until next 15-minute cycle.")
+            time.sleep(sleep_seconds)
+
+    except KeyboardInterrupt:
+        log("Stopping engine. Saving Excel...")
+
+    finally:
+        if writer:
+            writer.safe_save_close()
+        log("Engine stopped cleanly.")
+
+if __name__ == "__main__":
+    main()
