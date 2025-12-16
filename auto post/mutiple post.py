@@ -1,23 +1,19 @@
 import requests
 import feedparser
 import json
-import time
+import   
 from datetime import datetime
 
 # === Teams Webhook ===
 webhook_url = "https://default88ff9cb3e35e4d71b1d7f6c6ed8657.30.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/55b4731413d04f6a95975ba9fa82eb79/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Zcwo1Eac1WD4j7-ITfAA5YJTr9t93yezQWVZvRTKe-s"
 # === RSS Feeds (add or remove as needed) ===
 RSS_FEEDS = {
-        "Investing.com - General News": "https://www.investing.com/rss/news.rss",
-        "Investing.com - Forex": "https://www.investing.com/rss/news_1.rss",
-        "Investing.com - Commodities": "https://www.investing.com/rss/news_3.rss",
-        "Investing.com - Stock Market": "https://www.investing.com/rss/news_25.rss",
-        "Investing.com - Economy": "https://www.investing.com/rss/news_206.rss",
-        "Investing.com - Cryptocurrency": "https://www.investing.com/rss/news_279.rss",
-        "Investing.com - Bonds": "https://www.investing.com/rss/news_5.rss",
-        "Investing.com - Energy (Oil/Gas)": "https://www.investing.com/rss/news_17.rss",
-        "Investing.com - Metals (Gold/Silver)": "https://www.investing.com/rss/news_18.rss"
-
+       "trading economics": "https://tradingeconomics.com/rss/news.aspx",
+       "trading economics (economy)": "https://tradingeconomics.com/rss/news.aspx?i=economy",
+       "trading economics (interest-rate)": "https://tradingeconomics.com/rss/news.aspx?i=interest-rate",
+       "trading economics (inflation)": "https://tradingeconomics.com/rss/news.aspx?i=inflation",
+       "trading economics (gdp)": "https://tradingeconomics.com/rss/news.aspx?i=gdp",
+       "trading economics (labour)": "https://tradingeconomics.com/rss/news.aspx?i=labour"
 }
 
 # === Fetch Headlines from Multiple RSS Sources ===

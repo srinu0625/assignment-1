@@ -1,123 +1,215 @@
 import pandas as pd
+
 import eikon as ek
+
 import requests
+
 import time
+
 from datetime import datetime
+
 import pytz
-
+ 
 # -------------------------------------------------------
+
 # 1️⃣ CONFIGURATION
+
 # -------------------------------------------------------
-APP_KEY = "92e0a59a8e994142bab0f82d8294e1df404da224"  # 🔸 Replace with your Refinitiv/Eikon App Key
+
+APP_KEY = "92e0a59a8e994142bab0f82d8294e1df404da224"  # Replace with your valid Eikon App Key
+
 TEAMS_WEBHOOK_URL = "https://default88ff9cb3e35e4d71b1d7f6c6ed8657.30.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/55b4731413d04f6a95975ba9fa82eb79/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Zcwo1Eac1WD4j7-ITfAA5YJTr9t93yezQWVZvRTKe-s"
-
-# Initialize Eikon connection
+ 
 ek.set_app_key(APP_KEY)
+ 
+# -------------------------------------------------------
+
+# 2️⃣ NEWS QUERIES (TABS)
 
 # -------------------------------------------------------
-# 🔹 Define news categories
-# -------------------------------------------------------
-NEWS_CATEGORIES = {
-    "Grains News": "WHEAT OR RICE OR CORN OR GRAINS OR RTRS OR DJN  OR BARCHA OR NOTENG OR BNEINT OR IFX ",
-    "Livestock News": "LIVESTOCK OR CATTLE OR POULTRY OR RTRS OR DJN  OR BARCHA OR NOTENG OR BNEINT OR IFX",
-    "Agri Policy News": "AGRICULTURE OR FARM POLICY OR AGRI OR RTRS OR DJN  OR BARCHA OR NOTENG OR BNEINT OR IFX",
-    "Coffee News": "COFFEE OR RTRS OR DJN  OR BARCHA OR NOTENG OR BNEINT OR IFX OR SAUARB OR ARASER OR YAHNEX OR NOTENG OR BRN OR PUBT OR "
+
+NEWS_TABS = {
+
+    "GRAINS": "GRAINS AND ENGLISH",
+
+    "NOPA": "NOPA OR 'Statistics Canada' AND ENGLISH",
+
+    "CRUDE_METAL_FOREX": "(CRUDE OR METAL OR FOREX OR TARIFFS) AND ENGLISH",
+
+    "WAR": "(WAR OR UKRAINE OR ISRAEL OR GAZA OR RUSSIA) AND ENGLISH",
+
+    "BIOFUEL": "(BIOFUEL OR ETHANOL OR BIODIESEL) AND ENGLISH",
+
+    "RTRS_AGRI": "RTRS AND (GRAINS OR AGRI) AND ENGLISH NOT (DJNV OR RITV)",
+
+    "COCO_COFFEE": "(COCOA OR COFFEE) AND ENGLISH",
+
+    "COTTON_SUGAR": "(COTTON OR SUGAR) AND ENGLISH"
+
 }
+ 
+# -------------------------------------------------------
+
+# 🔹 Helper: Send to Teams
 
 # -------------------------------------------------------
-# 🔹 Send message to Microsoft Teams (no link)
-# -------------------------------------------------------
-def send_to_teams(headline, timestamp):
-    """Send formatted message (headline + timestamp only)"""
-    message = f"📰 {headline}\n🕒 {timestamp}"
-    payload = {"message": message}  # <-- 'message' works with Power Automate
+
+def send_to_teams(category, headline, story_id, timestamp):
+
+    """Send formatted message to Teams"""
+
+    message = f"🔥 **[{category}]**\n📰 {headline}\n🕒 {timestamp}\n🆔 Story ID: {story_id}"
+
+    payload = {"message": message}
+
     headers = {"Content-Type": "application/json"}
-
+ 
     try:
+
         r = requests.post(TEAMS_WEBHOOK_URL, json=payload, headers=headers, timeout=10)
+
         if r.status_code not in [200, 202]:
-            print(f"⚠️ Failed to post to Teams: {r.status_code} - {r.text}")
+
+            print(f"⚠️ Teams Post Failed ({r.status_code}): {r.text}")
+
         else:
-            print(f"✅ Posted successfully: {headline[:60]}...")
+
+            print(f"✅ Posted: {headline[:80]}...")
+
     except Exception as e:
+
         print(f"⚠️ Error sending to Teams: {e}")
+ 
+# -------------------------------------------------------
+
+# 🔹 Fetch news headlines
 
 # -------------------------------------------------------
-# 🔹 Fetch headlines for a given category
-# -------------------------------------------------------
-def fetch_news_by_category(query, count=5):
-    """Fetch latest news for a specific query"""
+
+def fetch_news(query, count=5):
+
     try:
-        headlines = ek.get_news_headlines(query, count=count)
-        if "versionCreated" in headlines.columns:
-            headlines["versionCreated"] = pd.to_datetime(headlines["versionCreated"], errors="coerce", utc=True)
-        return headlines
+
+        df = ek.get_news_headlines(query, count=count)
+
+        if "versionCreated" in df.columns:
+
+            df["versionCreated"] = pd.to_datetime(df["versionCreated"], errors="coerce", utc=True)
+
+        return df
+
     except Exception as e:
-        print(f"[{time.strftime('%H:%M:%S')}] ❌ Error fetching news: {e}")
+
+        print(f"[{time.strftime('%H:%M:%S')}] ❌ Error fetching news for query '{query}': {e}")
+
         return pd.DataFrame()
+ 
+# -------------------------------------------------------
+
+# 🔹 Detect headline column
 
 # -------------------------------------------------------
-# 🔹 Detect the correct headline column
-# -------------------------------------------------------
+
 def detect_headline_column(df):
-    possible_cols = ["headline", "text", "title", "storyText", "storyTitle"]
-    for col in possible_cols:
+
+    for col in ["headline", "text", "title", "storyText", "storyTitle"]:
+
         if col in df.columns:
+
             return col
+
     for col in df.columns:
+
         if df[col].dtype == object:
+
             return col
+
     return None
+ 
+# -------------------------------------------------------
+
+# 🔹 Convert UTC to India time
 
 # -------------------------------------------------------
-# 🔹 Convert UTC to India Time
-# -------------------------------------------------------
+
 def to_india_time(utc_time):
+
     if pd.isnull(utc_time):
+
         return ""
-    india_tz = pytz.timezone("Asia/Kolkata")
-    return utc_time.tz_convert(india_tz).strftime("%Y-%m-%d %H:%M:%S IST")
+
+    tz = pytz.timezone("Asia/Kolkata")
+
+    return utc_time.tz_convert(tz).strftime("%Y-%m-%d %H:%M:%S IST")
+ 
+# -------------------------------------------------------
+
+# 🔹 Monitor and post Reuters news
 
 # -------------------------------------------------------
-# 🔹 Monitor and post new stories (no link)
-# -------------------------------------------------------
-def monitor_news():
-    """Continuously monitor and post categorized news"""
-    print(f"🌾 Monitoring news at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+
+def monitor_reuters_news():
+
+    print(f"🟢 Monitoring Reuters news since {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+
     seen_ids = set()
-
+ 
     while True:
+
         try:
-            for category_name, query in NEWS_CATEGORIES.items():
-                news_df = fetch_news_by_category(query, count=5)
-                if news_df.empty:
-                    continue
 
-                headline_col = detect_headline_column(news_df)
+            for category, query in NEWS_TABS.items():
+
+                df = fetch_news(query, count=10)
+
+                if df.empty:
+
+                    continue
+ 
+                headline_col = detect_headline_column(df)
+
                 if not headline_col:
-                    print(f"⚠️ Could not find headline column for {category_name}")
+
+                    print(f"⚠️ No headline column for {category}")
+
                     continue
+ 
+                for _, row in df.iterrows():
 
-                for _, row in news_df.iterrows():
                     story_id = row.get("storyId")
-                    if story_id and story_id not in seen_ids:
-                        headline_text = str(row.get(headline_col, "No headline"))
-                        india_time = to_india_time(row.get("versionCreated"))
 
-                        # Send only headline and time (no link)
-                        send_to_teams(f"[{category_name}] {headline_text}", india_time)
-                        seen_ids.add(story_id)
+                    if not story_id or story_id in seen_ids:
 
-            print("✅ All current news posted!")
-            time.sleep(10)  # minimal delay for new news
+                        continue
+ 
+                    headline = str(row.get(headline_col, "No headline")).strip()
 
-        except Exception as loop_error:
-            print(f"⚠️ Loop error: {loop_error}")
-            print("🔁 Retrying in 10 seconds...")
-            time.sleep(10)
+                    timestamp = to_india_time(row.get("versionCreated"))
+
+                    # 🔥 Send to Teams with fire emoji and story ID
+
+                    send_to_teams(category, headline, story_id, timestamp)
+
+                    seen_ids.add(story_id)
+ 
+            print("🔁 Cycle complete. Checking again in 60 seconds...\n")
+
+            time.sleep(3)
+ 
+        except Exception as e:
+
+            print(f"⚠️ Error in loop: {e}")
+
+            time.sleep(5)
+ 
+# -------------------------------------------------------
+
+# MAIN ENTRY
 
 # -------------------------------------------------------
-# 🔹 MAIN ENTRY POINT
-# -------------------------------------------------------
+
 if __name__ == "__main__":
-    monitor_news()
+
+    monitor_reuters_news()
+
+ 

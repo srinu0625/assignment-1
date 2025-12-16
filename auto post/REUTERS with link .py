@@ -2,7 +2,7 @@ import pandas as pd
 import eikon as ek
 import requests
 import time
-from datetime import datetime
+from datetime import datetimes
 import pytz
 
 # -------------------------------------------------------
