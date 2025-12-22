@@ -4,11 +4,12 @@ import requests
 import time
 from datetime import datetimes
 import pytz
-
+import datetime
+from config import teams_webhook_url
 # -------------------------------------------------------
 # 1️⃣ CONFIGURATION
 # -------------------------------------------------------
-APP_KEY = "92e0a59a8e994142bab0f82d8294e1df404da224"  # 🔸 Replace with your Refinitiv/Eikon App Key
+APP_KEY = "92e0a59a8e994142bab0f82d8294e1df404da224"  # 
 TEAMS_WEBHOOK_URL = "https://default88ff9cb3e35e4d71b1d7f6c6ed8657.30.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/55b4731413d04f6a95975ba9fa82eb79/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Zcwo1Eac1WD4j7-ITfAA5YJTr9t93yezQWVZvRTKe-s"
 
 # Initialize Eikon connection
@@ -18,10 +19,17 @@ ek.set_app_key(APP_KEY)
 # 🔹 Define news categories
 # -------------------------------------------------------
 NEWS_CATEGORIES = {
-    "Cotton News": "COTTON",
-    "Grains News": "WHEAT OR RICE OR CORN OR GRAINS",
-    "Livestock News": "LIVESTOCK OR CATTLE OR POULTRY",
-    "Agri Policy News": "AGRICULTURE OR FARM POLICY OR AGRI"
+
+    "GRAINS": "GRAINS AND ENGLISH ",
+    "NOPA": "NOPA OR 'Statistics Canada' AND ENGLISH ",
+    "CRUDE_METAL_FOREX": "(CRUDE OR METAL OR FOREX OR TARIFFS) AND ENGLISH ",
+    "WAR": "(WAR OR UKRAINE OR ISRAEL OR GAZA OR RUSSIA) AND ENGLISH ",
+    "BIOFUEL": "(BIOFUEL OR ETHANOL OR BIODIESEL) AND ENGLISH ",
+    "RTRS_AGRI": "RTRS AND (GRAINS OR AGRI) AND ENGLISH NOT (DJN"
+    "V OR RITV) ",        
+    "COCO_COFFEE": "(COCOA OR COFFEE) AND ENGLISH ",
+    "COTTON_SUGAR": "(COTTON OR SUGAR) AND ENGLISH"
+
 }
 
 # -------------------------------------------------------
@@ -119,6 +127,8 @@ def monitor_news():
             print(f"⚠️ Loop error: {loop_error}")
             print("🔁 Retrying in 10 seconds...")
             time.sleep(10)
+
+
 
 # -------------------------------------------------------
 # 🔹 MAIN ENTRY POINT

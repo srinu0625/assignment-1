@@ -14,8 +14,8 @@ warnings.filterwarnings("ignore")
 product_pairs = {
     "ES": (r"D:\SI 60min.csv", r"D:\SI s.csv"),
     "NQ": (r"D:\NQ 60min.csv", r"D:\NQ s.csv"),
-    "SI": (r"D:\ES 60min.csv", r"D:\ES s.csv")
-    # "GC": (r"D:\GC 60min.csv", r"D:\GC s.csv")
+    "SI": (r"D:\ES 60min.csv", r"D:\ES s.csv"),
+    "GC": (r"D:\GC 60min.csv", r"D:\GC s.csv")
 }
 
 target_cols = ["Open", "High", "Close"]
