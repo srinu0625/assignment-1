@@ -4,29 +4,14 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
 # ====================================================
-# CONFIG (TIMEFRAME AGNOSTIC)
+# CONFIG
 # ====================================================
 CSV_FILE = r"D:\Data\ES_NQ.csv"
-
-ROLLING_WINDOW = 120        # bars
-ENTRY_Z = 1.5
-EXIT_Z = 0.6
-MAX_HALF_LIFE = 20          # bars
-TREND_LIMIT = 0.0005
-
-# ====================================================
-# HELPERS
-# ====================================================
-def half_life(series):
-    lag = series.shift(1).dropna()
-    delta = series.diff().dropna()
-    beta = np.polyfit(lag, delta, 1)[0]
-    return -np.log(2) / beta if beta < 0 else np.inf
-
-def max_drawdown(series):
-    cum = series.cumsum()
-    peak = cum.cummax()
-    return (peak - cum).max()
+ROLLING_WINDOW = 252
+ENTRY_Z = 0.8
+EXIT_Z = 0.2
+MAX_HOLD = 20
+OUTPUT_FILE = "PCA_ES_NQ_DAILY_ORDERBOOK.xlsx"
 
 # ====================================================
 # LOAD DATA
@@ -37,106 +22,135 @@ df.set_index("Date(GMT)", inplace=True)
 df = df[["ES Close", "NQ Close"]].dropna()
 df.columns = ["ES", "NQ"]
 
+# ====================================================
+# LOG RETURNS
+# ====================================================
 returns = np.log(df / df.shift(1)).dropna()
 
 # ====================================================
-# BACKTEST STATE
+# STATE
 # ====================================================
 position = 0
-entry_pc2 = 0.0
-entry_idx = None
-entry_date = None
-
+entry = {}
 trade_log = []
-pc2_pnl_series = []
+order_book = []
+cum_pnl = 0.0
+trade_id = 0
 
 # ====================================================
-# ROLLING PCA BACKTEST
+# BACKTEST
 # ====================================================
 for i in range(ROLLING_WINDOW, len(returns)):
 
     window = returns.iloc[i - ROLLING_WINDOW:i]
 
-    # Trend filter
-    if window.mean().abs().sum() > TREND_LIMIT:
-        continue
-
     scaler = StandardScaler()
     X = scaler.fit_transform(window)
 
     pca = PCA(n_components=2)
-    pcs = pca.fit_transform(X)
+    pca.fit(X)
 
-    pc2_series = pd.Series(pcs[:, 1], index=window.index)
+    pc2 = pca.transform(X)[:, 1]
+    mean_pc2 = pc2.mean()
+    std_pc2 = pc2.std()
 
-    hl = half_life(pc2_series)
-    if hl > MAX_HALF_LIFE:
+    if std_pc2 < 1e-6:
         continue
 
-    pc2_mean = pc2_series.mean()
-    pc2_std = pc2_series.std()
+    pc2_now = pca.transform(
+        scaler.transform(returns.iloc[i:i+1])
+    )[0, 1]
 
-    current_ret = scaler.transform(returns.iloc[i:i+1])
-    pc2_now = pca.transform(current_ret)[0, 1]
-    z = (pc2_now - pc2_mean) / pc2_std
-
+    z = (pc2_now - mean_pc2) / std_pc2
     date = returns.index[i]
+
+    w = pca.components_[1]
+    w = w / np.sum(np.abs(w))
+    es_w, nq_w = w
+
+    es_price = df.loc[date, "ES"]
+    nq_price = df.loc[date, "NQ"]
 
     # ================= ENTRY =================
     if position == 0:
+
         if z > ENTRY_Z:
             position = -1
-            entry_pc2 = pc2_now
-            entry_idx = i
-            entry_date = date
+            direction = "SHORT ES / LONG NQ"
+            es_side, nq_side = "SELL", "BUY"
 
         elif z < -ENTRY_Z:
             position = 1
-            entry_pc2 = pc2_now
-            entry_idx = i
-            entry_date = date
+            direction = "LONG ES / SHORT NQ"
+            es_side, nq_side = "BUY", "SELL"
+
+        else:
+            continue
+
+        trade_id += 1
+
+        entry = {
+            "Trade ID": trade_id,
+            "Entry Date": date,
+            "Entry Index": i,
+            "ES_w": es_w,
+            "NQ_w": nq_w,
+            "Entry PC2": pc2_now,
+            "Direction": direction,
+            "ES Side": es_side,
+            "NQ Side": nq_side
+        }
+
+        # ---- Order Book (ENTRY) ----
+        order_book.extend([
+            {"Trade ID": trade_id, "Date": date, "Instrument": "ES",
+             "Action": "ENTRY", "Side": es_side, "Weight": es_w, "Price": es_price},
+            {"Trade ID": trade_id, "Date": date, "Instrument": "NQ",
+             "Action": "ENTRY", "Side": nq_side, "Weight": nq_w, "Price": nq_price}
+        ])
 
     # ================= EXIT =================
     else:
-        if abs(z) < EXIT_Z:
-            pnl = position * (pc2_now - entry_pc2)
-            holding = i - entry_idx
+        hold = i - entry["Entry Index"]
+
+        if abs(z) < EXIT_Z or hold >= MAX_HOLD:
+
+            es_ret = returns.iloc[i]["ES"]
+            nq_ret = returns.iloc[i]["NQ"]
+
+            pnl = position * (es_ret * entry["ES_w"] - nq_ret * entry["NQ_w"])
+            cum_pnl += pnl
+
+            # ---- Order Book (EXIT) ----
+            exit_es = "BUY" if entry["ES Side"] == "SELL" else "SELL"
+            exit_nq = "BUY" if entry["NQ Side"] == "SELL" else "SELL"
+
+            order_book.extend([
+                {"Trade ID": entry["Trade ID"], "Date": date, "Instrument": "ES",
+                 "Action": "EXIT", "Side": exit_es, "Weight": entry["ES_w"], "Price": es_price},
+                {"Trade ID": entry["Trade ID"], "Date": date, "Instrument": "NQ",
+                 "Action": "EXIT", "Side": exit_nq, "Weight": entry["NQ_w"], "Price": nq_price}
+            ])
 
             trade_log.append({
-                "Entry Date": entry_date,
+                "Entry Date": entry["Entry Date"],
                 "Exit Date": date,
-                "Direction": "Long PC2" if position == 1 else "Short PC2",
-                "Entry PC2": entry_pc2,
-                "Exit PC2": pc2_now,
+                "Direction": entry["Direction"],
+                "Holding Days": hold,
                 "PnL": pnl,
-                "Holding Bars": holding
+                "CumPnL": cum_pnl
             })
-
-            pc2_pnl_series.append(pnl)
 
             position = 0
 
 # ====================================================
-# RESULTS
+# EXPORT
 # ====================================================
-trades = pd.DataFrame(trade_log)
-pnl = trades["PnL"] if not trades.empty else pd.Series(dtype=float)
+trades_df = pd.DataFrame(trade_log)
+order_book_df = pd.DataFrame(order_book)
 
-report = {
-    "Total Trades": len(trades),
-    "Win Rate": f"{(pnl > 0).mean() * 100:.2f}%" if len(pnl) else "0%",
-    "Avg Trade": pnl.mean() if len(pnl) else 0,
-    "Max Win": pnl.max() if len(pnl) else 0,
-    "Max Loss": pnl.min() if len(pnl) else 0,
-    "Avg Holding Time (bars)": trades["Holding Bars"].mean() if len(trades) else 0,
-    "PC2 Variance (%)": round(pca.explained_variance_ratio_[1] * 100, 2),
-    "Worst Drawdown (PC space)": max_drawdown(pd.Series(pc2_pnl_series)) if pc2_pnl_series else 0
-}
+with pd.ExcelWriter(OUTPUT_FILE, engine="openpyxl") as writer:
+    trades_df.to_excel(writer, sheet_name="Trades", index=False)
+    order_book_df.to_excel(writer, sheet_name="OrderBook", index=False)
 
-report_df = pd.DataFrame(report.items(), columns=["Metric", "Value"])
-
-print("\n✅ PCA STAT-ARB BACKTEST COMPLETE")
-print(report_df)
-
-# OPTIONAL: save trade log
-trades.to_csv("pca_trade_log.csv", index=False)
+print("✅ Order-book style Excel generated:", OUTPUT_FILE)
