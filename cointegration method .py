@@ -14,17 +14,17 @@ import time
 init(autoreset=True)
 
 # ==================== USER INPUT ====================
-file1 = r"D:\Data\CL 60 22-25.csv"
-file2 = r"D:\Data\BR 60 22-25.csv"
+file1 = r"D:\Data\CL d 19-25.csv"
+file2 = r"D:\Data\BR d 19-25.csv"
 
 CL_contract_size = 1000
 BR_contract_size = 1000
 
-WINDOW        = 50
-ADF_WINDOW    = max(200, 2 * WINDOW)
-ENTRY_Z       = 2.0
+WINDOW        = 30
+ADF_WINDOW    = max(150, 2 * WINDOW)
+ENTRY_Z       = 1.2
 EXIT_Z        = 0.5
-STOP_LOSS     = -1000
+STOP_LOSS     = -500
 ADF_PVAL_MAX  = 0.05
 
 # ==================== HELPER FUNCTIONS ====================
@@ -55,8 +55,8 @@ def print_exit(t, side, z, pnl, reason, h):
 df1 = pd.read_csv(file1)
 df2 = pd.read_csv(file2)
 
-df1['Date(GMT)'] = pd.to_datetime(df1['Date(GMT)'], format='%d-%m-%Y %H.%M')
-df2['Date(GMT)'] = pd.to_datetime(df2['Date(GMT)'], format='%d-%m-%Y %H.%M')
+df1['Date(GMT)'] = pd.to_datetime(df1['Date(GMT)'], format='%d-%m-%Y')
+df2['Date(GMT)'] = pd.to_datetime(df2['Date(GMT)'], format='%d-%m-%Y')
 
 df1 = df1.set_index('Date(GMT)')[['Close']].rename(columns={'Close': 'CL'})
 df2 = df2.set_index('Date(GMT)')[['Close']].rename(columns={'Close': 'BR'})
@@ -236,9 +236,9 @@ print("="*60)
 
 # ==================== EXCEL EXPORT ====================
 
-with pd.ExcelWriter("CL_BR_Cointegration_60_T7.xlsx", engine="openpyxl") as writer:
+with pd.ExcelWriter("CL_BR_Cointegration_D_T4.xlsx", engine="openpyxl") as writer:
     trades_df.to_excel(writer, sheet_name="Trades", index=False)
     summary_df = pd.DataFrame(list(summary.items()), columns=["Metric", "Value"])
     summary_df.to_excel(writer, sheet_name="Summary", index=False)
 
-print("\nExcel saved: CL_BR_Cointegration_60_T6.xlsx")
+print("\nExcel saved: CL_BR_Cointegration_D_T4.xlsx")
