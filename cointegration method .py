@@ -14,17 +14,17 @@ import time
 init(autoreset=True)
 
 # ==================== USER INPUT ====================
-file1 = r"D:\Data\CL d 19-25.csv"
-file2 = r"D:\Data\BR d 19-25.csv"
+file1 = r"D:\Data\CL 60 22-25.csv"
+file2 = r"D:\Data\BR 60 22-25.csv"
 
 CL_contract_size = 1000
 BR_contract_size = 1000
 
 WINDOW        = 30
 ADF_WINDOW    = max(150, 2 * WINDOW)
-ENTRY_Z       = 1.2
-EXIT_Z        = 0.5
-STOP_LOSS     = -500
+ENTRY_Z       = 2.1
+EXIT_Z        = 0.3
+STOP_LOSS     = -250
 ADF_PVAL_MAX  = 0.05
 
 # ==================== HELPER FUNCTIONS ====================
@@ -41,22 +41,22 @@ def print_entry(t, side, z, cl, br, h):
     print(f"{t} | ENTRY | {side} | Z={z:.2f} | hedge={h:.3f}")
     print(f"   CL={cl:.2f}  BR={br:.2f}")
     print("-" * 60)
-    time.sleep(0.5)
+    time.sleep(3.5)
 
 def print_exit(t, side, z, pnl, reason, h):
     color = Fore.GREEN if pnl > 0 else Fore.RED
     print(f"{t} | EXIT | {side} | Z={z:.2f} | hedge={h:.3f} | {reason}")
     print(f"   PnL: {color}{pnl:.2f}{Style.RESET_ALL}")
     print("=" * 70)
-    time.sleep(0.5)
+    time.sleep(3.5)
 
 # ==================== LOAD DATA ====================
 
 df1 = pd.read_csv(file1)
 df2 = pd.read_csv(file2)
 
-df1['Date(GMT)'] = pd.to_datetime(df1['Date(GMT)'], format='%d-%m-%Y')
-df2['Date(GMT)'] = pd.to_datetime(df2['Date(GMT)'], format='%d-%m-%Y')
+df1['Date(GMT)'] = pd.to_datetime(df1['Date(GMT)'], format='%d-%m-%Y %H.%M')
+df2['Date(GMT)'] = pd.to_datetime(df2['Date(GMT)'], format='%d-%m-%Y %H.%M')
 
 df1 = df1.set_index('Date(GMT)')[['Close']].rename(columns={'Close': 'CL'})
 df2 = df2.set_index('Date(GMT)')[['Close']].rename(columns={'Close': 'BR'})

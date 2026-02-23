@@ -69,7 +69,7 @@ df['sma_50'] = price.rolling(window=50).mean() # extra SMA for plotting
 # a simple RSI proxy (not exact TA-lib but serviceable)
 # We compute RSI on price changes (standard 14)
 
- delta = price.diff()
+delta = price.diff()
 up = delta.clip(lower=0)
 down = -1 * delta.clip(upper=0)
 roll_up = up.rolling(14).mean()
@@ -122,7 +122,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 # Use validation_split to get validation curves (10% of training used for validation)
 history = model.fit(X_train_scaled, y_train, epochs=20, batch_size=16, verbose=1, validation_split=0.1)
 
-# -------------------------
+# -------------------------rime.sleep
 # PREDICTIONS
 # -------------------------
 y_pred_proba = model.predict(X_test_scaled).flatten()

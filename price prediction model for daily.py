@@ -1,3 +1,4 @@
+from time import time
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.multioutput import MultiOutputRegressor
@@ -18,11 +19,13 @@ df["Date(GMT)"] = pd.to_datetime(df["Date(GMT)"], errors="coerce")
 df = df.dropna(subset=["Date(GMT)"]).sort_values("Date(GMT)").reset_index(drop=True)
 
 print(f"Loaded {len(df)} rows from file.")
+time.sleep(50)  # pause to read results before plotting
 
 # ======== ADAPTIVE LAG SELECTION =========
 usable_rows = len(df) - 50  # keep some for training/testing
 no_of_candles = min(No_of_candles, max(5, usable_rows // 5))
 print(f"Using {no_of_candles} lag candles (auto-adjusted based on data size).")
+time.sleep(50)  # pause to read results before plotting
 
 # ======== FEATURE CREATION ========= 
 for i in range(1, no_of_candles + 1):
@@ -57,6 +60,7 @@ X_train, X_test = X.iloc[:split_idx], X.iloc[split_idx:]
 y_train, y_test = y.iloc[:split_idx], y.iloc[split_idx:]
 
 print(f"Train size: {len(X_train)}, Test size: {len(X_test)}")
+time.sleep(50)  # pause to read results before plotting
 
 if len(X_train) < 30 or len(X_test) < 10:
     print("⚠️ Warning: Very small dataset; predictions may be rough.")
@@ -74,6 +78,7 @@ print(f"\nMean Absolute Errors:")
 print(f"  Open:  {mae_each[0]:.4f}")
 print(f"  High:  {mae_each[1]:.4f}")
 print(f"  Close: {mae_each[2]:.4f}")
+time.sleep(50)  # pause to read results before plotting
 
 # ======== NEXT-CANDLE PREDICTION =========
 last_row = df.iloc[-1]
@@ -84,6 +89,7 @@ print("\n=== Predicted Next Candle Prices ===")
 print(f"Next Open:  {next_pred[0]:.2f}")
 print(f"Next High:  {next_pred[1]:.2f}")
 print(f"Next Close: {next_pred[2]:.2f}")
+time.sleep(50)  # pause to read results before plotting
 
 # ======== PLOT RESULTS =========
 if len(y_test) > 0:
@@ -109,3 +115,4 @@ if len(y_test) > 0:
     plt.show()
 else:
     print("⚠️ Skipping plot — not enough test data.")
+    time.sleep(50)  # pause to read results before plotting
