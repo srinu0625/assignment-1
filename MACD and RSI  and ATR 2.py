@@ -4,7 +4,7 @@ import re
 import time
 
 # ==================== CONFIG ====================
-file_path         = r"D:\Data\CL d 19-25.csv"
+file_path         = r"D:\Data\CL daily.csv"
 output_path       = r"C:\Users\lenovo\Downloads\ES 10Min.csv"
 time_col          = 'Date(GMT)'
 open_col          = 'Open'
@@ -122,7 +122,7 @@ for i in range(warmup, len(df)):
             print(f" EMA_RSI      : {ema_rsi:.2f}")
             print(f" ATR          : {atr:.4f}")
             print("================================\n")
-            time.sleep(100)
+            time.sleep(1)
             continue
 
         if position == 1:
@@ -199,7 +199,7 @@ for i in range(warmup, len(df)):
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}  | Max RU: {max_runup:.2f}")
                 print("================================\n")
-                time.sleep(100)
+                time.sleep(1)
                 position = 0
                 entry_price = entry_time = entry_index = None
                 stop_loss = target_profit = None
@@ -220,7 +220,7 @@ for i in range(warmup, len(df)):
             print(f" EMA_RSI      : {ema_rsi:.2f}")
             print(f" ATR          : {atr:.4f}")
             print("================================\n")
-            time.sleep(100)
+            time.sleep(1)
             continue
 
         if position == -1:
@@ -297,7 +297,7 @@ for i in range(warmup, len(df)):
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}  | Max RU: {max_runup:.2f}")
                 print("================================\n")
-                time.sleep(100)
+                time.sleep(1)
                 position = 0
                 entry_price = entry_time = entry_index = None
                 stop_loss = target_profit = None

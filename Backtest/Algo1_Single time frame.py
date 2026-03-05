@@ -1,6 +1,8 @@
 import pandas as pd
+import time
 
-file_path = r"D:\es daily.csv"
+
+file_path = r"D:\Data\CL daily.csv"
 
 # Load the data
 try:
@@ -17,7 +19,7 @@ print("1st row", data.iloc[0].tolist())
 # Assuming the column names for high and low are 'High' and 'Low'
 high_column_name = 'High'
 low_column_name = 'Low'
-time_column_name = 'Date (GMT)'
+time_column_name = 'Date(GMT)'
 
 # temp column names
 temp_high = 0
@@ -38,8 +40,8 @@ num_of_trades=0
 # P&L calculation
 entry_price = 0
 exit_price = 0
-contract_size = 50 
-tick_value = 0.25
+contract_size = 100
+tick_value = 0.01
 # maxloss maxprofit
 max_loss=0 
 max_profit=0 
@@ -83,10 +85,10 @@ for index, row in data.iterrows():
                   , " temp_high :", temp_high)
             print("Current Low :", current_low, "Previous Low :", previous_low, "local_low :", local_low
                   , " temp_low :", temp_low)
-            #time.sleep(2)
+            time.sleep(2)
 
             # bullish candle---------------------------------------------------------------------------
-            max_loss_for_trade = (local_high - local_low) * contract_size
+            max_loss_for_trade = (local_high - local_low) * contract_size * tick_value
             if current_high > local_high and local_high!=0 and local_low!=0  and not bear and not flag:
                 number_of_positions +=1
                 entry_price = local_high +(tick_value * 2)
@@ -94,7 +96,7 @@ for index, row in data.iterrows():
                 print("current_high = ",current_high),print("local_high = ",local_high)
                 print("number_of_positions = ",number_of_positions)
                 print("   long_entry_price = ",entry_price)
-                print("max_loss_for_trade =",max_loss_for_trade)
+                print(" max_loss_for_trade = ",max_loss_for_trade)
                 bull = True
                 flag = True
                 continue
@@ -105,7 +107,8 @@ for index, row in data.iterrows():
                 exit_price = local_low -(tick_value * 2)
                 print("\033[32m--SNP500 LONG EXIT-- (CL < LL)\033[0m") # ANSI escape codes for this color coding to work
                 print("current_low :",current_low),print("local_low :",local_low)
-                print("number_of_positions = ",number_of_positions),print("num_of_trades = ",num_of_trades)
+                print("number_of_positions = ",number_of_positions),
+                print("num_of_trades = ",num_of_trades)
                 print( "    long_exit_pric =",exit_price)
                 
                 print(exit_price-entry_price)
@@ -147,7 +150,7 @@ for index, row in data.iterrows():
                 print("current_low :",current_low),print("local_low :",local_low)
                 print("number_of_positions =",number_of_positions)
                 print("  short_entry_price = ",entry_price)
-                print("max_loss_for_trade =",max_loss_for_trade)
+                print(" max_loss_for_trade =",max_loss_for_trade)
                 bear = True
                 flag = True
                 continue
@@ -158,7 +161,8 @@ for index, row in data.iterrows():
                 exit_price=local_high + (tick_value * 2) 
                 print("\033[31m--SNP500 SHORT EXIT-- (CH > LH)\033[0m") #  ANSI escape codes for this color coding to work 
                 print("current_high :",current_high), print("local_high :",local_high),
-                print("number_of_positions = ",number_of_positions),print("num_of_trades = ",num_of_trades)
+                print("number_of_positions = ",number_of_positions),
+                print("num_of_trades = ",num_of_trades)
                 print("   short_exit_price = ",exit_price)
                 print(entry_price-exit_price)
                 bear = False

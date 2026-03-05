@@ -1,0 +1,513 @@
+{
+  "id": "0bacd1fc-baa4-4f83-b99b-b80afa99278b",
+  "name": "price Alert ",
+  "description": "",
+  "orderSide": true,
+  "variables": [
+    "5a466ecf-7797-4a66-80c5-2294e55d0a69"
+  ],
+  "exports": [],
+  "bookmarks": [],
+  "content": [
+    {
+      "defName": "Instrument",
+      "defId": "9387710D-FC3E-42AA-AFFD-EB154BCFBAC7",
+      "guid": "5a466ecf-7797-4a66-80c5-2294e55d0a69",
+      "x": 271,
+      "y": 111.5,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Instrument0",
+          "hasCustomName": true
+        },
+        {
+          "name": "instrumentId",
+          "value": "8650488815850942608"
+        },
+        {
+          "name": "type",
+          "value": "userDefined"
+        },
+        {
+          "name": "account",
+          "value": "1319771"
+        },
+        {
+          "name": "instrumentAlias",
+          "value": "ES Sep25"
+        },
+        {
+          "name": "exchangeAlias",
+          "value": "CME"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 25
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "TimeAndSales",
+      "defId": "474C8E5F-9FDB-4685-ADBE-5AB4334CC9E9",
+      "guid": "6b7ce372-c352-4333-9866-85bc01f8f142",
+      "x": 443,
+      "y": 100,
+      "properties": [
+        {
+          "name": "name",
+          "value": "TimeAndSales0",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 50
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "MsgInfoExtractor",
+      "defId": "9E4FD2E5-1C34-436C-9AB7-AB1A16F13C74",
+      "guid": "71fbe999-0054-4220-b64f-b6934bf649c5",
+      "x": 583,
+      "y": 109,
+      "properties": [
+        {
+          "name": "name",
+          "value": "MsgInfoExtractor0",
+          "hasCustomName": true
+        },
+        {
+          "name": "Connectors",
+          "value": [
+            "tradeQuantity",
+            "tradePrice",
+            "milliseconds"
+          ]
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 50
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "ValueAccumulator",
+      "defId": "7C23E28F-AF94-4D4D-9E4D-0AD5584D0F4F",
+      "guid": "a67432e9-eb51-4366-9ffa-d00c08630ac2",
+      "x": 766,
+      "y": 110,
+      "properties": [
+        {
+          "name": "name",
+          "value": "QTY",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[71fbe999-0054-4220-b64f-b6934bf649c5.eeeea5e4-0bad-446d-b374-e610fdddbd1b] "
+        },
+        {
+          "name": "connectors",
+          "value": {}
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 40
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "7aabd2fe-0d79-43e4-90c6-167487f7d70b"
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "if",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 0,
+                  "column": 0
+                },
+                "end": {
+                  "offset": 0,
+                  "line": 0,
+                  "column": 0
+                }
+              },
+              "condition": {
+                "type": "bool",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 0,
+                    "column": 0
+                  },
+                  "end": {
+                    "offset": 0,
+                    "line": 0,
+                    "column": 0
+                  }
+                },
+                "value": true
+              },
+              "then": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 75,
+                    "line": 1,
+                    "column": 76
+                  }
+                },
+                "name": "71fbe999-0054-4220-b64f-b6934bf649c5.eeeea5e4-0bad-446d-b374-e610fdddbd1b",
+                "blockId": "71fbe999-0054-4220-b64f-b6934bf649c5",
+                "connId": "eeeea5e4-0bad-446d-b374-e610fdddbd1b",
+                "connDataType": "generic"
+              },
+              "else": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 75,
+                    "line": 1,
+                    "column": 76
+                  }
+                },
+                "name": "71fbe999-0054-4220-b64f-b6934bf649c5.eeeea5e4-0bad-446d-b374-e610fdddbd1b",
+                "blockId": "71fbe999-0054-4220-b64f-b6934bf649c5",
+                "connId": "eeeea5e4-0bad-446d-b374-e610fdddbd1b",
+                "connDataType": "generic"
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "GreaterThan",
+      "defId": "E1C87AE2-A4EA-4396-B301-2C552FB3B49D",
+      "guid": "f86eaafd-413d-4afb-ace8-a864d81f1c00",
+      "x": 964.0118307177157,
+      "y": 108.60810825850217,
+      "properties": [
+        {
+          "name": "name",
+          "value": "GreaterThan0",
+          "hasCustomName": true
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Number",
+      "defId": "794959B3-80F3-46DD-976F-B7BB517A2BAA",
+      "guid": "ca676e4a-5dbc-4ef1-9eae-353c0eec2e98",
+      "x": 880.0118307177157,
+      "y": 168.60810825850217,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Number0",
+          "hasCustomName": true
+        },
+        {
+          "name": "value",
+          "value": 130
+        },
+        {
+          "name": "orderTypeValue",
+          "value": "limit"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "type",
+          "value": "static"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Alert",
+      "defId": "84AC3999-06B1-4951-921D-2059B00BC4A1",
+      "guid": "a62828af-a465-4816-94d3-0ea6b1c90dd5",
+      "x": 1120.5118307177158,
+      "y": 107.10810825850217,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Alert0",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "\"[f86eaafd-413d-4afb-ace8-a864d81f1c00.997d2508-d927-4d14-aec4-fac3a5c89c7a] \"= true"
+        },
+        {
+          "name": "alertAction",
+          "value": [
+            "Sound",
+            "Audit Trail"
+          ]
+        },
+        {
+          "name": "frequency",
+          "value": "0.4"
+        },
+        {
+          "name": "alertColor",
+          "value": "rgb(255, 255, 255)"
+        },
+        {
+          "name": "alertSound",
+          "value": "chimes"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 55,
+            "height": 55
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Analytics",
+      "defId": "C8DE91C8-C9B6-446D-9431-CE1780DD4B1F",
+      "guid": "6def9adf-ad82-4dc8-ba49-6e40162a0e4e",
+      "x": 510.0118307177157,
+      "y": 265.10810825850217,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Analytics0",
+          "hasCustomName": true
+        },
+        {
+          "name": "intervalType",
+          "value": "minutes"
+        },
+        {
+          "name": "dataAccessMethod",
+          "value": "index"
+        },
+        {
+          "name": "barsToKeep",
+          "value": 2
+        },
+        {
+          "name": "exposedOutputs",
+          "value": [
+            "onBarComplete"
+          ]
+        },
+        {
+          "name": "instrumentAlias",
+          "value": "(not selected)"
+        },
+        {
+          "name": "indicator",
+          "value": "none"
+        },
+        {
+          "name": "field",
+          "value": "open"
+        },
+        {
+          "name": "movingAvgType",
+          "value": "simple"
+        },
+        {
+          "name": "movingAvgTypeSlowK",
+          "value": "simple"
+        },
+        {
+          "name": "movingAvgTypeSlowD",
+          "value": "simple"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 80
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Number",
+      "defId": "794959B3-80F3-46DD-976F-B7BB517A2BAA",
+      "guid": "63449576-cde4-45f3-aee6-992bfdd356ad",
+      "x": 406.0118307177157,
+      "y": 306.60810825850217,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Number1",
+          "hasCustomName": true
+        },
+        {
+          "name": "value",
+          "value": 1
+        },
+        {
+          "name": "orderTypeValue",
+          "value": "limit"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "currValue",
+          "value": null
+        },
+        {
+          "name": "type",
+          "value": "static"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "sourceBlock": "5a466ecf-7797-4a66-80c5-2294e55d0a69",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "6b7ce372-c352-4333-9866-85bc01f8f142",
+      "targetConnector": "0915b10e-9528-4967-8c57-dddd649efc2d",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "6b7ce372-c352-4333-9866-85bc01f8f142",
+      "sourceConnector": "724f0e86-94f9-4283-9d92-4ad7f21d8ce8",
+      "targetBlock": "71fbe999-0054-4220-b64f-b6934bf649c5",
+      "targetConnector": "8d36e715-f531-4ebd-a628-13c09006c573",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "71fbe999-0054-4220-b64f-b6934bf649c5",
+      "sourceConnector": "7ee8db29-5123-41eb-afa0-32aeda978a16",
+      "targetBlock": "a67432e9-eb51-4366-9ffa-d00c08630ac2",
+      "targetConnector": "93e2199d-2a71-4c4d-a90c-6a79cc5e8e43",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "a67432e9-eb51-4366-9ffa-d00c08630ac2",
+      "sourceConnector": "4c544af7-be31-4af0-9001-f9ad73a541b2",
+      "targetBlock": "f86eaafd-413d-4afb-ace8-a864d81f1c00",
+      "targetConnector": "b2be8fdb-09b0-4680-b27c-a1f1dfa36cc8",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "ca676e4a-5dbc-4ef1-9eae-353c0eec2e98",
+      "sourceConnector": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+      "targetBlock": "f86eaafd-413d-4afb-ace8-a864d81f1c00",
+      "targetConnector": "eb912d51-9a27-4c46-81fb-feb16bf0181d",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "f86eaafd-413d-4afb-ace8-a864d81f1c00",
+      "sourceConnector": "997d2508-d927-4d14-aec4-fac3a5c89c7a",
+      "targetBlock": "a62828af-a465-4816-94d3-0ea6b1c90dd5",
+      "targetConnector": "16a20574-a01b-44f3-af3d-749fbe816298",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "5a466ecf-7797-4a66-80c5-2294e55d0a69",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "6def9adf-ad82-4dc8-ba49-6e40162a0e4e",
+      "targetConnector": "8ccda67d-087d-481d-8026-ba4e6bb3bb8d",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "63449576-cde4-45f3-aee6-992bfdd356ad",
+      "sourceConnector": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+      "targetBlock": "6def9adf-ad82-4dc8-ba49-6e40162a0e4e",
+      "targetConnector": "a25c883a-13f8-485b-9420-cab1466714d9",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "63449576-cde4-45f3-aee6-992bfdd356ad",
+      "sourceConnector": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+      "targetBlock": "6def9adf-ad82-4dc8-ba49-6e40162a0e4e",
+      "targetConnector": "e056238b-0d88-48aa-8e9e-99a1be28aee5",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "6def9adf-ad82-4dc8-ba49-6e40162a0e4e",
+      "sourceConnector": "8123391e-495a-4e94-9e20-588b3aa6f6ac",
+      "targetBlock": "a67432e9-eb51-4366-9ffa-d00c08630ac2",
+      "targetConnector": "79f49e7a-bfff-4fe1-960e-78ade4d7df0f",
+      "className": "Edge"
+    }
+  ],
+  "lastModifiedTime": 1752507745786,
+  "ignoreMarketState": false,
+  "graphIdToViewport": {
+    "0bacd1fc-baa4-4f83-b99b-b80afa99278b": {
+      "x": 33.011830717715725,
+      "y": -177.39189174149783,
+      "scale": 1
+    }
+  },
+  "showInMDT": 0,
+  "isSOA": false,
+  "isOmaOta": false,
+  "isPREnabled": false
+}
