@@ -122,7 +122,7 @@ for i in range(warmup, len(df)):
             print(f" EMA_RSI      : {ema_rsi:.2f}")
             print(f" ATR          : {atr:.4f}")
             print("================================\n")
-            time.sleep(1)
+            time.sleep(10)
             continue
 
         if position == 1:
@@ -199,7 +199,7 @@ for i in range(warmup, len(df)):
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}  | Max RU: {max_runup:.2f}")
                 print("================================\n")
-                time.sleep(1)
+                time.sleep(10)
                 position = 0
                 entry_price = entry_time = entry_index = None
                 stop_loss = target_profit = None
@@ -220,7 +220,7 @@ for i in range(warmup, len(df)):
             print(f" EMA_RSI      : {ema_rsi:.2f}")
             print(f" ATR          : {atr:.4f}")
             print("================================\n")
-            time.sleep(1)
+            time.sleep(10)
             continue
 
         if position == -1:
@@ -266,7 +266,7 @@ for i in range(warmup, len(df)):
                 num_of_trades += 1
 
                 highest_equity = max(highest_equity, total_pnl)
-                lowest_equity  = min(lowest_equity, total_pnl)
+                lowest_equity  = min(lowest_equity , total_pnl)
                 drawdown = highest_equity - total_pnl
                 runup    = total_pnl - lowest_equity
                 max_drawdown = max(max_drawdown, drawdown)
@@ -274,14 +274,14 @@ for i in range(warmup, len(df)):
 
                 trade_log.append({
                     'side': 'short',
-                    'entry_time': entry_time,
-                    'entry_idx': entry_index,
+                    'entry_time' : entry_time,
+                    'entry_idx'  : entry_index,
                     'entry_price': entry_price,
-                    'exit_time': date,
-                    'exit_idx': i,
-                    'exit_price': exit_price,
+                    'exit_time ' : date,
+                    'exit_idx'   : i,
+                    'exit_price' : exit_price,
                     'pnl': pnl,
-                    'bars_held': i - entry_index,
+                    'bars_held'  : i - entry_index,
                     'exit_reason': exit_reason
                 })
 
@@ -297,7 +297,8 @@ for i in range(warmup, len(df)):
                 print(f" Drawdown     : {drawdown:.2f} | Max DD: {max_drawdown:.2f}")
                 print(f" Run-up       : {runup:.2f}  | Max RU: {max_runup:.2f}")
                 print("================================\n")
-                time.sleep(1)
+                time.sleep(10)
+
                 position = 0
                 entry_price = entry_time = entry_index = None
                 stop_loss = target_profit = None
