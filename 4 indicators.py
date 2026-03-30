@@ -3,7 +3,7 @@ import time
 import os
 
 # -------------------- Paths & Config --------------------
-file_path   = r"D:\Data\ES Jun25_60min.csv"                 
+file_path   = r"D:\Data\ES 30min.csv"                 
 output_path = r"C:\Users\lenovo\Desktop\Trade Logs\ES_daily_trades.xlsx"    
 
 time_col   = 'Date(GMT)'
@@ -133,7 +133,7 @@ for i in range(max(atr_period, 200), len(df)):
                 print(f"  Take Profit: {tp_price}")
                 print(f"  Stop Loss  : {sl_price}")
                 print("-----------------------------------")
-                time.sleep(1)
+                time.sleep(100)
                 continue
 
         # LONG → Check Exit
@@ -171,7 +171,7 @@ for i in range(max(atr_period, 200), len(df)):
                 print(f"  PnL        : {pnl:.2f}")
                 print(f"  Cum PnL    : {total_pnl:.2f}")
                 print("-----------------------------------")
-                time.sleep(1)
+                time.sleep(100)
 
                 trade_log.append({
                     "Side": entry_side,
@@ -221,7 +221,7 @@ for i in range(max(atr_period, 200), len(df)):
                 print(f"  PnL        : {pnl:.2f}")
                 print(f"  Cum PnL    : {total_pnl:.2f}")
                 print("-----------------------------------")
-                time.sleep(1)
+                time.sleep(100)
 
                 trade_log.append({
                     "Side": entry_side,

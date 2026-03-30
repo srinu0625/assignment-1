@@ -1,0 +1,8 @@
+print ("hello jenny ")
+print ("hello"+"srinu")
+print ("hello world \n hello world \n hello world")
+print ("('print hellojenny')")
+input ("what is your name...?")
+input ("Heyjenny how are you....?")
+print ("---hello " + " " + input('what is yout name...?'))
+print ("---I am "  + " " + input('Heyjenny how are you....?'))

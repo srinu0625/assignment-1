@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from keras.models import Sequential
 from keras.layers import Dense
-import tensorflow as tf
+# import tensorflow as tf
 import warnings
 warnings.filterwarnings("ignore")
 

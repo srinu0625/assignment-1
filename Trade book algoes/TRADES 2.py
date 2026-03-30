@@ -51,8 +51,8 @@ tick_val = 0.01
 max_loss = max_profit = loss_for_trade = 0
 TOTAL_P_L = total_long_pnl = total_short_pnl = positive_pnl = negative_pnl = 0
 num_of_lots = 0
-max_num_lots = 20
-risk = 720
+max_num_lots = 1
+risk = 250
 
 # Initialize list to store trade entries
 trade_entries_long = []
