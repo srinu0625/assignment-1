@@ -1,58 +1,47 @@
-# ==========================================================
-# PCA STAT ARB STRATEGY (ES vs NQ)
-# ----------------------------------------------------------
-# Simple explanation:
-# We are trying to catch moments where ES and NQ move apart
-# more than usual, and trade that they will come back together.
-# ==========================================================
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from datetime import datetime
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
-CSV_FILE = r"D:\data 3\ES_NQ 5.csv"   # input data file
-OUTPUT_PATH = r"D:\ARB_PROJECT1\ES_NQ PCA_RESULTS 5min.xlsx"  # where results will be saved
+# ==========================
+# CONFIG
+# ==========================
 
-ROLLING_WINDOW = 150   # how much past data we use to understand behaviour
+CSV_FILE = r"D:\data 3\ES_NQ 15.csv"
+OUTPUT_PATH = r"D:\ARB_PROJECT1\ES_NQ PCA_RESULTS 15min.xlsx"
 
-ENTRY_Z = 3.0   # enter trade when deviation is big
-EXIT_Z = 1.5    # exit when things calm down
-STOP_Z = 4.0    # emergency exit if things go too far
+ROLLING_WINDOW = 150
 
-MAX_HOLD = 20   # don’t stay in a trade forever
+ENTRY_Z = 2.0
+EXIT_Z = 1.5
+STOP_Z = 4.0
 
-ES_MULT = 50    # ES contract multiplier
-NQ_MULT = 20    # NQ contract multiplier
+MAX_HOLD = 20
+MAX_LOSS_PER_TRADE = -1500
 
-TCOST = 5       # trading cost per trade
-MAX_LOSS_PER_TRADE = -500   # hard stop loss
+ES_MULT = 50
+NQ_MULT = 20
 
-# --------------------------
+TCOST = 5
+
+# ==========================
 # LOAD DATA
-# --------------------------
+# ==========================
 
-# read CSV and set date as index
 df = pd.read_csv(CSV_FILE, parse_dates=["Date(GMT)"])
 df.set_index("Date(GMT)", inplace=True)
 
-# create a cleaner price (mid price instead of close)
 df["ES"] = (df["ES High"] + df["ES Low"]) / 2
 df["NQ"] = (df["NQ High"] + df["NQ Low"]) / 2
 
-# keep only needed columns
 df = df[["ES", "NQ"]].dropna()
 
-# convert to returns (this is what PCA will look at)
-returns = np.log(df / df.shift(1)).dropna()
-
-# --------------------------
+# ==========================
 # VARIABLES
-# --------------------------
+# ==========================
 
-position = 0    # 0 = no trade, 1 = long spread, -1 = short spread
+position = 0
 trade_log = []
 equity = 0
 equity_curve = []
@@ -64,99 +53,92 @@ exit_counts = {
     "Time Exit": 0
 }
 
-print("\nStarting PCA Stat Arb...\n")
+print("\n\033[1m=== PCA STAT ARB (RESIDUAL MODEL) STARTED ===\033[0m\n")
 
-# --------------------------
-# MAIN LOOP
-# --------------------------
+# ==========================
+# LOOP
+# ==========================
 
-for i in range(ROLLING_WINDOW, len(returns)):
+for i in range(ROLLING_WINDOW, len(df)):
 
-    # take last N candles
-    window = returns.iloc[i - ROLLING_WINDOW:i]
+    window = np.log(df.iloc[i - ROLLING_WINDOW:i][["ES", "NQ"]])
 
-    # scale data so PCA behaves properly
     scaler = StandardScaler()
     X = scaler.fit_transform(window)
 
-    # run PCA
-    pca = PCA(n_components=2)
-    pca.fit(X)
+    # PCA factor
+    pca = PCA(n_components=1)
+    factor = pca.fit_transform(X).flatten()
 
-    # first component = spread idea
-    pc1 = pca.transform(X)[:, 0]
+    # regression
+    beta_es = np.polyfit(factor, window["ES"], 1)
+    pred_es = beta_es[0] * factor + beta_es[1]
 
-    # get average behaviour of spread
-    mean = pc1.mean()
-    std = pc1.std()
+    beta_nq = np.polyfit(factor, window["NQ"], 1)
+    pred_nq = beta_nq[0] * factor + beta_nq[1]
+
+    # residual spread
+    res_es = window["ES"].values - pred_es
+    res_nq = window["NQ"].values - pred_nq
+    spread = res_es - res_nq
+
+    mean = spread.mean()
+    std = spread.std()
+
     if std == 0:
         continue
 
-    # current point projected into PCA world
-    current = scaler.transform(returns.iloc[i:i+1])
-    pc_now = pca.transform(current)[0, 0]
+    z = (spread[-1] - mean) / std
 
-    # how far from normal?
-    z = (pc_now - mean) / std
+    date = df.index[i]
+    es_price = df.iloc[i]["ES"]
+    nq_price = df.iloc[i]["NQ"]
 
-    date = returns.index[i]
-
-    es_price = df.loc[date, "ES"]
-    nq_price = df.loc[date, "NQ"]
-
-    # weights (rough relationship between ES & NQ)
-    weights = pca.components_[0] / np.linalg.norm(pca.components_[0])
-    es_w, nq_w = weights
-
-    # --------------------------
+    # ==========================
     # ENTRY
-    # --------------------------
+    # ==========================
 
     if position == 0:
 
-        # spread too high → expect it to fall
         if z > ENTRY_Z:
             position = -1
-            entry = (date, es_price, nq_price, es_w, nq_w, i, "SHORT")
-            print(f"{date} | SHORT spread | Z={z:.2f}")
+            entry = (date, es_price, nq_price, i, "SHORT")
+            print(f"{date} | \033[91mSHORT ES LONG NQ\033[0m | Z={z:.2f}")
 
-        # spread too low → expect it to rise
         elif z < -ENTRY_Z:
             position = 1
-            entry = (date, es_price, nq_price, es_w, nq_w, i, "LONG")
-            print(f"{date} | LONG spread | Z={z:.2f}")
+            entry = (date, es_price, nq_price, i, "LONG")
+            print(f"{date} | \033[92mLONG ES SHORT NQ\033[0m | Z={z:.2f}")
 
-    # --------------------------
+    # ==========================
     # EXIT
-    # --------------------------
+    # ==========================
 
     else:
 
-        holding = i - entry[5]
+        holding = i - entry[3]
 
-        # calculate PnL
-        es_pnl = (es_price - entry[1]) * ES_MULT * entry[3] * position
-        nq_pnl = (nq_price - entry[2]) * NQ_MULT * entry[4] * position
+        es_pnl = (es_price - entry[1]) * ES_MULT * position
+        nq_pnl = (nq_price - entry[2]) * NQ_MULT * position
+
         pnl = es_pnl - nq_pnl - TCOST
 
         exit_flag = False
 
-        # stop loss
+        # HARD STOP
         if pnl <= MAX_LOSS_PER_TRADE:
+            pnl = MAX_LOSS_PER_TRADE
             reason = "Hard Stop Loss"
             exit_flag = True
 
-        # main exit (mean reversion)
         elif abs(z) < EXIT_Z:
             reason = "Mean Reversion"
             exit_flag = True
 
-        # extreme move protection
         elif abs(z) > STOP_Z:
             reason = "Z Stop"
             exit_flag = True
 
-        # time exit
         elif holding > MAX_HOLD:
             reason = "Time Exit"
             exit_flag = True
@@ -164,24 +146,32 @@ for i in range(ROLLING_WINDOW, len(returns)):
         if exit_flag:
 
             exit_counts[reason] += 1
-
             equity += pnl
             equity_curve.append(equity)
 
-            print(f"{date} | EXIT | {reason} | PnL={pnl:.2f}")
+            color = "\033[92m" if pnl > 0 else "\033[91m"
+
+            print(f"{date} | \033[93mEXIT\033[0m | {reason} | {color}PnL={pnl:.2f}\033[0m | Equity={equity:.2f}")
 
             trade_log.append({
                 "Entry Date": entry[0],
                 "Exit Date": date,
-                "Direction": entry[6],
-                "PnL": pnl
+                "Direction": entry[4],
+                "Entry ES": entry[1],
+                "Exit ES": es_price,
+                "Entry NQ": entry[2],
+                "Exit NQ": nq_price,
+                "Holding Bars": holding,
+                "Exit Reason": reason,
+                "PnL": pnl,
+                "Equity": equity
             })
 
             position = 0
 
-# --------------------------
+# ==========================
 # SUMMARY
-# --------------------------
+# ==========================
 
 trades_df = pd.DataFrame(trade_log)
 
@@ -190,40 +180,64 @@ if not trades_df.empty:
     pnl = trades_df["PnL"]
 
     total_pnl = pnl.sum()
-    num_trades = len(pnl)
-    win_rate = (pnl > 0).mean() * 100
+    positive_pnl = pnl[pnl > 0].sum()
+    negative_pnl = pnl[pnl < 0].sum()
+
+    total_positive_trades = (pnl > 0).sum()
+    total_negative_trades = (pnl < 0).sum()
+    num_of_trades = len(pnl)
+
+    max_profit = pnl.max()
+    max_loss = pnl.min()
 
     equity_series = pnl.cumsum()
     drawdown = equity_series - equity_series.cummax()
+    max_drawdown = drawdown.min()
+    max_runup = equity_series.max()
 
-    print("\nSummary:")
-    print(f"Total PnL: {total_pnl:.2f}")
-    print(f"Trades: {num_trades}")
-    print(f"Win Rate: {win_rate:.2f}%")
-    print(f"Max Drawdown: {drawdown.min():.2f}")
+    success_rate = (total_positive_trades / num_of_trades) * 100
+    failure_rate = (total_negative_trades / num_of_trades) * 100
 
-# --------------------------
-# SAVE RESULTS
-# --------------------------
+    print("\n\033[1m--- Trading Performance Summary ---\033[0m")
+    print(f"     Max Profit = \033[92m{max_profit:.2f}\033[0m")
+    print(f"       Max Loss = \033[91m{max_loss:.2f}\033[0m")
+    print(f"   Positive PnL = \033[92m{positive_pnl:.2f}\033[0m")
+    print(f"   Negative PnL = \033[91m{negative_pnl:.2f}\033[0m")
+    print(f"          Gross = {total_pnl:.2f}")
+    print(f"   Max Drawdown = {max_drawdown:.2f}")
+    print(f"     Max Run-up = {max_runup:.2f}")
+    print(f"Positive Trades = {total_positive_trades}")
+    print(f"Negative Trades = {total_negative_trades}")
+    print(f"   Total Trades = {num_of_trades}")
+    print(f"   Success Rate = \033[92m{success_rate:.2f}%\033[0m")
+    print(f"   Failure Rate = \033[91m{failure_rate:.2f}%\033[0m")
+
+    print("\n\033[1m--- Exit Breakdown ---\033[0m")
+    for k, v in exit_counts.items():
+        print(f"{k}: {v}")
+
+# ==========================
+# SAVE
+# ==========================
 
 with pd.ExcelWriter(OUTPUT_PATH, engine="openpyxl") as writer:
     trades_df.to_excel(writer, sheet_name="Trades", index=False)
 
-print(f"\nSaved to: {OUTPUT_PATH}")
+# ==========================
+# CHARTS
+# ==========================
 
-# --------------------------
-# PLOTS
-# --------------------------
+if not trades_df.empty:
 
-plt.figure(figsize=(12, 8))
+    plt.figure(figsize=(12, 8))
 
-plt.subplot(2, 1, 1)
-plt.plot(equity_series)
-plt.title("Equity Curve")
+    plt.subplot(2, 1, 1)
+    plt.plot(equity_series)
+    plt.title("Equity Curve")
 
-plt.subplot(2, 1, 2)
-plt.plot(drawdown)
-plt.title("Drawdown")
+    plt.subplot(2, 1, 2)
+    plt.plot(drawdown)
+    plt.title("Drawdown")
 
-plt.tight_layout()
-plt.show()
+    plt.tight_layout()
+    plt.show()
