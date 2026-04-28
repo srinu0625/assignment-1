@@ -2,15 +2,14 @@ import pandas as pd
 import eikon as ek
 import requests
 import time
-from datetime import datetimes
+from datetime import datetime
 import pytz
-import datetime
-from config import teams_webhook_url
+# from config import teams_webhook_url
 # -------------------------------------------------------
 # 1️⃣ CONFIGURATION
 # -------------------------------------------------------
 APP_KEY = "92e0a59a8e994142bab0f82d8294e1df404da224"  # 
-TEAMS_WEBHOOK_URL = "https://default88ff9cb3e35e4d71b1d7f6c6ed8657.30.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/55b4731413d04f6a95975ba9fa82eb79/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Zcwo1Eac1WD4j7-ITfAA5YJTr9t93yezQWVZvRTKe-s"
+TEAMS_WEBHOOK_URL = "https://default88ff9cb3e35e4d71b1d7f6c6ed8657.30.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/60b2e30fbc954d44a0ad6a2fbe958ce2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=b0w27fZV4iTXdMNFwd8HgbYeen3xyVdALXyf8HO-8Ac"
 
 # Initialize Eikon connection
 ek.set_app_key(APP_KEY)

@@ -3,8 +3,8 @@ import os
 import time
 
 # -------------------- Paths & Config --------------------
-file_path   = r"D:\Data\CL Jun25_daily.csv"
-output_path = r"C:\Users\lenovo\Desktop\Trade Logs\CL_daily_trades.xlsx"
+file_path   = r"D:\Data\BR daily.csv"
+output_path = r"C:\Users\lenovo\Desktop\Trade Logs\BR_daily_trades.xlsx"
 
 time_col   = 'Date(GMT)'
 open_col   = 'Open'
@@ -111,6 +111,7 @@ for i in range(start_idx, len(df)):
                 print(f"  Take Profit: {tp_price}")
                 print(f"  Stop Loss  : {sl_price}")
                 print("-----------------------------------")
+                time.sleep(10)  # slight pause for readability
                 continue
 
         # ---------------- Long Exit ----------------
@@ -148,6 +149,7 @@ for i in range(start_idx, len(df)):
                 print(f"  PnL        : {pnl:.2f}")
                 print(f"  Cum PnL    : {total_pnl:.2f}")
                 print("-----------------------------------")
+                time.sleep(10)
 
                 trade_log.append({
                     "Side": entry_side,
@@ -180,6 +182,7 @@ for i in range(start_idx, len(df)):
                 print(f"  Take Profit: {tp_price}")
                 print(f"  Stop Loss  : {sl_price}")
                 print("-----------------------------------")
+                time.sleep(10)
                 continue
 
         # ---------------- Short Exit ----------------
@@ -217,6 +220,7 @@ for i in range(start_idx, len(df)):
                 print(f"  PnL        : {pnl:.2f}")
                 print(f"  Cum PnL    : {total_pnl:.2f}")
                 print("-----------------------------------")
+                time.sleep(10)
 
                 trade_log.append({
                     "Side": entry_side,
