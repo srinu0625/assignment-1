@@ -1,9 +1,10 @@
 import pandas as pd
 import os
 import re
+import time
 
 # File path
-file_path = r"C:\Users\lenovo\Desktop\Data\BR Jun25_30min.csv"
+file_path = r"D:\Data\CL 240min.csv"
 
 # Load data
 try:
@@ -53,6 +54,7 @@ for i in range(1, len(df)):
             print(f" Entry Time  : {Entry_time}")
             print(f" Entry Price : {entry_price:.2f}")
             print("================================\n")
+            time.sleep(3)
 
         # Long Exit
         elif position == 1:
@@ -90,6 +92,7 @@ for i in range(1, len(df)):
                 print(f" Trade P&L   : {pnl:.2f}")
                 print(f" Cumulative P&L : {total_pnl:.2f}")
                 print("================================\n")
+                time.sleep(3)   
 
         # Short Entry
         if position == 0 and (ltp < prev_close - 10 * tick_size) and (bid_qty > 100):
@@ -100,6 +103,7 @@ for i in range(1, len(df)):
             print(f" Entry Time  : {Entry_time}")
             print(f" Entry Price : {entry_price:.2f}")
             print("================================\n")
+            time.sleep(3)
 
         # Short Exit
         elif position == -1:
@@ -137,6 +141,7 @@ for i in range(1, len(df)):
                 print(f" Trade P&L   : {pnl:.2f}")
                 print(f" Cumulative P&L : {total_pnl:.2f}")
                 print("================================\n")
+                time.sleep(3)
 
     except Exception as e:
         print(f"Error at index {i}: {e}")

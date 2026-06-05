@@ -6,7 +6,7 @@ import re
 from datetime import datetime
 
 # ==================== CONFIG ====================
-file_path         = r"D:\Data\ES_10Min.csv"       # <- set your CSV path
+file_path         = r"D:\Data\CL 10min.csv"       # <- set your CSV path
 output_path       = r"C:\Users\lenovo\Downloads\ES_insidebar_trades.xlsx"
 time_col          = 'Date(GMT)'   # column name containing timestamp
 open_col          = 'Open'
@@ -148,7 +148,7 @@ for i in range(1, len(df)):  # start at 1 because we reference previous bar high
                         print(f" Mother High  : {s_highs[j]}  Mother Low: {s_lows[j]}")
                         print(f" TP           : {tp}  | SL: {sl}")
                         print("================================\n")
-                        time.sleep(0.05)
+                        time.sleep(2)
                     elif breakout_down and counts[j] >= n_inside:
                         # Enter short
                         tid = gen_trade_id("Short", j, i)
@@ -186,7 +186,7 @@ for i in range(1, len(df)):  # start at 1 because we reference previous bar high
                         print(f" Mother High  : {s_highs[j]}  Mother Low: {s_lows[j]}")
                         print(f" TP           : {tp}  | SL: {sl}")
                         print("================================\n")
-                        time.sleep(0.05)
+                        time.sleep(2)
                     else:
                         # Pattern invalid / broken before reaching required inside count -> remove it
                         # Remove corresponding indices across all lists
@@ -278,7 +278,7 @@ for i in range(1, len(df)):  # start at 1 because we reference previous bar high
                     print(f" Trade P&L    : {pnl:.2f}")
                     print(f" Cum. P&L     : {total_pnl:.2f}")
                     print("================================\n")
-                    time.sleep(0.02)
+                    time.sleep(2)
 
                     # mark that pattern is no longer active (if its pattern still exists)
                     if tid in trade_ids:
@@ -342,7 +342,7 @@ for i in range(1, len(df)):  # start at 1 because we reference previous bar high
                     print(f" Trade P&L    : {pnl:.2f}")
                     print(f" Cum. P&L     : {total_pnl:.2f}")
                     print("================================\n")
-                    time.sleep(0.02)
+                    time.sleep(2)
 
                     if tid in trade_ids:
                         idx = trade_ids.index(tid)

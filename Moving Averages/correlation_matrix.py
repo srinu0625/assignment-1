@@ -25,6 +25,7 @@ combined_df = pd.DataFrame({
     'bitcoin': data1['close'],  # S&P 500
     'etherium ': data2['close'],  # NASDAQ
     'dollar': data3['close'],  # dow
+    "eth": data4["close"], # eth
 })
 
 

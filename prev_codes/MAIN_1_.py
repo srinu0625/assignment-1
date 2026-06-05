@@ -1,7 +1,8 @@
 import pandas as pd
 import math
+import time 
 
-file_path = r"C:\Users\lenovo\Desktop\Dummy.csv"
+file_path = r"D:\Data\CL 240min.csv"
 
 # Load the data
 try:
@@ -18,7 +19,7 @@ print("1st row", data.iloc[0].tolist())
 # Assuming the column names for high and low are 'High' and 'Low'
 high_column_name = 'High'
 low_column_name  = 'Low'
-time_column_name = 'Date (GMT)'
+time_column_name = 'Date(GMT)'
 
 # temp column names
 temp_high = 0
@@ -120,6 +121,7 @@ for index, row in data.iterrows():
                     print("   num_of_positions = ", number_of_positions)
                     print("        num_of_lots = ",round(num_of_lots))
                     print(" max_loss_for_trade = ",round(max_loss_for_trade))
+                    time.sleep(2)
                     bull = True
                     flag = True
                     continue
@@ -133,6 +135,7 @@ for index, row in data.iterrows():
                 print("   num_of_positions = ", number_of_positions)
                 print("        num_of_lots = ", round(-1 * num_of_lots))
                 print("      num_of_trades = ", num_of_trades)
+                time.sleep(2)
                 bull = False
                 flag = False
 
@@ -161,6 +164,7 @@ for index, row in data.iterrows():
                 print("        max_profit = ", round(max_profit,2))
                 print("          max_loss = ", round(max_loss,2))
                 print("      P&L_Of_trade = ", pnl_color, round(integer_pnl,2),"\033[0m")
+                time.sleep(2)
                 continue
 
             # bearish candle-------------------------------------------------------------------------
@@ -181,6 +185,7 @@ for index, row in data.iterrows():
                     print("   num_of_positions = ", number_of_positions)
                     print("        num_of_lots = ",round(num_of_lots))
                     print(" max_loss_for_trade = ",round(max_loss_for_trade))
+                    time.sleep(2)
                     bear = True
                     flag = True
                     continue
@@ -194,6 +199,7 @@ for index, row in data.iterrows():
                 print("   num_of_positions = ", number_of_positions)
                 print("        num_of_lots = ", round(-1 * num_of_lots))
                 print("      num_of_trades = ", num_of_trades)
+                time.sleep(2)
                 bear = False
                 flag = False
 

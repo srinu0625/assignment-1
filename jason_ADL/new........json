@@ -1,0 +1,482 @@
+
+
+
+{
+  "id": "c20d42c4-44f7-44ae-ab3e-248fe29b1b4e",
+  "name": "Spreads Z-Score Calculator",
+  "description": "Z = (Spread - Mean) / StdDev  |  Spread = ES LTP - NQ LTP  |  Lookback = 20 bars",
+  "orderSide": true,
+  "variables": [
+    "e132b0a3-cfba-4d54-9005-a7a10d4b68f9",
+    "b23c3fd8-4a3e-47bd-890e-da4eb3001f02"
+  ],
+  "exports": [],
+  "bookmarks": [],
+  "content": [
+
+    {
+      "defName": "Instrument",
+      "defId": "9387710D-FC3E-42AA-AFFD-EB154BCFBAC7",
+      "guid": "e132b0a3-cfba-4d54-9005-a7a10d4b68f9",
+      "x": 156,
+      "y": 220.5,
+      "properties": [
+        { "name": "name", "value": "Leg 1", "hasCustomName": true },
+        { "name": "instrumentId", "value": "5782570457930965467" },
+        { "name": "type", "value": "userDefined" },
+        { "name": "account", "value": "1364679" },
+        { "name": "instrumentAlias", "value": "ES Jun26" },
+        { "name": "exchangeAlias", "value": "CME" },
+        { "name": "dimensions", "value": { "width": 80, "height": 25 } }
+      ],
+      "exportValues": []
+    },
+
+    {
+      "defName": "Instrument",
+      "defId": "9387710D-FC3E-42AA-AFFD-EB154BCFBAC7",
+      "guid": "b23c3fd8-4a3e-47bd-890e-da4eb3001f02",
+      "x": 165,
+      "y": 473,
+      "properties": [
+        { "name": "name", "value": "Leg 2", "hasCustomName": true },
+        { "name": "instrumentId", "value": "592799227884495126" },
+        { "name": "type", "value": "userDefined" },
+        { "name": "account", "value": "1364679" },
+        { "name": "instrumentAlias", "value": "NQ Jun26" },
+        { "name": "exchangeAlias", "value": "CME" },
+        { "name": "dimensions", "value": { "width": 80, "height": 25 } }
+      ],
+      "exportValues": []
+    },
+
+    {
+      "defName": "Field",
+      "defId": "1A993F9B-2146-4CF3-827D-B2D714AD1ACA",
+      "guid": "fb227608-f5d3-48af-91d4-9ef5a261ffdd",
+      "x": 283.2790321181325,
+      "y": 138.51621470642388,
+      "properties": [
+        { "name": "name", "value": "ES LTP", "hasCustomName": true },
+        { "name": "fieldName", "value": "lastTradePrice" },
+        { "name": "lookupType" },
+        { "name": "flipForSell", "value": false },
+        { "name": "dimensions", "value": { "width": 80, "height": 40 } }
+      ],
+      "exportValues": []
+    },
+
+    {
+      "defName": "Field",
+      "defId": "1A993F9B-2146-4CF3-827D-B2D714AD1ACA",
+      "guid": "84a2529c-1a4f-44cb-b46c-0d9ecd28ea7d",
+      "x": 284.9526127225979,
+      "y": 541.5414220059872,
+      "properties": [
+        { "name": "name", "value": "NQ LTP", "hasCustomName": true },
+        { "name": "fieldName", "value": "lastTradePrice" },
+        { "name": "lookupType" },
+        { "name": "flipForSell", "value": false },
+        { "name": "dimensions", "value": { "width": 80, "height": 40 } }
+      ],
+      "exportValues": []
+    },
+
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "8792a931-6fe0-42c2-bb7a-f23f080cfc45",
+      "x": 732,
+      "y": 127,
+      "properties": [
+        { "name": "name", "value": "Spread", "hasCustomName": true },
+        {
+          "name": "formula",
+          "value": "[fb227608-f5d3-48af-91d4-9ef5a261ffdd.2680ad90-b020-450b-8d61-84a472a7b2d6] - [84a2529c-1a4f-44cb-b46c-0d9ecd28ea7d.2680ad90-b020-450b-8d61-84a472a7b2d6] "
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "da76a55b-5353-40bf-ab31-738053132470": {
+              "guid": "da76a55b-5353-40bf-ab31-738053132470",
+              "name": "output",
+              "type": "generic",
+              "input": false
+            },
+            "0bd3e74c-f852-4f03-850c-de9b83c83389": {
+              "guid": "0bd3e74c-f852-4f03-850c-de9b83c83389",
+              "name": "fb227608-f5d3-48af-91d4-9ef5a261ffdd.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            },
+            "5344d3f2-8fd1-492f-96a2-f431c9e721f9": {
+              "guid": "5344d3f2-8fd1-492f-96a2-f431c9e721f9",
+              "name": "84a2529c-1a4f-44cb-b46c-0d9ecd28ea7d.2680ad90-b020-450b-8d61-84a472a7b2d6",
+              "type": "real",
+              "input": true
+            }
+          }
+        },
+        { "name": "dimensions", "value": { "width": 70, "height": 30 } },
+        { "name": "generic", "value": { "da76a55b-5353-40bf-ab31-738053132470": "real" } },
+        { "name": "formulaGraphId", "value": "8792a931-6fe0-42c2-bb7a-f23f080cfc45" },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "op",
+              "loc": { "start": {"offset":0,"line":1,"column":1}, "end": {"offset":154,"line":1,"column":155} },
+              "op": "-",
+              "left": {
+                "type": "connector",
+                "loc": { "start": {"offset":0,"line":1,"column":1}, "end": {"offset":75,"line":1,"column":76} },
+                "name": "fb227608-f5d3-48af-91d4-9ef5a261ffdd.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                "blockId": "fb227608-f5d3-48af-91d4-9ef5a261ffdd",
+                "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                "connDataType": "generic"
+              },
+              "right": {
+                "type": "connector",
+                "loc": { "start": {"offset":78,"line":1,"column":79}, "end": {"offset":153,"line":1,"column":154} },
+                "name": "84a2529c-1a4f-44cb-b46c-0d9ecd28ea7d.2680ad90-b020-450b-8d61-84a472a7b2d6",
+                "blockId": "84a2529c-1a4f-44cb-b46c-0d9ecd28ea7d",
+                "connId": "2680ad90-b020-450b-8d61-84a472a7b2d6",
+                "connDataType": "generic"
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+
+    {
+      "defName": "Number",
+      "defId": "794959B3-80F3-46DD-976F-B7BB517A2BAA",
+      "guid": "00000001-0000-0000-0000-000000000001",
+      "x": 870,
+      "y": 240,
+      "properties": [
+        { "name": "name", "value": "Lookback N", "hasCustomName": true },
+        { "name": "value", "value": 20 },
+        { "name": "orderTypeValue", "value": "limit" },
+        { "name": "TIF", "value": "day" },
+        { "name": "currValue", "value": null },
+        { "name": "type", "value": "userDefined" },
+        { "name": "dimensions", "value": { "width": 60, "height": 40 } }
+      ],
+      "exportValues": []
+    },
+
+    {
+      "defName": "MovingAverage",
+      "defId": "D4F8CFC3-A811-44BC-99A3-6CF40DC75BEA",
+      "guid": "00000002-0000-0000-0000-000000000002",
+      "x": 960,
+      "y": 127,
+      "properties": [
+        { "name": "name", "value": "MA Mean", "hasCustomName": true },
+        { "name": "formula", "value": "" },
+        { "name": "connectors" },
+        { "name": "dimensions", "value": { "width": 120, "height": 50 } }
+      ],
+      "exportValues": []
+    },
+
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "00000003-0000-0000-0000-000000000003",
+      "x": 1160,
+      "y": 127,
+      "properties": [
+        { "name": "name", "value": "Deviation", "hasCustomName": true },
+        {
+          "name": "formula",
+          "value": "[8792a931-6fe0-42c2-bb7a-f23f080cfc45.da76a55b-5353-40bf-ab31-738053132470] - [00000002-0000-0000-0000-000000000002.4a8b2c36-e9d7-5f12-3b47-6c8d9e0f1a2b] "
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "dev0out0-0000-0000-0000-000000000001": {
+              "guid": "dev0out0-0000-0000-0000-000000000001",
+              "name": "output",
+              "type": "generic",
+              "input": false
+            },
+            "dev0in01-0000-0000-0000-000000000001": {
+              "guid": "dev0in01-0000-0000-0000-000000000001",
+              "name": "8792a931-6fe0-42c2-bb7a-f23f080cfc45.da76a55b-5353-40bf-ab31-738053132470",
+              "type": "real",
+              "input": true
+            },
+            "dev0in02-0000-0000-0000-000000000002": {
+              "guid": "dev0in02-0000-0000-0000-000000000002",
+              "name": "00000002-0000-0000-0000-000000000002.4a8b2c36-e9d7-5f12-3b47-6c8d9e0f1a2b",
+              "type": "real",
+              "input": true
+            }
+          }
+        },
+        { "name": "dimensions", "value": { "width": 80, "height": 30 } },
+        { "name": "generic", "value": { "dev0out0-0000-0000-0000-000000000001": "real" } },
+        { "name": "formulaGraphId", "value": "00000003-0000-0000-0000-000000000003" },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "op",
+              "loc": { "start": {"offset":0,"line":1,"column":1}, "end": {"offset":154,"line":1,"column":155} },
+              "op": "-",
+              "left": {
+                "type": "connector",
+                "loc": { "start": {"offset":0,"line":1,"column":1}, "end": {"offset":75,"line":1,"column":76} },
+                "name": "8792a931-6fe0-42c2-bb7a-f23f080cfc45.da76a55b-5353-40bf-ab31-738053132470",
+                "blockId": "8792a931-6fe0-42c2-bb7a-f23f080cfc45",
+                "connId": "da76a55b-5353-40bf-ab31-738053132470",
+                "connDataType": "generic"
+              },
+              "right": {
+                "type": "connector",
+                "loc": { "start": {"offset":78,"line":1,"column":79}, "end": {"offset":153,"line":1,"column":154} },
+                "name": "00000002-0000-0000-0000-000000000002.4a8b2c36-e9d7-5f12-3b47-6c8d9e0f1a2b",
+                "blockId": "00000002-0000-0000-0000-000000000002",
+                "connId": "4a8b2c36-e9d7-5f12-3b47-6c8d9e0f1a2b",
+                "connDataType": "generic"
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "00000004-0000-0000-0000-000000000004",
+      "x": 1380,
+      "y": 127,
+      "properties": [
+        { "name": "name", "value": "Dev Squared", "hasCustomName": true },
+        {
+          "name": "formula",
+          "value": "[00000003-0000-0000-0000-000000000003.dev0out0-0000-0000-0000-000000000001] * [00000003-0000-0000-0000-000000000003.dev0out0-0000-0000-0000-000000000001] "
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "dsqout00-0000-0000-0000-000000000001": {
+              "guid": "dsqout00-0000-0000-0000-000000000001",
+              "name": "output",
+              "type": "generic",
+              "input": false
+            },
+            "dsqin001-0000-0000-0000-000000000001": {
+              "guid": "dsqin001-0000-0000-0000-000000000001",
+              "name": "00000003-0000-0000-0000-000000000003.dev0out0-0000-0000-0000-000000000001",
+              "type": "real",
+              "input": true
+            }
+          }
+        },
+        { "name": "dimensions", "value": { "width": 90, "height": 30 } },
+        { "name": "generic", "value": { "dsqout00-0000-0000-0000-000000000001": "real" } },
+        { "name": "formulaGraphId", "value": "00000004-0000-0000-0000-000000000004" },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "op",
+              "loc": { "start": {"offset":0,"line":1,"column":1}, "end": {"offset":154,"line":1,"column":155} },
+              "op": "*",
+              "left": {
+                "type": "connector",
+                "loc": { "start": {"offset":0,"line":1,"column":1}, "end": {"offset":75,"line":1,"column":76} },
+                "name": "00000003-0000-0000-0000-000000000003.dev0out0-0000-0000-0000-000000000001",
+                "blockId": "00000003-0000-0000-0000-000000000003",
+                "connId": "dev0out0-0000-0000-0000-000000000001",
+                "connDataType": "generic"
+              },
+              "right": {
+                "type": "connector",
+                "loc": { "start": {"offset":78,"line":1,"column":79}, "end": {"offset":153,"line":1,"column":154} },
+                "name": "00000003-0000-0000-0000-000000000003.dev0out0-0000-0000-0000-000000000001",
+                "blockId": "00000003-0000-0000-0000-000000000003",
+                "connId": "dev0out0-0000-0000-0000-000000000001",
+                "connDataType": "generic"
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+
+    {
+      "defName": "MovingAverage",
+      "defId": "D4F8CFC3-A811-44BC-99A3-6CF40DC75BEA",
+      "guid": "00000005-0000-0000-0000-000000000005",
+      "x": 1600,
+      "y": 127,
+      "properties": [
+        { "name": "name", "value": "MA Variance", "hasCustomName": true },
+        { "name": "formula", "value": "" },
+        { "name": "connectors" },
+        { "name": "dimensions", "value": { "width": 120, "height": 50 } }
+      ],
+      "exportValues": []
+    },
+
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "00000006-0000-0000-0000-000000000006",
+      "x": 1810,
+      "y": 127,
+      "properties": [
+        { "name": "name", "value": "StdDev", "hasCustomName": true },
+        {
+          "name": "formula",
+          "value": "SQRT([00000005-0000-0000-0000-000000000005.4a8b2c36-e9d7-5f12-3b47-6c8d9e0f1a2b])"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "sdvout00-0000-0000-0000-000000000001": {
+              "guid": "sdvout00-0000-0000-0000-000000000001",
+              "name": "output",
+              "type": "generic",
+              "input": false
+            },
+            "sdvin001-0000-0000-0000-000000000001": {
+              "guid": "sdvin001-0000-0000-0000-000000000001",
+              "name": "00000005-0000-0000-0000-000000000005.4a8b2c36-e9d7-5f12-3b47-6c8d9e0f1a2b",
+              "type": "real",
+              "input": true
+            }
+          }
+        },
+        { "name": "dimensions", "value": { "width": 70, "height": 30 } },
+        { "name": "generic", "value": { "sdvout00-0000-0000-0000-000000000001": "real" } },
+        { "name": "formulaGraphId", "value": "00000006-0000-0000-0000-000000000006" },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "call",
+              "loc": { "start": {"offset":0,"line":1,"column":1}, "end": {"offset":81,"line":1,"column":82} },
+              "callee": {
+                "type": "identifier",
+                "name": "SQRT",
+                "loc": { "start": {"offset":0,"line":1,"column":1}, "end": {"offset":4,"line":1,"column":5} }
+              },
+              "arguments": [
+                {
+                  "type": "connector",
+                  "loc": { "start": {"offset":5,"line":1,"column":6}, "end": {"offset":80,"line":1,"column":81} },
+                  "name": "00000005-0000-0000-0000-000000000005.4a8b2c36-e9d7-5f12-3b47-6c8d9e0f1a2b",
+                  "blockId": "00000005-0000-0000-0000-000000000005",
+                  "connId": "4a8b2c36-e9d7-5f12-3b47-6c8d9e0f1a2b",
+                  "connDataType": "generic"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "00000007-0000-0000-0000-000000000007",
+      "x": 2020,
+      "y": 127,
+      "properties": [
+        { "name": "name", "value": "Z-Score", "hasCustomName": true },
+        {
+          "name": "formula",
+          "value": "[00000003-0000-0000-0000-000000000003.dev0out0-0000-0000-0000-000000000001] / [00000006-0000-0000-0000-000000000006.sdvout00-0000-0000-0000-000000000001] "
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "zscout00-0000-0000-0000-000000000001": {
+              "guid": "zscout00-0000-0000-0000-000000000001",
+              "name": "output",
+              "type": "generic",
+              "input": false
+            },
+            "zscin001-0000-0000-0000-000000000001": {
+              "guid": "zscin001-0000-0000-0000-000000000001",
+              "name": "00000003-0000-0000-0000-000000000003.dev0out0-0000-0000-0000-000000000001",
+              "type": "real",
+              "input": true
+            },
+            "zscin002-0000-0000-0000-000000000002": {
+              "guid": "zscin002-0000-0000-0000-000000000002",
+              "name": "00000006-0000-0000-0000-000000000006.sdvout00-0000-0000-0000-000000000001",
+              "type": "real",
+              "input": true
+            }
+          }
+        },
+        { "name": "dimensions", "value": { "width": 70, "height": 30 } },
+        { "name": "generic", "value": { "zscout00-0000-0000-0000-000000000001": "real" } },
+        { "name": "formulaGraphId", "value": "00000007-0000-0000-0000-000000000007" },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "op",
+              "loc": { "start": {"offset":0,"line":1,"column":1}, "end": {"offset":154,"line":1,"column":155} },
+              "op": "/",
+              "left": {
+                "type": "connector",
+                "loc": { "start": {"offset":0,"line":1,"column":1}, "end": {"offset":75,"line":1,"column":76} },
+                "name": "00000003-0000-0000-0000-000000000003.dev0out0-0000-0000-0000-000000000001",
+                "blockId": "00000003-0000-0000-0000-000000000003",
+                "connId": "dev0out0-0000-0000-0000-000000000001",
+                "connDataType": "generic"
+              },
+              "right": {
+                "type": "connector",
+                "loc": { "start": {"offset":78,"line":1,"column":79}, "end": {"offset":153,"line":1,"column":154} },
+                "name": "00000006-0000-0000-0000-000000000006.sdvout00-0000-0000-0000-000000000001",
+                "blockId": "00000006-0000-0000-0000-000000000006",
+                "connId": "sdvout00-0000-0000-0000-000000000001",
+                "connDataType": "generic"
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+
+    { "sourceBlock": "e132b0a3-cfba-4d54-9005-a7a10d4b68f9", "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124", "targetBlock": "fb227608-f5d3-48af-91d4-9ef5a261ffdd", "targetConnector": "10f01cca-6699-4dbd-a2f3-47a3347606fd", "className": "Edge" },
+    { "sourceBlock": "b23c3fd8-4a3e-47bd-890e-da4eb3001f02", "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124", "targetBlock": "84a2529c-1a4f-44cb-b46c-0d9ecd28ea7d", "targetConnector": "10f01cca-6699-4dbd-a2f3-47a3347606fd", "className": "Edge" },
+
+    { "sourceBlock": "00000001-0000-0000-0000-000000000001", "sourceConnector": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e", "targetBlock": "00000002-0000-0000-0000-000000000002", "targetConnector": "9da50d93-02cb-4f68-823a-9ee77bfa3959", "className": "Edge" },
+    { "sourceBlock": "00000001-0000-0000-0000-000000000001", "sourceConnector": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e", "targetBlock": "00000005-0000-0000-0000-000000000005", "targetConnector": "9da50d93-02cb-4f68-823a-9ee77bfa3959", "className": "Edge" },
+
+    { "sourceBlock": "8792a931-6fe0-42c2-bb7a-f23f080cfc45", "sourceConnector": "da76a55b-5353-40bf-ab31-738053132470", "targetBlock": "00000002-0000-0000-0000-000000000002", "targetConnector": "b9e8f7a6-c5d4-3e2f-1a09-b8c7d6e5f4a3", "className": "Edge" },
+    { "sourceBlock": "00000004-0000-0000-0000-000000000004", "sourceConnector": "dsqout00-0000-0000-0000-000000000001", "targetBlock": "00000005-0000-0000-0000-000000000005", "targetConnector": "b9e8f7a6-c5d4-3e2f-1a09-b8c7d6e5f4a3", "className": "Edge" }
+
+  ],
+  "lastModifiedTime": 1779789452710,
+  "ignoreMarketState": false,
+  "graphIdToViewport": {
+    "c20d42c4-44f7-44ae-ab3e-248fe29b1b4e": {
+      "x": 0,
+      "y": 0,
+      "scale": 0.75
+    }
+  },
+  "showInMDT": 0,
+  "isSOA": false,
+  "isOmaOta": false,
+  "isPREnabled": false
+}

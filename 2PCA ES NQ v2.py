@@ -33,6 +33,7 @@ NQ_MULT = 20
 TCOST = 20.0  # FIXED: Realistic cost for ES+NQ round turn
 ADF_PVALUE_THRESH = 0.05  # Stricter threshold
 
+
 # ==========================
 # LOAD DATA
 # ==========================

@@ -1,0 +1,1328 @@
+{
+  "id": "d27ae311-729f-45f5-bccb-928f3c12e463",
+  "name": "Spread synchronization ",
+  "description": "",
+  "orderSide": true,
+  "variables": [
+    "5c5b463d-25c0-4b9f-b540-a48ef8f8690b",
+    "0b0a22b8-c05e-46be-9b08-58b7d46b7415",
+    "567e362c-5f80-444f-820d-b9fefc18e4dc",
+    "3714ca5c-e3b3-429c-9785-95787f21472a",
+    "30e14b7a-f2ad-4f16-a4ef-a864edcee3eb",
+    "2b90c2b4-b3a4-4184-8f75-f254f5bc4176",
+    "e2a26000-e4d8-46b2-bd75-04a792d2c13f"
+  ],
+  "exports": [
+    "2a952392-2167-4292-b427-2bebc6b7055b.a369364c-ad28-440f-b154-c3059c04bae4"
+  ],
+  "bookmarks": [],
+  "content": [
+    {
+      "defName": "Number",
+      "defId": "794959B3-80F3-46DD-976F-B7BB517A2BAA",
+      "guid": "5c5b463d-25c0-4b9f-b540-a48ef8f8690b",
+      "x": 808.4268893576267,
+      "y": 66.04541990007203,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Desir Qty",
+          "hasCustomName": true
+        },
+        {
+          "name": "value",
+          "value": 10
+        },
+        {
+          "name": "orderTypeValue",
+          "value": "limit"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "type",
+          "value": "orderQty"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 37
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "MsgInfoExtractor",
+      "defId": "9E4FD2E5-1C34-436C-9AB7-AB1A16F13C74",
+      "guid": "81b789b0-06ef-45f3-a59e-a33d22bab5b5",
+      "x": 884,
+      "y": 231.7527559724071,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Msg E",
+          "hasCustomName": true
+        },
+        {
+          "name": "Connectors",
+          "value": [
+            "fillQuantity",
+            "cumQuantity",
+            "fillPrice"
+          ]
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 50
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "MsgInfoExtractor",
+      "defId": "9E4FD2E5-1C34-436C-9AB7-AB1A16F13C74",
+      "guid": "4f6b9497-0b7f-4d7b-8297-44653b4e5e95",
+      "x": 889.6181100689822,
+      "y": 421.2472440275929,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Msg A",
+          "hasCustomName": true
+        },
+        {
+          "name": "Connectors",
+          "value": [
+            "fillQuantity",
+            "cumQuantity",
+            "fillPrice"
+          ]
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 50
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "ValueAccumulator",
+      "defId": "7C23E28F-AF94-4D4D-9E4D-0AD5584D0F4F",
+      "guid": "34e7b276-d38b-442f-85ac-02843a0c58c2",
+      "x": 1052.8653540965752,
+      "y": 232.7527559724071,
+      "properties": [
+        {
+          "name": "name",
+          "value": "E SUM",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[81b789b0-06ef-45f3-a59e-a33d22bab5b5.7d49799b-98c4-4e0b-81b1-33f78303bbf5] "
+        },
+        {
+          "name": "connectors",
+          "value": {}
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 102,
+            "height": 39
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "7770c79c-2910-421a-8fb5-f23a4381ed37"
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "if",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 0,
+                  "column": 0
+                },
+                "end": {
+                  "offset": 0,
+                  "line": 0,
+                  "column": 0
+                }
+              },
+              "condition": {
+                "type": "bool",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 0,
+                    "column": 0
+                  },
+                  "end": {
+                    "offset": 0,
+                    "line": 0,
+                    "column": 0
+                  }
+                },
+                "value": true
+              },
+              "then": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 75,
+                    "line": 1,
+                    "column": 76
+                  }
+                },
+                "name": "81b789b0-06ef-45f3-a59e-a33d22bab5b5.7d49799b-98c4-4e0b-81b1-33f78303bbf5",
+                "blockId": "81b789b0-06ef-45f3-a59e-a33d22bab5b5",
+                "connId": "7d49799b-98c4-4e0b-81b1-33f78303bbf5",
+                "connDataType": "generic"
+              },
+              "else": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 75,
+                    "line": 1,
+                    "column": 76
+                  }
+                },
+                "name": "81b789b0-06ef-45f3-a59e-a33d22bab5b5.7d49799b-98c4-4e0b-81b1-33f78303bbf5",
+                "blockId": "81b789b0-06ef-45f3-a59e-a33d22bab5b5",
+                "connId": "7d49799b-98c4-4e0b-81b1-33f78303bbf5",
+                "connDataType": "generic"
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "ValueAccumulator",
+      "defId": "7C23E28F-AF94-4D4D-9E4D-0AD5584D0F4F",
+      "guid": "fc41fa84-fa8b-4953-8d13-8a6c59ce2970",
+      "x": 1053.6181100689823,
+      "y": 424.6181100689823,
+      "properties": [
+        {
+          "name": "name",
+          "value": "A SUM",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "[4f6b9497-0b7f-4d7b-8297-44653b4e5e95.7d49799b-98c4-4e0b-81b1-33f78303bbf5] "
+        },
+        {
+          "name": "connectors",
+          "value": {}
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 40
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "7d12e965-4593-46da-baeb-f128ad9fa36e"
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "if",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 0,
+                  "column": 0
+                },
+                "end": {
+                  "offset": 0,
+                  "line": 0,
+                  "column": 0
+                }
+              },
+              "condition": {
+                "type": "bool",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 0,
+                    "column": 0
+                  },
+                  "end": {
+                    "offset": 0,
+                    "line": 0,
+                    "column": 0
+                  }
+                },
+                "value": true
+              },
+              "then": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 75,
+                    "line": 1,
+                    "column": 76
+                  }
+                },
+                "name": "4f6b9497-0b7f-4d7b-8297-44653b4e5e95.7d49799b-98c4-4e0b-81b1-33f78303bbf5",
+                "blockId": "4f6b9497-0b7f-4d7b-8297-44653b4e5e95",
+                "connId": "7d49799b-98c4-4e0b-81b1-33f78303bbf5",
+                "connDataType": "generic"
+              },
+              "else": {
+                "type": "connector",
+                "loc": {
+                  "start": {
+                    "offset": 0,
+                    "line": 1,
+                    "column": 1
+                  },
+                  "end": {
+                    "offset": 75,
+                    "line": 1,
+                    "column": 76
+                  }
+                },
+                "name": "4f6b9497-0b7f-4d7b-8297-44653b4e5e95.7d49799b-98c4-4e0b-81b1-33f78303bbf5",
+                "blockId": "4f6b9497-0b7f-4d7b-8297-44653b4e5e95",
+                "connId": "7d49799b-98c4-4e0b-81b1-33f78303bbf5",
+                "connDataType": "generic"
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Add",
+      "defId": "07E550ED-9E08-48EB-A668-3EE94AC1ED46",
+      "guid": "f5cd1f5a-104e-4126-a952-9115e11790dd",
+      "x": 1247.0917569735673,
+      "y": 235.42696970615572,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Total Qty",
+          "hasCustomName": true
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Subtract",
+      "defId": "BF3461E3-7AA2-4C49-96CE-D6423946DC01",
+      "guid": "2a952392-2167-4292-b427-2bebc6b7055b",
+      "x": 1421.1928579646153,
+      "y": 390.39647500077626,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Remain Qty",
+          "hasCustomName": true
+        },
+        {
+          "name": "flipForSell",
+          "value": false
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 40,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": [
+        {
+          "connId": "a369364c-ad28-440f-b154-c3059c04bae4",
+          "connName": "output"
+        }
+      ]
+    },
+    {
+      "defName": "IfThen",
+      "defId": "BB3A325A-882D-4F96-B166-79FD629461FB",
+      "guid": "762bf3c8-0e7c-4aaf-8620-8a2444bd90f3",
+      "x": 1567.1464462392332,
+      "y": 421.92863716924074,
+      "properties": [
+        {
+          "name": "name",
+          "value": "IfThen0",
+          "hasCustomName": true
+        },
+        {
+          "name": "generic",
+          "value": {
+            "62075391-84b2-4b9b-a9d7-c30057e6a256": "real",
+            "70b98d03-c978-4a8b-8ec0-85d747425904": "real",
+            "b17482dc-5a99-4623-b4a1-cfc34de733c1": "real"
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 55,
+            "height": 55
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "1b1ee58f-f34f-4d2b-99ed-67425903a97e",
+      "x": 932.0938674703186,
+      "y": 59.331000708918346,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Desir Qty",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "5c5b463d-25c0-4b9f-b540-a48ef8f8690b"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "real"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "83c4df56-d9d4-47e3-bbaf-9938411081fe",
+            "beedf507-32ae-4658-ba68-30469da8859b"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "83c4df56-d9d4-47e3-bbaf-9938411081fe",
+      "x": 1268.836374274229,
+      "y": 114.17240829481241,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Desir Qty",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "1b1ee58f-f34f-4d2b-99ed-67425903a97e"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "real"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "beedf507-32ae-4658-ba68-30469da8859b",
+      "x": 1393.1535997792348,
+      "y": 491.03937323155174,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Desir Qty",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 102,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "1b1ee58f-f34f-4d2b-99ed-67425903a97e"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "real"
+          }
+        },
+        {
+          "name": "sourceConnector"
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Formula",
+      "defId": "01D93821-DC77-4942-9F82-B05626023D83",
+      "guid": "aecfce85-7d03-4278-9e0d-90b6298dea1a",
+      "x": 1461.153599779235,
+      "y": 332.6750603992399,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Formula0",
+          "hasCustomName": true
+        },
+        {
+          "name": "formula",
+          "value": "IF([34e7b276-d38b-442f-85ac-02843a0c58c2.4c544af7-be31-4af0-9001-f9ad73a541b2] ==0 AND [fc41fa84-fa8b-4953-8d13-8a6c59ce2970.4c544af7-be31-4af0-9001-f9ad73a541b2] ==0,TRUE,FALSE)"
+        },
+        {
+          "name": "connectors",
+          "value": {
+            "44dd4cf3-bb55-474e-a898-2cb73be154f0": {
+              "guid": "44dd4cf3-bb55-474e-a898-2cb73be154f0",
+              "name": "output",
+              "type": "generic",
+              "input": false
+            },
+            "0cd3a3e6-adcb-4404-869b-d8142da6a50a": {
+              "guid": "0cd3a3e6-adcb-4404-869b-d8142da6a50a",
+              "name": "34e7b276-d38b-442f-85ac-02843a0c58c2.4c544af7-be31-4af0-9001-f9ad73a541b2",
+              "type": "real",
+              "input": true
+            },
+            "2844a3df-3e39-4ac9-98df-6ffdd53bc89e": {
+              "guid": "2844a3df-3e39-4ac9-98df-6ffdd53bc89e",
+              "name": "fc41fa84-fa8b-4953-8d13-8a6c59ce2970.4c544af7-be31-4af0-9001-f9ad73a541b2",
+              "type": "real",
+              "input": true
+            }
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 60,
+            "height": 30
+          }
+        },
+        {
+          "name": "generic",
+          "value": {
+            "44dd4cf3-bb55-474e-a898-2cb73be154f0": "bool"
+          }
+        },
+        {
+          "name": "formulaGraphId",
+          "value": "aecfce85-7d03-4278-9e0d-90b6298dea1a"
+        },
+        {
+          "name": "formulaNodes",
+          "value": {
+            "output": {
+              "type": "if",
+              "loc": {
+                "start": {
+                  "offset": 0,
+                  "line": 1,
+                  "column": 1
+                },
+                "end": {
+                  "offset": 178,
+                  "line": 1,
+                  "column": 179
+                }
+              },
+              "condition": {
+                "type": "op",
+                "loc": {
+                  "start": {
+                    "offset": 3,
+                    "line": 1,
+                    "column": 4
+                  },
+                  "end": {
+                    "offset": 166,
+                    "line": 1,
+                    "column": 167
+                  }
+                },
+                "op": "AND",
+                "left": {
+                  "type": "op",
+                  "loc": {
+                    "start": {
+                      "offset": 3,
+                      "line": 1,
+                      "column": 4
+                    },
+                    "end": {
+                      "offset": 83,
+                      "line": 1,
+                      "column": 84
+                    }
+                  },
+                  "op": "==",
+                  "left": {
+                    "type": "connector",
+                    "loc": {
+                      "start": {
+                        "offset": 3,
+                        "line": 1,
+                        "column": 4
+                      },
+                      "end": {
+                        "offset": 78,
+                        "line": 1,
+                        "column": 79
+                      }
+                    },
+                    "name": "34e7b276-d38b-442f-85ac-02843a0c58c2.4c544af7-be31-4af0-9001-f9ad73a541b2",
+                    "blockId": "34e7b276-d38b-442f-85ac-02843a0c58c2",
+                    "connId": "4c544af7-be31-4af0-9001-f9ad73a541b2",
+                    "connDataType": "generic"
+                  },
+                  "right": {
+                    "type": "number",
+                    "loc": {
+                      "start": {
+                        "offset": 81,
+                        "line": 1,
+                        "column": 82
+                      },
+                      "end": {
+                        "offset": 82,
+                        "line": 1,
+                        "column": 83
+                      }
+                    },
+                    "value": 0
+                  }
+                },
+                "right": {
+                  "type": "op",
+                  "loc": {
+                    "start": {
+                      "offset": 86,
+                      "line": 1,
+                      "column": 87
+                    },
+                    "end": {
+                      "offset": 166,
+                      "line": 1,
+                      "column": 167
+                    }
+                  },
+                  "op": "==",
+                  "left": {
+                    "type": "connector",
+                    "loc": {
+                      "start": {
+                        "offset": 87,
+                        "line": 1,
+                        "column": 88
+                      },
+                      "end": {
+                        "offset": 162,
+                        "line": 1,
+                        "column": 163
+                      }
+                    },
+                    "name": "fc41fa84-fa8b-4953-8d13-8a6c59ce2970.4c544af7-be31-4af0-9001-f9ad73a541b2",
+                    "blockId": "fc41fa84-fa8b-4953-8d13-8a6c59ce2970",
+                    "connId": "4c544af7-be31-4af0-9001-f9ad73a541b2",
+                    "connDataType": "generic"
+                  },
+                  "right": {
+                    "type": "number",
+                    "loc": {
+                      "start": {
+                        "offset": 165,
+                        "line": 1,
+                        "column": 166
+                      },
+                      "end": {
+                        "offset": 166,
+                        "line": 1,
+                        "column": 167
+                      }
+                    },
+                    "value": 0
+                  }
+                }
+              },
+              "then": {
+                "type": "bool",
+                "loc": {
+                  "start": {
+                    "offset": 167,
+                    "line": 1,
+                    "column": 168
+                  },
+                  "end": {
+                    "offset": 171,
+                    "line": 1,
+                    "column": 172
+                  }
+                },
+                "value": true
+              },
+              "else": {
+                "type": "bool",
+                "loc": {
+                  "start": {
+                    "offset": 172,
+                    "line": 1,
+                    "column": 173
+                  },
+                  "end": {
+                    "offset": 177,
+                    "line": 1,
+                    "column": 178
+                  }
+                },
+                "value": false
+              }
+            }
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Jump",
+      "defId": "768E7300-2F7C-4CEC-9B0A-B26B25BC449F",
+      "guid": "4bf08b0d-1b5f-4479-b8fb-4516ff268fdc",
+      "x": 1714.3551019398653,
+      "y": 424.8170721681962,
+      "properties": [
+        {
+          "name": "name",
+          "value": "IfThen0:output",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "762bf3c8-0e7c-4aaf-8620-8a2444bd90f3"
+        },
+        {
+          "name": "sourceConnector",
+          "value": "b17482dc-5a99-4623-b4a1-cfc34de733c1"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "dfbb1c77-85fd-4a62-b984-f1c17104553e": "real"
+          }
+        },
+        {
+          "name": "targetBlock",
+          "value": [
+            "67c9990a-5b1c-433f-803f-6454a0d6690d"
+          ]
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "JumpLanding",
+      "defId": "24D0DD91-4DB0-4161-A09B-98794221FCA4",
+      "guid": "67c9990a-5b1c-433f-803f-6454a0d6690d",
+      "x": 388.43448613849495,
+      "y": 262.0433731706892,
+      "properties": [
+        {
+          "name": "name",
+          "value": "IfThen0:output",
+          "hasCustomName": true
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 100,
+            "height": 50
+          }
+        },
+        {
+          "name": "sourceBlock",
+          "value": "4bf08b0d-1b5f-4479-b8fb-4516ff268fdc"
+        },
+        {
+          "name": "sourceConnector"
+        },
+        {
+          "name": "generic",
+          "value": {
+            "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6": "real"
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Order",
+      "defId": "DEC271C9-38E8-499A-ADA2-795B51544FE3",
+      "guid": "0b0a22b8-c05e-46be-9b08-58b7d46b7415",
+      "x": 659.2296407074946,
+      "y": 355.616001146298,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order0",
+          "hasCustomName": true
+        },
+        {
+          "name": "type",
+          "value": "limit"
+        },
+        {
+          "name": "side",
+          "value": "buy"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "flipForSell",
+          "value": true
+        },
+        {
+          "name": "Autospreader",
+          "value": false
+        },
+        {
+          "name": "onExtMod",
+          "value": "StopManaging"
+        },
+        {
+          "name": "leaveOnPauseCancel",
+          "value": []
+        },
+        {
+          "name": "ignoreInputsAfterAdd",
+          "value": false
+        },
+        {
+          "name": "autoResubmit",
+          "value": true
+        },
+        {
+          "name": "submitInSuspendedState",
+          "value": false
+        },
+        {
+          "name": "Connectors",
+          "value": []
+        },
+        {
+          "name": "tag",
+          "value": ""
+        },
+        {
+          "name": "openCloseStrategyflags",
+          "value": false
+        },
+        {
+          "name": "openClose",
+          "value": "NA"
+        },
+        {
+          "name": "TradingStrategy",
+          "value": "NA"
+        },
+        {
+          "name": "ReverseSpreadOC",
+          "value": "NA"
+        },
+        {
+          "name": "color",
+          "value": "rgb(255, 255, 255)"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 90,
+            "height": 90
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Price",
+      "defId": "7262B417-F089-4D6C-A0A8-EEEBCD5DAFD4",
+      "guid": "30e14b7a-f2ad-4f16-a4ef-a864edcee3eb",
+      "x": 485,
+      "y": 480.00000000000006,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Autospread price",
+          "hasCustomName": true
+        },
+        {
+          "name": "type",
+          "value": "orderPrice"
+        },
+        {
+          "name": "price",
+          "value": {
+            "price": 92.3,
+            "formatted": "92.30"
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Instrument",
+      "defId": "9387710D-FC3E-42AA-AFFD-EB154BCFBAC7",
+      "guid": "e2a26000-e4d8-46b2-bd75-04a792d2c13f",
+      "x": 249.76186026961545,
+      "y": 357.8083670100014,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Auto spread Instrument",
+          "hasCustomName": true
+        },
+        {
+          "name": "instrumentId",
+          "value": "4222973379158336294"
+        },
+        {
+          "name": "type",
+          "value": "orderInstrument"
+        },
+        {
+          "name": "account",
+          "value": "1364679"
+        },
+        {
+          "name": "instrumentAlias",
+          "value": "BRN/G Dec26-Dec27"
+        },
+        {
+          "name": "exchangeAlias",
+          "value": ""
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 25
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Order",
+      "defId": "DEC271C9-38E8-499A-ADA2-795B51544FE3",
+      "guid": "567e362c-5f80-444f-820d-b9fefc18e4dc",
+      "x": 658.7773655028035,
+      "y": 165.48403342907952,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Order1",
+          "hasCustomName": true
+        },
+        {
+          "name": "type",
+          "value": "limit"
+        },
+        {
+          "name": "side",
+          "value": "buy"
+        },
+        {
+          "name": "TIF",
+          "value": "day"
+        },
+        {
+          "name": "flipForSell",
+          "value": true
+        },
+        {
+          "name": "Autospreader",
+          "value": false
+        },
+        {
+          "name": "onExtMod",
+          "value": "StopManaging"
+        },
+        {
+          "name": "leaveOnPauseCancel",
+          "value": []
+        },
+        {
+          "name": "ignoreInputsAfterAdd",
+          "value": false
+        },
+        {
+          "name": "autoResubmit",
+          "value": true
+        },
+        {
+          "name": "submitInSuspendedState",
+          "value": false
+        },
+        {
+          "name": "Connectors",
+          "value": []
+        },
+        {
+          "name": "tag",
+          "value": ""
+        },
+        {
+          "name": "openCloseStrategyflags",
+          "value": false
+        },
+        {
+          "name": "openClose",
+          "value": "NA"
+        },
+        {
+          "name": "TradingStrategy",
+          "value": "NA"
+        },
+        {
+          "name": "ReverseSpreadOC",
+          "value": "NA"
+        },
+        {
+          "name": "color",
+          "value": "rgb(255, 255, 255)"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 90,
+            "height": 90
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Price",
+      "defId": "7262B417-F089-4D6C-A0A8-EEEBCD5DAFD4",
+      "guid": "3714ca5c-e3b3-429c-9785-95787f21472a",
+      "x": 489.97581229173124,
+      "y": 34.14683218755029,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Exchange spread Price",
+          "hasCustomName": true
+        },
+        {
+          "name": "type",
+          "value": "orderPrice"
+        },
+        {
+          "name": "price",
+          "value": {
+            "price": 2.54,
+            "formatted": "2.54"
+          }
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 40
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "defName": "Instrument",
+      "defId": "9387710D-FC3E-42AA-AFFD-EB154BCFBAC7",
+      "guid": "2b90c2b4-b3a4-4184-8f75-f254f5bc4176",
+      "x": 247.54450055148163,
+      "y": 166.21535352922947,
+      "properties": [
+        {
+          "name": "name",
+          "value": "Exchange spread Instrument",
+          "hasCustomName": true
+        },
+        {
+          "name": "instrumentId",
+          "value": "10122838698664355590"
+        },
+        {
+          "name": "type",
+          "value": "orderInstrument"
+        },
+        {
+          "name": "account",
+          "value": "1364679"
+        },
+        {
+          "name": "instrumentAlias",
+          "value": "BRN Aug26-Sep26 Calendar"
+        },
+        {
+          "name": "exchangeAlias",
+          "value": "ICE"
+        },
+        {
+          "name": "dimensions",
+          "value": {
+            "width": 80,
+            "height": 25
+          }
+        }
+      ],
+      "exportValues": []
+    },
+    {
+      "sourceBlock": "81b789b0-06ef-45f3-a59e-a33d22bab5b5",
+      "sourceConnector": "7ee8db29-5123-41eb-afa0-32aeda978a16",
+      "targetBlock": "34e7b276-d38b-442f-85ac-02843a0c58c2",
+      "targetConnector": "93e2199d-2a71-4c4d-a90c-6a79cc5e8e43",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "4f6b9497-0b7f-4d7b-8297-44653b4e5e95",
+      "sourceConnector": "7ee8db29-5123-41eb-afa0-32aeda978a16",
+      "targetBlock": "fc41fa84-fa8b-4953-8d13-8a6c59ce2970",
+      "targetConnector": "93e2199d-2a71-4c4d-a90c-6a79cc5e8e43",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "34e7b276-d38b-442f-85ac-02843a0c58c2",
+      "sourceConnector": "4c544af7-be31-4af0-9001-f9ad73a541b2",
+      "targetBlock": "f5cd1f5a-104e-4126-a952-9115e11790dd",
+      "targetConnector": "0219fcdc-8b15-4c7c-b398-7666471ddbea",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "fc41fa84-fa8b-4953-8d13-8a6c59ce2970",
+      "sourceConnector": "4c544af7-be31-4af0-9001-f9ad73a541b2",
+      "targetBlock": "f5cd1f5a-104e-4126-a952-9115e11790dd",
+      "targetConnector": "b856ffc1-7d6e-4d96-b086-1e055c039357",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "f5cd1f5a-104e-4126-a952-9115e11790dd",
+      "sourceConnector": "18ced375-cd46-4f86-8ea7-e98022eedb1b",
+      "targetBlock": "2a952392-2167-4292-b427-2bebc6b7055b",
+      "targetConnector": "2e8e77cc-efb9-4de3-9ba9-fa43b474db1f",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "5c5b463d-25c0-4b9f-b540-a48ef8f8690b",
+      "sourceConnector": "1d65ec2f-0fdd-4d88-b01d-5393a4e6890e",
+      "targetBlock": "1b1ee58f-f34f-4d2b-99ed-67425903a97e",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "83c4df56-d9d4-47e3-bbaf-9938411081fe",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "2a952392-2167-4292-b427-2bebc6b7055b",
+      "targetConnector": "54dbade5-e639-482a-9ede-b8c126af9c8b",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "beedf507-32ae-4658-ba68-30469da8859b",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "762bf3c8-0e7c-4aaf-8620-8a2444bd90f3",
+      "targetConnector": "62075391-84b2-4b9b-a9d7-c30057e6a256",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "2a952392-2167-4292-b427-2bebc6b7055b",
+      "sourceConnector": "a369364c-ad28-440f-b154-c3059c04bae4",
+      "targetBlock": "762bf3c8-0e7c-4aaf-8620-8a2444bd90f3",
+      "targetConnector": "70b98d03-c978-4a8b-8ec0-85d747425904",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "aecfce85-7d03-4278-9e0d-90b6298dea1a",
+      "sourceConnector": "44dd4cf3-bb55-474e-a898-2cb73be154f0",
+      "targetBlock": "762bf3c8-0e7c-4aaf-8620-8a2444bd90f3",
+      "targetConnector": "86fc4a0e-ec23-4a70-b0ae-14dcc7a51c89",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "762bf3c8-0e7c-4aaf-8620-8a2444bd90f3",
+      "sourceConnector": "b17482dc-5a99-4623-b4a1-cfc34de733c1",
+      "targetBlock": "4bf08b0d-1b5f-4479-b8fb-4516ff268fdc",
+      "targetConnector": "dfbb1c77-85fd-4a62-b984-f1c17104553e",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "30e14b7a-f2ad-4f16-a4ef-a864edcee3eb",
+      "sourceConnector": "335e1545-0048-476b-be2a-7563e9a6348e",
+      "targetBlock": "0b0a22b8-c05e-46be-9b08-58b7d46b7415",
+      "targetConnector": "c2f3c996-0295-4a9a-8300-ade3855822d6",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "e2a26000-e4d8-46b2-bd75-04a792d2c13f",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "30e14b7a-f2ad-4f16-a4ef-a864edcee3eb",
+      "targetConnector": "c088bde4-a808-4f93-8289-62ebe4200e64",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "e2a26000-e4d8-46b2-bd75-04a792d2c13f",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "0b0a22b8-c05e-46be-9b08-58b7d46b7415",
+      "targetConnector": "945f664b-2c67-4492-856b-f9977ac113b4",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "67c9990a-5b1c-433f-803f-6454a0d6690d",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "0b0a22b8-c05e-46be-9b08-58b7d46b7415",
+      "targetConnector": "02d6b042-1a9c-4533-8628-2ede52881596",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "0b0a22b8-c05e-46be-9b08-58b7d46b7415",
+      "sourceConnector": "9a5c027e-9579-4a23-a8d7-4073c3a2d88c",
+      "targetBlock": "4f6b9497-0b7f-4d7b-8297-44653b4e5e95",
+      "targetConnector": "8d36e715-f531-4ebd-a628-13c09006c573",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "3714ca5c-e3b3-429c-9785-95787f21472a",
+      "sourceConnector": "335e1545-0048-476b-be2a-7563e9a6348e",
+      "targetBlock": "567e362c-5f80-444f-820d-b9fefc18e4dc",
+      "targetConnector": "c2f3c996-0295-4a9a-8300-ade3855822d6",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "2b90c2b4-b3a4-4184-8f75-f254f5bc4176",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "3714ca5c-e3b3-429c-9785-95787f21472a",
+      "targetConnector": "c088bde4-a808-4f93-8289-62ebe4200e64",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "2b90c2b4-b3a4-4184-8f75-f254f5bc4176",
+      "sourceConnector": "4591f37d-348f-454c-b6f8-5eac9457a124",
+      "targetBlock": "567e362c-5f80-444f-820d-b9fefc18e4dc",
+      "targetConnector": "945f664b-2c67-4492-856b-f9977ac113b4",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "67c9990a-5b1c-433f-803f-6454a0d6690d",
+      "sourceConnector": "3b30f4bb-b6ed-4a56-b1b3-0a51ad1c10d6",
+      "targetBlock": "567e362c-5f80-444f-820d-b9fefc18e4dc",
+      "targetConnector": "02d6b042-1a9c-4533-8628-2ede52881596",
+      "className": "Edge"
+    },
+    {
+      "sourceBlock": "567e362c-5f80-444f-820d-b9fefc18e4dc",
+      "sourceConnector": "9a5c027e-9579-4a23-a8d7-4073c3a2d88c",
+      "targetBlock": "81b789b0-06ef-45f3-a59e-a33d22bab5b5",
+      "targetConnector": "8d36e715-f531-4ebd-a628-13c09006c573",
+      "className": "Edge"
+    }
+  ],
+  "lastModifiedTime": 1780676715512,
+  "ignoreMarketState": false,
+  "graphIdToViewport": {
+    "d27ae311-729f-45f5-bccb-928f3c12e463": {
+      "x": 177.66071148898163,
+      "y": -106.61787319728552,
+      "scale": 0.886581098347188
+    }
+  },
+  "showInMDT": false,
+  "isSOA": false,
+  "isOmaOta": false,
+  "isPREnabled": false
+}
