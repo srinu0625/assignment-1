@@ -4,12 +4,13 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+import time
 
 # ==========================
 # CONFIG
 # ==========================
 
-CSV_FILE = r"D:\Data 2\ES_NQ 5.csv"
+CSV_FILE = r"D:\Data 2\ES_NQ 60.csv"
 
 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 OUTPUT_PATH = fr"D:\ARB_PROJECT1\PCA_RESULTS_{timestamp}.xlsx"
@@ -103,11 +104,13 @@ for i in range(ROLLING_WINDOW, len(returns)):
             position = -1
             entry = (date, es_price, nq_price, es_w, nq_w, i, "SHORT")
             print(f"{date} | \033[91mSHORT ES LONG NQ\033[0m | Z={z:.2f}")
+            time.sleep(3)
 
         elif z < -ENTRY_Z:
             position = 1
             entry = (date, es_price, nq_price, es_w, nq_w, i, "LONG")
             print(f"{date} | \033[92mLONG ES SHORT NQ\033[0m | Z={z:.2f}")
+            time.sleep(3)
 
     # ==========================
     # EXIT
@@ -151,6 +154,7 @@ for i in range(ROLLING_WINDOW, len(returns)):
             color = "\033[92m" if pnl > 0 else "\033[91m"
 
             print(f"{date} | \033[93mEXIT\033[0m | {reason} | {color}PnL={pnl:.2f}\033[0m | Equity={equity:.2f}")
+            time.sleep(3)
 
             trade_log.append({
                 "Entry Date": entry[0],
@@ -269,4 +273,4 @@ plt.plot(pnl)
 plt.title("Trade PnL")
 
 plt.tight_layout()
-plt.show()
+# plt.show()

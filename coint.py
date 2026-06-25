@@ -38,14 +38,14 @@ def print_entry(t, side, z, cl, br, h):
     print(f"{t} | ENTRY | {side} | Z={z:.2f} | hedge={h:.3f}")
     print(f"   CL={cl:.2f}  BR={br:.2f}")
     print("-" * 60)
-    # time.sleep(2.5) 
+    time.sleep(2.5) 
 
 def print_exit(t, side, z, pnl, reason):
     color = Fore.GREEN if pnl > 0 else Fore.RED
     print(f"{t} | EXIT | {side} | Z={z:.2f} | {reason}")
     print(f"   PnL: {color}{pnl:.2f}{Style.RESET_ALL}")
     print("=" * 70)
-    # time.sleep(2.5)
+    time.sleep(2.5)
 
 # ==================== LOAD DATA ====================
 df1 = pd.read_csv(file1)
