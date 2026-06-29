@@ -15,7 +15,7 @@ BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAAw%2F%2BQEAAAAA3SyDBqwPbxXjcDA51%2B7xWEGTcv
 TEAMS_WEBHOOK_URL = "https://default88ff9cb3e35e4d71b1d7f6c6ed8657.30.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/60b2e30fbc954d44a0ad6a2fbe958ce2/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=b0w27fZV4iTXdMNFwd8HgbYeen3xyVdALXyf8HO-8Ac%22"
 
 CHECK_INTERVAL = 15
-MAX_TWEETS_PER_ACCOUNT = 
+MAX_TWEETS_PER_ACCOUNT = 20
 
 # ==========================================
 
